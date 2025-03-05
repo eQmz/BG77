@@ -1,0 +1,424 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.12.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>BG77: El</title>
+<link rel="icon" href="cursoCIntermedio.png" type="image/x-icon" />
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectlogo"><img alt="Logo" src="lenguaje-c-1.png" height="100px"/></td>
+  <td id="projectalign">
+   <div id="projectname">BG77<span id="projectnumber">&#160;1.0</span>
+   </div>
+   <div id="projectbrief">Esta es una libreria basica para controlar el modulo de comunicacion BG77</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generado por Doxygen 1.12.0 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() { codefold.init(0); });
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','Buscar',false);
+  $(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="doc-content">
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function(){ initResizable(false); });
+/* @license-end */
+</script>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Cargando...</div>
+<div class="SRStatus" id="Searching">Buscando...</div>
+<div class="SRStatus" id="NoMatches">Nada coincide</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">El</div></div>
+</div><!--header-->
+<div class="contents">
+<p>codigo de ejemplo a continuacion, muestra como utilizar la libreria. De manera general, se necesita:</p><ol type="1">
+<li>Generar el BSP que son punteros a funcion. 1.1 Funcion transmision de UART. 1.2 Funcion escritura de GPIOS. 1.3 Funcion de delay. 1.4 Funcion de reinicio de MCU.</li>
+<li>Llamar los callbacks de UART, Temporizador y Flancos del pin MAIN RI en las interrupciones correspondientes.</li>
+<li>Establecer o dar el BSP a la libreria.</li>
+<li>Inicializar la libreria.</li>
+<li>Realizar proceso de verificacion. 5.1 Verificar SIM. 5.2 Verificar el registro del modulo (attach). 5.3 Verificar la seleccion de operadora (COPS). 5.4 Verificar contexto PDP.</li>
+<li>Registrar o attachar el modulo. 6.1 Desactivar contexto PDP. 6.2 Registrar (attachar) seleccionando la operadora (COPS).</li>
+<li>Configurar y activar el contexto PDP.</li>
+<li>Configurar y abrir sockets (SERVIDOR o CLIENTE).</li>
+<li>Colocar funcion de manejo de URC en loop de la aplicacion principal.</li>
+<li><p class="startli">Recepcion y transmision de mensajes. 10.1 Dependiendo del modo de acceso usar la funcion de transmision adecuada. <a class="el" href="_b_g77_8h.html#a4324d29bee02aaf36d6d7dc3d54fa1b7" title="Funcion para transmitir mensajes por un socket que esta en modo buffer access mode.">bg_transmit_buffAMode(uint8_t connectID, uint8_t *data, uint16_t len)</a> <a class="el" href="_b_g77_8h.html#a2eb4e7ff0044a4ccb914381d9ae25265" title="Transmite datos en modo transparente.">bg_transmit_TM(uint8_t *data, uint16_t len)</a></p>
+<p class="startli">10.2 Dependiendo del modo de acceso usar el callback de recepcion adecuada. void <a class="el" href="_b_g77_8h.html#a9984ef8adb9430c0bb3410b6bf7120c5" title="Esta funcion es un callback que notifica al usuario de un mensaje que se recibe en modo transparente.">bg_callback_receive_TM(uint8_t *buff, uint16_t nBytes)</a> {</p>
+<p class="startli">} void <a class="el" href="_b_g77_8h.html#a03693666091cc43048c11c148b9afd23" title="Esta funcion es un callback que notifica al usuario que se recibio un mensaje de alguna conexion en m...">bg_recv_callback(uint8_t *buff, uint16_t len, uint8_t connectID)</a> {</p>
+<p class="startli">}</p><ol type="a">
+<li><p class="startli">Usar Callbacks de notificacion de URC 11.1 Callback de conexion entrante. void bg_incomming_callback(uint8_t serverID, uint *8_t connectID) {</p>
+<p class="startli">} 11.2 Callback de salida de modo transparente. void <a class="el" href="_b_g77_8h.html#a35a7b46f396882941b3aa7f00c1b19f4" title="Esta funcion es un callback que notifica al usuario que la conexion en modo transparente se cerro.">bg_callback_closed_TM(void)</a> {</p>
+<p class="startli">} 11.3 Callback de reactivacion de contexto PDP. void <a class="el" href="_b_g77_8h.html#a3776fe3967e34bff08a7c7d3c32cf2e7" title="Este callback notifica al usuario que hubo una reactivacion de contexto PDP debido al URC &quot;pdp deact&quot;...">bg_pdp_activation_callback(uint8_t contextID)</a> {</p>
+<p class="startli">} 11.4 Callback de modo transparente inactivo. El proposito es notificar al usuario para que pueda regresar a modo transparente. void <a class="el" href="_b_g77_8h.html#a8fcd8af3354bb2eb3fbde65e47993e78" title="Esta funcion de callback notifica al usuario que no hay más URC por atender y se esta fuera de modo t...">bg_callback_TM_Inactive(void)</a> {</p>
+<p class="startli">}</p>
+</li>
+</ol>
+</li>
+</ol>
+<p>Los pasos numero 10 y 11 son opcionales en este codigo de ejemplo, ya que, la libreria llama a funciones de notificacion callback por defecto si no se crean los de usuario.</p>
+<div class="fragment"><div class="line"><span class="preprocessor">#include &quot;main.h&quot;</span></div>
+<div class="line"><span class="preprocessor">#include &quot;<a class="code" href="_b_g77_8h.html">BG77.h</a>&quot;</span></div>
+<div class="line"> </div>
+<div class="line"><span class="comment">//-----------------------------BSP--------------------------------------</span></div>
+<div class="line"><a class="code hl_enumeration" href="_b_g77_8h.html#af98be1c204049055208486fb2b91c87b">bg_err_t</a> uart_tx(uint8_t *data, uint16_t len);</div>
+<div class="line"><a class="code hl_enumeration" href="_b_g77_8h.html#af98be1c204049055208486fb2b91c87b">bg_err_t</a> gpioWrite(<a class="code hl_enumeration" href="_b_g77_8h.html#a2c28d9ff8a1ade4f1a62876f8ea35812">bgPin_t</a> pin, uint8_t state);</div>
+<div class="line"><span class="keywordtype">void</span> msDelay(uint32_t mDelay);</div>
+<div class="line"><span class="keywordtype">void</span> resetMCU(<span class="keywordtype">void</span>);</div>
+<div class="line"> </div>
+<div class="line"><a class="code hl_enumeration" href="_b_g77_8h.html#af98be1c204049055208486fb2b91c87b">bg_err_t</a> uart_tx(uint8_t *data, uint16_t len)</div>
+<div class="line">{</div>
+<div class="line">   <a class="code hl_enumeration" href="_b_g77_8h.html#af98be1c204049055208486fb2b91c87b">bg_err_t</a> err = BG_OK;</div>
+<div class="line">   <span class="keywordflow">if</span>(HAL_UART_Transmit(&amp;UART_BG, data, len, 1000) != HAL_OK)</div>
+<div class="line">       err = BG_ERR_MCU_TX_UART;</div>
+<div class="line">   <span class="keywordflow">return</span> err;</div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line"><a class="code hl_enumeration" href="_b_g77_8h.html#af98be1c204049055208486fb2b91c87b">bg_err_t</a> gpioWrite(<a class="code hl_enumeration" href="_b_g77_8h.html#a2c28d9ff8a1ade4f1a62876f8ea35812">bgPin_t</a> pin, uint8_t state)</div>
+<div class="line">{</div>
+<div class="line">   <span class="keywordflow">if</span>(pin &gt;= BG_UNSUPORTED_PIN)</div>
+<div class="line">       <span class="keywordflow">return</span> BG_ERR_UNSUPPORTED_PIN;</div>
+<div class="line">       </div>
+<div class="line">   <a class="code hl_enumeration" href="_b_g77_8h.html#af98be1c204049055208486fb2b91c87b">bg_err_t</a> err = BG_OK;</div>
+<div class="line"> </div>
+<div class="line">   uint32_t bgPin[] = {BG_PWRKEY_Pin,  BG_VBAT_Pin, BG_RESET_Pin, BG_PON_TRIG_Pin};</div>
+<div class="line">   uint32_t bgPort[] = {BG_PWRKEY_GPIO_Port, BG_VBAT_GPIO_Port, BG_RESET_GPIO_Port,\</div>
+<div class="line">       BG_PON_TRIG_GPIO_Port}; </div>
+<div class="line"> </div>
+<div class="line">       HAL_GPIO_WritePin(bgPort[pin], bgPin[pin], state);</div>
+<div class="line"> </div>
+<div class="line">       <span class="keywordflow">return</span> BG_OK;</div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line"><span class="keywordtype">void</span> msDelay(uint32_t mDelay)</div>
+<div class="line">{</div>
+<div class="line">   HAL_Delay(mDelay);</div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line"><span class="keywordtype">void</span> resetMCU(<span class="keywordtype">void</span>)</div>
+<div class="line">{</div>
+<div class="line">   HAL_NVIC_SystemReset();</div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line"><a id="_a0" name="_a0"></a><a class="code hl_struct" href="structbg__bsp_fun__t.html">bg_bspFun_t</a> bspFun = {.uartTx = uart_tx, .gpioWrite = gpioWrite, .msDelay = msDelay,\</div>
+<div class="line">.resetMCU = resetMCU};</div>
+<div class="line"><span class="comment">//-----------------------------BSP end--------------------------------------</span></div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"><span class="comment">//-----------------------------Funcion de recepcion de interrupcion de UART---------------------</span></div>
+<div class="line"> </div>
+<div class="line"><span class="comment">//Creacion e inicialzacion de buffer del tipo uartBuff_t (buffer de 2KB de la libreria)</span></div>
+<div class="line">uartBuff_t uBg = {.buff = {<span class="charliteral">&#39;\0&#39;</span>}, .len = 0}; </div>
+<div class="line"> </div>
+<div class="line"><span class="comment">//--------------------------------Variables para manejo de UART---------------------</span></div>
+<div class="line"><span class="preprocessor">#define UART_BG huart7 </span><span class="comment">//instancia de UART de modulo de comunicacion</span></div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">typedef</span> <span class="keyword">enum</span> {</div>
+<div class="line">RX_LOG,</div>
+<div class="line">RX_BG,</div>
+<div class="line">RX_NO_SUPPORTED</div>
+<div class="line">}rxUart_t;</div>
+<div class="line"> </div>
+<div class="line">rxUart_t keyUart = RX_NO_SUPPORTED;</div>
+<div class="line"> </div>
+<div class="line"><span class="preprocessor">#define flg_uart flg_main.f0 </span><span class="comment">//1: llego una recepcion de UART por interrupcion.</span></div>
+<div class="line"><a id="_a1" name="_a1"></a><a class="code hl_struct" href="structflags__t.html">flags_t</a> flg_main = {0}; <span class="comment">//banderas de 1 bit.</span></div>
+<div class="line"><span class="comment">//--------------------------------Variables para manejo de UART end-----------------</span></div>
+<div class="line"> </div>
+<div class="line"><span class="keywordtype">void</span> HAL_UARTEx_RxEventCallback(UART_HandleTypeDef *huart, uint16_t Size)</div>
+<div class="line">{</div>
+<div class="line">   <span class="keywordflow">if</span>(huart == &amp;UART_BG)</div>
+<div class="line">   {   </div>
+<div class="line">       <span class="comment">//-----------Callback de UART para libreria-----------</span></div>
+<div class="line">       <a id="a2" name="a2"></a><a class="code hl_function" href="_b_g77_8c.html#acd4a161fbac7d28353ca438b91e0520b">bg_uartCallback</a>(uBg.buff, Size);</div>
+<div class="line"> </div>
+<div class="line">       HAL_UARTEx_ReceiveToIdle_IT(&amp;UART_BG, uBg.buff, <span class="keyword">sizeof</span>(uBg.buff));</div>
+<div class="line">       keyUart = RX_BG;</div>
+<div class="line">       uBg.len = Size;</div>
+<div class="line">       flg_uart = 1;</div>
+<div class="line">   }</div>
+<div class="line">}</div>
+<div class="line"><span class="comment">//-----------------------------Funcion de recepcion de interrupcion de UART end-----------------</span></div>
+<div class="line"> </div>
+<div class="line"><span class="comment">//-----------------------------------------------Funcion main-----------------------------------</span></div>
+<div class="line"><span class="keywordtype">int</span> main(<span class="keywordtype">void</span>)</div>
+<div class="line">{</div>
+<div class="line">   <span class="comment">//----------------------Configuracion e inicializacion de MCU----------------------------------</span></div>
+<div class="line">   HAL_Init();</div>
+<div class="line">   SystemClock_Config();</div>
+<div class="line">   MX_GPIO_Init();</div>
+<div class="line">   MX_UART4_Init();</div>
+<div class="line">   MX_UART7_Init();</div>
+<div class="line">   MX_USART2_UART_Init();</div>
+<div class="line">   <span class="comment">//----------------------Configuracion e inicializacion de MCU end------------------------------</span></div>
+<div class="line">   </div>
+<div class="line">   <span class="comment">//---------------------------------------Configurando o estableciendo BSP----------------------</span></div>
+<div class="line">   <a id="a3" name="a3"></a><a class="code hl_function" href="_b_g77_8c.html#a3f93ee3bfd2996fa41f5f9425dc83431">bg_set_bsp</a>(bspFun);</div>
+<div class="line"> </div>
+<div class="line">   <span class="comment">//--------------------------Activando la Recepcion de interrupcion de UART----------------------</span></div>
+<div class="line">   HAL_UARTEx_ReceiveToIdle_IT(&amp;UART_BG, uBg.buff, <span class="keyword">sizeof</span>(uBg.buff));</div>
+<div class="line">   flg_uart = 0;</div>
+<div class="line">   </div>
+<div class="line"> </div>
+<div class="line">   <span class="comment">//-------------------------------Inicializando el modulo (libreria)-----------------------------</span></div>
+<div class="line">   <a id="a4" name="a4"></a><a class="code hl_function" href="_b_g77_8c.html#ad9920b9e69487d843b87ace0fb65535f">bg_init_module</a>();</div>
+<div class="line">   <a id="a5" name="a5"></a><a class="code hl_function" href="_b_g77_8c.html#a5b05e846b42156e0bd04539d036e77e5">bg_data_module</a>();</div>
+<div class="line"> </div>
+<div class="line">   <span class="comment">//-------------------------------Verificacion de SIM-------------------------------</span></div>
+<div class="line">   <span class="keywordflow">if</span>(<a id="a6" name="a6"></a><a class="code hl_function" href="_b_g77_8c.html#a6fdf52da4e8bf69a4e9130163ae5e7be">bg_check_sim</a>() == BG_OK_SIM)</div>
+<div class="line">       printf(<span class="stringliteral">&quot;SIM OK\n&quot;</span>);</div>
+<div class="line">   <span class="keywordflow">else</span></div>
+<div class="line">       printf(<span class="stringliteral">&quot;SIM NO OK\n&quot;</span>);</div>
+<div class="line"> </div>
+<div class="line">   <span class="comment">//--------------------Verificacion si el modulo esta registrado--------------------</span></div>
+<div class="line">   <span class="keywordflow">if</span>(<a id="a7" name="a7"></a><a class="code hl_function" href="_b_g77_8c.html#a560f384f98c140a53d8fc8f5b32b5e19">bg_check_attach</a>() == BG_OK_ATTACH)</div>
+<div class="line">       printf(<span class="stringliteral">&quot;ATTACH OK\n&quot;</span>);</div>
+<div class="line">   <span class="keywordflow">else</span></div>
+<div class="line">       printf(<span class="stringliteral">&quot;ATTACH NO OK\n&quot;</span>);</div>
+<div class="line"> </div>
+<div class="line">   <span class="comment">//------------------------------Verificacion de COPS--------------------------------</span></div>
+<div class="line">   <span class="keywordflow">if</span>(<a id="a8" name="a8"></a><a class="code hl_function" href="_b_g77_8c.html#adfa333fa2fbd83d8d555f78174c312d4">bg_query_cops</a>() == BG_ERR_NO_OPER)</div>
+<div class="line">       printf(<span class="stringliteral">&quot;No se ha seleccionado operadora\n&quot;</span>);</div>
+<div class="line"> </div>
+<div class="line">   <span class="comment">//--------------------Consulta la configuracion del contexto PDP--------------------</span></div>
+<div class="line">   <span class="keywordflow">if</span>(<a id="a9" name="a9"></a><a class="code hl_function" href="_b_g77_8c.html#ac5b7a9c29733548542fd9372f5333273">bg_query_conf_pdp</a>(1) == BG_ERR_NO_CONF_PDP)</div>
+<div class="line">   printf(<span class="stringliteral">&quot;No se ha configurado contexto PDP\n&quot;</span>);</div>
+<div class="line"> </div>
+<div class="line">   <span class="comment">//--------------------Se verifica si esta activado el contexto PDP------------------</span></div>
+<div class="line">   <span class="keywordflow">if</span>(<a id="a10" name="a10"></a><a class="code hl_function" href="_b_g77_8c.html#ae28f36ea82838abfdca0118d7af70da7">bg_check_pdp</a>(1) == BG_OK_PDP_DEACT)</div>
+<div class="line">       printf(<span class="stringliteral">&quot;No esta activado el contexto PDP 1\n&quot;</span>);</div>
+<div class="line"> </div>
+<div class="line">   <span class="comment">//---------------------Se realiza el proceso de registro en la red------------------</span></div>
+<div class="line">   <span class="keywordflow">if</span>(<a id="a11" name="a11"></a><a class="code hl_function" href="_b_g77_8c.html#a1c0f09b53bcd76cc17f7be1d95778898">bg_attach</a>(COPS_LF) == BG_OK_ATTACH)</div>
+<div class="line">       printf(<span class="stringliteral">&quot;Modulo ATTACHADO\n&quot;</span>);</div>
+<div class="line"> </div>
+<div class="line">   <span class="comment">//----------------------Verifica si se el modulo esta registrado-------------------</span></div>
+<div class="line">   <span class="keywordflow">if</span>(<a class="code hl_function" href="_b_g77_8c.html#a560f384f98c140a53d8fc8f5b32b5e19">bg_check_attach</a>() == BG_OK_ATTACH)</div>
+<div class="line">       printf(<span class="stringliteral">&quot;ATTACH OK\n&quot;</span>);</div>
+<div class="line">   <span class="keywordflow">else</span></div>
+<div class="line">       printf(<span class="stringliteral">&quot;ATTACH NO OK\n&quot;</span>);</div>
+<div class="line"> </div>
+<div class="line">   <span class="comment">//-----------------------------Configura conterxto PDP-----------------------------</span></div>
+<div class="line">   <a id="_a12" name="_a12"></a><a class="code hl_struct" href="structbg__ctx_pdp__t.html">bg_ctxPdp_t</a> contextPDP_1 ={.ctxtID = 1, .contextType = BG_CTXT_IPV4,\</div>
+<div class="line">       .apn = APN_LINKS_FIELD, .usr = <span class="stringliteral">&quot;&quot;</span>, .psw = <span class="stringliteral">&quot;&quot;</span>};</div>
+<div class="line">   <a id="a13" name="a13"></a><a class="code hl_function" href="_b_g77_8c.html#ab3e3ace987b490e788e45c77d2762cc3">bg_conf_pdp</a>(contextPDP_1);</div>
+<div class="line"> </div>
+<div class="line">   <span class="comment">//-------------------------------Activa contexto PDP------------------------------</span></div>
+<div class="line">   <a id="a14" name="a14"></a><a class="code hl_function" href="_b_g77_8c.html#ae8e29b80c35bbfef04dde3dea52f459e">bg_pdp_activation</a>(1, BG_PDP_ACT);</div>
+<div class="line"> </div>
+<div class="line">   <span class="comment">//------------------------------Verificacion de COPS--------------------------------</span></div>
+<div class="line">   <span class="keywordflow">if</span>(<a class="code hl_function" href="_b_g77_8c.html#adfa333fa2fbd83d8d555f78174c312d4">bg_query_cops</a>() == BG_ERR_NO_OPER)</div>
+<div class="line">       printf(<span class="stringliteral">&quot;No se ha seleccionado operadora\n&quot;</span>);</div>
+<div class="line"> </div>
+<div class="line">   <span class="comment">//---------------------Creacion y apertura de socket 1 SERVIDOR----------------------</span></div>
+<div class="line">   <a id="_a15" name="_a15"></a><a class="code hl_struct" href="structbg_sckt__t.html">bgSckt_t</a> mySckt = {.ctxtID = 1, .connectID = 0, .ip = BG_OPEN_SERVER_IP,\</div>
+<div class="line">   .accssMode = BG_OPEN_BUFF_ACCSS_MODE, .serviceType = BG_OPEN_SERVER,\</div>
+<div class="line">   .remotePort = BG_OPEN_SERVER_REMOTE_PORT, .localPort = 2000};</div>
+<div class="line">   </div>
+<div class="line">   <a id="a16" name="a16"></a><a class="code hl_function" href="_b_g77_8c.html#a6fcaeffa8a8411da9bd284564e9cbd83">bg_open_sckt</a>(mySckt);</div>
+<div class="line">   <span class="comment">//---------------------Creacion y apertura de socket 1 SERVIDOR end--------------------</span></div>
+<div class="line"> </div>
+<div class="line">   <span class="comment">//----------------------Creacion y apertura de socket 2 CLIENTE------------------------</span></div>
+<div class="line">   <a class="code hl_struct" href="structbg_sckt__t.html">bgSckt_t</a> mySckt2 = {.ctxtID = 1, .connectID = 1, .ip = IP_METERCAD,\</div>
+<div class="line">       .accssMode = BG_OPEN_BUFF_ACCSS_MODE, .serviceType = BG_OPEN_CLIENT,\</div>
+<div class="line">       .remotePort = 2001, .localPort = BG_OPEN_CLIENT_LOCAL_PORT};</div>
+<div class="line"> </div>
+<div class="line">   <span class="keywordflow">if</span>(<a class="code hl_function" href="_b_g77_8c.html#a6fcaeffa8a8411da9bd284564e9cbd83">bg_open_sckt</a>(mySckt2) == BG_OK_CONNECT_ID_OPENNED)</div>
+<div class="line">       printf(<span class="stringliteral">&quot;Conexion myScket2 Abierta\n&quot;</span>);</div>
+<div class="line">   <span class="comment">//----------------------Creacion y apertura de socket 2 CLIENTE end---------------------</span></div>
+<div class="line"> </div>
+<div class="line">   <span class="comment">//--------------Transmision de mensajes de socket 2 en Buffer access mode---------------</span></div>
+<div class="line">   <span class="keywordflow">if</span>(<a id="a17" name="a17"></a><a class="code hl_function" href="_b_g77_8c.html#a4324d29bee02aaf36d6d7dc3d54fa1b7">bg_transmit_buffAMode</a>(mySckt2.<a id="a18" name="a18"></a>connectID, <span class="stringliteral">&quot;hello DOGO \x00\xFF&quot;</span>, 13) == BG_OK_TRANSMIT)</div>
+<div class="line">       printf(<span class="stringliteral">&quot;Mensaje enviado\n&quot;</span>);</div>
+<div class="line"> </div>
+<div class="line">   <span class="keywordflow">if</span>(<a class="code hl_function" href="_b_g77_8c.html#a4324d29bee02aaf36d6d7dc3d54fa1b7">bg_transmit_buffAMode</a>(mySckt2.connectID, <span class="stringliteral">&quot;hello COW &quot;</span>, 10) == BG_OK_TRANSMIT)</div>
+<div class="line">       printf(<span class="stringliteral">&quot;Mensaje enviado\n&quot;</span>);</div>
+<div class="line">   <span class="comment">//--------------Transmision de mensajes de socket 2 en Buffer access mode end------------</span></div>
+<div class="line"> </div>
+<div class="line">   <span class="comment">//-----------Cambio de modo de transmision a modo transparente del socket 2 y transmision de mensaje-----------</span></div>
+<div class="line">   <span class="keywordflow">if</span>(<a id="a19" name="a19"></a><a class="code hl_function" href="_b_g77_8c.html#a5ed9330e905321630088fe6a84c5a5de">bg_transparent_mode</a>(mySckt2.connectID) == BG_OK_TRANSPARENT_MODE)</div>
+<div class="line">   {</div>
+<div class="line">       printf(<span class="stringliteral">&quot;Modo transparente exitoso\n&quot;</span>);</div>
+<div class="line">       HAL_UART_Transmit(&amp;UART_BG, <span class="stringliteral">&quot;hello server&quot;</span>, 12, 1000);</div>
+<div class="line">       <span class="comment">//bg_transmit_TM(&quot;hello server&quot;, 12); //o tambien se puede usar esta funcion</span></div>
+<div class="line">   }</div>
+<div class="line"> </div>
+<div class="line">   <span class="comment">//-------------------Salida de modo transparente y cierre del socket 2------------------</span></div>
+<div class="line">   <span class="keywordflow">if</span>(<a id="a20" name="a20"></a><a class="code hl_function" href="_b_g77_8c.html#a453a9ac99a62c6fafe71b5179086ee97">bg_exit_transparent_mode</a>() == BG_OK_EXIT_TRANSPARENT_MODE)</div>
+<div class="line">   {</div>
+<div class="line">           printf(<span class="stringliteral">&quot;salida de TM Exitosa\n&quot;</span>);</div>
+<div class="line">           <a class="code hl_function" href="_b_g77_8c.html#ae28f36ea82838abfdca0118d7af70da7">bg_check_pdp</a>(1);</div>
+<div class="line">           <a id="a21" name="a21"></a><a class="code hl_function" href="_b_g77_8c.html#a803afbdc8df8c4db1b6f0267816954c8">bg_close_sckt</a>(mySckt2.connectID);</div>
+<div class="line">       </div>
+<div class="line">           <span class="keywordflow">if</span>(<a id="a22" name="a22"></a><a class="code hl_function" href="_b_g77_8c.html#ac4a2455d92827db1c3cf0ba553a05bb8">bg_check_sckt</a>(mySckt2.connectID) == BG_OK_CONNECT_ID_CLOSED)</div>
+<div class="line">               printf(<span class="stringliteral">&quot;Socket cerrado\n&quot;</span>);</div>
+<div class="line">   }</div>
+<div class="line"> </div>
+<div class="line">   <span class="keywordflow">else</span></div>
+<div class="line">       printf(<span class="stringliteral">&quot;Salida de TM no exitosa\n&quot;</span>);</div>
+<div class="line">   <span class="comment">//-------------------Salida de modo transparente y cierre del socket 2 end------------------</span></div>
+<div class="line">       </div>
+<div class="line">   <span class="comment">//--------------------------------Consulta del estado de señal------------------------------  </span></div>
+<div class="line">   <span class="keywordflow">if</span>(<a id="a23" name="a23"></a><a class="code hl_function" href="_b_g77_8c.html#a65c9f56b02078e837debb481fff49182">bg_query_signal</a>() == BG_OK_SIGNAL)</div>
+<div class="line">       printf(<span class="stringliteral">&quot;Intensidad de señal aceptable\n&quot;</span>);</div>
+<div class="line"> </div>
+<div class="line">   <span class="keywordflow">else</span></div>
+<div class="line">       printf(<span class="stringliteral">&quot;Intensidad de señal NO aceptable\n&quot;</span>);</div>
+<div class="line"> </div>
+<div class="line">   <span class="comment">//--------------------------------Desregistro de la red y termina el codigo------------------------------ </span></div>
+<div class="line">   <span class="comment">//if(bg_detach() == BG_OK_DETACH)</span></div>
+<div class="line">       <span class="comment">//printf(&quot;El Dispositivo esta desregistrado de la red\n&quot;);</span></div>
+<div class="line">   <span class="comment">// while(1);</span></div>
+<div class="line">   <span class="comment">//--------------------------------Desregistro de la red y termina el codigo end-------------------------- </span></div>
+<div class="line"> </div>
+<div class="line">   <span class="comment">//------------------------Apertura y cambio a modo transparente de socket 2 CLIENTE---------------------- </span></div>
+<div class="line">   <span class="keywordflow">if</span>(<a class="code hl_function" href="_b_g77_8c.html#a6fcaeffa8a8411da9bd284564e9cbd83">bg_open_sckt</a>(mySckt2) == BG_OK_CONNECT_ID_OPENNED)</div>
+<div class="line">       printf(<span class="stringliteral">&quot;Conexion mySocket2 Abierta\n&quot;</span>);</div>
+<div class="line"> </div>
+<div class="line">   <span class="keywordflow">if</span>(<a class="code hl_function" href="_b_g77_8c.html#a5ed9330e905321630088fe6a84c5a5de">bg_transparent_mode</a>(mySckt2.connectID) == BG_OK_TRANSPARENT_MODE)</div>
+<div class="line">   {</div>
+<div class="line">       printf(<span class="stringliteral">&quot;Modo transparente exitoso\n&quot;</span>);</div>
+<div class="line">       <a id="a24" name="a24"></a><a class="code hl_function" href="_b_g77_8c.html#a2eb4e7ff0044a4ccb914381d9ae25265">bg_transmit_TM</a>(<span class="stringliteral">&quot;hello serverDog&quot;</span>, 15);</div>
+<div class="line">   }</div>
+<div class="line">   <span class="comment">//------------------------Apertura y cambio a modo transparente de socket 2 CLIENTE---------------------- </span></div>
+<div class="line"> </div>
+<div class="line">   <span class="comment">//-----------------------------Loop del codigo o hilo principal----------------------------</span></div>
+<div class="line">   <span class="keywordflow">while</span>(1)</div>
+<div class="line">   {</div>
+<div class="line">       <span class="comment">//--------------------Funcion de manejo de URC-----------------------</span></div>
+<div class="line">       <a id="a25" name="a25"></a><a class="code hl_function" href="_b_g77_8c.html#a3f03c39804aa65f885946b3f30d6b4fc">bg_handle_urc</a>();</div>
+<div class="line"> </div>
+<div class="line">       <span class="comment">//---------------Transmision de mensaje cada 2 segundos---------------</span></div>
+<div class="line">       <a class="code hl_function" href="_b_g77_8c.html#a2eb4e7ff0044a4ccb914381d9ae25265">bg_transmit_TM</a>(<span class="stringliteral">&quot;hello dog&quot;</span>, 9);</div>
+<div class="line">       HAL_Delay(2000);</div>
+<div class="line">       memset(uBg.buff, <span class="charliteral">&#39;\0&#39;</span>, <span class="keyword">sizeof</span>(uBg.buff)); <span class="comment">//limpieza de buffer de recepcion de UART en aplicacion principal</span></div>
+<div class="line">   }</div>
+<div class="line">   <span class="comment">//-----------------------------Loop del codigo o hilo principal---------------------------- </span></div>
+<div class="line">}</div>
+<div class="line"><span class="comment">//-----------------------------------------------Funcion main end-------------------------------</span></div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"><span class="comment">//---------------------------------Funcion de interrupcion de temporizador----------------------</span></div>
+<div class="line"><span class="keywordtype">void</span> callback_systic(<span class="keywordtype">void</span>)</div>
+<div class="line">{  </div>
+<div class="line">   <span class="comment">//-----------Callback de temporizador de 1ms para libreria-----------</span></div>
+<div class="line">   <a id="a26" name="a26"></a><a class="code hl_function" href="_b_g77_8c.html#aa422c5730073a35ffc37421e44a6c632">bg_callback_ms</a>();</div>
+<div class="line">}</div>
+<div class="line"><span class="comment">//---------------------------------Funcion de interrupcion de temporizador end------------------</span></div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"><span class="comment">//---------------------------------Funcion de interrupcion de temporizador (Systick)----------------------</span></div>
+<div class="line"><span class="keywordtype">void</span> HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)</div>
+<div class="line">{</div>
+<div class="line">   <span class="keywordflow">if</span>(GPIO_Pin == INT_MAIN_RI_Pin)</div>
+<div class="line">   {</div>
+<div class="line">       <span class="keywordflow">if</span>(HAL_GPIO_ReadPin(INT_MAIN_RI_GPIO_Port, INT_MAIN_RI_Pin))</div>
+<div class="line">       {</div>
+<div class="line">           <span class="comment">//-----------Callback de flanco de subida de pin MAIN RI-----------</span></div>
+<div class="line">           <a id="a27" name="a27"></a><a class="code hl_function" href="_b_g77_8c.html#a796fbdf47278af0a696da945fa907110">bg_mainRICallback</a>(MAIN_RI_EDGE_RISING);</div>
+<div class="line">       }</div>
+<div class="line"> </div>
+<div class="line">       <span class="keywordflow">else</span></div>
+<div class="line">       {</div>
+<div class="line">           <span class="comment">//-----------Callback de flanco de bajada de pin MAIN RI-----------</span></div>
+<div class="line">           <a class="code hl_function" href="_b_g77_8c.html#a796fbdf47278af0a696da945fa907110">bg_mainRICallback</a>(MAIN_RI_EDGE_FALLING);</div>
+<div class="line">       }</div>
+<div class="line">   }</div>
+<div class="line">}</div>
+<div class="line"><span class="comment">//---------------------------------Funcion de interrupcion de temporizador  (Systick) end------------------</span></div>
+<div class="ttc" id="a_b_g77_8c_html_a1c0f09b53bcd76cc17f7be1d95778898"><div class="ttname"><a href="_b_g77_8c.html#a1c0f09b53bcd76cc17f7be1d95778898">bg_attach</a></div><div class="ttdeci">bg_err_t bg_attach(uint8_t *operator)</div><div class="ttdoc">Funcion para registrar el modulo en la red (attach).</div><div class="ttdef"><b>Definition</b> BG77.c:761</div></div>
+<div class="ttc" id="a_b_g77_8c_html_a2eb4e7ff0044a4ccb914381d9ae25265"><div class="ttname"><a href="_b_g77_8c.html#a2eb4e7ff0044a4ccb914381d9ae25265">bg_transmit_TM</a></div><div class="ttdeci">bg_err_t bg_transmit_TM(uint8_t *data, uint16_t len)</div><div class="ttdoc">Transmite datos en modo transparente.</div><div class="ttdef"><b>Definition</b> BG77.c:998</div></div>
+<div class="ttc" id="a_b_g77_8c_html_a3f03c39804aa65f885946b3f30d6b4fc"><div class="ttname"><a href="_b_g77_8c.html#a3f03c39804aa65f885946b3f30d6b4fc">bg_handle_urc</a></div><div class="ttdeci">void bg_handle_urc(void)</div><div class="ttdoc">Esta funcion se encarga de manejar los URC encolados.   Si hay un URC encolado, se procede a parsearl...</div><div class="ttdef"><b>Definition</b> BG77.c:237</div></div>
+<div class="ttc" id="a_b_g77_8c_html_a3f93ee3bfd2996fa41f5f9425dc83431"><div class="ttname"><a href="_b_g77_8c.html#a3f93ee3bfd2996fa41f5f9425dc83431">bg_set_bsp</a></div><div class="ttdeci">void bg_set_bsp(bg_bspFun_t bspFun)</div><div class="ttdoc">Funcion para establecer los punteros a función del BSP (UART TX, Delay, GPIO_write,...</div><div class="ttdef"><b>Definition</b> BG77.c:139</div></div>
+<div class="ttc" id="a_b_g77_8c_html_a4324d29bee02aaf36d6d7dc3d54fa1b7"><div class="ttname"><a href="_b_g77_8c.html#a4324d29bee02aaf36d6d7dc3d54fa1b7">bg_transmit_buffAMode</a></div><div class="ttdeci">bg_err_t bg_transmit_buffAMode(uint8_t connectID, uint8_t *data, uint16_t len)</div><div class="ttdoc">Funcion para transmitir mensajes por un socket que esta en modo buffer access mode.</div><div class="ttdef"><b>Definition</b> BG77.c:924</div></div>
+<div class="ttc" id="a_b_g77_8c_html_a453a9ac99a62c6fafe71b5179086ee97"><div class="ttname"><a href="_b_g77_8c.html#a453a9ac99a62c6fafe71b5179086ee97">bg_exit_transparent_mode</a></div><div class="ttdeci">bg_err_t bg_exit_transparent_mode(void)</div><div class="ttdoc">Hace que el dispositivo salga de modo transparente.</div><div class="ttdef"><b>Definition</b> BG77.c:880</div></div>
+<div class="ttc" id="a_b_g77_8c_html_a560f384f98c140a53d8fc8f5b32b5e19"><div class="ttname"><a href="_b_g77_8c.html#a560f384f98c140a53d8fc8f5b32b5e19">bg_check_attach</a></div><div class="ttdeci">bg_err_t bg_check_attach(void)</div><div class="ttdoc">Funcion para verificar el registro en red.</div><div class="ttdef"><b>Definition</b> BG77.c:547</div></div>
+<div class="ttc" id="a_b_g77_8c_html_a5b05e846b42156e0bd04539d036e77e5"><div class="ttname"><a href="_b_g77_8c.html#a5b05e846b42156e0bd04539d036e77e5">bg_data_module</a></div><div class="ttdeci">bg_err_t bg_data_module(void)</div><div class="ttdoc">Funcion para imprimir la version de FW del modulo, ICCI e IMEI.</div><div class="ttdef"><b>Definition</b> BG77.c:501</div></div>
+<div class="ttc" id="a_b_g77_8c_html_a5ed9330e905321630088fe6a84c5a5de"><div class="ttname"><a href="_b_g77_8c.html#a5ed9330e905321630088fe6a84c5a5de">bg_transparent_mode</a></div><div class="ttdeci">bg_err_t bg_transparent_mode(uint8_t connectID)</div><div class="ttdoc">Permite al dispositio cambiar su modo de acceso a modo transparente.</div><div class="ttdef"><b>Definition</b> BG77.c:852</div></div>
+<div class="ttc" id="a_b_g77_8c_html_a65c9f56b02078e837debb481fff49182"><div class="ttname"><a href="_b_g77_8c.html#a65c9f56b02078e837debb481fff49182">bg_query_signal</a></div><div class="ttdeci">bg_err_t bg_query_signal(void)</div><div class="ttdoc">Consulta la intensidad de la señal cuando el modulo ya esta registrado.</div><div class="ttdef"><b>Definition</b> BG77.c:711</div></div>
+<div class="ttc" id="a_b_g77_8c_html_a6fcaeffa8a8411da9bd284564e9cbd83"><div class="ttname"><a href="_b_g77_8c.html#a6fcaeffa8a8411da9bd284564e9cbd83">bg_open_sckt</a></div><div class="ttdeci">bg_err_t bg_open_sckt(bgSckt_t sckt)</div><div class="ttdoc">Abre una conexion (socket) TCP en modo servidor o cliente.</div><div class="ttdef"><b>Definition</b> BG77.c:811</div></div>
+<div class="ttc" id="a_b_g77_8c_html_a6fdf52da4e8bf69a4e9130163ae5e7be"><div class="ttname"><a href="_b_g77_8c.html#a6fdf52da4e8bf69a4e9130163ae5e7be">bg_check_sim</a></div><div class="ttdeci">bg_err_t bg_check_sim(void)</div><div class="ttdoc">Funcion para detectar SIM.</div><div class="ttdef"><b>Definition</b> BG77.c:530</div></div>
+<div class="ttc" id="a_b_g77_8c_html_a796fbdf47278af0a696da945fa907110"><div class="ttname"><a href="_b_g77_8c.html#a796fbdf47278af0a696da945fa907110">bg_mainRICallback</a></div><div class="ttdeci">void bg_mainRICallback(mainRiEdge_t edge)</div><div class="ttdoc">Esta funcion de callback se debe llamar en una funcion de interrupcion de pin digital que corresponde...</div><div class="ttdef"><b>Definition</b> BG77.c:189</div></div>
+<div class="ttc" id="a_b_g77_8c_html_a803afbdc8df8c4db1b6f0267816954c8"><div class="ttname"><a href="_b_g77_8c.html#a803afbdc8df8c4db1b6f0267816954c8">bg_close_sckt</a></div><div class="ttdeci">bg_err_t bg_close_sckt(uint8_t connectID)</div><div class="ttdoc">Cierra una conexion o socket.</div><div class="ttdef"><b>Definition</b> BG77.c:901</div></div>
+<div class="ttc" id="a_b_g77_8c_html_aa422c5730073a35ffc37421e44a6c632"><div class="ttname"><a href="_b_g77_8c.html#aa422c5730073a35ffc37421e44a6c632">bg_callback_ms</a></div><div class="ttdeci">void bg_callback_ms(void)</div><div class="ttdoc">Esta funcion de callback se tiene que llamar en una funcion de interrupción de temporizador en donde ...</div><div class="ttdef"><b>Definition</b> BG77.c:152</div></div>
+<div class="ttc" id="a_b_g77_8c_html_ab3e3ace987b490e788e45c77d2762cc3"><div class="ttname"><a href="_b_g77_8c.html#ab3e3ace987b490e788e45c77d2762cc3">bg_conf_pdp</a></div><div class="ttdeci">bg_err_t bg_conf_pdp(bg_ctxPdp_t contextPDP)</div><div class="ttdoc">Configura los parametros de contexto PDP que se quiere activar.</div><div class="ttdef"><b>Definition</b> BG77.c:778</div></div>
+<div class="ttc" id="a_b_g77_8c_html_ac4a2455d92827db1c3cf0ba553a05bb8"><div class="ttname"><a href="_b_g77_8c.html#ac4a2455d92827db1c3cf0ba553a05bb8">bg_check_sckt</a></div><div class="ttdeci">bg_err_t bg_check_sckt(uint8_t connectID)</div><div class="ttdoc">Verifica el estado de una conexion.</div><div class="ttdef"><b>Definition</b> BG77.c:667</div></div>
+<div class="ttc" id="a_b_g77_8c_html_ac5b7a9c29733548542fd9372f5333273"><div class="ttname"><a href="_b_g77_8c.html#ac5b7a9c29733548542fd9372f5333273">bg_query_conf_pdp</a></div><div class="ttdeci">bg_err_t bg_query_conf_pdp(uint8_t contextID)</div><div class="ttdoc">Funcion que imprime parametros de la configuracion de contexto PDP (APN, USER, PASSWORD,...</div><div class="ttdef"><b>Definition</b> BG77.c:595</div></div>
+<div class="ttc" id="a_b_g77_8c_html_acd4a161fbac7d28353ca438b91e0520b"><div class="ttname"><a href="_b_g77_8c.html#acd4a161fbac7d28353ca438b91e0520b">bg_uartCallback</a></div><div class="ttdeci">void bg_uartCallback(uint8_t *buff, uint16_t nBytes)</div><div class="ttdoc">Esta funcion de callback se debe llamar en una funcion de interrupcion de recepcion de uart en la cua...</div><div class="ttdef"><b>Definition</b> BG77.c:160</div></div>
+<div class="ttc" id="a_b_g77_8c_html_ad9920b9e69487d843b87ace0fb65535f"><div class="ttname"><a href="_b_g77_8c.html#ad9920b9e69487d843b87ace0fb65535f">bg_init_module</a></div><div class="ttdeci">bg_err_t bg_init_module(void)</div><div class="ttdoc">Funcion para inicializar el modulo. Sus funciones son encender y configurar el modulo.</div><div class="ttdef"><b>Definition</b> BG77.c:464</div></div>
+<div class="ttc" id="a_b_g77_8c_html_adfa333fa2fbd83d8d555f78174c312d4"><div class="ttname"><a href="_b_g77_8c.html#adfa333fa2fbd83d8d555f78174c312d4">bg_query_cops</a></div><div class="ttdeci">bg_err_t bg_query_cops(void)</div><div class="ttdoc">Funcion que imprime parametros de la consulta de COPS modo, operador, tecnologia de acceso.</div><div class="ttdef"><b>Definition</b> BG77.c:561</div></div>
+<div class="ttc" id="a_b_g77_8c_html_ae28f36ea82838abfdca0118d7af70da7"><div class="ttname"><a href="_b_g77_8c.html#ae28f36ea82838abfdca0118d7af70da7">bg_check_pdp</a></div><div class="ttdeci">bg_err_t bg_check_pdp(uint8_t ctxtID)</div><div class="ttdoc">Verifica que se tenga activado el contexto PDP seleccionado (contextID)</div><div class="ttdef"><b>Definition</b> BG77.c:629</div></div>
+<div class="ttc" id="a_b_g77_8c_html_ae8e29b80c35bbfef04dde3dea52f459e"><div class="ttname"><a href="_b_g77_8c.html#ae8e29b80c35bbfef04dde3dea52f459e">bg_pdp_activation</a></div><div class="ttdeci">bg_err_t bg_pdp_activation(uint8_t ctxtID, bg_actPdp_t act)</div><div class="ttdoc">Activa o desactiva el contexto PDP previamente configurado.</div><div class="ttdef"><b>Definition</b> BG77.c:793</div></div>
+<div class="ttc" id="a_b_g77_8h_html"><div class="ttname"><a href="_b_g77_8h.html">BG77.h</a></div><div class="ttdoc">Esta es una libreria base para implementar funcionalidades basicas del modulo BG77 (consulta de estad...</div></div>
+<div class="ttc" id="a_b_g77_8h_html_a2c28d9ff8a1ade4f1a62876f8ea35812"><div class="ttname"><a href="_b_g77_8h.html#a2c28d9ff8a1ade4f1a62876f8ea35812">bgPin_t</a></div><div class="ttdeci">bgPin_t</div><div class="ttdoc">tipo de dato que enlista todos los pines soportados para la escritura de GPIOs</div><div class="ttdef"><b>Definition</b> BG77.h:656</div></div>
+<div class="ttc" id="a_b_g77_8h_html_af98be1c204049055208486fb2b91c87b"><div class="ttname"><a href="_b_g77_8h.html#af98be1c204049055208486fb2b91c87b">bg_err_t</a></div><div class="ttdeci">bg_err_t</div><div class="ttdoc">tipo de variable que almacena el catalogo de errores.</div><div class="ttdef"><b>Definition</b> BG77.h:592</div></div>
+<div class="ttc" id="astructbg__bsp_fun__t_html"><div class="ttname"><a href="structbg__bsp_fun__t.html">bg_bspFun_t</a></div><div class="ttdoc">Tipo de variable que contiene los punteros a funcion del BSP.</div><div class="ttdef"><b>Definition</b> BG77.h:693</div></div>
+<div class="ttc" id="astructbg__ctx_pdp__t_html"><div class="ttname"><a href="structbg__ctx_pdp__t.html">bg_ctxPdp_t</a></div><div class="ttdoc">Es el tipo de variable que define la configuracion de contexto PDP.</div><div class="ttdef"><b>Definition</b> BG77.h:935</div></div>
+<div class="ttc" id="astructbg_sckt__t_html"><div class="ttname"><a href="structbg_sckt__t.html">bgSckt_t</a></div><div class="ttdoc">Tipo de dato que contiene todos los parametros de red para abrir un socket.</div><div class="ttdef"><b>Definition</b> BG77.h:999</div></div>
+<div class="ttc" id="astructflags__t_html"><div class="ttname"><a href="structflags__t.html">flags_t</a></div><div class="ttdoc">Tipo de dato para crear variables de banderas de 1 bit (16 bits)</div><div class="ttdef"><b>Definition</b> BG77.h:630</div></div>
+</div><!-- fragment --> <dl class="section copyright"><dt>Copyright</dt><dd>Copyright (c) 2024</dd></dl>
+<div class="fragment"></div><!-- fragment --> </div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+<img class="footer" src="cursoCIntermedio.png"  height="100px"/>
+</small></address>
+</div><!-- doc-content -->
+</body>
+</html>

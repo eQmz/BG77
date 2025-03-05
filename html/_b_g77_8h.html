@@ -1,0 +1,1841 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.12.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>BG77: Referencia del archivo BG77.h</title>
+<link rel="icon" href="cursoCIntermedio.png" type="image/x-icon" />
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectlogo"><img alt="Logo" src=" lenguaje-c-1.png" height="100px"/></td>
+  <td id="projectalign">
+   <div id="projectname">BG77<span id="projectnumber">&#160;1.0</span>
+   </div>
+   <div id="projectbrief">Esta es una libreria basica para controlar el modulo de comunicacion BG77</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generado por Doxygen 1.12.0 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() { codefold.init(0); });
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','Buscar',false);
+  $(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function(){ initResizable(false); });
+/* @license-end */
+</script>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Cargando...</div>
+<div class="SRStatus" id="Searching">Buscando...</div>
+<div class="SRStatus" id="NoMatches">Nada coincide</div>
+</div>
+</div>
+</div>
+</div>
+
+</div><!-- top -->
+<div id="doc-content">
+<div class="header">
+  <div class="summary">
+<a href="#nested-classes">Estructuras de datos</a> &#124;
+<a href="#define-members">defines</a> &#124;
+<a href="#typedef-members">typedefs</a> &#124;
+<a href="#enum-members">Enumeraciones</a> &#124;
+<a href="#func-members">Funciones</a>  </div>
+  <div class="headertitle"><div class="title">Referencia del archivo BG77.h</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>Esta es una libreria base para implementar funcionalidades basicas del modulo BG77 (consulta de estados, apertura de conexiones, transmision y recepcion de datos).  
+<a href="#details">Más...</a></p>
+<div class="textblock"><code>#include &quot;stdio.h&quot;</code><br />
+<code>#include &quot;stdint.h&quot;</code><br />
+<code>#include &quot;stdlib.h&quot;</code><br />
+<code>#include &quot;string.h&quot;</code><br />
+<code>#include &quot;stdarg.h&quot;</code><br />
+<code>#include &quot;../BG77/queue_module/queue_module.h&quot;</code><br />
+</div>
+<p><a href="_b_g77_8h_source.html">Ir al código fuente de este archivo.</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
+Estructuras de datos</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structflags__t.html">flags_t</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Tipo de dato para crear variables de banderas de 1 bit (16 bits)  <a href="structflags__t.html#details">Más...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structbg__bsp_fun__t.html">bg_bspFun_t</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Tipo de variable que contiene los punteros a funcion del BSP.  <a href="structbg__bsp_fun__t.html#details">Más...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structurc_info_data__t.html">urcInfoData_t</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Tipo de variable que contiene la informacion util de URC.  <a href="structurc_info_data__t.html#details">Más...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structbg__ctx_pdp__t.html">bg_ctxPdp_t</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Es el tipo de variable que define la configuracion de contexto PDP.  <a href="structbg__ctx_pdp__t.html#details">Más...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structbg_sckt__t.html">bgSckt_t</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Tipo de dato que contiene todos los parametros de red para abrir un socket.  <a href="structbg_sckt__t.html#details">Más...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="define-members" name="define-members"></a>
+defines</h2></td></tr>
+<tr class="memitem:a9b06fda83ca7a20a56bd6565d6841893" id="r_a9b06fda83ca7a20a56bd6565d6841893"><td class="memItemLeft" align="right" valign="top"><a id="a9b06fda83ca7a20a56bd6565d6841893" name="a9b06fda83ca7a20a56bd6565d6841893"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>LD</b>&#160;&#160;&#160;0</td></tr>
+<tr class="separator:a9b06fda83ca7a20a56bd6565d6841893"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa4d6abc7b58eb11e517993df83b7f0f7" id="r_aa4d6abc7b58eb11e517993df83b7f0f7"><td class="memItemLeft" align="right" valign="top"><a id="aa4d6abc7b58eb11e517993df83b7f0f7" name="aa4d6abc7b58eb11e517993df83b7f0f7"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>LE</b>&#160;&#160;&#160;1</td></tr>
+<tr class="separator:aa4d6abc7b58eb11e517993df83b7f0f7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abd3150cc4ae293e914485be959ec23e1" id="r_abd3150cc4ae293e914485be959ec23e1"><td class="memItemLeft" align="right" valign="top"><a id="abd3150cc4ae293e914485be959ec23e1" name="abd3150cc4ae293e914485be959ec23e1"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>_BG_DEBUG_</b></td></tr>
+<tr class="separator:abd3150cc4ae293e914485be959ec23e1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abced5d6549b42ce11890222cdcce5625" id="r_abced5d6549b42ce11890222cdcce5625"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#abced5d6549b42ce11890222cdcce5625">LOG_BG</a>(enable, ...)</td></tr>
+<tr class="memdesc:abced5d6549b42ce11890222cdcce5625"><td class="mdescLeft">&#160;</td><td class="mdescRight">MACRO para imprimir log. Este puede desactivarse en tiempo de ejecucion.  <br /></td></tr>
+<tr class="separator:abced5d6549b42ce11890222cdcce5625"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a68ee928e8b006a04a7fcf30d8498cbbe" id="r_a68ee928e8b006a04a7fcf30d8498cbbe"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a68ee928e8b006a04a7fcf30d8498cbbe">LOG_BG_TRACE</a>(enable, ...)</td></tr>
+<tr class="memdesc:a68ee928e8b006a04a7fcf30d8498cbbe"><td class="mdescLeft">&#160;</td><td class="mdescRight">Es un Log derivado que rastrea la ruta y la linea en donde se esta imprimiendo el mensaje.  <br /></td></tr>
+<tr class="separator:a68ee928e8b006a04a7fcf30d8498cbbe"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac5cdc584cf35c61f2875f1703ab9219b" id="r_ac5cdc584cf35c61f2875f1703ab9219b"><td class="memItemLeft" align="right" valign="top"><a id="ac5cdc584cf35c61f2875f1703ab9219b" name="ac5cdc584cf35c61f2875f1703ab9219b"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>__bg_weak__</b>&#160;&#160;&#160;__attribute__((weak))</td></tr>
+<tr class="memdesc:ac5cdc584cf35c61f2875f1703ab9219b"><td class="mdescLeft">&#160;</td><td class="mdescRight">MACRO para generar funciones del tipo weak. <br /></td></tr>
+<tr class="separator:ac5cdc584cf35c61f2875f1703ab9219b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab96c94c7d4f72592fb0bd579675c89f2" id="r_ab96c94c7d4f72592fb0bd579675c89f2"><td class="memItemLeft" align="right" valign="top"><a id="ab96c94c7d4f72592fb0bd579675c89f2" name="ab96c94c7d4f72592fb0bd579675c89f2"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>MAX_SEC</b>&#160;&#160;&#160;0XFFFFFFFFUL</td></tr>
+<tr class="separator:ab96c94c7d4f72592fb0bd579675c89f2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a40a62a68f8a03937787cc954317fbc13" id="r_a40a62a68f8a03937787cc954317fbc13"><td class="memItemLeft" align="right" valign="top"><a id="a40a62a68f8a03937787cc954317fbc13" name="a40a62a68f8a03937787cc954317fbc13"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>BG_TIMEOUT_ANSW</b>&#160;&#160;&#160;10UL</td></tr>
+<tr class="separator:a40a62a68f8a03937787cc954317fbc13"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afa8f5cd5ad672753ec601976bb730b74" id="r_afa8f5cd5ad672753ec601976bb730b74"><td class="memItemLeft" align="right" valign="top"><a id="afa8f5cd5ad672753ec601976bb730b74" name="afa8f5cd5ad672753ec601976bb730b74"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>BG_TIMEOUT_ANSW_OK</b>&#160;&#160;&#160;20UL</td></tr>
+<tr class="separator:afa8f5cd5ad672753ec601976bb730b74"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abc845dcc0f7a3b93fd2182df6bd90cf9" id="r_abc845dcc0f7a3b93fd2182df6bd90cf9"><td class="memItemLeft" align="right" valign="top"><a id="abc845dcc0f7a3b93fd2182df6bd90cf9" name="abc845dcc0f7a3b93fd2182df6bd90cf9"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>BG_TIMEOUT_ANSW_OK_LONG</b>&#160;&#160;&#160;40UL</td></tr>
+<tr class="separator:abc845dcc0f7a3b93fd2182df6bd90cf9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae9c00243e402e91d12fd0c65bf2ad7ca" id="r_ae9c00243e402e91d12fd0c65bf2ad7ca"><td class="memItemLeft" align="right" valign="top"><a id="ae9c00243e402e91d12fd0c65bf2ad7ca" name="ae9c00243e402e91d12fd0c65bf2ad7ca"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>IP_METERCAD</b>&#160;&#160;&#160;&quot;192.168.4.58&quot;</td></tr>
+<tr class="separator:ae9c00243e402e91d12fd0c65bf2ad7ca"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5850ea8e082e2f50787a75c6fba62c7a" id="r_a5850ea8e082e2f50787a75c6fba62c7a"><td class="memItemLeft" align="right" valign="top"><a id="a5850ea8e082e2f50787a75c6fba62c7a" name="a5850ea8e082e2f50787a75c6fba62c7a"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>IP_PROXYGAMMA</b>&#160;&#160;&#160;&quot;192.168.4.57&quot;</td></tr>
+<tr class="separator:a5850ea8e082e2f50787a75c6fba62c7a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aefc3b0c8b5e8e8b1b730d5adfc50191f" id="r_aefc3b0c8b5e8e8b1b730d5adfc50191f"><td class="memItemLeft" align="right" valign="top"><a id="aefc3b0c8b5e8e8b1b730d5adfc50191f" name="aefc3b0c8b5e8e8b1b730d5adfc50191f"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>IP_TCP_LISTENER</b>&#160;&#160;&#160;&quot;127.0.0.1&quot;</td></tr>
+<tr class="separator:aefc3b0c8b5e8e8b1b730d5adfc50191f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad2187edb5048abfcf399e1c6b5f4e82f" id="r_ad2187edb5048abfcf399e1c6b5f4e82f"><td class="memItemLeft" align="right" valign="top"><a id="ad2187edb5048abfcf399e1c6b5f4e82f" name="ad2187edb5048abfcf399e1c6b5f4e82f"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>APN_LINKS_FIELD</b>&#160;&#160;&#160;&quot;cantilever.1&quot;</td></tr>
+<tr class="separator:ad2187edb5048abfcf399e1c6b5f4e82f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab5875096e9e3c1f35b9f6dba8d6de965" id="r_ab5875096e9e3c1f35b9f6dba8d6de965"><td class="memItemLeft" align="right" valign="top"><a id="ab5875096e9e3c1f35b9f6dba8d6de965" name="ab5875096e9e3c1f35b9f6dba8d6de965"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>COPS_LF</b>&#160;&#160;&#160;&quot;334020&quot;</td></tr>
+<tr class="separator:ab5875096e9e3c1f35b9f6dba8d6de965"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa2798a6bac4c32b225943e273ef1ff37" id="r_aa2798a6bac4c32b225943e273ef1ff37"><td class="memItemLeft" align="right" valign="top"><a id="aa2798a6bac4c32b225943e273ef1ff37" name="aa2798a6bac4c32b225943e273ef1ff37"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>COPS_ATT_1</b>&#160;&#160;&#160;&quot;334090&quot;</td></tr>
+<tr class="separator:aa2798a6bac4c32b225943e273ef1ff37"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a09094f7f4bcca2ce1ccf96c91e9c6a03" id="r_a09094f7f4bcca2ce1ccf96c91e9c6a03"><td class="memItemLeft" align="right" valign="top"><a id="a09094f7f4bcca2ce1ccf96c91e9c6a03" name="a09094f7f4bcca2ce1ccf96c91e9c6a03"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>COPS_ATT_2</b>&#160;&#160;&#160;&quot;334050&quot;</td></tr>
+<tr class="separator:a09094f7f4bcca2ce1ccf96c91e9c6a03"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a178132174f9ee6c99bf132e9b8aff6b4" id="r_a178132174f9ee6c99bf132e9b8aff6b4"><td class="memItemLeft" align="right" valign="top"><a id="a178132174f9ee6c99bf132e9b8aff6b4" name="a178132174f9ee6c99bf132e9b8aff6b4"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>BG_CONTEXT_ID_MAX</b>&#160;&#160;&#160;7</td></tr>
+<tr class="separator:a178132174f9ee6c99bf132e9b8aff6b4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3ba9ffa004a0290d6eaecbbef7895864" id="r_a3ba9ffa004a0290d6eaecbbef7895864"><td class="memItemLeft" align="right" valign="top"><a id="a3ba9ffa004a0290d6eaecbbef7895864" name="a3ba9ffa004a0290d6eaecbbef7895864"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>BG_CONTEXT_ID_MIN</b>&#160;&#160;&#160;1</td></tr>
+<tr class="separator:a3ba9ffa004a0290d6eaecbbef7895864"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5c27fb85b702825a04e8a58911f9193f" id="r_a5c27fb85b702825a04e8a58911f9193f"><td class="memItemLeft" align="right" valign="top"><a id="a5c27fb85b702825a04e8a58911f9193f" name="a5c27fb85b702825a04e8a58911f9193f"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>BG_CONNECT_ID_MAX</b>&#160;&#160;&#160;11</td></tr>
+<tr class="separator:a5c27fb85b702825a04e8a58911f9193f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8dcf686bd59bcd0c024a7a06c45f7e58" id="r_a8dcf686bd59bcd0c024a7a06c45f7e58"><td class="memItemLeft" align="right" valign="top"><a id="a8dcf686bd59bcd0c024a7a06c45f7e58" name="a8dcf686bd59bcd0c024a7a06c45f7e58"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>BG_CONNECT_ID_MIN</b>&#160;&#160;&#160;0</td></tr>
+<tr class="separator:a8dcf686bd59bcd0c024a7a06c45f7e58"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a29b43f40cd1353df5eb853cb40aca7f9" id="r_a29b43f40cd1353df5eb853cb40aca7f9"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a29b43f40cd1353df5eb853cb40aca7f9">CHECK_BG_ERR</a>(err)</td></tr>
+<tr class="memdesc:a29b43f40cd1353df5eb853cb40aca7f9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Esta macro es una funcion inline que evalua que no se presento algun error del tipo bg_err_t. Su proposito es mantener la legibilidad del codigo.  <br /></td></tr>
+<tr class="separator:a29b43f40cd1353df5eb853cb40aca7f9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3e5f4c178ebf4e1ad598506fcb722d90" id="r_a3e5f4c178ebf4e1ad598506fcb722d90"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3e5f4c178ebf4e1ad598506fcb722d90">REMPLACE_CHAR</a>(rempSrcBuff,  chrRemplaced,  chrDesired)</td></tr>
+<tr class="separator:a3e5f4c178ebf4e1ad598506fcb722d90"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af8e4982d2acfaf513cef47c31cf82607" id="r_af8e4982d2acfaf513cef47c31cf82607"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af8e4982d2acfaf513cef47c31cf82607">COPY_PARSE_STR</a>(_dstBuff,  dstBuffSize,  srcBuff,  chr1,  chr2)</td></tr>
+<tr class="separator:af8e4982d2acfaf513cef47c31cf82607"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a65789cf68a6f03ed3ede1aa82784c39b" id="r_a65789cf68a6f03ed3ede1aa82784c39b"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a65789cf68a6f03ed3ede1aa82784c39b">CHECK_DESIRED_ANSW</a>(srcBuff,  desiredAnsw,  _timeout)</td></tr>
+<tr class="memdesc:a65789cf68a6f03ed3ede1aa82784c39b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Verifica que una cadena deseada se encuentre dentro de un array o buffer durante un tiempo especificado.  <br /></td></tr>
+<tr class="separator:a65789cf68a6f03ed3ede1aa82784c39b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a25de0a3a2ef034775a4ed2739c9d6af7" id="r_a25de0a3a2ef034775a4ed2739c9d6af7"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a25de0a3a2ef034775a4ed2739c9d6af7">CHECK_POWDWN_ANSW</a>(srcBuff,  _timeout)</td></tr>
+<tr class="memdesc:a25de0a3a2ef034775a4ed2739c9d6af7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Verifica que el comando de Power down sea exitoso.  <br /></td></tr>
+<tr class="separator:a25de0a3a2ef034775a4ed2739c9d6af7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae249007a2f2f4a602e52a621236bde51" id="r_ae249007a2f2f4a602e52a621236bde51"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae249007a2f2f4a602e52a621236bde51">CHECK_EXIT_TM_ANSW</a>(srcBuff,  _timeout)</td></tr>
+<tr class="memdesc:ae249007a2f2f4a602e52a621236bde51"><td class="mdescLeft">&#160;</td><td class="mdescRight">Verifica que la salida de modo transparente sea exitosa.  <br /></td></tr>
+<tr class="separator:ae249007a2f2f4a602e52a621236bde51"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acb098879d8671d85da27cc1ce9ce55b3" id="r_acb098879d8671d85da27cc1ce9ce55b3"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#acb098879d8671d85da27cc1ce9ce55b3">CREATE_BUFF</a>(x,  name)</td></tr>
+<tr class="separator:acb098879d8671d85da27cc1ce9ce55b3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aab65861738b8a4bf46454ad66659dbeb" id="r_aab65861738b8a4bf46454ad66659dbeb"><td class="memItemLeft" align="right" valign="top"><a id="aab65861738b8a4bf46454ad66659dbeb" name="aab65861738b8a4bf46454ad66659dbeb"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>SIZE_BG_BUFF</b>&#160;&#160;&#160;2048</td></tr>
+<tr class="separator:aab65861738b8a4bf46454ad66659dbeb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab52cb084c17d58d09ea50249d6e5a180" id="r_ab52cb084c17d58d09ea50249d6e5a180"><td class="memItemLeft" align="right" valign="top"><a id="ab52cb084c17d58d09ea50249d6e5a180" name="ab52cb084c17d58d09ea50249d6e5a180"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>BG_OPEN_SERVER_REMOTE_PORT</b>&#160;&#160;&#160;0</td></tr>
+<tr class="separator:ab52cb084c17d58d09ea50249d6e5a180"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3b1560b9af26e1aae2389a54b8072593" id="r_a3b1560b9af26e1aae2389a54b8072593"><td class="memItemLeft" align="right" valign="top"><a id="a3b1560b9af26e1aae2389a54b8072593" name="a3b1560b9af26e1aae2389a54b8072593"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>BG_OPEN_SERVER_IP</b>&#160;&#160;&#160;&quot;127.0.0.1&quot;</td></tr>
+<tr class="separator:a3b1560b9af26e1aae2389a54b8072593"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af4690344a3f01b4d9dd0de506706c313" id="r_af4690344a3f01b4d9dd0de506706c313"><td class="memItemLeft" align="right" valign="top"><a id="af4690344a3f01b4d9dd0de506706c313" name="af4690344a3f01b4d9dd0de506706c313"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>BG_OPEN_BUFF_ACCSS_MODE</b>&#160;&#160;&#160;0</td></tr>
+<tr class="separator:af4690344a3f01b4d9dd0de506706c313"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad180ae4154f208c3061daf996c45662e" id="r_ad180ae4154f208c3061daf996c45662e"><td class="memItemLeft" align="right" valign="top"><a id="ad180ae4154f208c3061daf996c45662e" name="ad180ae4154f208c3061daf996c45662e"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>BG_OPEN_TRANSPARENT_MODE</b>&#160;&#160;&#160;2</td></tr>
+<tr class="separator:ad180ae4154f208c3061daf996c45662e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae016f8744ca6a26d4c3e38f80ec815a3" id="r_ae016f8744ca6a26d4c3e38f80ec815a3"><td class="memItemLeft" align="right" valign="top"><a id="ae016f8744ca6a26d4c3e38f80ec815a3" name="ae016f8744ca6a26d4c3e38f80ec815a3"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>BG_OPEN_CLIENT_LOCAL_PORT</b>&#160;&#160;&#160;0</td></tr>
+<tr class="separator:ae016f8744ca6a26d4c3e38f80ec815a3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="typedef-members" name="typedef-members"></a>
+typedefs</h2></td></tr>
+<tr class="memitem:a5df4af1d37573e135df6251575c7644f" id="r_a5df4af1d37573e135df6251575c7644f"><td class="memItemLeft" align="right" valign="top"><a id="a5df4af1d37573e135df6251575c7644f" name="a5df4af1d37573e135df6251575c7644f"></a>
+typedef <a class="el" href="#af98be1c204049055208486fb2b91c87b">bg_err_t</a>(*&#160;</td><td class="memItemRight" valign="bottom"><b>uartFun_t</b>) (uint8_t *data, uint8_t len)</td></tr>
+<tr class="memdesc:a5df4af1d37573e135df6251575c7644f"><td class="mdescLeft">&#160;</td><td class="mdescRight">tipo de dato para crear un puntero a funciones uart (TX o RX) <br /></td></tr>
+<tr class="separator:a5df4af1d37573e135df6251575c7644f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aae937a975adb539d978912a31af5a288" id="r_aae937a975adb539d978912a31af5a288"><td class="memItemLeft" align="right" valign="top"><a id="aae937a975adb539d978912a31af5a288" name="aae937a975adb539d978912a31af5a288"></a>
+typedef <a class="el" href="#af98be1c204049055208486fb2b91c87b">bg_err_t</a>(*&#160;</td><td class="memItemRight" valign="bottom"><b>gpioWriteFun_t</b>) (<a class="el" href="#a2c28d9ff8a1ade4f1a62876f8ea35812">bgPin_t</a> pin, uint8_t state)</td></tr>
+<tr class="memdesc:aae937a975adb539d978912a31af5a288"><td class="mdescLeft">&#160;</td><td class="mdescRight">tipo de dato para crear un puntero a funcion de escritura de GPIOs <br /></td></tr>
+<tr class="separator:aae937a975adb539d978912a31af5a288"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3cf0239ec77a1d5be9c2a1b4e28e0d43" id="r_a3cf0239ec77a1d5be9c2a1b4e28e0d43"><td class="memItemLeft" align="right" valign="top"><a id="a3cf0239ec77a1d5be9c2a1b4e28e0d43" name="a3cf0239ec77a1d5be9c2a1b4e28e0d43"></a>
+typedef void(*&#160;</td><td class="memItemRight" valign="bottom"><b>delayFun_t</b>) (uint32_t mDelay)</td></tr>
+<tr class="memdesc:a3cf0239ec77a1d5be9c2a1b4e28e0d43"><td class="mdescLeft">&#160;</td><td class="mdescRight">tipo de dato para crear un puntero a funcion de delay (en mili segundos) <br /></td></tr>
+<tr class="separator:a3cf0239ec77a1d5be9c2a1b4e28e0d43"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae235bc4734e4f0ac5242dd32776a39cb" id="r_ae235bc4734e4f0ac5242dd32776a39cb"><td class="memItemLeft" align="right" valign="top"><a id="ae235bc4734e4f0ac5242dd32776a39cb" name="ae235bc4734e4f0ac5242dd32776a39cb"></a>
+typedef void(*&#160;</td><td class="memItemRight" valign="bottom"><b>resetFun_t</b>) (void)</td></tr>
+<tr class="memdesc:ae235bc4734e4f0ac5242dd32776a39cb"><td class="mdescLeft">&#160;</td><td class="mdescRight">tipo de dato para crear un puntero a funcion de reset de sistema (reset de MCU) <br /></td></tr>
+<tr class="separator:ae235bc4734e4f0ac5242dd32776a39cb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="enum-members" name="enum-members"></a>
+Enumeraciones</h2></td></tr>
+<tr class="memitem:af98be1c204049055208486fb2b91c87b" id="r_af98be1c204049055208486fb2b91c87b"><td class="memItemLeft" align="right" valign="top"><a id="af98be1c204049055208486fb2b91c87b" name="af98be1c204049055208486fb2b91c87b"></a>enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af98be1c204049055208486fb2b91c87b">bg_err_t</a> { <br />
+&#160;&#160;<b>BG_ERR_TIMEOUT_ANS</b> = -255
+, <b>BG_ERR_TIMEOUT_ANS_DESIRED</b>
+, <b>BG_ERR_MCU_TX_UART</b>
+, <b>BG_ERR_MCU_PTR_NULL</b>
+, <br />
+&#160;&#160;<b>BG_ERR_UNSUPPORTED_PIN</b>
+, <b>BG_ERR_SIM_NO_OK</b>
+, <b>BG_ERR_PARSE</b>
+, <b>BG_ERR_ATTACH_NO_OK</b>
+, <br />
+&#160;&#160;<b>BG_ERR_NO_OPER</b>
+, <b>BG_ERR_NO_CONF_PDP</b>
+, <b>BG_ERR_CTXT_ID_UNSUPPORTED</b>
+, <b>BG_ERR_CONNECT_ID_UNSUPORTED</b>
+, <br />
+&#160;&#160;<b>BG_ERR_CONNECT_ID_NOT_USED</b>
+, <b>BG_ERR_CONF_PDP</b>
+, <b>BG_ERR_ACT_PDP</b>
+, <b>BG_ERR_SIGNAL</b>
+, <br />
+&#160;&#160;<b>BG_OK</b> = 0
+, <b>BG_OK_SIM</b>
+, <b>BG_OK_ATTACH</b>
+, <b>BG_OK_PDP_ACT</b>
+, <br />
+&#160;&#160;<b>BG_OK_PDP_DEACT</b>
+, <b>BG_OK_CONNECT_ID_OPENNED</b>
+, <b>BG_OK_CONF_PDP</b>
+, <b>BG_OK_TRANSPARENT_MODE</b>
+, <br />
+&#160;&#160;<b>BG_OK_EXIT_TRANSPARENT_MODE</b>
+, <b>BG_OK_CONNECT_ID_CLOSED</b>
+, <b>BG_OK_DETACH</b>
+, <b>BG_OK_TRANSMIT</b>
+, <br />
+&#160;&#160;<b>BG_OK_RECEIVE</b>
+, <b>BG_OK_SIGNAL</b>
+<br />
+ }</td></tr>
+<tr class="memdesc:af98be1c204049055208486fb2b91c87b"><td class="mdescLeft">&#160;</td><td class="mdescRight">tipo de variable que almacena el catalogo de errores. <br /></td></tr>
+<tr class="separator:af98be1c204049055208486fb2b91c87b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2c28d9ff8a1ade4f1a62876f8ea35812" id="r_a2c28d9ff8a1ade4f1a62876f8ea35812"><td class="memItemLeft" align="right" valign="top"><a id="a2c28d9ff8a1ade4f1a62876f8ea35812" name="a2c28d9ff8a1ade4f1a62876f8ea35812"></a>enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a2c28d9ff8a1ade4f1a62876f8ea35812">bgPin_t</a> { <br />
+&#160;&#160;<b>BG_PWRKEY_PIN</b>
+, <b>BG_VBAT_PIN</b>
+, <b>BG_RESET_PIN</b>
+, <b>BG_PON_TRIG_PIN</b>
+, <br />
+&#160;&#160;<b>BG_UNSUPORTED_PIN</b>
+<br />
+ }</td></tr>
+<tr class="memdesc:a2c28d9ff8a1ade4f1a62876f8ea35812"><td class="mdescLeft">&#160;</td><td class="mdescRight">tipo de dato que enlista todos los pines soportados para la escritura de GPIOs <br /></td></tr>
+<tr class="separator:a2c28d9ff8a1ade4f1a62876f8ea35812"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab0ebc1ea018349b5e09729ddad2f443e" id="r_ab0ebc1ea018349b5e09729ddad2f443e"><td class="memItemLeft" align="right" valign="top"><a id="ab0ebc1ea018349b5e09729ddad2f443e" name="ab0ebc1ea018349b5e09729ddad2f443e"></a>enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab0ebc1ea018349b5e09729ddad2f443e">mainRiEdge_t</a> { <b>MAIN_RI_EDGE_FALLING</b>
+, <b>MAIN_RI_EDGE_RISING</b>
+, <b>MAIN_RI_EDGE_UNSUPPORTED</b>
+ }</td></tr>
+<tr class="memdesc:ab0ebc1ea018349b5e09729ddad2f443e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Tipo de variable que indica el flanco que sucedio en el pin MAIN_RI. <br /></td></tr>
+<tr class="separator:ab0ebc1ea018349b5e09729ddad2f443e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4e88b1ffb1682253b142b2e133dada3e" id="r_a4e88b1ffb1682253b142b2e133dada3e"><td class="memItemLeft" align="right" valign="top"><a id="a4e88b1ffb1682253b142b2e133dada3e" name="a4e88b1ffb1682253b142b2e133dada3e"></a>enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a4e88b1ffb1682253b142b2e133dada3e">bgAuth_t</a> { <br />
+&#160;&#160;<b>BG_AUTH_NONE</b>
+, <b>BG_AUTH_PAP</b>
+, <b>BG_AUTH_CHAP</b>
+, <b>BG_AUTH_PAP_CHAP</b>
+, <br />
+&#160;&#160;<b>BG_AUTH_NO_SUPPORTED</b>
+<br />
+ }</td></tr>
+<tr class="memdesc:a4e88b1ffb1682253b142b2e133dada3e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Es el tipo de variable que define el tipo de autenticacion a utilizar. <br /></td></tr>
+<tr class="separator:a4e88b1ffb1682253b142b2e133dada3e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0d31ddf2d818cd2c7c61b08553abff3d" id="r_a0d31ddf2d818cd2c7c61b08553abff3d"><td class="memItemLeft" align="right" valign="top"><a id="a0d31ddf2d818cd2c7c61b08553abff3d" name="a0d31ddf2d818cd2c7c61b08553abff3d"></a>enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a0d31ddf2d818cd2c7c61b08553abff3d">bgCtxtType_t</a> { <b>BG_CTXT_IPV4</b> = 1
+, <b>BG_CTXT_IPV6</b>
+, <b>BG_CTXT_IPV4_IPV6</b>
+, <b>BG_CTXT_UNSUPPORTED</b>
+ }</td></tr>
+<tr class="memdesc:a0d31ddf2d818cd2c7c61b08553abff3d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Es el tipo de variable que define el tipo de contexto. <br /></td></tr>
+<tr class="separator:a0d31ddf2d818cd2c7c61b08553abff3d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4ad1b226966cfdfeedb106c0a8cf2250" id="r_a4ad1b226966cfdfeedb106c0a8cf2250"><td class="memItemLeft" align="right" valign="top"><a id="a4ad1b226966cfdfeedb106c0a8cf2250" name="a4ad1b226966cfdfeedb106c0a8cf2250"></a>enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a4ad1b226966cfdfeedb106c0a8cf2250">bg_actPdp_t</a> { <b>BG_PDP_ACT</b>
+, <b>BG_PDP_DEACT</b>
+, <b>BG_PDP_ACT_UNSUPORTED</b>
+ }</td></tr>
+<tr class="memdesc:a4ad1b226966cfdfeedb106c0a8cf2250"><td class="mdescLeft">&#160;</td><td class="mdescRight">Es el tipo de variable que define la opcion para activar o desactivar el contexto PDP. <br /></td></tr>
+<tr class="separator:a4ad1b226966cfdfeedb106c0a8cf2250"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4de0ad8313ddfa98018750819864029b" id="r_a4de0ad8313ddfa98018750819864029b"><td class="memItemLeft" align="right" valign="top"><a id="a4de0ad8313ddfa98018750819864029b" name="a4de0ad8313ddfa98018750819864029b"></a>enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a4de0ad8313ddfa98018750819864029b">bgServiceType_t</a> { <b>BG_OPEN_SERVER</b>
+, <b>BG_OPEN_CLIENT</b>
+ }</td></tr>
+<tr class="memdesc:a4de0ad8313ddfa98018750819864029b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Es el tipo de dato para seleccionar el tipo de servicio en una apertura de conexion (Cliente o Servidor TCP). <br /></td></tr>
+<tr class="separator:a4de0ad8313ddfa98018750819864029b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6a6ed3ed80fa20a7c489f5bf09ab85c6" id="r_a6a6ed3ed80fa20a7c489f5bf09ab85c6"><td class="memItemLeft" align="right" valign="top"><a id="a6a6ed3ed80fa20a7c489f5bf09ab85c6" name="a6a6ed3ed80fa20a7c489f5bf09ab85c6"></a>enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a6a6ed3ed80fa20a7c489f5bf09ab85c6">bg_urcType_t</a> { <br />
+&#160;&#160;<b>BG_URC_CLOSED</b>
+, <b>BG_URC_RECV</b>
+, <b>BG_URC_INCOMING_FULL</b>
+, <b>BG_URC_INCOMING</b>
+, <br />
+&#160;&#160;<b>BG_URC_PDP_DEACT</b>
+, <b>BG_URC_EXIT_TM</b>
+, <b>BG_URC_NO_CARRIER</b>
+, <b>BG_URC_UNSUPPORTED</b>
+<br />
+ }</td></tr>
+<tr class="memdesc:a6a6ed3ed80fa20a7c489f5bf09ab85c6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Variable de tipo que sirve para identificar que tipo de URC fue recibido. <br /></td></tr>
+<tr class="separator:a6a6ed3ed80fa20a7c489f5bf09ab85c6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2eda4d5bf02084b0c05dbc21810a5e82" id="r_a2eda4d5bf02084b0c05dbc21810a5e82"><td class="memItemLeft" align="right" valign="top"><a id="a2eda4d5bf02084b0c05dbc21810a5e82" name="a2eda4d5bf02084b0c05dbc21810a5e82"></a>enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a2eda4d5bf02084b0c05dbc21810a5e82">bg_noCarrierTM_t</a> { <b>BG_TM_NO_CARRIER_SET</b>
+, <b>BG_TM_NO_CARRIER_RESET</b>
+ }</td></tr>
+<tr class="memdesc:a2eda4d5bf02084b0c05dbc21810a5e82"><td class="mdescLeft">&#160;</td><td class="mdescRight">Este tipo de variable sirve para indicar si llego un mensaje de NO CARRIER que indica la salida de modo transparente por desconexion. <br /></td></tr>
+<tr class="separator:a2eda4d5bf02084b0c05dbc21810a5e82"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
+Funciones</h2></td></tr>
+<tr class="memitem:a89dac8bef95fbc323f9216383fad9377" id="r_a89dac8bef95fbc323f9216383fad9377"><td class="memItemLeft" align="right" valign="top"><a id="a89dac8bef95fbc323f9216383fad9377" name="a89dac8bef95fbc323f9216383fad9377"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>CREATE_BUFF</b> (SIZE_BG_BUFF, uartBuff)</td></tr>
+<tr class="memdesc:a89dac8bef95fbc323f9216383fad9377"><td class="mdescLeft">&#160;</td><td class="mdescRight">Se crea un tipo de variable llamado uartBuff_t para generar buffers de uart de tamaño 1024By. <br /></td></tr>
+<tr class="separator:a89dac8bef95fbc323f9216383fad9377"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3f93ee3bfd2996fa41f5f9425dc83431" id="r_a3f93ee3bfd2996fa41f5f9425dc83431"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3f93ee3bfd2996fa41f5f9425dc83431">bg_set_bsp</a> (<a class="el" href="structbg__bsp_fun__t.html">bg_bspFun_t</a> bspFun)</td></tr>
+<tr class="memdesc:a3f93ee3bfd2996fa41f5f9425dc83431"><td class="mdescLeft">&#160;</td><td class="mdescRight">Funcion para establecer los punteros a función del BSP (UART TX, Delay, GPIO_write, Reset de MCU).  <br /></td></tr>
+<tr class="separator:a3f93ee3bfd2996fa41f5f9425dc83431"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa422c5730073a35ffc37421e44a6c632" id="r_aa422c5730073a35ffc37421e44a6c632"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa422c5730073a35ffc37421e44a6c632">bg_callback_ms</a> (void)</td></tr>
+<tr class="memdesc:aa422c5730073a35ffc37421e44a6c632"><td class="mdescLeft">&#160;</td><td class="mdescRight">Esta funcion de callback se tiene que llamar en una funcion de interrupción de temporizador en donde se genere cada 1ms.  <br /></td></tr>
+<tr class="separator:aa422c5730073a35ffc37421e44a6c632"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acd4a161fbac7d28353ca438b91e0520b" id="r_acd4a161fbac7d28353ca438b91e0520b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#acd4a161fbac7d28353ca438b91e0520b">bg_uartCallback</a> (uint8_t *buff, uint16_t nBytes)</td></tr>
+<tr class="memdesc:acd4a161fbac7d28353ca438b91e0520b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Esta funcion de callback se debe llamar en una funcion de interrupcion de recepcion de uart en la cual se debe pasar el buffer y el tamaño del mensaje recibido por UART.  <br /></td></tr>
+<tr class="separator:acd4a161fbac7d28353ca438b91e0520b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a796fbdf47278af0a696da945fa907110" id="r_a796fbdf47278af0a696da945fa907110"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a796fbdf47278af0a696da945fa907110">bg_mainRICallback</a> (<a class="el" href="#ab0ebc1ea018349b5e09729ddad2f443e">mainRiEdge_t</a> edge)</td></tr>
+<tr class="memdesc:a796fbdf47278af0a696da945fa907110"><td class="mdescLeft">&#160;</td><td class="mdescRight">Esta funcion de callback se debe llamar en una funcion de interrupcion de pin digital que corresponde al pin MAIN_RI del modulo de comunicaciones en la cual se debe especificar el flanco generado.  <br /></td></tr>
+<tr class="separator:a796fbdf47278af0a696da945fa907110"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3f03c39804aa65f885946b3f30d6b4fc" id="r_a3f03c39804aa65f885946b3f30d6b4fc"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3f03c39804aa65f885946b3f30d6b4fc">bg_handle_urc</a> (void)</td></tr>
+<tr class="memdesc:a3f03c39804aa65f885946b3f30d6b4fc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Esta funcion se encarga de manejar los URC encolados. <br  />
+ Si hay un URC encolado, se procede a parsearlo y a llamar a un callback para entregar informacion parseada al usuario. Por defecto llama a la <a class="el" href="#a182c6ca209fecf25da97f51f1eaf5550" title="Esta funcion es un callback en donde se le va a entregar al usuario la informacion util de un URC det...">bg_urc_parsed_callback(urcInfoData_t infoUrc)</a> para indicar el resultado de URC;.  <br /></td></tr>
+<tr class="separator:a3f03c39804aa65f885946b3f30d6b4fc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a952e9d1543029fccfb87e8e133b68122" id="r_a952e9d1543029fccfb87e8e133b68122"><td class="memItemLeft" align="right" valign="top"><a class="el" href="#af98be1c204049055208486fb2b91c87b">bg_err_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a952e9d1543029fccfb87e8e133b68122">bg_send</a> (uint32_t timeout, uint8_t enablePrint, const char *fmt,...)</td></tr>
+<tr class="memdesc:a952e9d1543029fccfb87e8e133b68122"><td class="mdescLeft">&#160;</td><td class="mdescRight">Esta funcion permite enviar comandos AT en formato de especificadores de formato (como printf)  <br /></td></tr>
+<tr class="separator:a952e9d1543029fccfb87e8e133b68122"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae23a60b4e1b7f50ea3cdd0927640e0de" id="r_ae23a60b4e1b7f50ea3cdd0927640e0de"><td class="memItemLeft" align="right" valign="top"><a class="el" href="#af98be1c204049055208486fb2b91c87b">bg_err_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae23a60b4e1b7f50ea3cdd0927640e0de">bg_power_on</a> (void)</td></tr>
+<tr class="memdesc:ae23a60b4e1b7f50ea3cdd0927640e0de"><td class="mdescLeft">&#160;</td><td class="mdescRight">Esta funcion realiza la secuencia necesaria de los pines BG_PWRKEY_PIN, BG_VBAT_PIN, BG_RESET_PIN para encender al modulo de comunicación.  <br /></td></tr>
+<tr class="separator:ae23a60b4e1b7f50ea3cdd0927640e0de"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae05b151b88c27bed92a5a91c4cb9781f" id="r_ae05b151b88c27bed92a5a91c4cb9781f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="#af98be1c204049055208486fb2b91c87b">bg_err_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae05b151b88c27bed92a5a91c4cb9781f">bg_power_off</a> (void)</td></tr>
+<tr class="memdesc:ae05b151b88c27bed92a5a91c4cb9781f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Realiza el apagado del modulo con el comando AT+QPOWD.  <br /></td></tr>
+<tr class="separator:ae05b151b88c27bed92a5a91c4cb9781f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad9920b9e69487d843b87ace0fb65535f" id="r_ad9920b9e69487d843b87ace0fb65535f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="#af98be1c204049055208486fb2b91c87b">bg_err_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad9920b9e69487d843b87ace0fb65535f">bg_init_module</a> (void)</td></tr>
+<tr class="memdesc:ad9920b9e69487d843b87ace0fb65535f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Funcion para inicializar el modulo. Sus funciones son encender y configurar el modulo.  <br /></td></tr>
+<tr class="separator:ad9920b9e69487d843b87ace0fb65535f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5b05e846b42156e0bd04539d036e77e5" id="r_a5b05e846b42156e0bd04539d036e77e5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="#af98be1c204049055208486fb2b91c87b">bg_err_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a5b05e846b42156e0bd04539d036e77e5">bg_data_module</a> (void)</td></tr>
+<tr class="memdesc:a5b05e846b42156e0bd04539d036e77e5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Funcion para imprimir la version de FW del modulo, ICCI e IMEI.  <br /></td></tr>
+<tr class="separator:a5b05e846b42156e0bd04539d036e77e5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6fdf52da4e8bf69a4e9130163ae5e7be" id="r_a6fdf52da4e8bf69a4e9130163ae5e7be"><td class="memItemLeft" align="right" valign="top"><a class="el" href="#af98be1c204049055208486fb2b91c87b">bg_err_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a6fdf52da4e8bf69a4e9130163ae5e7be">bg_check_sim</a> (void)</td></tr>
+<tr class="memdesc:a6fdf52da4e8bf69a4e9130163ae5e7be"><td class="mdescLeft">&#160;</td><td class="mdescRight">Funcion para detectar SIM.  <br /></td></tr>
+<tr class="separator:a6fdf52da4e8bf69a4e9130163ae5e7be"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a560f384f98c140a53d8fc8f5b32b5e19" id="r_a560f384f98c140a53d8fc8f5b32b5e19"><td class="memItemLeft" align="right" valign="top"><a class="el" href="#af98be1c204049055208486fb2b91c87b">bg_err_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a560f384f98c140a53d8fc8f5b32b5e19">bg_check_attach</a> (void)</td></tr>
+<tr class="memdesc:a560f384f98c140a53d8fc8f5b32b5e19"><td class="mdescLeft">&#160;</td><td class="mdescRight">Funcion para verificar el registro en red.  <br /></td></tr>
+<tr class="separator:a560f384f98c140a53d8fc8f5b32b5e19"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adfa333fa2fbd83d8d555f78174c312d4" id="r_adfa333fa2fbd83d8d555f78174c312d4"><td class="memItemLeft" align="right" valign="top"><a class="el" href="#af98be1c204049055208486fb2b91c87b">bg_err_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#adfa333fa2fbd83d8d555f78174c312d4">bg_query_cops</a> (void)</td></tr>
+<tr class="memdesc:adfa333fa2fbd83d8d555f78174c312d4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Funcion que imprime parametros de la consulta de COPS modo, operador, tecnologia de acceso.  <br /></td></tr>
+<tr class="separator:adfa333fa2fbd83d8d555f78174c312d4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac5b7a9c29733548542fd9372f5333273" id="r_ac5b7a9c29733548542fd9372f5333273"><td class="memItemLeft" align="right" valign="top"><a class="el" href="#af98be1c204049055208486fb2b91c87b">bg_err_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac5b7a9c29733548542fd9372f5333273">bg_query_conf_pdp</a> (uint8_t contextID)</td></tr>
+<tr class="memdesc:ac5b7a9c29733548542fd9372f5333273"><td class="mdescLeft">&#160;</td><td class="mdescRight">Funcion que imprime parametros de la configuracion de contexto PDP (APN, USER, PASSWORD, AUTHENTICATION)  <br /></td></tr>
+<tr class="separator:ac5b7a9c29733548542fd9372f5333273"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae28f36ea82838abfdca0118d7af70da7" id="r_ae28f36ea82838abfdca0118d7af70da7"><td class="memItemLeft" align="right" valign="top"><a class="el" href="#af98be1c204049055208486fb2b91c87b">bg_err_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae28f36ea82838abfdca0118d7af70da7">bg_check_pdp</a> (uint8_t ctxtID)</td></tr>
+<tr class="memdesc:ae28f36ea82838abfdca0118d7af70da7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Verifica que se tenga activado el contexto PDP seleccionado (contextID)  <br /></td></tr>
+<tr class="separator:ae28f36ea82838abfdca0118d7af70da7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac4a2455d92827db1c3cf0ba553a05bb8" id="r_ac4a2455d92827db1c3cf0ba553a05bb8"><td class="memItemLeft" align="right" valign="top"><a class="el" href="#af98be1c204049055208486fb2b91c87b">bg_err_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac4a2455d92827db1c3cf0ba553a05bb8">bg_check_sckt</a> (uint8_t connectID)</td></tr>
+<tr class="memdesc:ac4a2455d92827db1c3cf0ba553a05bb8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Verifica el estado de una conexion.  <br /></td></tr>
+<tr class="separator:ac4a2455d92827db1c3cf0ba553a05bb8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a65c9f56b02078e837debb481fff49182" id="r_a65c9f56b02078e837debb481fff49182"><td class="memItemLeft" align="right" valign="top"><a class="el" href="#af98be1c204049055208486fb2b91c87b">bg_err_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a65c9f56b02078e837debb481fff49182">bg_query_signal</a> (void)</td></tr>
+<tr class="memdesc:a65c9f56b02078e837debb481fff49182"><td class="mdescLeft">&#160;</td><td class="mdescRight">Consulta la intensidad de la señal cuando el modulo ya esta registrado.  <br /></td></tr>
+<tr class="separator:a65c9f56b02078e837debb481fff49182"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1c0f09b53bcd76cc17f7be1d95778898" id="r_a1c0f09b53bcd76cc17f7be1d95778898"><td class="memItemLeft" align="right" valign="top"><a class="el" href="#af98be1c204049055208486fb2b91c87b">bg_err_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a1c0f09b53bcd76cc17f7be1d95778898">bg_attach</a> (uint8_t *operator)</td></tr>
+<tr class="memdesc:a1c0f09b53bcd76cc17f7be1d95778898"><td class="mdescLeft">&#160;</td><td class="mdescRight">Funcion para registrar el modulo en la red (attach).  <br /></td></tr>
+<tr class="separator:a1c0f09b53bcd76cc17f7be1d95778898"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab3e3ace987b490e788e45c77d2762cc3" id="r_ab3e3ace987b490e788e45c77d2762cc3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="#af98be1c204049055208486fb2b91c87b">bg_err_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab3e3ace987b490e788e45c77d2762cc3">bg_conf_pdp</a> (<a class="el" href="structbg__ctx_pdp__t.html">bg_ctxPdp_t</a> contextPDP)</td></tr>
+<tr class="memdesc:ab3e3ace987b490e788e45c77d2762cc3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Configura los parametros de contexto PDP que se quiere activar.  <br /></td></tr>
+<tr class="separator:ab3e3ace987b490e788e45c77d2762cc3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae8e29b80c35bbfef04dde3dea52f459e" id="r_ae8e29b80c35bbfef04dde3dea52f459e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="#af98be1c204049055208486fb2b91c87b">bg_err_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae8e29b80c35bbfef04dde3dea52f459e">bg_pdp_activation</a> (uint8_t ctxtID, <a class="el" href="#a4ad1b226966cfdfeedb106c0a8cf2250">bg_actPdp_t</a> act)</td></tr>
+<tr class="memdesc:ae8e29b80c35bbfef04dde3dea52f459e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Activa o desactiva el contexto PDP previamente configurado.  <br /></td></tr>
+<tr class="separator:ae8e29b80c35bbfef04dde3dea52f459e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6fcaeffa8a8411da9bd284564e9cbd83" id="r_a6fcaeffa8a8411da9bd284564e9cbd83"><td class="memItemLeft" align="right" valign="top"><a class="el" href="#af98be1c204049055208486fb2b91c87b">bg_err_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a6fcaeffa8a8411da9bd284564e9cbd83">bg_open_sckt</a> (<a class="el" href="structbg_sckt__t.html">bgSckt_t</a> sckt)</td></tr>
+<tr class="memdesc:a6fcaeffa8a8411da9bd284564e9cbd83"><td class="mdescLeft">&#160;</td><td class="mdescRight">Abre una conexion (socket) TCP en modo servidor o cliente.  <br /></td></tr>
+<tr class="separator:a6fcaeffa8a8411da9bd284564e9cbd83"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5ed9330e905321630088fe6a84c5a5de" id="r_a5ed9330e905321630088fe6a84c5a5de"><td class="memItemLeft" align="right" valign="top"><a class="el" href="#af98be1c204049055208486fb2b91c87b">bg_err_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a5ed9330e905321630088fe6a84c5a5de">bg_transparent_mode</a> (uint8_t connectID)</td></tr>
+<tr class="memdesc:a5ed9330e905321630088fe6a84c5a5de"><td class="mdescLeft">&#160;</td><td class="mdescRight">Permite al dispositio cambiar su modo de acceso a modo transparente.  <br /></td></tr>
+<tr class="separator:a5ed9330e905321630088fe6a84c5a5de"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a453a9ac99a62c6fafe71b5179086ee97" id="r_a453a9ac99a62c6fafe71b5179086ee97"><td class="memItemLeft" align="right" valign="top"><a class="el" href="#af98be1c204049055208486fb2b91c87b">bg_err_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a453a9ac99a62c6fafe71b5179086ee97">bg_exit_transparent_mode</a> (void)</td></tr>
+<tr class="memdesc:a453a9ac99a62c6fafe71b5179086ee97"><td class="mdescLeft">&#160;</td><td class="mdescRight">Hace que el dispositivo salga de modo transparente.  <br /></td></tr>
+<tr class="separator:a453a9ac99a62c6fafe71b5179086ee97"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a803afbdc8df8c4db1b6f0267816954c8" id="r_a803afbdc8df8c4db1b6f0267816954c8"><td class="memItemLeft" align="right" valign="top"><a class="el" href="#af98be1c204049055208486fb2b91c87b">bg_err_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a803afbdc8df8c4db1b6f0267816954c8">bg_close_sckt</a> (uint8_t connectID)</td></tr>
+<tr class="memdesc:a803afbdc8df8c4db1b6f0267816954c8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Cierra una conexion o socket.  <br /></td></tr>
+<tr class="separator:a803afbdc8df8c4db1b6f0267816954c8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a04ad0c65991cef2200cc99a9910a6ef7" id="r_a04ad0c65991cef2200cc99a9910a6ef7"><td class="memItemLeft" align="right" valign="top"><a class="el" href="#af98be1c204049055208486fb2b91c87b">bg_err_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a04ad0c65991cef2200cc99a9910a6ef7">bg_detach</a> (void)</td></tr>
+<tr class="memdesc:a04ad0c65991cef2200cc99a9910a6ef7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sirve para desregistrar el modulo de la red (detach).  <br /></td></tr>
+<tr class="separator:a04ad0c65991cef2200cc99a9910a6ef7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4324d29bee02aaf36d6d7dc3d54fa1b7" id="r_a4324d29bee02aaf36d6d7dc3d54fa1b7"><td class="memItemLeft" align="right" valign="top"><a class="el" href="#af98be1c204049055208486fb2b91c87b">bg_err_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a4324d29bee02aaf36d6d7dc3d54fa1b7">bg_transmit_buffAMode</a> (uint8_t connectID, uint8_t *data, uint16_t len)</td></tr>
+<tr class="memdesc:a4324d29bee02aaf36d6d7dc3d54fa1b7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Funcion para transmitir mensajes por un socket que esta en modo buffer access mode.  <br /></td></tr>
+<tr class="separator:a4324d29bee02aaf36d6d7dc3d54fa1b7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a22e89067926540a7db799cf50725070b" id="r_a22e89067926540a7db799cf50725070b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="#af98be1c204049055208486fb2b91c87b">bg_err_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a22e89067926540a7db799cf50725070b">bg_receive_buffAMode</a> (uint8_t connectID, uint8_t *buff, uint16_t *len)</td></tr>
+<tr class="memdesc:a22e89067926540a7db799cf50725070b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Funcion que se encarga de recuperar los datos recibidos por una conexion en buffer access mode.  <br /></td></tr>
+<tr class="separator:a22e89067926540a7db799cf50725070b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2eb4e7ff0044a4ccb914381d9ae25265" id="r_a2eb4e7ff0044a4ccb914381d9ae25265"><td class="memItemLeft" align="right" valign="top"><a class="el" href="#af98be1c204049055208486fb2b91c87b">bg_err_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a2eb4e7ff0044a4ccb914381d9ae25265">bg_transmit_TM</a> (uint8_t *data, uint16_t len)</td></tr>
+<tr class="memdesc:a2eb4e7ff0044a4ccb914381d9ae25265"><td class="mdescLeft">&#160;</td><td class="mdescRight">Transmite datos en modo transparente.  <br /></td></tr>
+<tr class="separator:a2eb4e7ff0044a4ccb914381d9ae25265"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae3aa6c8894b5afd4e7d9cc43750cdb31" id="r_ae3aa6c8894b5afd4e7d9cc43750cdb31"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae3aa6c8894b5afd4e7d9cc43750cdb31">bg_callback_urcDetected</a> (urcRawData_t urcData)</td></tr>
+<tr class="memdesc:ae3aa6c8894b5afd4e7d9cc43750cdb31"><td class="mdescLeft">&#160;</td><td class="mdescRight">Esta funcion corresponde a un callback para el usuario. Esta funcion se llamara cuando se detecte un URC. La libreria tiene su callback por defecto y lo que hace es encolar el URC recibido en una cola interna de la libreria.  <br /></td></tr>
+<tr class="separator:ae3aa6c8894b5afd4e7d9cc43750cdb31"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a182c6ca209fecf25da97f51f1eaf5550" id="r_a182c6ca209fecf25da97f51f1eaf5550"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a182c6ca209fecf25da97f51f1eaf5550">bg_urc_parsed_callback</a> (<a class="el" href="structurc_info_data__t.html">urcInfoData_t</a> infoUrc)</td></tr>
+<tr class="memdesc:a182c6ca209fecf25da97f51f1eaf5550"><td class="mdescLeft">&#160;</td><td class="mdescRight">Esta funcion es un callback en donde se le va a entregar al usuario la informacion util de un URC detectado y parseado. La funcion por defecto de la libreria, se dedica a realizar el tratamiento o manejo correspondiente al URC que se presenta. Ejemplo: Si se presenta un URC de cierre de socket procede a cerrar dicho socket. Si se presenta un URC de mensaje RECV procede a recuperarlo y entregarlo en un callback (mensaje, tamaño en bytes, conexion).  <br /></td></tr>
+<tr class="separator:a182c6ca209fecf25da97f51f1eaf5550"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a03693666091cc43048c11c148b9afd23" id="r_a03693666091cc43048c11c148b9afd23"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a03693666091cc43048c11c148b9afd23">bg_recv_callback</a> (uint8_t *buff, uint16_t len, uint8_t connectID)</td></tr>
+<tr class="memdesc:a03693666091cc43048c11c148b9afd23"><td class="mdescLeft">&#160;</td><td class="mdescRight">Esta funcion es un callback que notifica al usuario que se recibio un mensaje de alguna conexion en modo buffer access mode. Este callback se llama en <a class="el" href="#a182c6ca209fecf25da97f51f1eaf5550" title="Esta funcion es un callback en donde se le va a entregar al usuario la informacion util de un URC det...">bg_urc_parsed_callback(urcInfoData_t infoUrc)</a> al detectar y parsear un URC RECV y entrega al usuario el mensaje, tamaño en bytes y el numero de conexion que recibio dicho mensaje.  <br /></td></tr>
+<tr class="separator:a03693666091cc43048c11c148b9afd23"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae4503c4dc1caa40b7075342e7317e2f8" id="r_ae4503c4dc1caa40b7075342e7317e2f8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae4503c4dc1caa40b7075342e7317e2f8">bg_incomming_callback</a> (uint8_t serverID, uint8_t connectID)</td></tr>
+<tr class="memdesc:ae4503c4dc1caa40b7075342e7317e2f8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Esta funcion corresponde a un callback que notifica al usuario la ocurrencia de una conexion entrante a algun servidor del modulo. Esta se llama en <a class="el" href="#a182c6ca209fecf25da97f51f1eaf5550" title="Esta funcion es un callback en donde se le va a entregar al usuario la informacion util de un URC det...">bg_urc_parsed_callback(urcInfoData_t infoUrc)</a> al detectar y parsear un URC INCOMMING y entrega al usuario el serverID y el connectID de la conexion entrante.  <br /></td></tr>
+<tr class="separator:ae4503c4dc1caa40b7075342e7317e2f8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9984ef8adb9430c0bb3410b6bf7120c5" id="r_a9984ef8adb9430c0bb3410b6bf7120c5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a9984ef8adb9430c0bb3410b6bf7120c5">bg_callback_receive_TM</a> (uint8_t *buff, uint16_t nBytes)</td></tr>
+<tr class="memdesc:a9984ef8adb9430c0bb3410b6bf7120c5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Esta funcion es un callback que notifica al usuario de un mensaje que se recibe en modo transparente.  <br /></td></tr>
+<tr class="separator:a9984ef8adb9430c0bb3410b6bf7120c5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a35a7b46f396882941b3aa7f00c1b19f4" id="r_a35a7b46f396882941b3aa7f00c1b19f4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a35a7b46f396882941b3aa7f00c1b19f4">bg_callback_closed_TM</a> (void)</td></tr>
+<tr class="memdesc:a35a7b46f396882941b3aa7f00c1b19f4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Esta funcion es un callback que notifica al usuario que la conexion en modo transparente se cerro.  <br /></td></tr>
+<tr class="separator:a35a7b46f396882941b3aa7f00c1b19f4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3776fe3967e34bff08a7c7d3c32cf2e7" id="r_a3776fe3967e34bff08a7c7d3c32cf2e7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3776fe3967e34bff08a7c7d3c32cf2e7">bg_pdp_activation_callback</a> (uint8_t contextID)</td></tr>
+<tr class="memdesc:a3776fe3967e34bff08a7c7d3c32cf2e7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Este callback notifica al usuario que hubo una reactivacion de contexto PDP debido al URC "pdp deact" LA funcion por defecto imprime un mensaje del contexto que se reactivo.  <br /></td></tr>
+<tr class="separator:a3776fe3967e34bff08a7c7d3c32cf2e7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a96631fa2e9306134c3f2d13692d6c382" id="r_a96631fa2e9306134c3f2d13692d6c382"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a96631fa2e9306134c3f2d13692d6c382">bg_callback_TM_Inactive</a> (uint8_t connectID, <a class="el" href="#a2eda4d5bf02084b0c05dbc21810a5e82">bg_noCarrierTM_t</a> statusNoCarrier)</td></tr>
+<tr class="memdesc:a96631fa2e9306134c3f2d13692d6c382"><td class="mdescLeft">&#160;</td><td class="mdescRight">Esta funcion de callback notifica al usuario que no hay más URC por atender y se esta fuera de modo transparente. Esta funcion se llama en bg_handle(void) y su proposito es recordar al usuario de que tiene posibilidad de entrar en modo transparente.  <br /></td></tr>
+<tr class="separator:a96631fa2e9306134c3f2d13692d6c382"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:accb6d774575fa4349a922b7194d36b95" id="r_accb6d774575fa4349a922b7194d36b95"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#accb6d774575fa4349a922b7194d36b95">bg_queue_put</a> (urcRawData_t urc)</td></tr>
+<tr class="memdesc:accb6d774575fa4349a922b7194d36b95"><td class="mdescLeft">&#160;</td><td class="mdescRight">Esta funcion hacer uso de la cola interna de URC de la libreria y encola mensajes del tipo urcRawData_t.  <br /></td></tr>
+<tr class="separator:accb6d774575fa4349a922b7194d36b95"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a417fbe13aaac91032b2cf5fe5fbabba3" id="r_a417fbe13aaac91032b2cf5fe5fbabba3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a417fbe13aaac91032b2cf5fe5fbabba3">bg_queue_pop</a> (urcRawData_t *urc)</td></tr>
+<tr class="memdesc:a417fbe13aaac91032b2cf5fe5fbabba3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Esta funcion hacer uso de la cola interna de URC de la libreria y desencola mensajes del tipo urcRawData_t.  <br /></td></tr>
+<tr class="separator:a417fbe13aaac91032b2cf5fe5fbabba3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a00a186528d54e0162b4ec31902db106b" id="r_a00a186528d54e0162b4ec31902db106b"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a00a186528d54e0162b4ec31902db106b">bg_queue_is_empty</a> (void)</td></tr>
+<tr class="memdesc:a00a186528d54e0162b4ec31902db106b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Indica si la cola interna esta vacia.  <br /></td></tr>
+<tr class="separator:a00a186528d54e0162b4ec31902db106b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a61963d30f7d309a7ae1cf8eeed599605" id="r_a61963d30f7d309a7ae1cf8eeed599605"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a61963d30f7d309a7ae1cf8eeed599605">bg_queue_is_full</a> (void)</td></tr>
+<tr class="memdesc:a61963d30f7d309a7ae1cf8eeed599605"><td class="mdescLeft">&#160;</td><td class="mdescRight">Indica si la cola interna esta llena.  <br /></td></tr>
+<tr class="separator:a61963d30f7d309a7ae1cf8eeed599605"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Descripción detallada</h2>
+<div class="textblock"><p>Esta es una libreria base para implementar funcionalidades basicas del modulo BG77 (consulta de estados, apertura de conexiones, transmision y recepcion de datos). </p>
+<dl class="section author"><dt>Autor</dt><dd>EM2 </dd></dl>
+<dl class="section version"><dt>Versión</dt><dd>1.0 </dd></dl>
+<dl class="section date"><dt>Fecha</dt><dd>2025-02-06 </dd></dl>
+</div><h2 class="groupheader">Documentación de «define»</h2>
+<a id="a29b43f40cd1353df5eb853cb40aca7f9" name="a29b43f40cd1353df5eb853cb40aca7f9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a29b43f40cd1353df5eb853cb40aca7f9">&#9670;&#160;</a></span>CHECK_BG_ERR</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define CHECK_BG_ERR</td>
+          <td>(</td>
+          <td class="paramtype"></td>          <td class="paramname"><span class="paramname"><em>err</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Valor:</b><div class="fragment"><div class="line"><span class="keywordflow">do</span>{ <span class="keywordflow">if</span>(err != BG_OK) <span class="keywordflow">return</span> err; } <span class="keywordflow">while</span>(0)</div>
+</div><!-- fragment -->
+<p>Esta macro es una funcion inline que evalua que no se presento algun error del tipo bg_err_t. Su proposito es mantener la legibilidad del codigo. </p>
+<dl class="section note"><dt>Nota</dt><dd>Se debe de alimentar con una variable del tipo bg_err_t que almacene el resultado de una funcion que devuelva un codigo de error bg_err_t </dd></dl>
+
+</div>
+</div>
+<a id="a65789cf68a6f03ed3ede1aa82784c39b" name="a65789cf68a6f03ed3ede1aa82784c39b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a65789cf68a6f03ed3ede1aa82784c39b">&#9670;&#160;</a></span>CHECK_DESIRED_ANSW</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define CHECK_DESIRED_ANSW</td>
+          <td>(</td>
+          <td class="paramtype"></td>          <td class="paramname"><span class="paramname"><em>srcBuff</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"></td>          <td class="paramname"><span class="paramname"><em>desiredAnsw</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"></td>          <td class="paramname"><span class="paramname"><em>_timeout</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Valor:</b><div class="fragment"><div class="line"><span class="keywordflow">do</span>{\</div>
+<div class="line">    bg_start_timeout();\</div>
+<div class="line">    while(!strstr(srcBuff, desiredAnsw) &amp;&amp; count_sec_bg &lt; _timeout)\</div>
+<div class="line">        __asm__(<span class="stringliteral">&quot;nop&quot;</span>);\</div>
+<div class="line">    if(_timeout &lt;= bg_stop_timeout())\</div>
+<div class="line">    {\</div>
+<div class="line">        LOG_BG(LE,<span class="stringliteral">&quot;[BG_ERR] TIMEOUT RESPUESTA DESEADA\n&quot;</span>);\</div>
+<div class="line">        <span class="keywordflow">return</span> BG_ERR_TIMEOUT_ANS_DESIRED;\</div>
+<div class="line">    }\</div>
+<div class="line">}<span class="keywordflow">while</span>(0)</div>
+</div><!-- fragment -->
+<p>Verifica que una cadena deseada se encuentre dentro de un array o buffer durante un tiempo especificado. </p>
+<dl class="params"><dt>Parámetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">srcBuff</td><td>Es el buffer o array en donde se va a buscar la cadena deseada. </td></tr>
+    <tr><td class="paramname">desiredAnsw</td><td>Es la cadena deseada que se quiere buscar dentro del array. </td></tr>
+    <tr><td class="paramname">_timeot</td><td>Es el tiempo de espera en el que tratara de encontrar la cadena deseada. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ae249007a2f2f4a602e52a621236bde51" name="ae249007a2f2f4a602e52a621236bde51"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae249007a2f2f4a602e52a621236bde51">&#9670;&#160;</a></span>CHECK_EXIT_TM_ANSW</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define CHECK_EXIT_TM_ANSW</td>
+          <td>(</td>
+          <td class="paramtype"></td>          <td class="paramname"><span class="paramname"><em>srcBuff</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"></td>          <td class="paramname"><span class="paramname"><em>_timeout</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Valor:</b><div class="fragment"><div class="line"><span class="keywordflow">do</span>{\</div>
+<div class="line">    bg_start_timeout();\</div>
+<div class="line">    while(!strstr(srcBuff, <span class="stringliteral">&quot;OK&quot;</span>) &amp;&amp; !strstr(srcBuff, <span class="stringliteral">&quot;QIURC&quot;</span>) &amp;&amp; count_sec_bg &lt; _timeout)\</div>
+<div class="line">        __asm__(<span class="stringliteral">&quot;nop&quot;</span>);\</div>
+<div class="line">    if(_timeout &lt;= bg_stop_timeout())\</div>
+<div class="line">    {\</div>
+<div class="line">        LOG_BG(LE,<span class="stringliteral">&quot;[BG_ERR] TIMEOUT RESPUESTA DESEADA\n&quot;</span>);\</div>
+<div class="line">        <span class="keywordflow">return</span> BG_ERR_TIMEOUT_ANS_DESIRED;\</div>
+<div class="line">    }\</div>
+<div class="line">}<span class="keywordflow">while</span>(0)</div>
+</div><!-- fragment -->
+<p>Verifica que la salida de modo transparente sea exitosa. </p>
+<dl class="params"><dt>Parámetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">srcBuff</td><td>Es el buffer o array en donde esta la respuesta a la salida de modo transparente. </td></tr>
+    <tr><td class="paramname">_timeot</td><td>Es el tiempo de espera en el que tratara de verificar la salida de modo transparente. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a25de0a3a2ef034775a4ed2739c9d6af7" name="a25de0a3a2ef034775a4ed2739c9d6af7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a25de0a3a2ef034775a4ed2739c9d6af7">&#9670;&#160;</a></span>CHECK_POWDWN_ANSW</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define CHECK_POWDWN_ANSW</td>
+          <td>(</td>
+          <td class="paramtype"></td>          <td class="paramname"><span class="paramname"><em>srcBuff</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"></td>          <td class="paramname"><span class="paramname"><em>_timeout</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Valor:</b><div class="fragment"><div class="line"><span class="keywordflow">do</span>{\</div>
+<div class="line">    bg_start_timeout();\</div>
+<div class="line">    while(!strstr(srcBuff, <span class="stringliteral">&quot;OK&quot;</span>) &amp;&amp; !strstr(srcBuff, <span class="stringliteral">&quot;RDY&quot;</span>) &amp;&amp; count_sec_bg &lt; _timeout)\</div>
+<div class="line">        __asm__(<span class="stringliteral">&quot;nop&quot;</span>);\</div>
+<div class="line">    if(_timeout &lt;= bg_stop_timeout())\</div>
+<div class="line">    {\</div>
+<div class="line">        LOG_BG(LE,<span class="stringliteral">&quot;[BG_ERR] TIMEOUT RESPUESTA DESEADA\n&quot;</span>);\</div>
+<div class="line">        <span class="keywordflow">return</span> BG_ERR_TIMEOUT_ANS_DESIRED;\</div>
+<div class="line">    }\</div>
+<div class="line">}<span class="keywordflow">while</span>(0)</div>
+</div><!-- fragment -->
+<p>Verifica que el comando de Power down sea exitoso. </p>
+<dl class="params"><dt>Parámetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">srcBuff</td><td>Es el buffer o array en donde esta la respuesta al comando de power down. </td></tr>
+    <tr><td class="paramname">_timeot</td><td>Es el tiempo de espera en el que tratara de verificar el comando power down. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="af8e4982d2acfaf513cef47c31cf82607" name="af8e4982d2acfaf513cef47c31cf82607"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af8e4982d2acfaf513cef47c31cf82607">&#9670;&#160;</a></span>COPY_PARSE_STR</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define COPY_PARSE_STR</td>
+          <td>(</td>
+          <td class="paramtype"></td>          <td class="paramname"><span class="paramname"><em>_dstBuff</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"></td>          <td class="paramname"><span class="paramname"><em>dstBuffSize</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"></td>          <td class="paramname"><span class="paramname"><em>srcBuff</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"></td>          <td class="paramname"><span class="paramname"><em>chr1</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"></td>          <td class="paramname"><span class="paramname"><em>chr2</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Valor:</b><div class="fragment"><div class="line"><span class="keywordflow">do</span> { \</div>
+<div class="line">    uint8_t *dstBuff = _dstBuff;\</div>
+<div class="line">    uint8_t *_parsePtr = strchr(srcBuff, chr1); \</div>
+<div class="line">    if(_parsePtr == NULL || dstBuff == NULL) <span class="keywordflow">break</span>; \</div>
+<div class="line">    _parsePtr++; \</div>
+<div class="line">    uint8_t *_endPtr = NULL;\</div>
+<div class="line">    if(chr1 == chr2)\</div>
+<div class="line">        _endPtr = strchr(_parsePtr + 1, chr2); \</div>
+<div class="line">    else\</div>
+<div class="line">        _endPtr = strchr(_parsePtr, chr2); \</div>
+<div class="line">    if(_endPtr == NULL) <span class="keywordflow">break</span>; \</div>
+<div class="line">    <span class="keywordtype">size_t</span> len = _endPtr - _parsePtr; \</div>
+<div class="line">    if(len &gt;= dstBuffSize) <span class="keywordflow">break</span>;\</div>
+<div class="line">    for(<span class="keywordtype">size_t</span> i = 0; i &lt; len; i++) dstBuff[i] = _parsePtr[i];\</div>
+<div class="line">    dstBuff[len] = <span class="charliteral">&#39;\0&#39;</span>; <span class="comment">/* Agrega el terminador nulo */</span> \</div>
+<div class="line">} <span class="keywordflow">while</span>(0)</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="acb098879d8671d85da27cc1ce9ce55b3" name="acb098879d8671d85da27cc1ce9ce55b3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acb098879d8671d85da27cc1ce9ce55b3">&#9670;&#160;</a></span>CREATE_BUFF</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define CREATE_BUFF</td>
+          <td>(</td>
+          <td class="paramtype"></td>          <td class="paramname"><span class="paramname"><em>x</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"></td>          <td class="paramname"><span class="paramname"><em>name</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Valor:</b><div class="fragment"><div class="line"><span class="keyword">typedef</span> <span class="keyword">struct </span>\</div>
+<div class="line">{ \</div>
+<div class="line">    uint8_t buff[(x)]; \</div>
+<div class="line">    uint16_t len; \</div>
+<div class="line">} name##_t;</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="abced5d6549b42ce11890222cdcce5625" name="abced5d6549b42ce11890222cdcce5625"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abced5d6549b42ce11890222cdcce5625">&#9670;&#160;</a></span>LOG_BG</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define LOG_BG</td>
+          <td>(</td>
+          <td class="paramtype"></td>          <td class="paramname"><span class="paramname"><em>enable</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"></td>          <td class="paramname"><span class="paramname"><em></em></span>...&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Valor:</b><div class="fragment"><div class="line"><span class="keywordflow">do</span>{\</div>
+<div class="line">    if(enable) \</div>
+<div class="line">        printf(__VA_ARGS__);\</div>
+<div class="line">}<span class="keywordflow">while</span>(0)</div>
+</div><!-- fragment -->
+<p>MACRO para imprimir log. Este puede desactivarse en tiempo de ejecucion. </p>
+
+</div>
+</div>
+<a id="a68ee928e8b006a04a7fcf30d8498cbbe" name="a68ee928e8b006a04a7fcf30d8498cbbe"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a68ee928e8b006a04a7fcf30d8498cbbe">&#9670;&#160;</a></span>LOG_BG_TRACE</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define LOG_BG_TRACE</td>
+          <td>(</td>
+          <td class="paramtype"></td>          <td class="paramname"><span class="paramname"><em>enable</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"></td>          <td class="paramname"><span class="paramname"><em></em></span>...&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Valor:</b><div class="fragment"><div class="line"><span class="keywordflow">do</span>{\</div>
+<div class="line">    if(enable) \</div>
+<div class="line">    {\</div>
+<div class="line">        printf(<span class="stringliteral">&quot;[%s: %d]&quot;</span>, __FILE__, __LINE__);\</div>
+<div class="line">        printf(__VA_ARGS__);\</div>
+<div class="line">    }\</div>
+<div class="line">}<span class="keywordflow">while</span>(0)</div>
+</div><!-- fragment -->
+<p>Es un Log derivado que rastrea la ruta y la linea en donde se esta imprimiendo el mensaje. </p>
+
+</div>
+</div>
+<a id="a3e5f4c178ebf4e1ad598506fcb722d90" name="a3e5f4c178ebf4e1ad598506fcb722d90"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3e5f4c178ebf4e1ad598506fcb722d90">&#9670;&#160;</a></span>REMPLACE_CHAR</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define REMPLACE_CHAR</td>
+          <td>(</td>
+          <td class="paramtype"></td>          <td class="paramname"><span class="paramname"><em>rempSrcBuff</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"></td>          <td class="paramname"><span class="paramname"><em>chrRemplaced</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"></td>          <td class="paramname"><span class="paramname"><em>chrDesired</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Valor:</b><div class="fragment"><div class="line"><span class="keywordflow">do</span>{\</div>
+<div class="line">    uint8_t *_remplacePtr = strchr(rempSrcBuff, chrRemplaced);\</div>
+<div class="line">    if(_remplacePtr != NULL)\</div>
+<div class="line">        *_remplacePtr = chrDesired;\</div>
+<div class="line">}<span class="keywordflow">while</span>(0)</div>
+</div><!-- fragment -->
+</div>
+</div>
+<h2 class="groupheader">Documentación de funciones</h2>
+<a id="a1c0f09b53bcd76cc17f7be1d95778898" name="a1c0f09b53bcd76cc17f7be1d95778898"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1c0f09b53bcd76cc17f7be1d95778898">&#9670;&#160;</a></span>bg_attach()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#af98be1c204049055208486fb2b91c87b">bg_err_t</a> bg_attach </td>
+          <td>(</td>
+          <td class="paramtype">uint8_t *</td>          <td class="paramname"><span class="paramname"><em>operator</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Funcion para registrar el modulo en la red (attach). </p>
+<dl class="params"><dt>Parámetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">operator</td><td>Es la operadora del SIM. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Devuelve</dt><dd>bg_err_t Regresa el codigo de error basado en el tipo bg_err_t. Si el modulo consigue registrarse se espera BG_OK_ATTACH. </dd></dl>
+
+</div>
+</div>
+<a id="a35a7b46f396882941b3aa7f00c1b19f4" name="a35a7b46f396882941b3aa7f00c1b19f4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a35a7b46f396882941b3aa7f00c1b19f4">&#9670;&#160;</a></span>bg_callback_closed_TM()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void bg_callback_closed_TM </td>
+          <td>(</td>
+          <td class="paramtype">void</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Esta funcion es un callback que notifica al usuario que la conexion en modo transparente se cerro. </p>
+<p>La funcion por defecto imprime el mensaje "Conexion remota cerro, fuera de TM\n" </p>
+
+</div>
+</div>
+<a id="aa422c5730073a35ffc37421e44a6c632" name="aa422c5730073a35ffc37421e44a6c632"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa422c5730073a35ffc37421e44a6c632">&#9670;&#160;</a></span>bg_callback_ms()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void bg_callback_ms </td>
+          <td>(</td>
+          <td class="paramtype">void</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Esta funcion de callback se tiene que llamar en una funcion de interrupción de temporizador en donde se genere cada 1ms. </p>
+<p>Sirve para proveer a la libreria de un conteo de reloj y poder determinar tiempos de espera (timeouts). </p>
+
+</div>
+</div>
+<a id="a9984ef8adb9430c0bb3410b6bf7120c5" name="a9984ef8adb9430c0bb3410b6bf7120c5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9984ef8adb9430c0bb3410b6bf7120c5">&#9670;&#160;</a></span>bg_callback_receive_TM()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void bg_callback_receive_TM </td>
+          <td>(</td>
+          <td class="paramtype">uint8_t *</td>          <td class="paramname"><span class="paramname"><em>buff</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint16_t</td>          <td class="paramname"><span class="paramname"><em>nBytes</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Esta funcion es un callback que notifica al usuario de un mensaje que se recibe en modo transparente. </p>
+<dl class="params"><dt>Parámetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">buff</td><td>puntero a funcion en donde se tiene el mensaje recibido. </td></tr>
+    <tr><td class="paramname">nBytes</td><td>numero de bytes recibidos. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a96631fa2e9306134c3f2d13692d6c382" name="a96631fa2e9306134c3f2d13692d6c382"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a96631fa2e9306134c3f2d13692d6c382">&#9670;&#160;</a></span>bg_callback_TM_Inactive()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void bg_callback_TM_Inactive </td>
+          <td>(</td>
+          <td class="paramtype">uint8_t</td>          <td class="paramname"><span class="paramname"><em>connectID</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="#a2eda4d5bf02084b0c05dbc21810a5e82">bg_noCarrierTM_t</a></td>          <td class="paramname"><span class="paramname"><em>statusNoCarrier</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Esta funcion de callback notifica al usuario que no hay más URC por atender y se esta fuera de modo transparente. Esta funcion se llama en bg_handle(void) y su proposito es recordar al usuario de que tiene posibilidad de entrar en modo transparente. </p>
+<p>La funcion por defecto de la libreria verifica que la ultima conexion de modo transparente este abierta y si es asi, procede a activar el modo transparente en esa conexion.</p>
+<dl class="params"><dt>Parámetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">connectID</td><td>Es el connectID de la ultima conexion en modo transparente.</td></tr>
+    <tr><td class="paramname">statusNoCarrier</td><td>Notifica el motivo de salida de modo transparente. Si el valor de la variable es BG_TM_NO_CARRIER_SET, quiere decir que fue por desconexion del punto remoto. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ae3aa6c8894b5afd4e7d9cc43750cdb31" name="ae3aa6c8894b5afd4e7d9cc43750cdb31"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae3aa6c8894b5afd4e7d9cc43750cdb31">&#9670;&#160;</a></span>bg_callback_urcDetected()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void bg_callback_urcDetected </td>
+          <td>(</td>
+          <td class="paramtype">urcRawData_t</td>          <td class="paramname"><span class="paramname"><em>urcData</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Esta funcion corresponde a un callback para el usuario. Esta funcion se llamara cuando se detecte un URC. La libreria tiene su callback por defecto y lo que hace es encolar el URC recibido en una cola interna de la libreria. </p>
+<p>NOTE: El Usuario puede prescindir de ella y realizar su estrategia de manejo de URC en este punto.</p>
+<dl class="params"><dt>Parámetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">urcData</td><td>Es una variable que contiene el buffer de informacion no analizada (o datos crudos) y el tipo de URC detectado. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a560f384f98c140a53d8fc8f5b32b5e19" name="a560f384f98c140a53d8fc8f5b32b5e19"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a560f384f98c140a53d8fc8f5b32b5e19">&#9670;&#160;</a></span>bg_check_attach()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#af98be1c204049055208486fb2b91c87b">bg_err_t</a> bg_check_attach </td>
+          <td>(</td>
+          <td class="paramtype">void</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Funcion para verificar el registro en red. </p>
+<dl class="section return"><dt>Devuelve</dt><dd>bg_err_t Regresa el codigo de error basado en el tipo bg_err_t. Si el modulo esta registrado se espera BG_OK_ATTACH </dd></dl>
+
+</div>
+</div>
+<a id="ae28f36ea82838abfdca0118d7af70da7" name="ae28f36ea82838abfdca0118d7af70da7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae28f36ea82838abfdca0118d7af70da7">&#9670;&#160;</a></span>bg_check_pdp()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#af98be1c204049055208486fb2b91c87b">bg_err_t</a> bg_check_pdp </td>
+          <td>(</td>
+          <td class="paramtype">uint8_t</td>          <td class="paramname"><span class="paramname"><em>ctxtID</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Verifica que se tenga activado el contexto PDP seleccionado (contextID) </p>
+<dl class="params"><dt>Parámetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">ctxtID</td><td>Es el numero de contexto que se quiere verificar (rango 1-7).</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Devuelve</dt><dd>bg_err_t Regresa el codigo de error basado en el tipo bg_err_t. Si el contexto PDP del contextID esta activado retorna BG_OK_PDP_ACT </dd></dl>
+
+</div>
+</div>
+<a id="ac4a2455d92827db1c3cf0ba553a05bb8" name="ac4a2455d92827db1c3cf0ba553a05bb8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac4a2455d92827db1c3cf0ba553a05bb8">&#9670;&#160;</a></span>bg_check_sckt()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#af98be1c204049055208486fb2b91c87b">bg_err_t</a> bg_check_sckt </td>
+          <td>(</td>
+          <td class="paramtype">uint8_t</td>          <td class="paramname"><span class="paramname"><em>connectID</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Verifica el estado de una conexion. </p>
+<dl class="params"><dt>Parámetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">connectID</td><td>el numero de conexion (rango 0-11) </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Devuelve</dt><dd>bg_err_t Regresa el codigo de error basado en el tipo bg_err_t. Si la conexion esta abierta devuelve BG_OK_CONNECT_ID_OPENNED. </dd></dl>
+
+</div>
+</div>
+<a id="a6fdf52da4e8bf69a4e9130163ae5e7be" name="a6fdf52da4e8bf69a4e9130163ae5e7be"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6fdf52da4e8bf69a4e9130163ae5e7be">&#9670;&#160;</a></span>bg_check_sim()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#af98be1c204049055208486fb2b91c87b">bg_err_t</a> bg_check_sim </td>
+          <td>(</td>
+          <td class="paramtype">void</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Funcion para detectar SIM. </p>
+<dl class="section return"><dt>Devuelve</dt><dd>bg_err_t Regresa el codigo de error basado en el tipo bg_err_t. Si todo esta bien se espera BG_OK_SIM </dd></dl>
+
+</div>
+</div>
+<a id="a803afbdc8df8c4db1b6f0267816954c8" name="a803afbdc8df8c4db1b6f0267816954c8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a803afbdc8df8c4db1b6f0267816954c8">&#9670;&#160;</a></span>bg_close_sckt()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#af98be1c204049055208486fb2b91c87b">bg_err_t</a> bg_close_sckt </td>
+          <td>(</td>
+          <td class="paramtype">uint8_t</td>          <td class="paramname"><span class="paramname"><em>connectID</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Cierra una conexion o socket. </p>
+<dl class="params"><dt>Parámetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">connectID</td><td>Es el numero de conexion que se quiere cerrar. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Devuelve</dt><dd>bg_err_t bg_err_t Regresa el codigo de error basado en el tipo bg_err_t. Si se consigue cerrar la conexion retorna BG_OK_CONNECT_ID_CLOSED. </dd></dl>
+
+</div>
+</div>
+<a id="ab3e3ace987b490e788e45c77d2762cc3" name="ab3e3ace987b490e788e45c77d2762cc3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab3e3ace987b490e788e45c77d2762cc3">&#9670;&#160;</a></span>bg_conf_pdp()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#af98be1c204049055208486fb2b91c87b">bg_err_t</a> bg_conf_pdp </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structbg__ctx_pdp__t.html">bg_ctxPdp_t</a></td>          <td class="paramname"><span class="paramname"><em>contextPDP</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Configura los parametros de contexto PDP que se quiere activar. </p>
+<dl class="params"><dt>Parámetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">contextPDP</td><td>Es una estructura de datos que contiene los parametros de configuracion del contexto PDP. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Devuelve</dt><dd>bg_err_t Regresa el codigo de error basado en el tipo bg_err_t. Si se configuro correctamente el contexto devolvera BG_OK_CONF_PDP. </dd></dl>
+
+</div>
+</div>
+<a id="a5b05e846b42156e0bd04539d036e77e5" name="a5b05e846b42156e0bd04539d036e77e5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5b05e846b42156e0bd04539d036e77e5">&#9670;&#160;</a></span>bg_data_module()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#af98be1c204049055208486fb2b91c87b">bg_err_t</a> bg_data_module </td>
+          <td>(</td>
+          <td class="paramtype">void</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Funcion para imprimir la version de FW del modulo, ICCI e IMEI. </p>
+<dl class="section return"><dt>Devuelve</dt><dd>bg_err_t Regresa el codigo de error basado en el tipo bg_err_t. Si todo esta bien se espera BG_OK </dd></dl>
+
+</div>
+</div>
+<a id="a04ad0c65991cef2200cc99a9910a6ef7" name="a04ad0c65991cef2200cc99a9910a6ef7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a04ad0c65991cef2200cc99a9910a6ef7">&#9670;&#160;</a></span>bg_detach()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#af98be1c204049055208486fb2b91c87b">bg_err_t</a> bg_detach </td>
+          <td>(</td>
+          <td class="paramtype">void</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Sirve para desregistrar el modulo de la red (detach). </p>
+<dl class="section return"><dt>Devuelve</dt><dd>bg_err_t Regresa el codigo de error basado en el tipo bg_err_t. Si se consigue desregistrar al modulo de la red devuelve BG_OK_DETACH. </dd></dl>
+
+</div>
+</div>
+<a id="a453a9ac99a62c6fafe71b5179086ee97" name="a453a9ac99a62c6fafe71b5179086ee97"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a453a9ac99a62c6fafe71b5179086ee97">&#9670;&#160;</a></span>bg_exit_transparent_mode()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#af98be1c204049055208486fb2b91c87b">bg_err_t</a> bg_exit_transparent_mode </td>
+          <td>(</td>
+          <td class="paramtype">void</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Hace que el dispositivo salga de modo transparente. </p>
+<dl class="section return"><dt>Devuelve</dt><dd>bg_err_t Regresa el codigo de error basado en el tipo bg_err_t. Si el modulo consigue salir de modo transpoarente retornara BG_OK_EXIT_TRANSPARENT_MODE. </dd></dl>
+
+</div>
+</div>
+<a id="a3f03c39804aa65f885946b3f30d6b4fc" name="a3f03c39804aa65f885946b3f30d6b4fc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3f03c39804aa65f885946b3f30d6b4fc">&#9670;&#160;</a></span>bg_handle_urc()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void bg_handle_urc </td>
+          <td>(</td>
+          <td class="paramtype">void</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Esta funcion se encarga de manejar los URC encolados. <br  />
+ Si hay un URC encolado, se procede a parsearlo y a llamar a un callback para entregar informacion parseada al usuario. Por defecto llama a la <a class="el" href="#a182c6ca209fecf25da97f51f1eaf5550" title="Esta funcion es un callback en donde se le va a entregar al usuario la informacion util de un URC det...">bg_urc_parsed_callback(urcInfoData_t infoUrc)</a> para indicar el resultado de URC;. </p>
+<p>NOTE: El usuario puede presendir de esta funcion y hacer su propia estrategia de parseo de URC. Sin embargo, si se quiere utilizar esta funcion, esta se debe de colocar en un ciclo de poleo en el codigo principal de la aplicacion, asi como, usar las funciones <a class="el" href="#ae3aa6c8894b5afd4e7d9cc43750cdb31" title="Esta funcion corresponde a un callback para el usuario. Esta funcion se llamara cuando se detecte un ...">bg_callback_urcDetected(urcRawData_t urcData)</a> y <a class="el" href="#a182c6ca209fecf25da97f51f1eaf5550" title="Esta funcion es un callback en donde se le va a entregar al usuario la informacion util de un URC det...">bg_urc_parsed_callback(urcInfoData_t infoUrc)</a> que tiene por defecto la libreria (o en su defecto el usuario debera hacer la suyas propias tomando como base estas funciones). </p>
+
+</div>
+</div>
+<a id="ae4503c4dc1caa40b7075342e7317e2f8" name="ae4503c4dc1caa40b7075342e7317e2f8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae4503c4dc1caa40b7075342e7317e2f8">&#9670;&#160;</a></span>bg_incomming_callback()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void bg_incomming_callback </td>
+          <td>(</td>
+          <td class="paramtype">uint8_t</td>          <td class="paramname"><span class="paramname"><em>serverID</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t</td>          <td class="paramname"><span class="paramname"><em>connectID</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Esta funcion corresponde a un callback que notifica al usuario la ocurrencia de una conexion entrante a algun servidor del modulo. Esta se llama en <a class="el" href="#a182c6ca209fecf25da97f51f1eaf5550" title="Esta funcion es un callback en donde se le va a entregar al usuario la informacion util de un URC det...">bg_urc_parsed_callback(urcInfoData_t infoUrc)</a> al detectar y parsear un URC INCOMMING y entrega al usuario el serverID y el connectID de la conexion entrante. </p>
+<p>En la libreria la funcion por defecto solo imprime el serverID y el connectID de la conexion entrante.</p>
+<dl class="params"><dt>Parámetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">serverID</td><td></td></tr>
+    <tr><td class="paramname">connectID</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ad9920b9e69487d843b87ace0fb65535f" name="ad9920b9e69487d843b87ace0fb65535f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad9920b9e69487d843b87ace0fb65535f">&#9670;&#160;</a></span>bg_init_module()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#af98be1c204049055208486fb2b91c87b">bg_err_t</a> bg_init_module </td>
+          <td>(</td>
+          <td class="paramtype">void</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Funcion para inicializar el modulo. Sus funciones son encender y configurar el modulo. </p>
+<dl class="section return"><dt>Devuelve</dt><dd>bg_err_t Regresa el codigo de error basado en el tipo bg_err_t. Si todo esta bien se espera BG_OK </dd></dl>
+
+</div>
+</div>
+<a id="a796fbdf47278af0a696da945fa907110" name="a796fbdf47278af0a696da945fa907110"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a796fbdf47278af0a696da945fa907110">&#9670;&#160;</a></span>bg_mainRICallback()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void bg_mainRICallback </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="#ab0ebc1ea018349b5e09729ddad2f443e">mainRiEdge_t</a></td>          <td class="paramname"><span class="paramname"><em>edge</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Esta funcion de callback se debe llamar en una funcion de interrupcion de pin digital que corresponde al pin MAIN_RI del modulo de comunicaciones en la cual se debe especificar el flanco generado. </p>
+<p>Sirve para proveer a la libreria la deteccion del cambio de estado en la entrada del pin MAIN_RI.</p>
+<dl class="params"><dt>Parámetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">edge</td><td>Es el flanco que se genero en la interrupcion digital (se debe pasar MAIN_RI_EDGE_FALLIN si se genero un flanco de bajada o MAIN_RI_EDGE_RISING si se genero flanco de subida). </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a6fcaeffa8a8411da9bd284564e9cbd83" name="a6fcaeffa8a8411da9bd284564e9cbd83"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6fcaeffa8a8411da9bd284564e9cbd83">&#9670;&#160;</a></span>bg_open_sckt()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#af98be1c204049055208486fb2b91c87b">bg_err_t</a> bg_open_sckt </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structbg_sckt__t.html">bgSckt_t</a></td>          <td class="paramname"><span class="paramname"><em>sckt</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Abre una conexion (socket) TCP en modo servidor o cliente. </p>
+<dl class="params"><dt>Parámetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">sckt</td><td>Es una estructura de datos que contiene todos los parametros necesarios para abrir una conexion. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Devuelve</dt><dd>bg_err_t Regresa el codigo de error basado en el tipo bg_err_t. Si el modulo consigue abrir la conexion devolvera BG_OK_CONNECT_ID_OPENNED </dd></dl>
+
+</div>
+</div>
+<a id="ae8e29b80c35bbfef04dde3dea52f459e" name="ae8e29b80c35bbfef04dde3dea52f459e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae8e29b80c35bbfef04dde3dea52f459e">&#9670;&#160;</a></span>bg_pdp_activation()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#af98be1c204049055208486fb2b91c87b">bg_err_t</a> bg_pdp_activation </td>
+          <td>(</td>
+          <td class="paramtype">uint8_t</td>          <td class="paramname"><span class="paramname"><em>ctxtID</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="#a4ad1b226966cfdfeedb106c0a8cf2250">bg_actPdp_t</a></td>          <td class="paramname"><span class="paramname"><em>act</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Activa o desactiva el contexto PDP previamente configurado. </p>
+<dl class="params"><dt>Parámetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">ctxtID</td><td>Numero de contexto PDP que se quiere activar/desactivar (rango 1-7). </td></tr>
+    <tr><td class="paramname">act</td><td>Opcion que selecciona si se quiere activar o desactivar el contexto PDP especificado. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Devuelve</dt><dd>bg_err_t Regresa el codigo de error basado en el tipo bg_err_t. Si se desactivo el contexto PDP correctamente devuelve BG_OK_PDP_DEACT, si se activo el contexto PDP correctamente regresa BG_OK_PDP_ACT. </dd></dl>
+
+</div>
+</div>
+<a id="a3776fe3967e34bff08a7c7d3c32cf2e7" name="a3776fe3967e34bff08a7c7d3c32cf2e7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3776fe3967e34bff08a7c7d3c32cf2e7">&#9670;&#160;</a></span>bg_pdp_activation_callback()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void bg_pdp_activation_callback </td>
+          <td>(</td>
+          <td class="paramtype">uint8_t</td>          <td class="paramname"><span class="paramname"><em>contextID</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Este callback notifica al usuario que hubo una reactivacion de contexto PDP debido al URC "pdp deact" LA funcion por defecto imprime un mensaje del contexto que se reactivo. </p>
+<dl class="params"><dt>Parámetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">contextID</td><td>Es el numero de contexto que se desactivo </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ae05b151b88c27bed92a5a91c4cb9781f" name="ae05b151b88c27bed92a5a91c4cb9781f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae05b151b88c27bed92a5a91c4cb9781f">&#9670;&#160;</a></span>bg_power_off()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#af98be1c204049055208486fb2b91c87b">bg_err_t</a> bg_power_off </td>
+          <td>(</td>
+          <td class="paramtype">void</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Realiza el apagado del modulo con el comando AT+QPOWD. </p>
+<dl class="section return"><dt>Devuelve</dt><dd>bg_err_t Regresa el codigo de error basado en el tipo bg_err_t. Si todo esta bien se espera BG_OK </dd></dl>
+
+</div>
+</div>
+<a id="ae23a60b4e1b7f50ea3cdd0927640e0de" name="ae23a60b4e1b7f50ea3cdd0927640e0de"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae23a60b4e1b7f50ea3cdd0927640e0de">&#9670;&#160;</a></span>bg_power_on()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#af98be1c204049055208486fb2b91c87b">bg_err_t</a> bg_power_on </td>
+          <td>(</td>
+          <td class="paramtype">void</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Esta funcion realiza la secuencia necesaria de los pines BG_PWRKEY_PIN, BG_VBAT_PIN, BG_RESET_PIN para encender al modulo de comunicación. </p>
+<dl class="section return"><dt>Devuelve</dt><dd>bg_err_t Devuelve el codigo de error basado en el tipo bg_err_t. Si todo esta bien se espera BG_OK </dd></dl>
+
+</div>
+</div>
+<a id="ac5b7a9c29733548542fd9372f5333273" name="ac5b7a9c29733548542fd9372f5333273"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac5b7a9c29733548542fd9372f5333273">&#9670;&#160;</a></span>bg_query_conf_pdp()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#af98be1c204049055208486fb2b91c87b">bg_err_t</a> bg_query_conf_pdp </td>
+          <td>(</td>
+          <td class="paramtype">uint8_t</td>          <td class="paramname"><span class="paramname"><em>contextID</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Funcion que imprime parametros de la configuracion de contexto PDP (APN, USER, PASSWORD, AUTHENTICATION) </p>
+<dl class="params"><dt>Parámetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">contextID</td><td>Es el contexto ID que se quiere consutar </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Devuelve</dt><dd>bg_err_t Regresa el codigo de error basado en el tipo bg_err_t. Si todo esta bien retorna BG_OK </dd></dl>
+
+</div>
+</div>
+<a id="adfa333fa2fbd83d8d555f78174c312d4" name="adfa333fa2fbd83d8d555f78174c312d4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adfa333fa2fbd83d8d555f78174c312d4">&#9670;&#160;</a></span>bg_query_cops()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#af98be1c204049055208486fb2b91c87b">bg_err_t</a> bg_query_cops </td>
+          <td>(</td>
+          <td class="paramtype">void</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Funcion que imprime parametros de la consulta de COPS modo, operador, tecnologia de acceso. </p>
+<dl class="section return"><dt>Devuelve</dt><dd>bg_err_t Regresa el codigo de error basado en el tipo bg_err_t. Si se tiene un operador ya registrado regresa BG_OK. </dd></dl>
+
+</div>
+</div>
+<a id="a65c9f56b02078e837debb481fff49182" name="a65c9f56b02078e837debb481fff49182"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a65c9f56b02078e837debb481fff49182">&#9670;&#160;</a></span>bg_query_signal()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#af98be1c204049055208486fb2b91c87b">bg_err_t</a> bg_query_signal </td>
+          <td>(</td>
+          <td class="paramtype">void</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Consulta la intensidad de la señal cuando el modulo ya esta registrado. </p>
+<dl class="section return"><dt>Devuelve</dt><dd>bg_err_t Regresa el codigo de error basado en el tipo bg_err_t. Si intensidad de señal es aceptable regresa BG_OK_SIGNAL. </dd></dl>
+
+</div>
+</div>
+<a id="a00a186528d54e0162b4ec31902db106b" name="a00a186528d54e0162b4ec31902db106b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a00a186528d54e0162b4ec31902db106b">&#9670;&#160;</a></span>bg_queue_is_empty()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint8_t bg_queue_is_empty </td>
+          <td>(</td>
+          <td class="paramtype">void</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Indica si la cola interna esta vacia. </p>
+<dl class="section return"><dt>Devuelve</dt><dd>uint8_t Devuelve 1 en caso de que este vacia y 0 en caso contrario. </dd></dl>
+
+</div>
+</div>
+<a id="a61963d30f7d309a7ae1cf8eeed599605" name="a61963d30f7d309a7ae1cf8eeed599605"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a61963d30f7d309a7ae1cf8eeed599605">&#9670;&#160;</a></span>bg_queue_is_full()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint8_t bg_queue_is_full </td>
+          <td>(</td>
+          <td class="paramtype">void</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Indica si la cola interna esta llena. </p>
+<dl class="section return"><dt>Devuelve</dt><dd>uint8_t Devuelve 1 en caso de que este llena y 0 en caso contrario. </dd></dl>
+
+</div>
+</div>
+<a id="a417fbe13aaac91032b2cf5fe5fbabba3" name="a417fbe13aaac91032b2cf5fe5fbabba3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a417fbe13aaac91032b2cf5fe5fbabba3">&#9670;&#160;</a></span>bg_queue_pop()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void bg_queue_pop </td>
+          <td>(</td>
+          <td class="paramtype">urcRawData_t *</td>          <td class="paramname"><span class="paramname"><em>urc</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Esta funcion hacer uso de la cola interna de URC de la libreria y desencola mensajes del tipo urcRawData_t. </p>
+<dl class="params"><dt>Parámetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">urc</td><td>Es un puntero a la variable en donde se quiere copiar el mensaje/evento desencolado. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="accb6d774575fa4349a922b7194d36b95" name="accb6d774575fa4349a922b7194d36b95"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#accb6d774575fa4349a922b7194d36b95">&#9670;&#160;</a></span>bg_queue_put()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void bg_queue_put </td>
+          <td>(</td>
+          <td class="paramtype">urcRawData_t</td>          <td class="paramname"><span class="paramname"><em>urc</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Esta funcion hacer uso de la cola interna de URC de la libreria y encola mensajes del tipo urcRawData_t. </p>
+<p>NOTE: La libreria usa esta cola cuando se usan los calbacks por defecto de la libreria bg_callback_urcDetected(urcRawData_t urcData, <a class="el" href="#a182c6ca209fecf25da97f51f1eaf5550" title="Esta funcion es un callback en donde se le va a entregar al usuario la informacion util de un URC det...">bg_urc_parsed_callback(urcInfoData_t infoUrc)</a> y la funcion de manejo de URC <a class="el" href="#a3f03c39804aa65f885946b3f30d6b4fc" title="Esta funcion se encarga de manejar los URC encolados.   Si hay un URC encolado, se procede a parsearl...">bg_handle_urc(void)</a>. </p><dl class="params"><dt>Parámetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">urc</td><td>Es la variable que contiene el dato/evento a encolar. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a22e89067926540a7db799cf50725070b" name="a22e89067926540a7db799cf50725070b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a22e89067926540a7db799cf50725070b">&#9670;&#160;</a></span>bg_receive_buffAMode()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#af98be1c204049055208486fb2b91c87b">bg_err_t</a> bg_receive_buffAMode </td>
+          <td>(</td>
+          <td class="paramtype">uint8_t</td>          <td class="paramname"><span class="paramname"><em>connectID</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t *</td>          <td class="paramname"><span class="paramname"><em>buff</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint16_t *</td>          <td class="paramname"><span class="paramname"><em>len</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Funcion que se encarga de recuperar los datos recibidos por una conexion en buffer access mode. </p>
+<dl class="params"><dt>Parámetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">connectID</td><td>numero de conexion en la cual se recibio un mensaje. </td></tr>
+    <tr><td class="paramname">buff</td><td>puntero a buffer en donde se copiara el mensaje recibido. </td></tr>
+    <tr><td class="paramname">len</td><td>puntero a variable que almacene el numero de bytes recibidos en el mensaje. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Devuelve</dt><dd>bg_err_t Regresa el codigo de error basado en el tipo bg_err_t. Si se consigue enviar el mensaje el modulo devuelve BG_OK_TRANSMIT. </dd></dl>
+
+</div>
+</div>
+<a id="a03693666091cc43048c11c148b9afd23" name="a03693666091cc43048c11c148b9afd23"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a03693666091cc43048c11c148b9afd23">&#9670;&#160;</a></span>bg_recv_callback()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void bg_recv_callback </td>
+          <td>(</td>
+          <td class="paramtype">uint8_t *</td>          <td class="paramname"><span class="paramname"><em>buff</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint16_t</td>          <td class="paramname"><span class="paramname"><em>len</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t</td>          <td class="paramname"><span class="paramname"><em>connectID</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Esta funcion es un callback que notifica al usuario que se recibio un mensaje de alguna conexion en modo buffer access mode. Este callback se llama en <a class="el" href="#a182c6ca209fecf25da97f51f1eaf5550" title="Esta funcion es un callback en donde se le va a entregar al usuario la informacion util de un URC det...">bg_urc_parsed_callback(urcInfoData_t infoUrc)</a> al detectar y parsear un URC RECV y entrega al usuario el mensaje, tamaño en bytes y el numero de conexion que recibio dicho mensaje. </p>
+<p>La funcion por defecto de la libreria solo imprime el mensaje recibido, el tamaño y el numero de connectID </p><dl class="params"><dt>Parámetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">buff</td><td>Puntero a funcion que apunta al mensaje recibido. </td></tr>
+    <tr><td class="paramname">len</td><td>Tamaño en bytes del mensaje recibido. </td></tr>
+    <tr><td class="paramname">connectID</td><td>Conexion de la cual se recibio el mensaje. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a952e9d1543029fccfb87e8e133b68122" name="a952e9d1543029fccfb87e8e133b68122"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a952e9d1543029fccfb87e8e133b68122">&#9670;&#160;</a></span>bg_send()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#af98be1c204049055208486fb2b91c87b">bg_err_t</a> bg_send </td>
+          <td>(</td>
+          <td class="paramtype">uint32_t</td>          <td class="paramname"><span class="paramname"><em>timeout</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t</td>          <td class="paramname"><span class="paramname"><em>enablePrint</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *</td>          <td class="paramname"><span class="paramname"><em>fmt</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"></td>          <td class="paramname"><span class="paramname"><em>...</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Esta funcion permite enviar comandos AT en formato de especificadores de formato (como printf) </p>
+<dl class="params"><dt>Parámetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">timeout</td><td>Es el tiempo de espera para conseguir respuesta del modulo. La unidad de tiempo son segundos. </td></tr>
+    <tr><td class="paramname">enablePrint</td><td>Si tiene el valor de 0 no imprime la respuesta del modulo en el Log. Cualquier otro valor, imprime la respuesta. Es recomendable usar las MACROS LE (para imprimir respuesta) y LD (para NO imprimir la respuesta). </td></tr>
+    <tr><td class="paramname">fmt</td><td>Es el formato del mensaje. </td></tr>
+    <tr><td class="paramname">...</td><td>Son los parametros variables que se utilizan en el formato del mensaje generado. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Devuelve</dt><dd>bg_err_t Retorna el codigo de error basado en el tipo bg_err_t. Si todo esta bien se espera BG_OK </dd></dl>
+
+</div>
+</div>
+<a id="a3f93ee3bfd2996fa41f5f9425dc83431" name="a3f93ee3bfd2996fa41f5f9425dc83431"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3f93ee3bfd2996fa41f5f9425dc83431">&#9670;&#160;</a></span>bg_set_bsp()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void bg_set_bsp </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structbg__bsp_fun__t.html">bg_bspFun_t</a></td>          <td class="paramname"><span class="paramname"><em>bspFun</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Funcion para establecer los punteros a función del BSP (UART TX, Delay, GPIO_write, Reset de MCU). </p>
+<dl class="params"><dt>Parámetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">bspFun</td><td>Variable que contiene los punteros a funcion para el BSP. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a4324d29bee02aaf36d6d7dc3d54fa1b7" name="a4324d29bee02aaf36d6d7dc3d54fa1b7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4324d29bee02aaf36d6d7dc3d54fa1b7">&#9670;&#160;</a></span>bg_transmit_buffAMode()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#af98be1c204049055208486fb2b91c87b">bg_err_t</a> bg_transmit_buffAMode </td>
+          <td>(</td>
+          <td class="paramtype">uint8_t</td>          <td class="paramname"><span class="paramname"><em>connectID</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t *</td>          <td class="paramname"><span class="paramname"><em>data</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint16_t</td>          <td class="paramname"><span class="paramname"><em>len</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Funcion para transmitir mensajes por un socket que esta en modo buffer access mode. </p>
+<dl class="params"><dt>Parámetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">connectID</td><td>numero de conexion a la que se quiere transmitir el mensaje. </td></tr>
+    <tr><td class="paramname">data</td><td>puntero al buffer que contiene el dato a transmitir. </td></tr>
+    <tr><td class="paramname">len</td><td>numero de bytes que se quieren transmitir del buffer. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Devuelve</dt><dd>bg_err_t Regresa el codigo de error basado en el tipo bg_err_t. Si se consigue enviar el mensaje el modulo devuelve BG_OK_TRANSMIT. </dd></dl>
+
+</div>
+</div>
+<a id="a2eb4e7ff0044a4ccb914381d9ae25265" name="a2eb4e7ff0044a4ccb914381d9ae25265"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2eb4e7ff0044a4ccb914381d9ae25265">&#9670;&#160;</a></span>bg_transmit_TM()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#af98be1c204049055208486fb2b91c87b">bg_err_t</a> bg_transmit_TM </td>
+          <td>(</td>
+          <td class="paramtype">uint8_t *</td>          <td class="paramname"><span class="paramname"><em>data</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint16_t</td>          <td class="paramname"><span class="paramname"><em>len</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Transmite datos en modo transparente. </p>
+<p>NOTE: Si no se tiene habilitado el modo transparente no envia nada por UART.</p>
+<dl class="params"><dt>Parámetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">data</td><td>Es el puntero al buffer que contiene el mensaje a transmitir. </td></tr>
+    <tr><td class="paramname">len</td><td>Es el numero de bytes que se quieren transmitir. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Devuelve</dt><dd>bg_err_t </dd></dl>
+
+</div>
+</div>
+<a id="a5ed9330e905321630088fe6a84c5a5de" name="a5ed9330e905321630088fe6a84c5a5de"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5ed9330e905321630088fe6a84c5a5de">&#9670;&#160;</a></span>bg_transparent_mode()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#af98be1c204049055208486fb2b91c87b">bg_err_t</a> bg_transparent_mode </td>
+          <td>(</td>
+          <td class="paramtype">uint8_t</td>          <td class="paramname"><span class="paramname"><em>connectID</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Permite al dispositio cambiar su modo de acceso a modo transparente. </p>
+<dl class="params"><dt>Parámetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">connectID</td><td>Es el numero de conexion que se desea cambiar a modo transparente. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Devuelve</dt><dd>bg_err_t Regresa el codigo de error basado en el tipo bg_err_t. Si el modulo consigue entrar en modo transpoarente retornara BG_OK_TRANSPARENT_MODE. </dd></dl>
+
+</div>
+</div>
+<a id="acd4a161fbac7d28353ca438b91e0520b" name="acd4a161fbac7d28353ca438b91e0520b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acd4a161fbac7d28353ca438b91e0520b">&#9670;&#160;</a></span>bg_uartCallback()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void bg_uartCallback </td>
+          <td>(</td>
+          <td class="paramtype">uint8_t *</td>          <td class="paramname"><span class="paramname"><em>buff</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint16_t</td>          <td class="paramname"><span class="paramname"><em>nBytes</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Esta funcion de callback se debe llamar en una funcion de interrupcion de recepcion de uart en la cual se debe pasar el buffer y el tamaño del mensaje recibido por UART. </p>
+<p>Su funcion es proveer a la libreria todos los datos de recepcion por interrupcion de UART en el puerto correspondiente al modulo.</p>
+<dl class="params"><dt>Parámetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">buff</td><td>Es la direccion del buffer que contiene los datos recibidos en la interrupcion de UART. </td></tr>
+    <tr><td class="paramname">nBytes</td><td>Es el numero de bytes recibidos en la interrupcion de UART. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a182c6ca209fecf25da97f51f1eaf5550" name="a182c6ca209fecf25da97f51f1eaf5550"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a182c6ca209fecf25da97f51f1eaf5550">&#9670;&#160;</a></span>bg_urc_parsed_callback()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void bg_urc_parsed_callback </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structurc_info_data__t.html">urcInfoData_t</a></td>          <td class="paramname"><span class="paramname"><em>infoUrc</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Esta funcion es un callback en donde se le va a entregar al usuario la informacion util de un URC detectado y parseado. La funcion por defecto de la libreria, se dedica a realizar el tratamiento o manejo correspondiente al URC que se presenta. Ejemplo: Si se presenta un URC de cierre de socket procede a cerrar dicho socket. Si se presenta un URC de mensaje RECV procede a recuperarlo y entregarlo en un callback (mensaje, tamaño en bytes, conexion). </p>
+<p>NOTE: Esta funcion se llama en la funcion de manejo de URC <a class="el" href="#a3f03c39804aa65f885946b3f30d6b4fc" title="Esta funcion se encarga de manejar los URC encolados.   Si hay un URC encolado, se procede a parsearl...">bg_handle_urc(void)</a> despues de parsear el URC encolado. Sin embargo, el Usuario puede prescindir de ella y realizar su estrategia de manejo de URC en este punto. </p><dl class="params"><dt>Parámetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">infoUrc</td><td>Es una variable que contiene la informacion util del URC. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+<img class="footer" src="cursoCIntermedio.png"  height="100px"/>
+</small></address>
+</div><!-- doc-content -->
+</body>
+</html>

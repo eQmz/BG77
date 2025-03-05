@@ -1,0 +1,449 @@
+\doxysection{C\+:/\+Users/a\+\_\+gc/\+Documents/\+Q/\+STM32\+\_\+\+CUBE\+\_\+\+IDE/\+STM32\+\_\+workspace\+\_\+free\+\_\+color/\+HW\+\_\+\+MTU\+\_\+\+BG77/\+Core/\+Src/\+BG77/\+BG77.\+h}
+\hypertarget{_c_1_2_users_2a_gc_2_documents_2_q_2_s_t_m32__c_u_b_e__i_d_e_2_s_t_m32_workspace_free_color_2_h_be1358639e38c8e05e63039284d434fd}{}\label{_c_1_2_users_2a_gc_2_documents_2_q_2_s_t_m32__c_u_b_e__i_d_e_2_s_t_m32_workspace_free_color_2_h_be1358639e38c8e05e63039284d434fd}Remplaza la primera ocurrencia de un caracter especificado en un array por otro deseado. El proposito de esta macro es sustituir el primer caracter encontrado por otro deseado y su utilidad es para copiar informacion que debe ser parseada.
+
+Remplaza la primera ocurrencia de un caracter especificado en un array por otro deseado. El proposito de esta macro es sustituir el primer caracter encontrado por otro deseado y su utilidad es para copiar informacion que debe ser parseada.\begin{DoxyNote}{Nota}
+Si el caracter no es encontrado no sucede nada.
+\end{DoxyNote}
+
+\begin{DoxyParams}{Parámetros}
+{\em remp\+Src\+Buff} & Es el array al que se quiere remplazar un caracter. \\
+\hline
+{\em chr\+Remplaced} & Es el caracter que se quiere remplazar por otro deseado. \\
+\hline
+{\em chr\+Desired} & Es el caracter deseado.\\
+\hline
+\end{DoxyParams}
+En este ejemplo se intercambia el caracter \textquotesingle{}u\textquotesingle{} del buffer foo\+Buff por el caracter \textquotesingle{}a\textquotesingle{} 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{uint8\_t\ fooBuff[]\ =\ \textcolor{stringliteral}{"{}cut"{}};}
+\DoxyCodeLine{REMPLACE\_CHAR(fooBuff,\ \textcolor{charliteral}{'u'},\ \textcolor{charliteral}{'a'});}
+
+\end{DoxyCode}
+
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ "{}stdio.h"{}}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ "{}stdint.h"{}}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ "{}stdlib.h"{}}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ "{}string.h"{}}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ "{}stdarg.h"{}}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ "{}../BG77/queue\_module/queue\_module.h"{}}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{preprocessor}{\#ifndef\ \_BG77\_H\_}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#define\ \_BG77\_H\_}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{preprocessor}{\#define\ LD\ 0\ \ \ \ }\textcolor{comment}{//Sirve\ para\ indicar\ que\ NO\ se\ imprima\ mensaje\ en\ la\ MACRO\ LOG\_BG}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#define\ LE\ 1\ \ \ \ }\textcolor{comment}{//Sirve\ para\ indicar\ que\ SI\ se\ imprima\ mensaje\ en\ la\ MACRO\ LOG\_BG}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#define\ \_BG\_DEBUG\_}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#ifdef\ \_BG\_DEBUG\_}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{preprocessor}{\#define\ LOG\_BG(enable,\ ...)\(\backslash\)}}
+\DoxyCodeLine{\textcolor{preprocessor}{do\{\(\backslash\)}}
+\DoxyCodeLine{\textcolor{preprocessor}{\ \ \ \ if(enable)\ \(\backslash\)}}
+\DoxyCodeLine{\textcolor{preprocessor}{\ \ \ \ \ \ \ \ printf(\_\_VA\_ARGS\_\_);\(\backslash\)}}
+\DoxyCodeLine{\textcolor{preprocessor}{\}while(0)}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{preprocessor}{\#define\ LOG\_BG\_TRACE(enable,\ ...)\(\backslash\)}}
+\DoxyCodeLine{\textcolor{preprocessor}{do\{\(\backslash\)}}
+\DoxyCodeLine{\textcolor{preprocessor}{\ \ \ \ if(enable)\ \(\backslash\)}}
+\DoxyCodeLine{\textcolor{preprocessor}{\ \ \ \ \{\(\backslash\)}}
+\DoxyCodeLine{\textcolor{preprocessor}{\ \ \ \ \ \ \ \ printf("{}[\%s:\ \%d]"{},\ \_\_FILE\_\_,\ \_\_LINE\_\_);\(\backslash\)}}
+\DoxyCodeLine{\textcolor{preprocessor}{\ \ \ \ \ \ \ \ printf(\_\_VA\_ARGS\_\_);\(\backslash\)}}
+\DoxyCodeLine{\textcolor{preprocessor}{\ \ \ \ \}\(\backslash\)}}
+\DoxyCodeLine{\textcolor{preprocessor}{\}while(0)}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#define\ LOG\_BG(...)}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#define\ LOG\_BG\_TRACE(...)}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{preprocessor}{\#define\ \_\_bg\_weak\_\_\ \_\_attribute\_\_((weak))}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{preprocessor}{\#define\ MAX\_SEC\ 0XFFFFFFFFUL}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{preprocessor}{\#define\ BG\_TIMEOUT\_ANSW\ 10UL\ \ \ \ \ \ \ \ \ \ \ \ }\textcolor{comment}{//timeout\ de\ espera\ de\ respuesta\ de\ comando\ BG}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#define\ BG\_TIMEOUT\_ANSW\_OK\ 20UL\ \ \ \ \ \ \ \ \ }\textcolor{comment}{//timeout\ de\ espera\ de\ respuesta\ esperada\ del\ modulo\ BG}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#define\ BG\_TIMEOUT\_ANSW\_OK\_LONG\ 40UL\ \ \ \ }\textcolor{comment}{//timeout\ de\ espera\ de\ respuesta\ esperada\ del\ modulo\ BG\ para\ tiempos\ largos}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{preprocessor}{\#define\ IP\_METERCAD\ \ "{}192.168.4.58"{}\ \ \ \ \ }\textcolor{comment}{//Direccion\ IP\ de\ maquina\ virtual\ metercad}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#define\ IP\_PROXYGAMMA\ "{}192.168.4.57"{}\ \ \ \ }\textcolor{comment}{//Direccion\ IP\ de\ maquina\ virtual\ proxygamma}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#define\ IP\_TCP\_LISTENER\ "{}127.0.0.1"{}\ \ \ \ \ }\textcolor{comment}{//Direccion\ IP\ de\ por\ defecto\ para\ abrir\ socket\ en\ modo\ servidor}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{preprocessor}{\#define\ APN\_LINKS\_FIELD\ "{}cantilever.1"{}\ \ }\textcolor{comment}{//APN\ de\ linksfield}}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{preprocessor}{\#define\ COPS\_LF\ "{}334020"{}\ \ \ \ }\textcolor{comment}{//Seleccion\ de\ operadora\ linksfield}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#define\ COPS\_ATT\_1\ "{}334090"{}\ }\textcolor{comment}{//Seleccion\ de\ operadora\ ATT\ 1}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#define\ COPS\_ATT\_2\ "{}334050"{}\ }\textcolor{comment}{//Seleccion\ de\ operadora\ ATT\ 2}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{preprocessor}{\#define\ BG\_CONTEXT\_ID\_MAX\ 7\ }\textcolor{comment}{//Es\ el\ maximo\ numero\ de\ contextID\ que\ soporta\ el\ modulo\ BG77}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#define\ BG\_CONTEXT\_ID\_MIN\ 1\ }\textcolor{comment}{//Es\ el\ minimo\ numero\ de\ contextID\ que\ soporta\ el\ modulo\ BG77}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{preprocessor}{\#define\ BG\_CONNECT\_ID\_MAX\ 11\ }\textcolor{comment}{//Es\ el\ maximo\ numero\ de\ connectID\ que\ soporta\ el\ modulo\ BG77\ (rango\ 0-\/11)}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#define\ BG\_CONNECT\_ID\_MIN\ 0\ \ }\textcolor{comment}{//Es\ el\ minimo\ numero\ de\ connectID\ que\ soporta\ el\ modulo\ BG77\ (rango\ 0-\/11)}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{preprocessor}{\#define\ CHECK\_BG\_ERR(err)\ do\{\ if(err\ !=\ BG\_OK)\ return\ err;\ \}\ while(0)}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{preprocessor}{\#define\ REMPLACE\_CHAR(rempSrcBuff,\ chrRemplaced,\ chrDesired)\(\backslash\)}}
+\DoxyCodeLine{\textcolor{preprocessor}{do\{\(\backslash\)}}
+\DoxyCodeLine{\textcolor{preprocessor}{\ \ \ \ uint8\_t\ *\_remplacePtr\ =\ strchr(rempSrcBuff,\ chrRemplaced);\(\backslash\)}}
+\DoxyCodeLine{\textcolor{preprocessor}{\ \ \ \ if(\_remplacePtr\ !=\ NULL)\(\backslash\)}}
+\DoxyCodeLine{\textcolor{preprocessor}{\ \ \ \ \ \ \ \ *\_remplacePtr\ =\ chrDesired;\(\backslash\)}}
+\DoxyCodeLine{\textcolor{preprocessor}{\}while(0)}}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{preprocessor}{\#define\ COPY\_PARSE\_STR(\_dstBuff,\ dstBuffSize,\ srcBuff,\ chr1,\ chr2)\(\backslash\)}}
+\DoxyCodeLine{\textcolor{preprocessor}{do\ \{\ \(\backslash\)}}
+\DoxyCodeLine{\textcolor{preprocessor}{\ \ \ \ uint8\_t\ *dstBuff\ =\ \_dstBuff;\(\backslash\)}}
+\DoxyCodeLine{\textcolor{preprocessor}{\ \ \ \ uint8\_t\ *\_parsePtr\ =\ strchr(srcBuff,\ chr1);\ \(\backslash\)}}
+\DoxyCodeLine{\textcolor{preprocessor}{\ \ \ \ if(\_parsePtr\ ==\ NULL\ ||\ dstBuff\ ==\ NULL)\ break;\ \(\backslash\)}}
+\DoxyCodeLine{\textcolor{preprocessor}{\ \ \ \ \_parsePtr++;\ \(\backslash\)}}
+\DoxyCodeLine{\textcolor{preprocessor}{\ \ \ \ uint8\_t\ *\_endPtr\ =\ NULL;\(\backslash\)}}
+\DoxyCodeLine{\textcolor{preprocessor}{\ \ \ \ if(chr1\ ==\ chr2)\(\backslash\)}}
+\DoxyCodeLine{\textcolor{preprocessor}{\ \ \ \ \ \ \ \ \_endPtr\ =\ strchr(\_parsePtr\ +\ 1,\ chr2);\ \(\backslash\)}}
+\DoxyCodeLine{\textcolor{preprocessor}{\ \ \ \ else\(\backslash\)}}
+\DoxyCodeLine{\textcolor{preprocessor}{\ \ \ \ \ \ \ \ \_endPtr\ =\ strchr(\_parsePtr,\ chr2);\ \(\backslash\)}}
+\DoxyCodeLine{\textcolor{preprocessor}{\ \ \ \ if(\_endPtr\ ==\ NULL)\ break;\ \(\backslash\)}}
+\DoxyCodeLine{\textcolor{preprocessor}{\ \ \ \ size\_t\ len\ =\ \_endPtr\ -\/\ \_parsePtr;\ \(\backslash\)}}
+\DoxyCodeLine{\textcolor{preprocessor}{\ \ \ \ if(len\ >=\ dstBuffSize)\ break;\(\backslash\)}}
+\DoxyCodeLine{\textcolor{preprocessor}{\ \ \ \ for(size\_t\ i\ =\ 0;\ i\ <\ len;\ i++)\ dstBuff[i]\ =\ \_parsePtr[i];\(\backslash\)}}
+\DoxyCodeLine{\textcolor{preprocessor}{\ \ \ \ dstBuff[len]\ =\ '\(\backslash\)0';\ }\textcolor{comment}{/*\ Agrega\ el\ terminador\ nulo\ */}\textcolor{preprocessor}{\ \(\backslash\)}}
+\DoxyCodeLine{\textcolor{preprocessor}{\}\ while(0)}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{preprocessor}{\#define\ CHECK\_DESIRED\_ANSW(srcBuff,\ desiredAnsw,\ \_timeout)\(\backslash\)}}
+\DoxyCodeLine{\textcolor{preprocessor}{do\{\(\backslash\)}}
+\DoxyCodeLine{\textcolor{preprocessor}{\ \ \ \ bg\_start\_timeout();\(\backslash\)}}
+\DoxyCodeLine{\textcolor{preprocessor}{\ \ \ \ while(!strstr(srcBuff,\ desiredAnsw)\ \&\&\ count\_sec\_bg\ <\ \_timeout)\(\backslash\)}}
+\DoxyCodeLine{\textcolor{preprocessor}{\ \ \ \ \ \ \ \ \_\_asm\_\_("{}nop"{});\(\backslash\)}}
+\DoxyCodeLine{\textcolor{preprocessor}{\ \ \ \ if(\_timeout\ <=\ bg\_stop\_timeout())\(\backslash\)}}
+\DoxyCodeLine{\textcolor{preprocessor}{\ \ \ \ \{\(\backslash\)}}
+\DoxyCodeLine{\textcolor{preprocessor}{\ \ \ \ \ \ \ \ LOG\_BG(LE,"{}[BG\_ERR]\ TIMEOUT\ RESPUESTA\ DESEADA\(\backslash\)n"{});\(\backslash\)}}
+\DoxyCodeLine{\textcolor{preprocessor}{\ \ \ \ \ \ \ \ return\ BG\_ERR\_TIMEOUT\_ANS\_DESIRED;\(\backslash\)}}
+\DoxyCodeLine{\textcolor{preprocessor}{\ \ \ \ \}\(\backslash\)}}
+\DoxyCodeLine{\textcolor{preprocessor}{\}while(0)}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{preprocessor}{\#define\ CHECK\_POWDWN\_ANSW(srcBuff,\ \_timeout)\(\backslash\)}}
+\DoxyCodeLine{\textcolor{preprocessor}{do\{\(\backslash\)}}
+\DoxyCodeLine{\textcolor{preprocessor}{\ \ \ \ bg\_start\_timeout();\(\backslash\)}}
+\DoxyCodeLine{\textcolor{preprocessor}{\ \ \ \ while(!strstr(srcBuff,\ "{}OK"{})\ \&\&\ !strstr(srcBuff,\ "{}RDY"{})\ \&\&\ count\_sec\_bg\ <\ \_timeout)\(\backslash\)}}
+\DoxyCodeLine{\textcolor{preprocessor}{\ \ \ \ \ \ \ \ \_\_asm\_\_("{}nop"{});\(\backslash\)}}
+\DoxyCodeLine{\textcolor{preprocessor}{\ \ \ \ if(\_timeout\ <=\ bg\_stop\_timeout())\(\backslash\)}}
+\DoxyCodeLine{\textcolor{preprocessor}{\ \ \ \ \{\(\backslash\)}}
+\DoxyCodeLine{\textcolor{preprocessor}{\ \ \ \ \ \ \ \ LOG\_BG(LE,"{}[BG\_ERR]\ TIMEOUT\ RESPUESTA\ DESEADA\(\backslash\)n"{});\(\backslash\)}}
+\DoxyCodeLine{\textcolor{preprocessor}{\ \ \ \ \ \ \ \ return\ BG\_ERR\_TIMEOUT\_ANS\_DESIRED;\(\backslash\)}}
+\DoxyCodeLine{\textcolor{preprocessor}{\ \ \ \ \}\(\backslash\)}}
+\DoxyCodeLine{\textcolor{preprocessor}{\}while(0)}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{preprocessor}{\#define\ CHECK\_EXIT\_TM\_ANSW(srcBuff,\ \_timeout)\(\backslash\)}}
+\DoxyCodeLine{\textcolor{preprocessor}{do\{\(\backslash\)}}
+\DoxyCodeLine{\textcolor{preprocessor}{\ \ \ \ bg\_start\_timeout();\(\backslash\)}}
+\DoxyCodeLine{\textcolor{preprocessor}{\ \ \ \ while(!strstr(srcBuff,\ "{}OK"{})\ \&\&\ !strstr(srcBuff,\ "{}QIURC"{})\ \&\&\ count\_sec\_bg\ <\ \_timeout)\(\backslash\)}}
+\DoxyCodeLine{\textcolor{preprocessor}{\ \ \ \ \ \ \ \ \_\_asm\_\_("{}nop"{});\(\backslash\)}}
+\DoxyCodeLine{\textcolor{preprocessor}{\ \ \ \ if(\_timeout\ <=\ bg\_stop\_timeout())\(\backslash\)}}
+\DoxyCodeLine{\textcolor{preprocessor}{\ \ \ \ \{\(\backslash\)}}
+\DoxyCodeLine{\textcolor{preprocessor}{\ \ \ \ \ \ \ \ LOG\_BG(LE,"{}[BG\_ERR]\ TIMEOUT\ RESPUESTA\ DESEADA\(\backslash\)n"{});\(\backslash\)}}
+\DoxyCodeLine{\textcolor{preprocessor}{\ \ \ \ \ \ \ \ return\ BG\_ERR\_TIMEOUT\_ANS\_DESIRED;\(\backslash\)}}
+\DoxyCodeLine{\textcolor{preprocessor}{\ \ \ \ \}\(\backslash\)}}
+\DoxyCodeLine{\textcolor{preprocessor}{\}while(0)}}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{preprocessor}{\#define\ CREATE\_BUFF(x,\ name)\ \(\backslash\)}}
+\DoxyCodeLine{\textcolor{preprocessor}{typedef\ struct\ \(\backslash\)}}
+\DoxyCodeLine{\textcolor{preprocessor}{\{\ \(\backslash\)}}
+\DoxyCodeLine{\textcolor{preprocessor}{\ \ \ \ uint8\_t\ buff[(x)];\ \(\backslash\)}}
+\DoxyCodeLine{\textcolor{preprocessor}{\ \ \ \ uint16\_t\ len;\ \(\backslash\)}}
+\DoxyCodeLine{\textcolor{preprocessor}{\}\ name\#\#\_t;}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{preprocessor}{\#define\ SIZE\_BG\_BUFF\ 2048}}
+\DoxyCodeLine{CREATE\_BUFF(SIZE\_BG\_BUFF,\ uartBuff);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{typedef}\ \textcolor{keyword}{enum}\{}
+\DoxyCodeLine{\ \ \ \ BG\_ERR\_TIMEOUT\_ANS\ =\ -\/255,\ \textcolor{comment}{//Error\ de\ timeout\ al\ no\ recibir\ respuesta\ del\ modulo\ BG}}
+\DoxyCodeLine{\ \ \ \ BG\_ERR\_TIMEOUT\_ANS\_DESIRED,\ \ \ \ \ \ \ \ \ \textcolor{comment}{//Error\ de\ timeout\ al\ no\ recibir\ respuesta\ esperada\ del\ modulo\ BG}}
+\DoxyCodeLine{\ \ \ \ BG\_ERR\_MCU\_TX\_UART,\ \ \ \ \ \ \ \ \ \textcolor{comment}{//Ocurrio\ un\ error\ en\ la\ transmision\ por\ UART\ al\ BG}}
+\DoxyCodeLine{\ \ \ \ BG\_ERR\_MCU\_PTR\_NULL,\ \ \ \ \textcolor{comment}{//El\ puntero\ que\ se\ esta\ entregando\ apunta\ a\ NULL}}
+\DoxyCodeLine{\ \ \ \ BG\_ERR\_UNSUPPORTED\_PIN,\ \textcolor{comment}{//Se\ quiere\ cambiar\ el\ estado\ de\ un\ pin\ no\ soportado\ o\ mapeado\ (PWR\_KEY,\ VBAT,\ RESET,\ PON\_TRIG)}}
+\DoxyCodeLine{\ \ \ \ BG\_ERR\_SIM\_NO\_OK,\ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//No\ se\ detecta\ SIM}}
+\DoxyCodeLine{\ \ \ \ BG\_ERR\_PARSE,\ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//No\ se\ encontro\ el\ delimitador\ con\ \ funcion\ strchr()}}
+\DoxyCodeLine{\ \ \ \ BG\_ERR\_ATTACH\_NO\_OK,\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//El\ modulo\ NO\ esta\ registrado\ en\ la\ red}}
+\DoxyCodeLine{\ \ \ \ BG\_ERR\_NO\_OPER,\ \ \ \ \ \ \ \ \ \textcolor{comment}{//No\ se\ ha\ seleccionado\ una\ operadora\ en\ COPS}}
+\DoxyCodeLine{\ \ \ \ BG\_ERR\_NO\_CONF\_PDP,\ \ \ \ \ \textcolor{comment}{//No\ se\ ha\ configurado\ el\ contexto\ PDP}}
+\DoxyCodeLine{\ \ \ \ BG\_ERR\_CTXT\_ID\_UNSUPPORTED,\ \textcolor{comment}{//Se\ esta\ tratando\ de\ utilizar\ un\ contextID\ no\ soportado\ rango\ 1-\/7\ para\ BG77}}
+\DoxyCodeLine{\ \ \ \ BG\_ERR\_CONNECT\_ID\_UNSUPORTED,\ \ \ \textcolor{comment}{//Se\ esta\ tratando\ de\ utilizar\ un\ connectID\ no\ soportado\ rango\ 0-\/11\ para\ BG77}}
+\DoxyCodeLine{\ \ \ \ BG\_ERR\_CONNECT\_ID\_NOT\_USED,\ \textcolor{comment}{//Connect\ ID\ no\ utilizado}}
+\DoxyCodeLine{\ \ \ \ BG\_ERR\_CONF\_PDP,\ \ \ \ \textcolor{comment}{//Error\ en\ la\ configuracion\ de\ contexto\ PDP\ }}
+\DoxyCodeLine{\ \ \ \ BG\_ERR\_ACT\_PDP,\ \ \ \ \ \textcolor{comment}{//Error\ en\ la\ activacion\ PDP}}
+\DoxyCodeLine{\ \ \ \ BG\_ERR\_SIGNAL,\ \ \ \ \ \ \textcolor{comment}{//No\ se\ tiene\ una\ intensidad\ de\ señal\ aceptable}}
+\DoxyCodeLine{\ \ \ \ BG\_OK\ =\ 0,\ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//No\ hay\ error}}
+\DoxyCodeLine{\ \ \ \ BG\_OK\_SIM,\ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//Se\ detecto\ SIM}}
+\DoxyCodeLine{\ \ \ \ BG\_OK\_ATTACH,\ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//El\ modulo\ esta\ registrado\ en\ la\ red}}
+\DoxyCodeLine{\ \ \ \ BG\_OK\_PDP\_ACT,\ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//Contexto\ PDP\ activado}}
+\DoxyCodeLine{\ \ \ \ BG\_OK\_PDP\_DEACT,\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//Contexto\ PDP\ desactivado}}
+\DoxyCodeLine{\ \ \ \ BG\_OK\_CONNECT\_ID\_OPENNED,\ \ \ \textcolor{comment}{//Connect\ ID\ abierto}}
+\DoxyCodeLine{\ \ \ \ BG\_OK\_CONF\_PDP,\ \textcolor{comment}{//Contexto\ PDP\ configurado}}
+\DoxyCodeLine{\ \ \ \ BG\_OK\_TRANSPARENT\_MODE,\ \textcolor{comment}{//La\ conexion\ se\ paso\ correctamente\ a\ modo\ transparente}}
+\DoxyCodeLine{\ \ \ \ BG\_OK\_EXIT\_TRANSPARENT\_MODE,\ \textcolor{comment}{//El\ modulo\ salio\ de\ modo\ transparente\ correctamente}}
+\DoxyCodeLine{\ \ \ \ BG\_OK\_CONNECT\_ID\_CLOSED,\ \ \ \ \textcolor{comment}{//Connect\ ID\ cerrado}}
+\DoxyCodeLine{\ \ \ \ BG\_OK\_DETACH,\ \ \ \textcolor{comment}{//El\ modulo\ se\ desrgistro\ correctamente}}
+\DoxyCodeLine{\ \ \ \ BG\_OK\_TRANSMIT,\ \textcolor{comment}{//Se\ consiguio\ transmitir\ un\ mensaje}}
+\DoxyCodeLine{\ \ \ \ BG\_OK\_RECEIVE,\ \ \textcolor{comment}{//Se\ consiguio\ recuperar\ el\ mensaje\ recibido}}
+\DoxyCodeLine{\ \ \ \ BG\_OK\_SIGNAL\ \ \ \ \textcolor{comment}{//Se\ tiene\ una\ intensidad\ de\ señal\ aceptable\ (rsrp\ >=\ -\/115\ \&\&\ sinr\ >=\ 0)}}
+\DoxyCodeLine{\}\mbox{\hyperlink{_b_g77_8h_af98be1c204049055208486fb2b91c87b}{bg\_err\_t}};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/Flags-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\textcolor{keyword}{typedef}\ \textcolor{keyword}{struct}\{}
+\DoxyCodeLine{\ \ \ \ uint16\_t\ f0\ \ \ \ \ :\ 1;}
+\DoxyCodeLine{\ \ \ \ uint16\_t\ f1\ \ \ \ \ :\ 1;}
+\DoxyCodeLine{\ \ \ \ uint16\_t\ f2\ \ \ \ \ :\ 1;}
+\DoxyCodeLine{\ \ \ \ uint16\_t\ f3\ \ \ \ \ :\ 1;}
+\DoxyCodeLine{\ \ \ \ uint16\_t\ f4\ \ \ \ \ :\ 1;}
+\DoxyCodeLine{\ \ \ \ uint16\_t\ f5\ \ \ \ \ :\ 1;}
+\DoxyCodeLine{\ \ \ \ uint16\_t\ f6\ \ \ \ \ :\ 1;}
+\DoxyCodeLine{\ \ \ \ uint16\_t\ f7\ \ \ \ \ :\ 1;}
+\DoxyCodeLine{\ \ \ \ uint16\_t\ f8\ \ \ \ \ :\ 1;}
+\DoxyCodeLine{\ \ \ \ uint16\_t\ f9\ \ \ \ \ :\ 1;}
+\DoxyCodeLine{\ \ \ \ uint16\_t\ f10\ \ \ \ :\ 1;}
+\DoxyCodeLine{\ \ \ \ uint16\_t\ f11\ \ \ \ :\ 1;}
+\DoxyCodeLine{\ \ \ \ uint16\_t\ f12\ \ \ \ :\ 1;}
+\DoxyCodeLine{\ \ \ \ uint16\_t\ f13\ \ \ \ :\ 1;}
+\DoxyCodeLine{\ \ \ \ uint16\_t\ f14\ \ \ \ :\ 1;}
+\DoxyCodeLine{\ \ \ \ uint16\_t\ f15\ \ \ \ :\ 1;}
+\DoxyCodeLine{\}\mbox{\hyperlink{structflags__t}{flags\_t}};}
+\DoxyCodeLine{\textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/Flags\ end-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/BSP-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\textcolor{keyword}{typedef}\ \textcolor{keyword}{enum}}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\ \ \ \ BG\_PWRKEY\_PIN,}
+\DoxyCodeLine{\ \ \ \ BG\_VBAT\_PIN,}
+\DoxyCodeLine{\ \ \ \ BG\_RESET\_PIN,}
+\DoxyCodeLine{\ \ \ \ BG\_PON\_TRIG\_PIN,}
+\DoxyCodeLine{\ \ \ \ BG\_UNSUPORTED\_PIN}
+\DoxyCodeLine{\}\mbox{\hyperlink{_b_g77_8h_a2c28d9ff8a1ade4f1a62876f8ea35812}{bgPin\_t}};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{typedef}\ \mbox{\hyperlink{_b_g77_8h_af98be1c204049055208486fb2b91c87b}{bg\_err\_t}}\ (*\mbox{\hyperlink{_b_g77_8h_a5df4af1d37573e135df6251575c7644f}{uartFun\_t}})(uint8\_t\ *data,\ uint8\_t\ len);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{typedef}\ \mbox{\hyperlink{_b_g77_8h_af98be1c204049055208486fb2b91c87b}{bg\_err\_t}}\ (*\mbox{\hyperlink{_b_g77_8h_aae937a975adb539d978912a31af5a288}{gpioWriteFun\_t}})(\mbox{\hyperlink{_b_g77_8h_a2c28d9ff8a1ade4f1a62876f8ea35812}{bgPin\_t}}\ pin,\ uint8\_t\ state);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{typedef}\ void\ (*\mbox{\hyperlink{_b_g77_8h_a3cf0239ec77a1d5be9c2a1b4e28e0d43}{delayFun\_t}})(uint32\_t\ mDelay);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{typedef}\ void\ (*\mbox{\hyperlink{_b_g77_8h_ae235bc4734e4f0ac5242dd32776a39cb}{resetFun\_t}})(void);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{typedef}\ \textcolor{keyword}{struct}}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{_b_g77_8h_a5df4af1d37573e135df6251575c7644f}{uartFun\_t}}\ uartTx;\ }
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{_b_g77_8h_aae937a975adb539d978912a31af5a288}{gpioWriteFun\_t}}\ gpioWrite;}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{_b_g77_8h_a3cf0239ec77a1d5be9c2a1b4e28e0d43}{delayFun\_t}}\ msDelay;}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{_b_g77_8h_ae235bc4734e4f0ac5242dd32776a39cb}{resetFun\_t}}\ resetMCU;}
+\DoxyCodeLine{\}\mbox{\hyperlink{structbg__bsp_fun__t}{bg\_bspFun\_t}};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ \mbox{\hyperlink{_b_g77_8c_a3f93ee3bfd2996fa41f5f9425dc83431}{bg\_set\_bsp}}(\mbox{\hyperlink{structbg__bsp_fun__t}{bg\_bspFun\_t}}\ bspFun);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/BSP\ end-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/Callbacks\ MCU\ para\ LIB-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\textcolor{keyword}{typedef}\ \textcolor{keyword}{enum}}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\ \ \ \ MAIN\_RI\_EDGE\_FALLING,}
+\DoxyCodeLine{\ \ \ \ MAIN\_RI\_EDGE\_RISING,}
+\DoxyCodeLine{\ \ \ \ MAIN\_RI\_EDGE\_UNSUPPORTED}
+\DoxyCodeLine{\}\mbox{\hyperlink{_b_g77_8h_ab0ebc1ea018349b5e09729ddad2f443e}{mainRiEdge\_t}};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{typedef}\ \textcolor{keyword}{struct}\{}
+\DoxyCodeLine{\ \ \ \ uint8\_t\ buff[1024];}
+\DoxyCodeLine{\ \ \ \ uint16\_t\ len;}
+\DoxyCodeLine{\ \ \ \ uint8\_t\ type;}
+\DoxyCodeLine{\ \ \ \ uint8\_t\ connectID;}
+\DoxyCodeLine{\ \ \ \ uint8\_t\ contextID;}
+\DoxyCodeLine{\ \ \ \ uint8\_t\ serverID;}
+\DoxyCodeLine{\}\mbox{\hyperlink{structurc_info_data__t}{urcInfoData\_t}};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ \mbox{\hyperlink{_b_g77_8c_aa422c5730073a35ffc37421e44a6c632}{bg\_callback\_ms}}(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ \mbox{\hyperlink{_b_g77_8c_acd4a161fbac7d28353ca438b91e0520b}{bg\_uartCallback}}(uint8\_t\ *buff,\ uint16\_t\ nBytes);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ \mbox{\hyperlink{_b_g77_8c_a796fbdf47278af0a696da945fa907110}{bg\_mainRICallback}}(\mbox{\hyperlink{_b_g77_8h_ab0ebc1ea018349b5e09729ddad2f443e}{mainRiEdge\_t}}\ edge);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ \mbox{\hyperlink{_b_g77_8c_a3f03c39804aa65f885946b3f30d6b4fc}{bg\_handle\_urc}}(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{\textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/Callbacks\ MCU\ para\ LIB\ end-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/Funciones\ basicas\ y\ de\ configuracion\ de\ modulo-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\mbox{\hyperlink{_b_g77_8h_af98be1c204049055208486fb2b91c87b}{bg\_err\_t}}\ \mbox{\hyperlink{_b_g77_8c_a952e9d1543029fccfb87e8e133b68122}{bg\_send}}(uint32\_t\ timeout,\ uint8\_t\ enablePrint,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *fmt,\ ...);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\mbox{\hyperlink{_b_g77_8h_af98be1c204049055208486fb2b91c87b}{bg\_err\_t}}\ \mbox{\hyperlink{_b_g77_8c_ae23a60b4e1b7f50ea3cdd0927640e0de}{bg\_power\_on}}(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{}
+\DoxyCodeLine{\mbox{\hyperlink{_b_g77_8h_af98be1c204049055208486fb2b91c87b}{bg\_err\_t}}\ \mbox{\hyperlink{_b_g77_8c_ae05b151b88c27bed92a5a91c4cb9781f}{bg\_power\_off}}(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{}
+\DoxyCodeLine{\mbox{\hyperlink{_b_g77_8h_af98be1c204049055208486fb2b91c87b}{bg\_err\_t}}\ \mbox{\hyperlink{_b_g77_8c_ad9920b9e69487d843b87ace0fb65535f}{bg\_init\_module}}(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/Funciones\ basicas\ y\ de\ configuracion\ de\ modulo\ end-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/Funciones\ de\ consultas-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\mbox{\hyperlink{_b_g77_8h_af98be1c204049055208486fb2b91c87b}{bg\_err\_t}}\ \mbox{\hyperlink{_b_g77_8c_a5b05e846b42156e0bd04539d036e77e5}{bg\_data\_module}}(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{}
+\DoxyCodeLine{\mbox{\hyperlink{_b_g77_8h_af98be1c204049055208486fb2b91c87b}{bg\_err\_t}}\ \mbox{\hyperlink{_b_g77_8c_a6fdf52da4e8bf69a4e9130163ae5e7be}{bg\_check\_sim}}(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{}
+\DoxyCodeLine{\mbox{\hyperlink{_b_g77_8h_af98be1c204049055208486fb2b91c87b}{bg\_err\_t}}\ \mbox{\hyperlink{_b_g77_8c_a560f384f98c140a53d8fc8f5b32b5e19}{bg\_check\_attach}}(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{}
+\DoxyCodeLine{\mbox{\hyperlink{_b_g77_8h_af98be1c204049055208486fb2b91c87b}{bg\_err\_t}}\ \mbox{\hyperlink{_b_g77_8c_adfa333fa2fbd83d8d555f78174c312d4}{bg\_query\_cops}}(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\mbox{\hyperlink{_b_g77_8h_af98be1c204049055208486fb2b91c87b}{bg\_err\_t}}\ \mbox{\hyperlink{_b_g77_8c_ac5b7a9c29733548542fd9372f5333273}{bg\_query\_conf\_pdp}}(uint8\_t\ contextID);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\mbox{\hyperlink{_b_g77_8h_af98be1c204049055208486fb2b91c87b}{bg\_err\_t}}\ \mbox{\hyperlink{_b_g77_8c_ae28f36ea82838abfdca0118d7af70da7}{bg\_check\_pdp}}(uint8\_t\ ctxtID);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\mbox{\hyperlink{_b_g77_8h_af98be1c204049055208486fb2b91c87b}{bg\_err\_t}}\ \mbox{\hyperlink{_b_g77_8c_ac4a2455d92827db1c3cf0ba553a05bb8}{bg\_check\_sckt}}(uint8\_t\ connectID);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\mbox{\hyperlink{_b_g77_8h_af98be1c204049055208486fb2b91c87b}{bg\_err\_t}}\ \mbox{\hyperlink{_b_g77_8c_a65c9f56b02078e837debb481fff49182}{bg\_query\_signal}}(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{\textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/Funciones\ de\ consultas\ end-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/Funciones\ de\ Attach\ y\ activacion\ PDP-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\textcolor{keyword}{typedef}\ \textcolor{keyword}{enum}}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\ \ \ \ BG\_AUTH\_NONE,\ }
+\DoxyCodeLine{\ \ \ \ BG\_AUTH\_PAP,\ }
+\DoxyCodeLine{\ \ \ \ BG\_AUTH\_CHAP,}
+\DoxyCodeLine{\ \ \ \ BG\_AUTH\_PAP\_CHAP,}
+\DoxyCodeLine{\ \ \ \ BG\_AUTH\_NO\_SUPPORTED\ }
+\DoxyCodeLine{\}\mbox{\hyperlink{_b_g77_8h_a4e88b1ffb1682253b142b2e133dada3e}{bgAuth\_t}};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{typedef}\ \textcolor{keyword}{enum}}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\ \ \ \ BG\_CTXT\_IPV4\ =\ 1,\ }
+\DoxyCodeLine{\ \ \ \ BG\_CTXT\_IPV6,}
+\DoxyCodeLine{\ \ \ \ BG\_CTXT\_IPV4\_IPV6,}
+\DoxyCodeLine{\ \ \ \ BG\_CTXT\_UNSUPPORTED}
+\DoxyCodeLine{\}\mbox{\hyperlink{_b_g77_8h_a0d31ddf2d818cd2c7c61b08553abff3d}{bgCtxtType\_t}};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{typedef}\ \textcolor{keyword}{enum}}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\ \ \ \ BG\_PDP\_ACT,\ \textcolor{comment}{//Opcion\ para\ activar\ el\ contexto\ PDP.}}
+\DoxyCodeLine{\ \ \ \ BG\_PDP\_DEACT,\ \textcolor{comment}{//Opcion\ para\ desactivar\ el\ contexto\ PDP.}}
+\DoxyCodeLine{\ \ \ \ BG\_PDP\_ACT\_UNSUPORTED\ }
+\DoxyCodeLine{\}\mbox{\hyperlink{_b_g77_8h_a4ad1b226966cfdfeedb106c0a8cf2250}{bg\_actPdp\_t}};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{typedef}\ \textcolor{keyword}{struct}}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\ \ \ \ uint8\_t\ ctxtID;}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{_b_g77_8h_a0d31ddf2d818cd2c7c61b08553abff3d}{bgCtxtType\_t}}\ contextType;}
+\DoxyCodeLine{\ \ \ \ uint8\_t\ *apn;}
+\DoxyCodeLine{\ \ \ \ uint8\_t\ *usr;}
+\DoxyCodeLine{\ \ \ \ uint8\_t\ *psw;}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{_b_g77_8h_a4e88b1ffb1682253b142b2e133dada3e}{bgAuth\_t}}\ auth;}
+\DoxyCodeLine{\}\mbox{\hyperlink{structbg__ctx_pdp__t}{bg\_ctxPdp\_t}};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\mbox{\hyperlink{_b_g77_8h_af98be1c204049055208486fb2b91c87b}{bg\_err\_t}}\ \mbox{\hyperlink{_b_g77_8c_a1c0f09b53bcd76cc17f7be1d95778898}{bg\_attach}}(uint8\_t\ *\textcolor{keyword}{operator});}
+\DoxyCodeLine{}
+\DoxyCodeLine{\mbox{\hyperlink{_b_g77_8h_af98be1c204049055208486fb2b91c87b}{bg\_err\_t}}\ \mbox{\hyperlink{_b_g77_8c_ab3e3ace987b490e788e45c77d2762cc3}{bg\_conf\_pdp}}(\mbox{\hyperlink{structbg__ctx_pdp__t}{bg\_ctxPdp\_t}}\ contextPDP);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\mbox{\hyperlink{_b_g77_8h_af98be1c204049055208486fb2b91c87b}{bg\_err\_t}}\ \mbox{\hyperlink{_b_g77_8c_ae8e29b80c35bbfef04dde3dea52f459e}{bg\_pdp\_activation}}(uint8\_t\ ctxtID,\ \mbox{\hyperlink{_b_g77_8h_a4ad1b226966cfdfeedb106c0a8cf2250}{bg\_actPdp\_t}}\ act);}
+\DoxyCodeLine{\textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/Funciones\ de\ Attach\ y\ activacion\ PDP\ end-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/Funciones\ de\ apertura\ de\ socket-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#define\ BG\_OPEN\_SERVER\_REMOTE\_PORT\ 0\ }\textcolor{comment}{//Esta\ MACRO\ especifica\ el\ puerto\ remoto\ en\ modo\ Servidor.}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#define\ BG\_OPEN\_SERVER\_IP\ "{}127.0.0.1"{}\ }\textcolor{comment}{//Esta\ MACRO\ especifica\ la\ direccion\ IP\ en\ modo\ Servidor.}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{preprocessor}{\#define\ BG\_OPEN\_BUFF\_ACCSS\_MODE\ 0\ \ \ }\textcolor{comment}{//Esta\ MACRO\ especifica\ que\ se\ quiere\ usar\ el\ modo\ de\ acceso\ en\ buffer\ acces\ mode.}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#define\ BG\_OPEN\_TRANSPARENT\_MODE\ 2\ \ }\textcolor{comment}{//Esta\ MACRO\ especifica\ que\ se\ quiere\ usar\ el\ modo\ de\ acceso\ en\ modo\ transparente.}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{preprocessor}{\#define\ BG\_OPEN\_CLIENT\_LOCAL\_PORT\ 0\ }\textcolor{comment}{//Esta\ MACRO\ especifica\ el\ puetro\ local\ automatico\ en\ modo\ Cliente.}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{typedef}\ \textcolor{keyword}{enum}}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\ \ \ \ BG\_OPEN\_SERVER,\ \textcolor{comment}{//Opcion\ para\ abrir\ conexion\ en\ modo\ Servidor.}}
+\DoxyCodeLine{\ \ \ \ BG\_OPEN\_CLIENT\ \ \textcolor{comment}{//Opcion\ para\ abrir\ conexion\ en\ modo\ Cliente.}}
+\DoxyCodeLine{\}\mbox{\hyperlink{_b_g77_8h_a4de0ad8313ddfa98018750819864029b}{bgServiceType\_t}};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{typedef}\ \textcolor{keyword}{struct}}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\ \ \ \ uint8\_t\ ctxtID;\ \textcolor{comment}{//contextID\ del\ contexto\ PDP\ que\ se\ activo}}
+\DoxyCodeLine{\ \ \ \ uint8\_t\ connectID;\ \textcolor{comment}{//connectID\ es\ el\ numero\ de\ conexion.\ Sirve\ para\ identificar\ conexiones\ (rango\ 0-\/11)}}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{_b_g77_8h_a4de0ad8313ddfa98018750819864029b}{bgServiceType\_t}}\ serviceType;\ \textcolor{comment}{//Es\ el\ tipo\ de\ conexion\ a\ abrir\ (TCP\ Cliente\ o\ TCP\ Servidor)}}
+\DoxyCodeLine{\ \ \ \ uint8\_t\ *ip;\ \textcolor{comment}{//Direccion\ IP\ de\ destino\ cuando\ la\ conexion\ es\ Cliente}}
+\DoxyCodeLine{\ \ \ \ uint32\_t\ remotePort;\ \textcolor{comment}{//Puerto\ remoto\ al\ que\ se\ quiere\ apuntar\ cuando\ la\ conexion\ es\ Cliente}}
+\DoxyCodeLine{\ \ \ \ uint32\_t\ localPort;\ \textcolor{comment}{//Puerto\ local\ del\ dispositivo\ se\ utiliza\ cuando\ la\ conexion\ es\ Servidor\ (en\ modo\ Cliente\ por\ defecto\ es\ 0)}}
+\DoxyCodeLine{\ \ \ \ uint32\_t\ accssMode;\ \textcolor{comment}{//Selecciona\ la\ opcion\ de\ modo\ de\ acceso\ Buffer\ acces\ mode\ o\ Transparent\ mode\ (las\ conexiones\ cliente\ son\ las\ que\ pueden\ iniciar\ como\ Transparent\ mode)}}
+\DoxyCodeLine{\}\mbox{\hyperlink{structbg_sckt__t}{bgSckt\_t}};}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\mbox{\hyperlink{_b_g77_8h_af98be1c204049055208486fb2b91c87b}{bg\_err\_t}}\ \mbox{\hyperlink{_b_g77_8c_a6fcaeffa8a8411da9bd284564e9cbd83}{bg\_open\_sckt}}(\mbox{\hyperlink{structbg_sckt__t}{bgSckt\_t}}\ sckt);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\mbox{\hyperlink{_b_g77_8h_af98be1c204049055208486fb2b91c87b}{bg\_err\_t}}\ \mbox{\hyperlink{_b_g77_8c_a5ed9330e905321630088fe6a84c5a5de}{bg\_transparent\_mode}}(uint8\_t\ connectID);}
+\DoxyCodeLine{\textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/Funciones\ de\ apertura\ de\ socket\ end-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/Funciones\ de\ cierre\ y\ desactivacion-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\mbox{\hyperlink{_b_g77_8h_af98be1c204049055208486fb2b91c87b}{bg\_err\_t}}\ \mbox{\hyperlink{_b_g77_8c_a453a9ac99a62c6fafe71b5179086ee97}{bg\_exit\_transparent\_mode}}(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{}
+\DoxyCodeLine{\mbox{\hyperlink{_b_g77_8h_af98be1c204049055208486fb2b91c87b}{bg\_err\_t}}\ \mbox{\hyperlink{_b_g77_8c_a803afbdc8df8c4db1b6f0267816954c8}{bg\_close\_sckt}}(uint8\_t\ connectID);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\mbox{\hyperlink{_b_g77_8h_af98be1c204049055208486fb2b91c87b}{bg\_err\_t}}\ \mbox{\hyperlink{_b_g77_8c_a04ad0c65991cef2200cc99a9910a6ef7}{bg\_detach}}(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/Funciones\ de\ cierre\ y\ desactivacion\ end-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/Funciones\ de\ transmision\ recepcion\ de\ mensajes-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\mbox{\hyperlink{_b_g77_8h_af98be1c204049055208486fb2b91c87b}{bg\_err\_t}}\ \mbox{\hyperlink{_b_g77_8c_a4324d29bee02aaf36d6d7dc3d54fa1b7}{bg\_transmit\_buffAMode}}(uint8\_t\ connectID,\ uint8\_t\ *data,\ uint16\_t\ len);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\mbox{\hyperlink{_b_g77_8h_af98be1c204049055208486fb2b91c87b}{bg\_err\_t}}\ \mbox{\hyperlink{_b_g77_8c_a22e89067926540a7db799cf50725070b}{bg\_receive\_buffAMode}}(uint8\_t\ connectID,\ uint8\_t\ *buff,\ uint16\_t\ *len);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\mbox{\hyperlink{_b_g77_8h_af98be1c204049055208486fb2b91c87b}{bg\_err\_t}}\ \mbox{\hyperlink{_b_g77_8c_a2eb4e7ff0044a4ccb914381d9ae25265}{bg\_transmit\_TM}}(uint8\_t\ *data,\ uint16\_t\ len);}
+\DoxyCodeLine{\textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/Funciones\ de\ transmision\ recepcion\ de\ mensajes\ end-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/Callbacks\ LIB\ para\ MCU-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\textcolor{keyword}{typedef}\ \textcolor{keyword}{enum}}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\ \ \ \ BG\_URC\_CLOSED,}
+\DoxyCodeLine{\ \ \ \ BG\_URC\_RECV,}
+\DoxyCodeLine{\ \ \ \ BG\_URC\_INCOMING\_FULL,}
+\DoxyCodeLine{\ \ \ \ BG\_URC\_INCOMING,}
+\DoxyCodeLine{\ \ \ \ BG\_URC\_PDP\_DEACT,}
+\DoxyCodeLine{\ \ \ \ BG\_URC\_EXIT\_TM,}
+\DoxyCodeLine{\ \ \ \ BG\_URC\_UNSUPPORTED}
+\DoxyCodeLine{\}\mbox{\hyperlink{_b_g77_8h_a6a6ed3ed80fa20a7c489f5bf09ab85c6}{bg\_urcType\_t}};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ \mbox{\hyperlink{_b_g77_8c_ad0fda8eacad5ae93b44f5205e4defd90}{bg\_callback\_urcDetected}}(urcRawData\_t\ urcData);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ \mbox{\hyperlink{_b_g77_8c_aaa55f9ad9670475441d404a86c27f732}{bg\_urc\_parsed\_callback}}(\mbox{\hyperlink{structurc_info_data__t}{urcInfoData\_t}}\ infoUrc);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ \mbox{\hyperlink{_b_g77_8c_acdaa58d150ec7d4d1a5609e0770643b2}{bg\_recv\_callback}}(uint8\_t\ *buff,\ uint16\_t\ len,\ uint8\_t\ connectID);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ \mbox{\hyperlink{_b_g77_8c_a10f9ce690b16f36b9229fecd740a6895}{bg\_incomming\_callback}}(uint8\_t\ serverID,\ uint8\_t\ connectID);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ \mbox{\hyperlink{_b_g77_8c_a82f08c1cbe0edd3995c157be6ecd4b31}{bg\_callback\_receive\_TM}}(uint8\_t\ *buff,\ uint16\_t\ nBytes);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ \mbox{\hyperlink{_b_g77_8c_a735707a118cf1461601c586b3fb56060}{bg\_callback\_closed\_TM}}(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ \mbox{\hyperlink{_b_g77_8c_ac828183e261ff8d14f033e5b1b651625}{bg\_pdp\_activation\_callback}}(uint8\_t\ contextID);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ \mbox{\hyperlink{_b_g77_8c_a15909ca3b9587681afc05d26f7ff793c}{bg\_callback\_TM\_Inactive}}(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{\textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/Callbacks\ LIB\ para\ MCU\ end-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/Funciones\ de\ cola-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ \mbox{\hyperlink{_b_g77_8c_accb6d774575fa4349a922b7194d36b95}{bg\_queue\_put}}(urcRawData\_t\ urc);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ \mbox{\hyperlink{_b_g77_8c_a417fbe13aaac91032b2cf5fe5fbabba3}{bg\_queue\_pop}}(urcRawData\_t\ *urc);}
+\DoxyCodeLine{}
+\DoxyCodeLine{uint8\_t\ \mbox{\hyperlink{_b_g77_8c_a00a186528d54e0162b4ec31902db106b}{bg\_queue\_is\_empty}}(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{}
+\DoxyCodeLine{uint8\_t\ \mbox{\hyperlink{_b_g77_8c_a61963d30f7d309a7ae1cf8eeed599605}{bg\_queue\_is\_full}}(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/Funciones\ de\ cola\ end-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{//\ bg\_err\_t\ bg\_tx(uint8\_t\ cntId,\ uint8\_t\ *data,\ uint16\_t\ len,\ uint32\_t\ timeout);}}
+\DoxyCodeLine{\textcolor{comment}{//\ void\ bg\_parse\_open\_cmd(uint8\_t\ *openCmd,\ clientScktParam\_t\ *clientOpen);}}
+\DoxyCodeLine{\textcolor{comment}{//\ bg\_err\_t\ bg\_open\_client(clientScktParam\_t\ cientOpen);}}
+\DoxyCodeLine{\textcolor{comment}{//\ static\ int\ bg\_modem\_config\_modem(void);}}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ \_BG77\_H\_\ */}\textcolor{preprocessor}{}}
+
+\end{DoxyCodeInclude}
+ 

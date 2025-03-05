@@ -1,0 +1,118 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.12.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>BG77: Uso_de_COPY_PARSE_STR</title>
+<link rel="icon" href="cursoCIntermedio.png" type="image/x-icon" />
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectlogo"><img alt="Logo" src=" lenguaje-c-1.png" height="100px"/></td>
+  <td id="projectalign">
+   <div id="projectname">BG77<span id="projectnumber">&#160;1.0</span>
+   </div>
+   <div id="projectbrief">Esta es una libreria basica para controlar el modulo de comunicacion BG77</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generado por Doxygen 1.12.0 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() { codefold.init(0); });
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','Buscar',false);
+  $(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="doc-content">
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function(){ initResizable(false); });
+/* @license-end */
+</script>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Cargando...</div>
+<div class="SRStatus" id="Searching">Buscando...</div>
+<div class="SRStatus" id="NoMatches">Nada coincide</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">Uso_de_COPY_PARSE_STR</div></div>
+</div><!--header-->
+<div class="contents">
+<p>Copia una cadena que se encuentra entre dos caracteres desde un buffer origen a otro buffer de destino. El proposito de esta MACRO es copiar cadenas de informacion que debe ser parseada por delimitadores como '<br  />
+', ' ', '=', ','.</p>
+<p>Copia una cadena que se encuentra entre dos caracteres desde un buffer origen a otro buffer de destino. El proposito de esta MACRO es copiar cadenas de informacion que debe ser parseada por delimitadores como '<br  />
+', ' ', '=', ',' </p><dl class="params"><dt>Parámetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">dstBuff</td><td>Es el buffer de destino. </td></tr>
+    <tr><td class="paramname">dstBuffSize</td><td>Es el tamaño total de dstBuff. Sirve para evaluar el desbordamiento de memoria. </td></tr>
+    <tr><td class="paramname">srcBuff</td><td>Es el buffer origen. </td></tr>
+    <tr><td class="paramname">chr1</td><td>Es el caracter que indica desde donde se empezar a copiar. Se empieza a copiar una posicion despues de este caracter. </td></tr>
+    <tr><td class="paramname">chr2</td><td>Es el caracter hasta el cual se va a copiar. Este ultimo caracter se cambia a nulo '\0' para delimitar la cadena. <br  />
+</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>En este ejemplo se copia la cadena "125" proveniente de dataBuff a parseBuff </p><div class="fragment"><div class="line">uint8_t dataBuff[] = <span class="stringliteral">&quot;vol=125v,pot=12w&quot;</span>;</div>
+<div class="line">uint8_t parseBuff[30] = {<span class="charliteral">&#39;\0&#39;</span>};</div>
+<div class="line"> </div>
+<div class="line">COPY_PARSE_STR(<span class="keyword">sizeof</span>(parseBuff), parseBuff, dataBuff, <span class="charliteral">&#39;=&#39;</span>, <span class="charliteral">&#39;v&#39;</span>);</div>
+</div><!-- fragment --><div class="fragment"></div><!-- fragment --> </div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+<img class="footer" src="cursoCIntermedio.png"  height="100px"/>
+</small></address>
+</div><!-- doc-content -->
+</body>
+</html>

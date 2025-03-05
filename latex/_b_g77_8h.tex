@@ -1,0 +1,1201 @@
+\doxysection{Referencia del archivo BG77.\+h}
+\hypertarget{_b_g77_8h}{}\label{_b_g77_8h}\index{BG77.h@{BG77.h}}
+
+
+Esta es una libreria base para implementar funcionalidades basicas del modulo BG77 (consulta de estados, apertura de conexiones, transmision y recepcion de datos).  
+
+
+{\ttfamily \#include "{}stdio.\+h"{}}\newline
+{\ttfamily \#include "{}stdint.\+h"{}}\newline
+{\ttfamily \#include "{}stdlib.\+h"{}}\newline
+{\ttfamily \#include "{}string.\+h"{}}\newline
+{\ttfamily \#include "{}stdarg.\+h"{}}\newline
+{\ttfamily \#include "{}../\+BG77/queue\+\_\+module/queue\+\_\+module.\+h"{}}\newline
+\doxysubsubsection*{Estructuras de datos}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structflags__t}{flags\+\_\+t}}
+\begin{DoxyCompactList}\small\item\em Tipo de dato para crear variables de banderas de 1 bit (16 bits) \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structbg__bsp_fun__t}{bg\+\_\+bsp\+Fun\+\_\+t}}
+\begin{DoxyCompactList}\small\item\em Tipo de variable que contiene los punteros a funcion del BSP. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structurc_info_data__t}{urc\+Info\+Data\+\_\+t}}
+\begin{DoxyCompactList}\small\item\em Tipo de variable que contiene la informacion util de URC. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structbg__ctx_pdp__t}{bg\+\_\+ctx\+Pdp\+\_\+t}}
+\begin{DoxyCompactList}\small\item\em Es el tipo de variable que define la configuracion de contexto PDP. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structbg_sckt__t}{bg\+Sckt\+\_\+t}}
+\begin{DoxyCompactList}\small\item\em Tipo de dato que contiene todos los parametros de red para abrir un socket. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{defines}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{_b_g77_8h_a9b06fda83ca7a20a56bd6565d6841893}\label{_b_g77_8h_a9b06fda83ca7a20a56bd6565d6841893} 
+\#define {\bfseries LD}~0
+\item 
+\Hypertarget{_b_g77_8h_aa4d6abc7b58eb11e517993df83b7f0f7}\label{_b_g77_8h_aa4d6abc7b58eb11e517993df83b7f0f7} 
+\#define {\bfseries LE}~1
+\item 
+\Hypertarget{_b_g77_8h_abd3150cc4ae293e914485be959ec23e1}\label{_b_g77_8h_abd3150cc4ae293e914485be959ec23e1} 
+\#define {\bfseries \+\_\+\+BG\+\_\+\+DEBUG\+\_\+}
+\item 
+\#define \mbox{\hyperlink{_b_g77_8h_abced5d6549b42ce11890222cdcce5625}{LOG\+\_\+\+BG}}(enable, ...)
+\begin{DoxyCompactList}\small\item\em MACRO para imprimir log. Este puede desactivarse en tiempo de ejecucion. \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{_b_g77_8h_a68ee928e8b006a04a7fcf30d8498cbbe}{LOG\+\_\+\+BG\+\_\+\+TRACE}}(enable, ...)
+\begin{DoxyCompactList}\small\item\em Es un Log derivado que rastrea la ruta y la linea en donde se esta imprimiendo el mensaje. \end{DoxyCompactList}\item 
+\Hypertarget{_b_g77_8h_ac5cdc584cf35c61f2875f1703ab9219b}\label{_b_g77_8h_ac5cdc584cf35c61f2875f1703ab9219b} 
+\#define {\bfseries \+\_\+\+\_\+bg\+\_\+weak\+\_\+\+\_\+}~\+\_\+\+\_\+attribute\+\_\+\+\_\+((weak))
+\begin{DoxyCompactList}\small\item\em MACRO para generar funciones del tipo weak. \end{DoxyCompactList}\item 
+\Hypertarget{_b_g77_8h_ab96c94c7d4f72592fb0bd579675c89f2}\label{_b_g77_8h_ab96c94c7d4f72592fb0bd579675c89f2} 
+\#define {\bfseries MAX\+\_\+\+SEC}~0\+XFFFFFFFFUL
+\item 
+\Hypertarget{_b_g77_8h_a40a62a68f8a03937787cc954317fbc13}\label{_b_g77_8h_a40a62a68f8a03937787cc954317fbc13} 
+\#define {\bfseries BG\+\_\+\+TIMEOUT\+\_\+\+ANSW}~10\+UL
+\item 
+\Hypertarget{_b_g77_8h_afa8f5cd5ad672753ec601976bb730b74}\label{_b_g77_8h_afa8f5cd5ad672753ec601976bb730b74} 
+\#define {\bfseries BG\+\_\+\+TIMEOUT\+\_\+\+ANSW\+\_\+\+OK}~20\+UL
+\item 
+\Hypertarget{_b_g77_8h_abc845dcc0f7a3b93fd2182df6bd90cf9}\label{_b_g77_8h_abc845dcc0f7a3b93fd2182df6bd90cf9} 
+\#define {\bfseries BG\+\_\+\+TIMEOUT\+\_\+\+ANSW\+\_\+\+OK\+\_\+\+LONG}~40\+UL
+\item 
+\Hypertarget{_b_g77_8h_ae9c00243e402e91d12fd0c65bf2ad7ca}\label{_b_g77_8h_ae9c00243e402e91d12fd0c65bf2ad7ca} 
+\#define {\bfseries IP\+\_\+\+METERCAD}~"{}192.\+168.\+4.\+58"{}
+\item 
+\Hypertarget{_b_g77_8h_a5850ea8e082e2f50787a75c6fba62c7a}\label{_b_g77_8h_a5850ea8e082e2f50787a75c6fba62c7a} 
+\#define {\bfseries IP\+\_\+\+PROXYGAMMA}~"{}192.\+168.\+4.\+57"{}
+\item 
+\Hypertarget{_b_g77_8h_aefc3b0c8b5e8e8b1b730d5adfc50191f}\label{_b_g77_8h_aefc3b0c8b5e8e8b1b730d5adfc50191f} 
+\#define {\bfseries IP\+\_\+\+TCP\+\_\+\+LISTENER}~"{}127.\+0.\+0.\+1"{}
+\item 
+\Hypertarget{_b_g77_8h_ad2187edb5048abfcf399e1c6b5f4e82f}\label{_b_g77_8h_ad2187edb5048abfcf399e1c6b5f4e82f} 
+\#define {\bfseries APN\+\_\+\+LINKS\+\_\+\+FIELD}~"{}cantilever.\+1"{}
+\item 
+\Hypertarget{_b_g77_8h_ab5875096e9e3c1f35b9f6dba8d6de965}\label{_b_g77_8h_ab5875096e9e3c1f35b9f6dba8d6de965} 
+\#define {\bfseries COPS\+\_\+\+LF}~"{}334020"{}
+\item 
+\Hypertarget{_b_g77_8h_aa2798a6bac4c32b225943e273ef1ff37}\label{_b_g77_8h_aa2798a6bac4c32b225943e273ef1ff37} 
+\#define {\bfseries COPS\+\_\+\+ATT\+\_\+1}~"{}334090"{}
+\item 
+\Hypertarget{_b_g77_8h_a09094f7f4bcca2ce1ccf96c91e9c6a03}\label{_b_g77_8h_a09094f7f4bcca2ce1ccf96c91e9c6a03} 
+\#define {\bfseries COPS\+\_\+\+ATT\+\_\+2}~"{}334050"{}
+\item 
+\Hypertarget{_b_g77_8h_a178132174f9ee6c99bf132e9b8aff6b4}\label{_b_g77_8h_a178132174f9ee6c99bf132e9b8aff6b4} 
+\#define {\bfseries BG\+\_\+\+CONTEXT\+\_\+\+ID\+\_\+\+MAX}~7
+\item 
+\Hypertarget{_b_g77_8h_a3ba9ffa004a0290d6eaecbbef7895864}\label{_b_g77_8h_a3ba9ffa004a0290d6eaecbbef7895864} 
+\#define {\bfseries BG\+\_\+\+CONTEXT\+\_\+\+ID\+\_\+\+MIN}~1
+\item 
+\Hypertarget{_b_g77_8h_a5c27fb85b702825a04e8a58911f9193f}\label{_b_g77_8h_a5c27fb85b702825a04e8a58911f9193f} 
+\#define {\bfseries BG\+\_\+\+CONNECT\+\_\+\+ID\+\_\+\+MAX}~11
+\item 
+\Hypertarget{_b_g77_8h_a8dcf686bd59bcd0c024a7a06c45f7e58}\label{_b_g77_8h_a8dcf686bd59bcd0c024a7a06c45f7e58} 
+\#define {\bfseries BG\+\_\+\+CONNECT\+\_\+\+ID\+\_\+\+MIN}~0
+\item 
+\#define \mbox{\hyperlink{_b_g77_8h_a29b43f40cd1353df5eb853cb40aca7f9}{CHECK\+\_\+\+BG\+\_\+\+ERR}}(err)
+\begin{DoxyCompactList}\small\item\em Esta macro es una funcion inline que evalua que no se presento algun error del tipo bg\+\_\+err\+\_\+t. Su proposito es mantener la legibilidad del codigo. \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{_b_g77_8h_a3e5f4c178ebf4e1ad598506fcb722d90}{REMPLACE\+\_\+\+CHAR}}(remp\+Src\+Buff,  chr\+Remplaced,  chr\+Desired)
+\item 
+\#define \mbox{\hyperlink{_b_g77_8h_af8e4982d2acfaf513cef47c31cf82607}{COPY\+\_\+\+PARSE\+\_\+\+STR}}(\+\_\+dst\+Buff,  dst\+Buff\+Size,  src\+Buff,  chr1,  chr2)
+\item 
+\#define \mbox{\hyperlink{_b_g77_8h_a65789cf68a6f03ed3ede1aa82784c39b}{CHECK\+\_\+\+DESIRED\+\_\+\+ANSW}}(src\+Buff,  desired\+Answ,  \+\_\+timeout)
+\begin{DoxyCompactList}\small\item\em Verifica que una cadena deseada se encuentre dentro de un array o buffer durante un tiempo especificado. \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{_b_g77_8h_a25de0a3a2ef034775a4ed2739c9d6af7}{CHECK\+\_\+\+POWDWN\+\_\+\+ANSW}}(src\+Buff,  \+\_\+timeout)
+\begin{DoxyCompactList}\small\item\em Verifica que el comando de Power down sea exitoso. \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{_b_g77_8h_ae249007a2f2f4a602e52a621236bde51}{CHECK\+\_\+\+EXIT\+\_\+\+TM\+\_\+\+ANSW}}(src\+Buff,  \+\_\+timeout)
+\begin{DoxyCompactList}\small\item\em Verifica que la salida de modo transparente sea exitosa. \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{_b_g77_8h_acb098879d8671d85da27cc1ce9ce55b3}{CREATE\+\_\+\+BUFF}}(x,  name)
+\item 
+\Hypertarget{_b_g77_8h_aab65861738b8a4bf46454ad66659dbeb}\label{_b_g77_8h_aab65861738b8a4bf46454ad66659dbeb} 
+\#define {\bfseries SIZE\+\_\+\+BG\+\_\+\+BUFF}~2048
+\item 
+\Hypertarget{_b_g77_8h_ab52cb084c17d58d09ea50249d6e5a180}\label{_b_g77_8h_ab52cb084c17d58d09ea50249d6e5a180} 
+\#define {\bfseries BG\+\_\+\+OPEN\+\_\+\+SERVER\+\_\+\+REMOTE\+\_\+\+PORT}~0
+\item 
+\Hypertarget{_b_g77_8h_a3b1560b9af26e1aae2389a54b8072593}\label{_b_g77_8h_a3b1560b9af26e1aae2389a54b8072593} 
+\#define {\bfseries BG\+\_\+\+OPEN\+\_\+\+SERVER\+\_\+\+IP}~"{}127.\+0.\+0.\+1"{}
+\item 
+\Hypertarget{_b_g77_8h_af4690344a3f01b4d9dd0de506706c313}\label{_b_g77_8h_af4690344a3f01b4d9dd0de506706c313} 
+\#define {\bfseries BG\+\_\+\+OPEN\+\_\+\+BUFF\+\_\+\+ACCSS\+\_\+\+MODE}~0
+\item 
+\Hypertarget{_b_g77_8h_ad180ae4154f208c3061daf996c45662e}\label{_b_g77_8h_ad180ae4154f208c3061daf996c45662e} 
+\#define {\bfseries BG\+\_\+\+OPEN\+\_\+\+TRANSPARENT\+\_\+\+MODE}~2
+\item 
+\Hypertarget{_b_g77_8h_ae016f8744ca6a26d4c3e38f80ec815a3}\label{_b_g77_8h_ae016f8744ca6a26d4c3e38f80ec815a3} 
+\#define {\bfseries BG\+\_\+\+OPEN\+\_\+\+CLIENT\+\_\+\+LOCAL\+\_\+\+PORT}~0
+\end{DoxyCompactItemize}
+\doxysubsubsection*{typedefs}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{_b_g77_8h_a5df4af1d37573e135df6251575c7644f}\label{_b_g77_8h_a5df4af1d37573e135df6251575c7644f} 
+typedef \mbox{\hyperlink{_b_g77_8h_af98be1c204049055208486fb2b91c87b}{bg\+\_\+err\+\_\+t}}(\texorpdfstring{$\ast$}{*} {\bfseries uart\+Fun\+\_\+t}) (uint8\+\_\+t \texorpdfstring{$\ast$}{*}data, uint8\+\_\+t len)
+\begin{DoxyCompactList}\small\item\em tipo de dato para crear un puntero a funciones uart (TX o RX) \end{DoxyCompactList}\item 
+\Hypertarget{_b_g77_8h_aae937a975adb539d978912a31af5a288}\label{_b_g77_8h_aae937a975adb539d978912a31af5a288} 
+typedef \mbox{\hyperlink{_b_g77_8h_af98be1c204049055208486fb2b91c87b}{bg\+\_\+err\+\_\+t}}(\texorpdfstring{$\ast$}{*} {\bfseries gpio\+Write\+Fun\+\_\+t}) (\mbox{\hyperlink{_b_g77_8h_a2c28d9ff8a1ade4f1a62876f8ea35812}{bg\+Pin\+\_\+t}} pin, uint8\+\_\+t state)
+\begin{DoxyCompactList}\small\item\em tipo de dato para crear un puntero a funcion de escritura de GPIOs \end{DoxyCompactList}\item 
+\Hypertarget{_b_g77_8h_a3cf0239ec77a1d5be9c2a1b4e28e0d43}\label{_b_g77_8h_a3cf0239ec77a1d5be9c2a1b4e28e0d43} 
+typedef void(\texorpdfstring{$\ast$}{*} {\bfseries delay\+Fun\+\_\+t}) (uint32\+\_\+t m\+Delay)
+\begin{DoxyCompactList}\small\item\em tipo de dato para crear un puntero a funcion de delay (en mili segundos) \end{DoxyCompactList}\item 
+\Hypertarget{_b_g77_8h_ae235bc4734e4f0ac5242dd32776a39cb}\label{_b_g77_8h_ae235bc4734e4f0ac5242dd32776a39cb} 
+typedef void(\texorpdfstring{$\ast$}{*} {\bfseries reset\+Fun\+\_\+t}) (void)
+\begin{DoxyCompactList}\small\item\em tipo de dato para crear un puntero a funcion de reset de sistema (reset de MCU) \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Enumeraciones}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{_b_g77_8h_af98be1c204049055208486fb2b91c87b}\label{_b_g77_8h_af98be1c204049055208486fb2b91c87b} 
+enum \mbox{\hyperlink{_b_g77_8h_af98be1c204049055208486fb2b91c87b}{bg\+\_\+err\+\_\+t}} \{ \newline
+{\bfseries BG\+\_\+\+ERR\+\_\+\+TIMEOUT\+\_\+\+ANS} = -\/255
+, {\bfseries BG\+\_\+\+ERR\+\_\+\+TIMEOUT\+\_\+\+ANS\+\_\+\+DESIRED}
+, {\bfseries BG\+\_\+\+ERR\+\_\+\+MCU\+\_\+\+TX\+\_\+\+UART}
+, {\bfseries BG\+\_\+\+ERR\+\_\+\+MCU\+\_\+\+PTR\+\_\+\+NULL}
+, \newline
+{\bfseries BG\+\_\+\+ERR\+\_\+\+UNSUPPORTED\+\_\+\+PIN}
+, {\bfseries BG\+\_\+\+ERR\+\_\+\+SIM\+\_\+\+NO\+\_\+\+OK}
+, {\bfseries BG\+\_\+\+ERR\+\_\+\+PARSE}
+, {\bfseries BG\+\_\+\+ERR\+\_\+\+ATTACH\+\_\+\+NO\+\_\+\+OK}
+, \newline
+{\bfseries BG\+\_\+\+ERR\+\_\+\+NO\+\_\+\+OPER}
+, {\bfseries BG\+\_\+\+ERR\+\_\+\+NO\+\_\+\+CONF\+\_\+\+PDP}
+, {\bfseries BG\+\_\+\+ERR\+\_\+\+CTXT\+\_\+\+ID\+\_\+\+UNSUPPORTED}
+, {\bfseries BG\+\_\+\+ERR\+\_\+\+CONNECT\+\_\+\+ID\+\_\+\+UNSUPORTED}
+, \newline
+{\bfseries BG\+\_\+\+ERR\+\_\+\+CONNECT\+\_\+\+ID\+\_\+\+NOT\+\_\+\+USED}
+, {\bfseries BG\+\_\+\+ERR\+\_\+\+CONF\+\_\+\+PDP}
+, {\bfseries BG\+\_\+\+ERR\+\_\+\+ACT\+\_\+\+PDP}
+, {\bfseries BG\+\_\+\+ERR\+\_\+\+SIGNAL}
+, \newline
+{\bfseries BG\+\_\+\+OK} = 0
+, {\bfseries BG\+\_\+\+OK\+\_\+\+SIM}
+, {\bfseries BG\+\_\+\+OK\+\_\+\+ATTACH}
+, {\bfseries BG\+\_\+\+OK\+\_\+\+PDP\+\_\+\+ACT}
+, \newline
+{\bfseries BG\+\_\+\+OK\+\_\+\+PDP\+\_\+\+DEACT}
+, {\bfseries BG\+\_\+\+OK\+\_\+\+CONNECT\+\_\+\+ID\+\_\+\+OPENNED}
+, {\bfseries BG\+\_\+\+OK\+\_\+\+CONF\+\_\+\+PDP}
+, {\bfseries BG\+\_\+\+OK\+\_\+\+TRANSPARENT\+\_\+\+MODE}
+, \newline
+{\bfseries BG\+\_\+\+OK\+\_\+\+EXIT\+\_\+\+TRANSPARENT\+\_\+\+MODE}
+, {\bfseries BG\+\_\+\+OK\+\_\+\+CONNECT\+\_\+\+ID\+\_\+\+CLOSED}
+, {\bfseries BG\+\_\+\+OK\+\_\+\+DETACH}
+, {\bfseries BG\+\_\+\+OK\+\_\+\+TRANSMIT}
+, \newline
+{\bfseries BG\+\_\+\+OK\+\_\+\+RECEIVE}
+, {\bfseries BG\+\_\+\+OK\+\_\+\+SIGNAL}
+ \}
+\begin{DoxyCompactList}\small\item\em tipo de variable que almacena el catalogo de errores. \end{DoxyCompactList}\item 
+\Hypertarget{_b_g77_8h_a2c28d9ff8a1ade4f1a62876f8ea35812}\label{_b_g77_8h_a2c28d9ff8a1ade4f1a62876f8ea35812} 
+enum \mbox{\hyperlink{_b_g77_8h_a2c28d9ff8a1ade4f1a62876f8ea35812}{bg\+Pin\+\_\+t}} \{ \newline
+{\bfseries BG\+\_\+\+PWRKEY\+\_\+\+PIN}
+, {\bfseries BG\+\_\+\+VBAT\+\_\+\+PIN}
+, {\bfseries BG\+\_\+\+RESET\+\_\+\+PIN}
+, {\bfseries BG\+\_\+\+PON\+\_\+\+TRIG\+\_\+\+PIN}
+, \newline
+{\bfseries BG\+\_\+\+UNSUPORTED\+\_\+\+PIN}
+ \}
+\begin{DoxyCompactList}\small\item\em tipo de dato que enlista todos los pines soportados para la escritura de GPIOs \end{DoxyCompactList}\item 
+\Hypertarget{_b_g77_8h_ab0ebc1ea018349b5e09729ddad2f443e}\label{_b_g77_8h_ab0ebc1ea018349b5e09729ddad2f443e} 
+enum \mbox{\hyperlink{_b_g77_8h_ab0ebc1ea018349b5e09729ddad2f443e}{main\+Ri\+Edge\+\_\+t}} \{ {\bfseries MAIN\+\_\+\+RI\+\_\+\+EDGE\+\_\+\+FALLING}
+, {\bfseries MAIN\+\_\+\+RI\+\_\+\+EDGE\+\_\+\+RISING}
+, {\bfseries MAIN\+\_\+\+RI\+\_\+\+EDGE\+\_\+\+UNSUPPORTED}
+ \}
+\begin{DoxyCompactList}\small\item\em Tipo de variable que indica el flanco que sucedio en el pin MAIN\+\_\+\+RI. \end{DoxyCompactList}\item 
+\Hypertarget{_b_g77_8h_a4e88b1ffb1682253b142b2e133dada3e}\label{_b_g77_8h_a4e88b1ffb1682253b142b2e133dada3e} 
+enum \mbox{\hyperlink{_b_g77_8h_a4e88b1ffb1682253b142b2e133dada3e}{bg\+Auth\+\_\+t}} \{ \newline
+{\bfseries BG\+\_\+\+AUTH\+\_\+\+NONE}
+, {\bfseries BG\+\_\+\+AUTH\+\_\+\+PAP}
+, {\bfseries BG\+\_\+\+AUTH\+\_\+\+CHAP}
+, {\bfseries BG\+\_\+\+AUTH\+\_\+\+PAP\+\_\+\+CHAP}
+, \newline
+{\bfseries BG\+\_\+\+AUTH\+\_\+\+NO\+\_\+\+SUPPORTED}
+ \}
+\begin{DoxyCompactList}\small\item\em Es el tipo de variable que define el tipo de autenticacion a utilizar. \end{DoxyCompactList}\item 
+\Hypertarget{_b_g77_8h_a0d31ddf2d818cd2c7c61b08553abff3d}\label{_b_g77_8h_a0d31ddf2d818cd2c7c61b08553abff3d} 
+enum \mbox{\hyperlink{_b_g77_8h_a0d31ddf2d818cd2c7c61b08553abff3d}{bg\+Ctxt\+Type\+\_\+t}} \{ {\bfseries BG\+\_\+\+CTXT\+\_\+\+IPV4} = 1
+, {\bfseries BG\+\_\+\+CTXT\+\_\+\+IPV6}
+, {\bfseries BG\+\_\+\+CTXT\+\_\+\+IPV4\+\_\+\+IPV6}
+, {\bfseries BG\+\_\+\+CTXT\+\_\+\+UNSUPPORTED}
+ \}
+\begin{DoxyCompactList}\small\item\em Es el tipo de variable que define el tipo de contexto. \end{DoxyCompactList}\item 
+\Hypertarget{_b_g77_8h_a4ad1b226966cfdfeedb106c0a8cf2250}\label{_b_g77_8h_a4ad1b226966cfdfeedb106c0a8cf2250} 
+enum \mbox{\hyperlink{_b_g77_8h_a4ad1b226966cfdfeedb106c0a8cf2250}{bg\+\_\+act\+Pdp\+\_\+t}} \{ {\bfseries BG\+\_\+\+PDP\+\_\+\+ACT}
+, {\bfseries BG\+\_\+\+PDP\+\_\+\+DEACT}
+, {\bfseries BG\+\_\+\+PDP\+\_\+\+ACT\+\_\+\+UNSUPORTED}
+ \}
+\begin{DoxyCompactList}\small\item\em Es el tipo de variable que define la opcion para activar o desactivar el contexto PDP. \end{DoxyCompactList}\item 
+\Hypertarget{_b_g77_8h_a4de0ad8313ddfa98018750819864029b}\label{_b_g77_8h_a4de0ad8313ddfa98018750819864029b} 
+enum \mbox{\hyperlink{_b_g77_8h_a4de0ad8313ddfa98018750819864029b}{bg\+Service\+Type\+\_\+t}} \{ {\bfseries BG\+\_\+\+OPEN\+\_\+\+SERVER}
+, {\bfseries BG\+\_\+\+OPEN\+\_\+\+CLIENT}
+ \}
+\begin{DoxyCompactList}\small\item\em Es el tipo de dato para seleccionar el tipo de servicio en una apertura de conexion (Cliente o Servidor TCP). \end{DoxyCompactList}\item 
+\Hypertarget{_b_g77_8h_a6a6ed3ed80fa20a7c489f5bf09ab85c6}\label{_b_g77_8h_a6a6ed3ed80fa20a7c489f5bf09ab85c6} 
+enum \mbox{\hyperlink{_b_g77_8h_a6a6ed3ed80fa20a7c489f5bf09ab85c6}{bg\+\_\+urc\+Type\+\_\+t}} \{ \newline
+{\bfseries BG\+\_\+\+URC\+\_\+\+CLOSED}
+, {\bfseries BG\+\_\+\+URC\+\_\+\+RECV}
+, {\bfseries BG\+\_\+\+URC\+\_\+\+INCOMING\+\_\+\+FULL}
+, {\bfseries BG\+\_\+\+URC\+\_\+\+INCOMING}
+, \newline
+{\bfseries BG\+\_\+\+URC\+\_\+\+PDP\+\_\+\+DEACT}
+, {\bfseries BG\+\_\+\+URC\+\_\+\+EXIT\+\_\+\+TM}
+, {\bfseries BG\+\_\+\+URC\+\_\+\+NO\+\_\+\+CARRIER}
+, {\bfseries BG\+\_\+\+URC\+\_\+\+UNSUPPORTED}
+ \}
+\begin{DoxyCompactList}\small\item\em Variable de tipo que sirve para identificar que tipo de URC fue recibido. \end{DoxyCompactList}\item 
+\Hypertarget{_b_g77_8h_a2eda4d5bf02084b0c05dbc21810a5e82}\label{_b_g77_8h_a2eda4d5bf02084b0c05dbc21810a5e82} 
+enum \mbox{\hyperlink{_b_g77_8h_a2eda4d5bf02084b0c05dbc21810a5e82}{bg\+\_\+no\+Carrier\+TM\+\_\+t}} \{ {\bfseries BG\+\_\+\+TM\+\_\+\+NO\+\_\+\+CARRIER\+\_\+\+SET}
+, {\bfseries BG\+\_\+\+TM\+\_\+\+NO\+\_\+\+CARRIER\+\_\+\+RESET}
+ \}
+\begin{DoxyCompactList}\small\item\em Este tipo de variable sirve para indicar si llego un mensaje de NO CARRIER que indica la salida de modo transparente por desconexion. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Funciones}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{_b_g77_8h_a89dac8bef95fbc323f9216383fad9377}\label{_b_g77_8h_a89dac8bef95fbc323f9216383fad9377} 
+{\bfseries CREATE\+\_\+\+BUFF} (SIZE\+\_\+\+BG\+\_\+\+BUFF, uart\+Buff)
+\begin{DoxyCompactList}\small\item\em Se crea un tipo de variable llamado uart\+Buff\+\_\+t para generar buffers de uart de tamaño 1024By. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{_b_g77_8h_a3f93ee3bfd2996fa41f5f9425dc83431}{bg\+\_\+set\+\_\+bsp}} (\mbox{\hyperlink{structbg__bsp_fun__t}{bg\+\_\+bsp\+Fun\+\_\+t}} bsp\+Fun)
+\begin{DoxyCompactList}\small\item\em Funcion para establecer los punteros a función del BSP (UART TX, Delay, GPIO\+\_\+write, Reset de MCU). \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{_b_g77_8h_aa422c5730073a35ffc37421e44a6c632}{bg\+\_\+callback\+\_\+ms}} (void)
+\begin{DoxyCompactList}\small\item\em Esta funcion de callback se tiene que llamar en una funcion de interrupción de temporizador en donde se genere cada 1ms. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{_b_g77_8h_acd4a161fbac7d28353ca438b91e0520b}{bg\+\_\+uart\+Callback}} (uint8\+\_\+t \texorpdfstring{$\ast$}{*}buff, uint16\+\_\+t n\+Bytes)
+\begin{DoxyCompactList}\small\item\em Esta funcion de callback se debe llamar en una funcion de interrupcion de recepcion de uart en la cual se debe pasar el buffer y el tamaño del mensaje recibido por UART. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{_b_g77_8h_a796fbdf47278af0a696da945fa907110}{bg\+\_\+main\+RICallback}} (\mbox{\hyperlink{_b_g77_8h_ab0ebc1ea018349b5e09729ddad2f443e}{main\+Ri\+Edge\+\_\+t}} edge)
+\begin{DoxyCompactList}\small\item\em Esta funcion de callback se debe llamar en una funcion de interrupcion de pin digital que corresponde al pin MAIN\+\_\+\+RI del modulo de comunicaciones en la cual se debe especificar el flanco generado. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{_b_g77_8h_a3f03c39804aa65f885946b3f30d6b4fc}{bg\+\_\+handle\+\_\+urc}} (void)
+\begin{DoxyCompactList}\small\item\em Esta funcion se encarga de manejar los URC encolados. ~\newline
+ Si hay un URC encolado, se procede a parsearlo y a llamar a un callback para entregar informacion parseada al usuario. Por defecto llama a la \doxylink{_b_g77_8h_a182c6ca209fecf25da97f51f1eaf5550}{bg\+\_\+urc\+\_\+parsed\+\_\+callback(urc\+Info\+Data\+\_\+t info\+Urc)} para indicar el resultado de URC;. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{_b_g77_8h_af98be1c204049055208486fb2b91c87b}{bg\+\_\+err\+\_\+t}} \mbox{\hyperlink{_b_g77_8h_a952e9d1543029fccfb87e8e133b68122}{bg\+\_\+send}} (uint32\+\_\+t timeout, uint8\+\_\+t enable\+Print, const char \texorpdfstring{$\ast$}{*}fmt,...)
+\begin{DoxyCompactList}\small\item\em Esta funcion permite enviar comandos AT en formato de especificadores de formato (como printf) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{_b_g77_8h_af98be1c204049055208486fb2b91c87b}{bg\+\_\+err\+\_\+t}} \mbox{\hyperlink{_b_g77_8h_ae23a60b4e1b7f50ea3cdd0927640e0de}{bg\+\_\+power\+\_\+on}} (void)
+\begin{DoxyCompactList}\small\item\em Esta funcion realiza la secuencia necesaria de los pines BG\+\_\+\+PWRKEY\+\_\+\+PIN, BG\+\_\+\+VBAT\+\_\+\+PIN, BG\+\_\+\+RESET\+\_\+\+PIN para encender al modulo de comunicación. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{_b_g77_8h_af98be1c204049055208486fb2b91c87b}{bg\+\_\+err\+\_\+t}} \mbox{\hyperlink{_b_g77_8h_ae05b151b88c27bed92a5a91c4cb9781f}{bg\+\_\+power\+\_\+off}} (void)
+\begin{DoxyCompactList}\small\item\em Realiza el apagado del modulo con el comando AT+\+QPOWD. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{_b_g77_8h_af98be1c204049055208486fb2b91c87b}{bg\+\_\+err\+\_\+t}} \mbox{\hyperlink{_b_g77_8h_ad9920b9e69487d843b87ace0fb65535f}{bg\+\_\+init\+\_\+module}} (void)
+\begin{DoxyCompactList}\small\item\em Funcion para inicializar el modulo. Sus funciones son encender y configurar el modulo. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{_b_g77_8h_af98be1c204049055208486fb2b91c87b}{bg\+\_\+err\+\_\+t}} \mbox{\hyperlink{_b_g77_8h_a5b05e846b42156e0bd04539d036e77e5}{bg\+\_\+data\+\_\+module}} (void)
+\begin{DoxyCompactList}\small\item\em Funcion para imprimir la version de FW del modulo, ICCI e IMEI. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{_b_g77_8h_af98be1c204049055208486fb2b91c87b}{bg\+\_\+err\+\_\+t}} \mbox{\hyperlink{_b_g77_8h_a6fdf52da4e8bf69a4e9130163ae5e7be}{bg\+\_\+check\+\_\+sim}} (void)
+\begin{DoxyCompactList}\small\item\em Funcion para detectar SIM. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{_b_g77_8h_af98be1c204049055208486fb2b91c87b}{bg\+\_\+err\+\_\+t}} \mbox{\hyperlink{_b_g77_8h_a560f384f98c140a53d8fc8f5b32b5e19}{bg\+\_\+check\+\_\+attach}} (void)
+\begin{DoxyCompactList}\small\item\em Funcion para verificar el registro en red. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{_b_g77_8h_af98be1c204049055208486fb2b91c87b}{bg\+\_\+err\+\_\+t}} \mbox{\hyperlink{_b_g77_8h_adfa333fa2fbd83d8d555f78174c312d4}{bg\+\_\+query\+\_\+cops}} (void)
+\begin{DoxyCompactList}\small\item\em Funcion que imprime parametros de la consulta de COPS modo, operador, tecnologia de acceso. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{_b_g77_8h_af98be1c204049055208486fb2b91c87b}{bg\+\_\+err\+\_\+t}} \mbox{\hyperlink{_b_g77_8h_ac5b7a9c29733548542fd9372f5333273}{bg\+\_\+query\+\_\+conf\+\_\+pdp}} (uint8\+\_\+t context\+ID)
+\begin{DoxyCompactList}\small\item\em Funcion que imprime parametros de la configuracion de contexto PDP (APN, USER, PASSWORD, AUTHENTICATION) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{_b_g77_8h_af98be1c204049055208486fb2b91c87b}{bg\+\_\+err\+\_\+t}} \mbox{\hyperlink{_b_g77_8h_ae28f36ea82838abfdca0118d7af70da7}{bg\+\_\+check\+\_\+pdp}} (uint8\+\_\+t ctxt\+ID)
+\begin{DoxyCompactList}\small\item\em Verifica que se tenga activado el contexto PDP seleccionado (context\+ID) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{_b_g77_8h_af98be1c204049055208486fb2b91c87b}{bg\+\_\+err\+\_\+t}} \mbox{\hyperlink{_b_g77_8h_ac4a2455d92827db1c3cf0ba553a05bb8}{bg\+\_\+check\+\_\+sckt}} (uint8\+\_\+t connect\+ID)
+\begin{DoxyCompactList}\small\item\em Verifica el estado de una conexion. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{_b_g77_8h_af98be1c204049055208486fb2b91c87b}{bg\+\_\+err\+\_\+t}} \mbox{\hyperlink{_b_g77_8h_a65c9f56b02078e837debb481fff49182}{bg\+\_\+query\+\_\+signal}} (void)
+\begin{DoxyCompactList}\small\item\em Consulta la intensidad de la señal cuando el modulo ya esta registrado. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{_b_g77_8h_af98be1c204049055208486fb2b91c87b}{bg\+\_\+err\+\_\+t}} \mbox{\hyperlink{_b_g77_8h_a1c0f09b53bcd76cc17f7be1d95778898}{bg\+\_\+attach}} (uint8\+\_\+t \texorpdfstring{$\ast$}{*}operator)
+\begin{DoxyCompactList}\small\item\em Funcion para registrar el modulo en la red (attach). \end{DoxyCompactList}\item 
+\mbox{\hyperlink{_b_g77_8h_af98be1c204049055208486fb2b91c87b}{bg\+\_\+err\+\_\+t}} \mbox{\hyperlink{_b_g77_8h_ab3e3ace987b490e788e45c77d2762cc3}{bg\+\_\+conf\+\_\+pdp}} (\mbox{\hyperlink{structbg__ctx_pdp__t}{bg\+\_\+ctx\+Pdp\+\_\+t}} context\+PDP)
+\begin{DoxyCompactList}\small\item\em Configura los parametros de contexto PDP que se quiere activar. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{_b_g77_8h_af98be1c204049055208486fb2b91c87b}{bg\+\_\+err\+\_\+t}} \mbox{\hyperlink{_b_g77_8h_ae8e29b80c35bbfef04dde3dea52f459e}{bg\+\_\+pdp\+\_\+activation}} (uint8\+\_\+t ctxt\+ID, \mbox{\hyperlink{_b_g77_8h_a4ad1b226966cfdfeedb106c0a8cf2250}{bg\+\_\+act\+Pdp\+\_\+t}} act)
+\begin{DoxyCompactList}\small\item\em Activa o desactiva el contexto PDP previamente configurado. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{_b_g77_8h_af98be1c204049055208486fb2b91c87b}{bg\+\_\+err\+\_\+t}} \mbox{\hyperlink{_b_g77_8h_a6fcaeffa8a8411da9bd284564e9cbd83}{bg\+\_\+open\+\_\+sckt}} (\mbox{\hyperlink{structbg_sckt__t}{bg\+Sckt\+\_\+t}} sckt)
+\begin{DoxyCompactList}\small\item\em Abre una conexion (socket) TCP en modo servidor o cliente. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{_b_g77_8h_af98be1c204049055208486fb2b91c87b}{bg\+\_\+err\+\_\+t}} \mbox{\hyperlink{_b_g77_8h_a5ed9330e905321630088fe6a84c5a5de}{bg\+\_\+transparent\+\_\+mode}} (uint8\+\_\+t connect\+ID)
+\begin{DoxyCompactList}\small\item\em Permite al dispositio cambiar su modo de acceso a modo transparente. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{_b_g77_8h_af98be1c204049055208486fb2b91c87b}{bg\+\_\+err\+\_\+t}} \mbox{\hyperlink{_b_g77_8h_a453a9ac99a62c6fafe71b5179086ee97}{bg\+\_\+exit\+\_\+transparent\+\_\+mode}} (void)
+\begin{DoxyCompactList}\small\item\em Hace que el dispositivo salga de modo transparente. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{_b_g77_8h_af98be1c204049055208486fb2b91c87b}{bg\+\_\+err\+\_\+t}} \mbox{\hyperlink{_b_g77_8h_a803afbdc8df8c4db1b6f0267816954c8}{bg\+\_\+close\+\_\+sckt}} (uint8\+\_\+t connect\+ID)
+\begin{DoxyCompactList}\small\item\em Cierra una conexion o socket. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{_b_g77_8h_af98be1c204049055208486fb2b91c87b}{bg\+\_\+err\+\_\+t}} \mbox{\hyperlink{_b_g77_8h_a04ad0c65991cef2200cc99a9910a6ef7}{bg\+\_\+detach}} (void)
+\begin{DoxyCompactList}\small\item\em Sirve para desregistrar el modulo de la red (detach). \end{DoxyCompactList}\item 
+\mbox{\hyperlink{_b_g77_8h_af98be1c204049055208486fb2b91c87b}{bg\+\_\+err\+\_\+t}} \mbox{\hyperlink{_b_g77_8h_a4324d29bee02aaf36d6d7dc3d54fa1b7}{bg\+\_\+transmit\+\_\+buff\+AMode}} (uint8\+\_\+t connect\+ID, uint8\+\_\+t \texorpdfstring{$\ast$}{*}data, uint16\+\_\+t len)
+\begin{DoxyCompactList}\small\item\em Funcion para transmitir mensajes por un socket que esta en modo buffer access mode. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{_b_g77_8h_af98be1c204049055208486fb2b91c87b}{bg\+\_\+err\+\_\+t}} \mbox{\hyperlink{_b_g77_8h_a22e89067926540a7db799cf50725070b}{bg\+\_\+receive\+\_\+buff\+AMode}} (uint8\+\_\+t connect\+ID, uint8\+\_\+t \texorpdfstring{$\ast$}{*}buff, uint16\+\_\+t \texorpdfstring{$\ast$}{*}len)
+\begin{DoxyCompactList}\small\item\em Funcion que se encarga de recuperar los datos recibidos por una conexion en buffer access mode. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{_b_g77_8h_af98be1c204049055208486fb2b91c87b}{bg\+\_\+err\+\_\+t}} \mbox{\hyperlink{_b_g77_8h_a2eb4e7ff0044a4ccb914381d9ae25265}{bg\+\_\+transmit\+\_\+\+TM}} (uint8\+\_\+t \texorpdfstring{$\ast$}{*}data, uint16\+\_\+t len)
+\begin{DoxyCompactList}\small\item\em Transmite datos en modo transparente. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{_b_g77_8h_ae3aa6c8894b5afd4e7d9cc43750cdb31}{bg\+\_\+callback\+\_\+urc\+Detected}} (urc\+Raw\+Data\+\_\+t urc\+Data)
+\begin{DoxyCompactList}\small\item\em Esta funcion corresponde a un callback para el usuario. Esta funcion se llamara cuando se detecte un URC. La libreria tiene su callback por defecto y lo que hace es encolar el URC recibido en una cola interna de la libreria. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{_b_g77_8h_a182c6ca209fecf25da97f51f1eaf5550}{bg\+\_\+urc\+\_\+parsed\+\_\+callback}} (\mbox{\hyperlink{structurc_info_data__t}{urc\+Info\+Data\+\_\+t}} info\+Urc)
+\begin{DoxyCompactList}\small\item\em Esta funcion es un callback en donde se le va a entregar al usuario la informacion util de un URC detectado y parseado. La funcion por defecto de la libreria, se dedica a realizar el tratamiento o manejo correspondiente al URC que se presenta. Ejemplo\+: Si se presenta un URC de cierre de socket procede a cerrar dicho socket. Si se presenta un URC de mensaje RECV procede a recuperarlo y entregarlo en un callback (mensaje, tamaño en bytes, conexion). \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{_b_g77_8h_a03693666091cc43048c11c148b9afd23}{bg\+\_\+recv\+\_\+callback}} (uint8\+\_\+t \texorpdfstring{$\ast$}{*}buff, uint16\+\_\+t len, uint8\+\_\+t connect\+ID)
+\begin{DoxyCompactList}\small\item\em Esta funcion es un callback que notifica al usuario que se recibio un mensaje de alguna conexion en modo buffer access mode. Este callback se llama en \doxylink{_b_g77_8h_a182c6ca209fecf25da97f51f1eaf5550}{bg\+\_\+urc\+\_\+parsed\+\_\+callback(urc\+Info\+Data\+\_\+t info\+Urc)} al detectar y parsear un URC RECV y entrega al usuario el mensaje, tamaño en bytes y el numero de conexion que recibio dicho mensaje. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{_b_g77_8h_ae4503c4dc1caa40b7075342e7317e2f8}{bg\+\_\+incomming\+\_\+callback}} (uint8\+\_\+t server\+ID, uint8\+\_\+t connect\+ID)
+\begin{DoxyCompactList}\small\item\em Esta funcion corresponde a un callback que notifica al usuario la ocurrencia de una conexion entrante a algun servidor del modulo. Esta se llama en \doxylink{_b_g77_8h_a182c6ca209fecf25da97f51f1eaf5550}{bg\+\_\+urc\+\_\+parsed\+\_\+callback(urc\+Info\+Data\+\_\+t info\+Urc)} al detectar y parsear un URC INCOMMING y entrega al usuario el server\+ID y el connect\+ID de la conexion entrante. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{_b_g77_8h_a9984ef8adb9430c0bb3410b6bf7120c5}{bg\+\_\+callback\+\_\+receive\+\_\+\+TM}} (uint8\+\_\+t \texorpdfstring{$\ast$}{*}buff, uint16\+\_\+t n\+Bytes)
+\begin{DoxyCompactList}\small\item\em Esta funcion es un callback que notifica al usuario de un mensaje que se recibe en modo transparente. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{_b_g77_8h_a35a7b46f396882941b3aa7f00c1b19f4}{bg\+\_\+callback\+\_\+closed\+\_\+\+TM}} (void)
+\begin{DoxyCompactList}\small\item\em Esta funcion es un callback que notifica al usuario que la conexion en modo transparente se cerro. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{_b_g77_8h_a3776fe3967e34bff08a7c7d3c32cf2e7}{bg\+\_\+pdp\+\_\+activation\+\_\+callback}} (uint8\+\_\+t context\+ID)
+\begin{DoxyCompactList}\small\item\em Este callback notifica al usuario que hubo una reactivacion de contexto PDP debido al URC "{}pdp deact"{} LA funcion por defecto imprime un mensaje del contexto que se reactivo. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{_b_g77_8h_a96631fa2e9306134c3f2d13692d6c382}{bg\+\_\+callback\+\_\+\+TM\+\_\+\+Inactive}} (uint8\+\_\+t connect\+ID, \mbox{\hyperlink{_b_g77_8h_a2eda4d5bf02084b0c05dbc21810a5e82}{bg\+\_\+no\+Carrier\+TM\+\_\+t}} status\+No\+Carrier)
+\begin{DoxyCompactList}\small\item\em Esta funcion de callback notifica al usuario que no hay más URC por atender y se esta fuera de modo transparente. Esta funcion se llama en bg\+\_\+handle(void) y su proposito es recordar al usuario de que tiene posibilidad de entrar en modo transparente. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{_b_g77_8h_accb6d774575fa4349a922b7194d36b95}{bg\+\_\+queue\+\_\+put}} (urc\+Raw\+Data\+\_\+t urc)
+\begin{DoxyCompactList}\small\item\em Esta funcion hacer uso de la cola interna de URC de la libreria y encola mensajes del tipo urc\+Raw\+Data\+\_\+t. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{_b_g77_8h_a417fbe13aaac91032b2cf5fe5fbabba3}{bg\+\_\+queue\+\_\+pop}} (urc\+Raw\+Data\+\_\+t \texorpdfstring{$\ast$}{*}urc)
+\begin{DoxyCompactList}\small\item\em Esta funcion hacer uso de la cola interna de URC de la libreria y desencola mensajes del tipo urc\+Raw\+Data\+\_\+t. \end{DoxyCompactList}\item 
+uint8\+\_\+t \mbox{\hyperlink{_b_g77_8h_a00a186528d54e0162b4ec31902db106b}{bg\+\_\+queue\+\_\+is\+\_\+empty}} (void)
+\begin{DoxyCompactList}\small\item\em Indica si la cola interna esta vacia. \end{DoxyCompactList}\item 
+uint8\+\_\+t \mbox{\hyperlink{_b_g77_8h_a61963d30f7d309a7ae1cf8eeed599605}{bg\+\_\+queue\+\_\+is\+\_\+full}} (void)
+\begin{DoxyCompactList}\small\item\em Indica si la cola interna esta llena. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Descripción detallada}
+Esta es una libreria base para implementar funcionalidades basicas del modulo BG77 (consulta de estados, apertura de conexiones, transmision y recepcion de datos). 
+
+\begin{DoxyAuthor}{Autor}
+EM2 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Versión}
+1.\+0 
+\end{DoxyVersion}
+\begin{DoxyDate}{Fecha}
+2025-\/02-\/06 
+\end{DoxyDate}
+
+
+\doxysubsection{Documentación de «define»}
+\Hypertarget{_b_g77_8h_a29b43f40cd1353df5eb853cb40aca7f9}\index{BG77.h@{BG77.h}!CHECK\_BG\_ERR@{CHECK\_BG\_ERR}}
+\index{CHECK\_BG\_ERR@{CHECK\_BG\_ERR}!BG77.h@{BG77.h}}
+\doxysubsubsection{\texorpdfstring{CHECK\_BG\_ERR}{CHECK\_BG\_ERR}}
+{\footnotesize\ttfamily \label{_b_g77_8h_a29b43f40cd1353df5eb853cb40aca7f9} 
+\#define CHECK\+\_\+\+BG\+\_\+\+ERR(\begin{DoxyParamCaption}\item[{}]{err}{}\end{DoxyParamCaption})}
+
+{\bfseries Valor\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keywordflow}{do}\{\ \textcolor{keywordflow}{if}(err\ !=\ BG\_OK)\ \textcolor{keywordflow}{return}\ err;\ \}\ \textcolor{keywordflow}{while}(0)}
+
+\end{DoxyCode}
+
+
+Esta macro es una funcion inline que evalua que no se presento algun error del tipo bg\+\_\+err\+\_\+t. Su proposito es mantener la legibilidad del codigo. 
+
+\begin{DoxyNote}{Nota}
+Se debe de alimentar con una variable del tipo bg\+\_\+err\+\_\+t que almacene el resultado de una funcion que devuelva un codigo de error bg\+\_\+err\+\_\+t 
+\end{DoxyNote}
+\Hypertarget{_b_g77_8h_a65789cf68a6f03ed3ede1aa82784c39b}\index{BG77.h@{BG77.h}!CHECK\_DESIRED\_ANSW@{CHECK\_DESIRED\_ANSW}}
+\index{CHECK\_DESIRED\_ANSW@{CHECK\_DESIRED\_ANSW}!BG77.h@{BG77.h}}
+\doxysubsubsection{\texorpdfstring{CHECK\_DESIRED\_ANSW}{CHECK\_DESIRED\_ANSW}}
+{\footnotesize\ttfamily \label{_b_g77_8h_a65789cf68a6f03ed3ede1aa82784c39b} 
+\#define CHECK\+\_\+\+DESIRED\+\_\+\+ANSW(\begin{DoxyParamCaption}\item[{}]{src\+Buff}{, }\item[{}]{desired\+Answ}{, }\item[{}]{\+\_\+timeout}{}\end{DoxyParamCaption})}
+
+{\bfseries Valor\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keywordflow}{do}\{\(\backslash\)}
+\DoxyCodeLine{\ \ \ \ bg\_start\_timeout();\(\backslash\)}
+\DoxyCodeLine{\ \ \ \ while(!strstr(srcBuff,\ desiredAnsw)\ \&\&\ count\_sec\_bg\ <\ \_timeout)\(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \_\_asm\_\_(\textcolor{stringliteral}{"{}nop"{}});\(\backslash\)}
+\DoxyCodeLine{\ \ \ \ if(\_timeout\ <=\ bg\_stop\_timeout())\(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \{\(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ LOG\_BG(LE,\textcolor{stringliteral}{"{}[BG\_ERR]\ TIMEOUT\ RESPUESTA\ DESEADA\(\backslash\)n"{}});\(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ BG\_ERR\_TIMEOUT\_ANS\_DESIRED;\(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \}\(\backslash\)}
+\DoxyCodeLine{\}\textcolor{keywordflow}{while}(0)}
+
+\end{DoxyCode}
+
+
+Verifica que una cadena deseada se encuentre dentro de un array o buffer durante un tiempo especificado. 
+
+
+\begin{DoxyParams}{Parámetros}
+{\em src\+Buff} & Es el buffer o array en donde se va a buscar la cadena deseada. \\
+\hline
+{\em desired\+Answ} & Es la cadena deseada que se quiere buscar dentro del array. \\
+\hline
+{\em \+\_\+timeot} & Es el tiempo de espera en el que tratara de encontrar la cadena deseada. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{_b_g77_8h_ae249007a2f2f4a602e52a621236bde51}\index{BG77.h@{BG77.h}!CHECK\_EXIT\_TM\_ANSW@{CHECK\_EXIT\_TM\_ANSW}}
+\index{CHECK\_EXIT\_TM\_ANSW@{CHECK\_EXIT\_TM\_ANSW}!BG77.h@{BG77.h}}
+\doxysubsubsection{\texorpdfstring{CHECK\_EXIT\_TM\_ANSW}{CHECK\_EXIT\_TM\_ANSW}}
+{\footnotesize\ttfamily \label{_b_g77_8h_ae249007a2f2f4a602e52a621236bde51} 
+\#define CHECK\+\_\+\+EXIT\+\_\+\+TM\+\_\+\+ANSW(\begin{DoxyParamCaption}\item[{}]{src\+Buff}{, }\item[{}]{\+\_\+timeout}{}\end{DoxyParamCaption})}
+
+{\bfseries Valor\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keywordflow}{do}\{\(\backslash\)}
+\DoxyCodeLine{\ \ \ \ bg\_start\_timeout();\(\backslash\)}
+\DoxyCodeLine{\ \ \ \ while(!strstr(srcBuff,\ \textcolor{stringliteral}{"{}OK"{}})\ \&\&\ !strstr(srcBuff,\ \textcolor{stringliteral}{"{}QIURC"{}})\ \&\&\ count\_sec\_bg\ <\ \_timeout)\(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \_\_asm\_\_(\textcolor{stringliteral}{"{}nop"{}});\(\backslash\)}
+\DoxyCodeLine{\ \ \ \ if(\_timeout\ <=\ bg\_stop\_timeout())\(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \{\(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ LOG\_BG(LE,\textcolor{stringliteral}{"{}[BG\_ERR]\ TIMEOUT\ RESPUESTA\ DESEADA\(\backslash\)n"{}});\(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ BG\_ERR\_TIMEOUT\_ANS\_DESIRED;\(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \}\(\backslash\)}
+\DoxyCodeLine{\}\textcolor{keywordflow}{while}(0)}
+
+\end{DoxyCode}
+
+
+Verifica que la salida de modo transparente sea exitosa. 
+
+
+\begin{DoxyParams}{Parámetros}
+{\em src\+Buff} & Es el buffer o array en donde esta la respuesta a la salida de modo transparente. \\
+\hline
+{\em \+\_\+timeot} & Es el tiempo de espera en el que tratara de verificar la salida de modo transparente. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{_b_g77_8h_a25de0a3a2ef034775a4ed2739c9d6af7}\index{BG77.h@{BG77.h}!CHECK\_POWDWN\_ANSW@{CHECK\_POWDWN\_ANSW}}
+\index{CHECK\_POWDWN\_ANSW@{CHECK\_POWDWN\_ANSW}!BG77.h@{BG77.h}}
+\doxysubsubsection{\texorpdfstring{CHECK\_POWDWN\_ANSW}{CHECK\_POWDWN\_ANSW}}
+{\footnotesize\ttfamily \label{_b_g77_8h_a25de0a3a2ef034775a4ed2739c9d6af7} 
+\#define CHECK\+\_\+\+POWDWN\+\_\+\+ANSW(\begin{DoxyParamCaption}\item[{}]{src\+Buff}{, }\item[{}]{\+\_\+timeout}{}\end{DoxyParamCaption})}
+
+{\bfseries Valor\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keywordflow}{do}\{\(\backslash\)}
+\DoxyCodeLine{\ \ \ \ bg\_start\_timeout();\(\backslash\)}
+\DoxyCodeLine{\ \ \ \ while(!strstr(srcBuff,\ \textcolor{stringliteral}{"{}OK"{}})\ \&\&\ !strstr(srcBuff,\ \textcolor{stringliteral}{"{}RDY"{}})\ \&\&\ count\_sec\_bg\ <\ \_timeout)\(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \_\_asm\_\_(\textcolor{stringliteral}{"{}nop"{}});\(\backslash\)}
+\DoxyCodeLine{\ \ \ \ if(\_timeout\ <=\ bg\_stop\_timeout())\(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \{\(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ LOG\_BG(LE,\textcolor{stringliteral}{"{}[BG\_ERR]\ TIMEOUT\ RESPUESTA\ DESEADA\(\backslash\)n"{}});\(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ BG\_ERR\_TIMEOUT\_ANS\_DESIRED;\(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \}\(\backslash\)}
+\DoxyCodeLine{\}\textcolor{keywordflow}{while}(0)}
+
+\end{DoxyCode}
+
+
+Verifica que el comando de Power down sea exitoso. 
+
+
+\begin{DoxyParams}{Parámetros}
+{\em src\+Buff} & Es el buffer o array en donde esta la respuesta al comando de power down. \\
+\hline
+{\em \+\_\+timeot} & Es el tiempo de espera en el que tratara de verificar el comando power down. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{_b_g77_8h_af8e4982d2acfaf513cef47c31cf82607}\index{BG77.h@{BG77.h}!COPY\_PARSE\_STR@{COPY\_PARSE\_STR}}
+\index{COPY\_PARSE\_STR@{COPY\_PARSE\_STR}!BG77.h@{BG77.h}}
+\doxysubsubsection{\texorpdfstring{COPY\_PARSE\_STR}{COPY\_PARSE\_STR}}
+{\footnotesize\ttfamily \label{_b_g77_8h_af8e4982d2acfaf513cef47c31cf82607} 
+\#define COPY\+\_\+\+PARSE\+\_\+\+STR(\begin{DoxyParamCaption}\item[{}]{\+\_\+dst\+Buff}{, }\item[{}]{dst\+Buff\+Size}{, }\item[{}]{src\+Buff}{, }\item[{}]{chr1}{, }\item[{}]{chr2}{}\end{DoxyParamCaption})}
+
+{\bfseries Valor\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keywordflow}{do}\ \{\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ uint8\_t\ *dstBuff\ =\ \_dstBuff;\(\backslash\)}
+\DoxyCodeLine{\ \ \ \ uint8\_t\ *\_parsePtr\ =\ strchr(srcBuff,\ chr1);\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ if(\_parsePtr\ ==\ NULL\ ||\ dstBuff\ ==\ NULL)\ \textcolor{keywordflow}{break};\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \_parsePtr++;\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ uint8\_t\ *\_endPtr\ =\ NULL;\(\backslash\)}
+\DoxyCodeLine{\ \ \ \ if(chr1\ ==\ chr2)\(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \_endPtr\ =\ strchr(\_parsePtr\ +\ 1,\ chr2);\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ else\(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \_endPtr\ =\ strchr(\_parsePtr,\ chr2);\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ if(\_endPtr\ ==\ NULL)\ \textcolor{keywordflow}{break};\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{size\_t}\ len\ =\ \_endPtr\ -\/\ \_parsePtr;\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ if(len\ >=\ dstBuffSize)\ \textcolor{keywordflow}{break};\(\backslash\)}
+\DoxyCodeLine{\ \ \ \ for(\textcolor{keywordtype}{size\_t}\ i\ =\ 0;\ i\ <\ len;\ i++)\ dstBuff[i]\ =\ \_parsePtr[i];\(\backslash\)}
+\DoxyCodeLine{\ \ \ \ dstBuff[len]\ =\ \textcolor{charliteral}{'\(\backslash\)0'};\ \textcolor{comment}{/*\ Agrega\ el\ terminador\ nulo\ */}\ \(\backslash\)}
+\DoxyCodeLine{\}\ \textcolor{keywordflow}{while}(0)}
+
+\end{DoxyCode}
+\Hypertarget{_b_g77_8h_acb098879d8671d85da27cc1ce9ce55b3}\index{BG77.h@{BG77.h}!CREATE\_BUFF@{CREATE\_BUFF}}
+\index{CREATE\_BUFF@{CREATE\_BUFF}!BG77.h@{BG77.h}}
+\doxysubsubsection{\texorpdfstring{CREATE\_BUFF}{CREATE\_BUFF}}
+{\footnotesize\ttfamily \label{_b_g77_8h_acb098879d8671d85da27cc1ce9ce55b3} 
+\#define CREATE\+\_\+\+BUFF(\begin{DoxyParamCaption}\item[{}]{x}{, }\item[{}]{name}{}\end{DoxyParamCaption})}
+
+{\bfseries Valor\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\(\backslash\)}
+\DoxyCodeLine{\{\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ uint8\_t\ buff[(x)];\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ uint16\_t\ len;\ \(\backslash\)}
+\DoxyCodeLine{\}\ name\#\#\_t;}
+
+\end{DoxyCode}
+\Hypertarget{_b_g77_8h_abced5d6549b42ce11890222cdcce5625}\index{BG77.h@{BG77.h}!LOG\_BG@{LOG\_BG}}
+\index{LOG\_BG@{LOG\_BG}!BG77.h@{BG77.h}}
+\doxysubsubsection{\texorpdfstring{LOG\_BG}{LOG\_BG}}
+{\footnotesize\ttfamily \label{_b_g77_8h_abced5d6549b42ce11890222cdcce5625} 
+\#define LOG\+\_\+\+BG(\begin{DoxyParamCaption}\item[{}]{enable}{, }\item[{}]{}...{}\end{DoxyParamCaption})}
+
+{\bfseries Valor\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keywordflow}{do}\{\(\backslash\)}
+\DoxyCodeLine{\ \ \ \ if(enable)\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ printf(\_\_VA\_ARGS\_\_);\(\backslash\)}
+\DoxyCodeLine{\}\textcolor{keywordflow}{while}(0)}
+
+\end{DoxyCode}
+
+
+MACRO para imprimir log. Este puede desactivarse en tiempo de ejecucion. 
+
+\Hypertarget{_b_g77_8h_a68ee928e8b006a04a7fcf30d8498cbbe}\index{BG77.h@{BG77.h}!LOG\_BG\_TRACE@{LOG\_BG\_TRACE}}
+\index{LOG\_BG\_TRACE@{LOG\_BG\_TRACE}!BG77.h@{BG77.h}}
+\doxysubsubsection{\texorpdfstring{LOG\_BG\_TRACE}{LOG\_BG\_TRACE}}
+{\footnotesize\ttfamily \label{_b_g77_8h_a68ee928e8b006a04a7fcf30d8498cbbe} 
+\#define LOG\+\_\+\+BG\+\_\+\+TRACE(\begin{DoxyParamCaption}\item[{}]{enable}{, }\item[{}]{}...{}\end{DoxyParamCaption})}
+
+{\bfseries Valor\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keywordflow}{do}\{\(\backslash\)}
+\DoxyCodeLine{\ \ \ \ if(enable)\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \{\(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}[\%s:\ \%d]"{}},\ \_\_FILE\_\_,\ \_\_LINE\_\_);\(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ printf(\_\_VA\_ARGS\_\_);\(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \}\(\backslash\)}
+\DoxyCodeLine{\}\textcolor{keywordflow}{while}(0)}
+
+\end{DoxyCode}
+
+
+Es un Log derivado que rastrea la ruta y la linea en donde se esta imprimiendo el mensaje. 
+
+\Hypertarget{_b_g77_8h_a3e5f4c178ebf4e1ad598506fcb722d90}\index{BG77.h@{BG77.h}!REMPLACE\_CHAR@{REMPLACE\_CHAR}}
+\index{REMPLACE\_CHAR@{REMPLACE\_CHAR}!BG77.h@{BG77.h}}
+\doxysubsubsection{\texorpdfstring{REMPLACE\_CHAR}{REMPLACE\_CHAR}}
+{\footnotesize\ttfamily \label{_b_g77_8h_a3e5f4c178ebf4e1ad598506fcb722d90} 
+\#define REMPLACE\+\_\+\+CHAR(\begin{DoxyParamCaption}\item[{}]{remp\+Src\+Buff}{, }\item[{}]{chr\+Remplaced}{, }\item[{}]{chr\+Desired}{}\end{DoxyParamCaption})}
+
+{\bfseries Valor\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keywordflow}{do}\{\(\backslash\)}
+\DoxyCodeLine{\ \ \ \ uint8\_t\ *\_remplacePtr\ =\ strchr(rempSrcBuff,\ chrRemplaced);\(\backslash\)}
+\DoxyCodeLine{\ \ \ \ if(\_remplacePtr\ !=\ NULL)\(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ *\_remplacePtr\ =\ chrDesired;\(\backslash\)}
+\DoxyCodeLine{\}\textcolor{keywordflow}{while}(0)}
+
+\end{DoxyCode}
+
+
+\doxysubsection{Documentación de funciones}
+\Hypertarget{_b_g77_8h_a1c0f09b53bcd76cc17f7be1d95778898}\index{BG77.h@{BG77.h}!bg\_attach@{bg\_attach}}
+\index{bg\_attach@{bg\_attach}!BG77.h@{BG77.h}}
+\doxysubsubsection{\texorpdfstring{bg\_attach()}{bg\_attach()}}
+{\footnotesize\ttfamily \label{_b_g77_8h_a1c0f09b53bcd76cc17f7be1d95778898} 
+\mbox{\hyperlink{_b_g77_8h_af98be1c204049055208486fb2b91c87b}{bg\+\_\+err\+\_\+t}} bg\+\_\+attach (\begin{DoxyParamCaption}\item[{uint8\+\_\+t \texorpdfstring{$\ast$}{*}}]{operator}{}\end{DoxyParamCaption})}
+
+
+
+Funcion para registrar el modulo en la red (attach). 
+
+
+\begin{DoxyParams}{Parámetros}
+{\em operator} & Es la operadora del SIM. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Devuelve}
+bg\+\_\+err\+\_\+t Regresa el codigo de error basado en el tipo bg\+\_\+err\+\_\+t. Si el modulo consigue registrarse se espera BG\+\_\+\+OK\+\_\+\+ATTACH. 
+\end{DoxyReturn}
+\Hypertarget{_b_g77_8h_a35a7b46f396882941b3aa7f00c1b19f4}\index{BG77.h@{BG77.h}!bg\_callback\_closed\_TM@{bg\_callback\_closed\_TM}}
+\index{bg\_callback\_closed\_TM@{bg\_callback\_closed\_TM}!BG77.h@{BG77.h}}
+\doxysubsubsection{\texorpdfstring{bg\_callback\_closed\_TM()}{bg\_callback\_closed\_TM()}}
+{\footnotesize\ttfamily \label{_b_g77_8h_a35a7b46f396882941b3aa7f00c1b19f4} 
+void bg\+\_\+callback\+\_\+closed\+\_\+\+TM (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Esta funcion es un callback que notifica al usuario que la conexion en modo transparente se cerro. 
+
+La funcion por defecto imprime el mensaje "{}\+Conexion remota cerro, fuera de TM\textbackslash{}n"{} \Hypertarget{_b_g77_8h_aa422c5730073a35ffc37421e44a6c632}\index{BG77.h@{BG77.h}!bg\_callback\_ms@{bg\_callback\_ms}}
+\index{bg\_callback\_ms@{bg\_callback\_ms}!BG77.h@{BG77.h}}
+\doxysubsubsection{\texorpdfstring{bg\_callback\_ms()}{bg\_callback\_ms()}}
+{\footnotesize\ttfamily \label{_b_g77_8h_aa422c5730073a35ffc37421e44a6c632} 
+void bg\+\_\+callback\+\_\+ms (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Esta funcion de callback se tiene que llamar en una funcion de interrupción de temporizador en donde se genere cada 1ms. 
+
+Sirve para proveer a la libreria de un conteo de reloj y poder determinar tiempos de espera (timeouts). \Hypertarget{_b_g77_8h_a9984ef8adb9430c0bb3410b6bf7120c5}\index{BG77.h@{BG77.h}!bg\_callback\_receive\_TM@{bg\_callback\_receive\_TM}}
+\index{bg\_callback\_receive\_TM@{bg\_callback\_receive\_TM}!BG77.h@{BG77.h}}
+\doxysubsubsection{\texorpdfstring{bg\_callback\_receive\_TM()}{bg\_callback\_receive\_TM()}}
+{\footnotesize\ttfamily \label{_b_g77_8h_a9984ef8adb9430c0bb3410b6bf7120c5} 
+void bg\+\_\+callback\+\_\+receive\+\_\+\+TM (\begin{DoxyParamCaption}\item[{uint8\+\_\+t \texorpdfstring{$\ast$}{*}}]{buff}{, }\item[{uint16\+\_\+t}]{n\+Bytes}{}\end{DoxyParamCaption})}
+
+
+
+Esta funcion es un callback que notifica al usuario de un mensaje que se recibe en modo transparente. 
+
+
+\begin{DoxyParams}{Parámetros}
+{\em buff} & puntero a funcion en donde se tiene el mensaje recibido. \\
+\hline
+{\em n\+Bytes} & numero de bytes recibidos. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{_b_g77_8h_a96631fa2e9306134c3f2d13692d6c382}\index{BG77.h@{BG77.h}!bg\_callback\_TM\_Inactive@{bg\_callback\_TM\_Inactive}}
+\index{bg\_callback\_TM\_Inactive@{bg\_callback\_TM\_Inactive}!BG77.h@{BG77.h}}
+\doxysubsubsection{\texorpdfstring{bg\_callback\_TM\_Inactive()}{bg\_callback\_TM\_Inactive()}}
+{\footnotesize\ttfamily \label{_b_g77_8h_a96631fa2e9306134c3f2d13692d6c382} 
+void bg\+\_\+callback\+\_\+\+TM\+\_\+\+Inactive (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{connect\+ID}{, }\item[{\mbox{\hyperlink{_b_g77_8h_a2eda4d5bf02084b0c05dbc21810a5e82}{bg\+\_\+no\+Carrier\+TM\+\_\+t}}}]{status\+No\+Carrier}{}\end{DoxyParamCaption})}
+
+
+
+Esta funcion de callback notifica al usuario que no hay más URC por atender y se esta fuera de modo transparente. Esta funcion se llama en bg\+\_\+handle(void) y su proposito es recordar al usuario de que tiene posibilidad de entrar en modo transparente. 
+
+La funcion por defecto de la libreria verifica que la ultima conexion de modo transparente este abierta y si es asi, procede a activar el modo transparente en esa conexion.
+
+
+\begin{DoxyParams}{Parámetros}
+{\em connect\+ID} & Es el connect\+ID de la ultima conexion en modo transparente.\\
+\hline
+{\em status\+No\+Carrier} & Notifica el motivo de salida de modo transparente. Si el valor de la variable es BG\+\_\+\+TM\+\_\+\+NO\+\_\+\+CARRIER\+\_\+\+SET, quiere decir que fue por desconexion del punto remoto. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{_b_g77_8h_ae3aa6c8894b5afd4e7d9cc43750cdb31}\index{BG77.h@{BG77.h}!bg\_callback\_urcDetected@{bg\_callback\_urcDetected}}
+\index{bg\_callback\_urcDetected@{bg\_callback\_urcDetected}!BG77.h@{BG77.h}}
+\doxysubsubsection{\texorpdfstring{bg\_callback\_urcDetected()}{bg\_callback\_urcDetected()}}
+{\footnotesize\ttfamily \label{_b_g77_8h_ae3aa6c8894b5afd4e7d9cc43750cdb31} 
+void bg\+\_\+callback\+\_\+urc\+Detected (\begin{DoxyParamCaption}\item[{urc\+Raw\+Data\+\_\+t}]{urc\+Data}{}\end{DoxyParamCaption})}
+
+
+
+Esta funcion corresponde a un callback para el usuario. Esta funcion se llamara cuando se detecte un URC. La libreria tiene su callback por defecto y lo que hace es encolar el URC recibido en una cola interna de la libreria. 
+
+NOTE\+: El Usuario puede prescindir de ella y realizar su estrategia de manejo de URC en este punto.
+
+
+\begin{DoxyParams}{Parámetros}
+{\em urc\+Data} & Es una variable que contiene el buffer de informacion no analizada (o datos crudos) y el tipo de URC detectado. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{_b_g77_8h_a560f384f98c140a53d8fc8f5b32b5e19}\index{BG77.h@{BG77.h}!bg\_check\_attach@{bg\_check\_attach}}
+\index{bg\_check\_attach@{bg\_check\_attach}!BG77.h@{BG77.h}}
+\doxysubsubsection{\texorpdfstring{bg\_check\_attach()}{bg\_check\_attach()}}
+{\footnotesize\ttfamily \label{_b_g77_8h_a560f384f98c140a53d8fc8f5b32b5e19} 
+\mbox{\hyperlink{_b_g77_8h_af98be1c204049055208486fb2b91c87b}{bg\+\_\+err\+\_\+t}} bg\+\_\+check\+\_\+attach (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Funcion para verificar el registro en red. 
+
+\begin{DoxyReturn}{Devuelve}
+bg\+\_\+err\+\_\+t Regresa el codigo de error basado en el tipo bg\+\_\+err\+\_\+t. Si el modulo esta registrado se espera BG\+\_\+\+OK\+\_\+\+ATTACH 
+\end{DoxyReturn}
+\Hypertarget{_b_g77_8h_ae28f36ea82838abfdca0118d7af70da7}\index{BG77.h@{BG77.h}!bg\_check\_pdp@{bg\_check\_pdp}}
+\index{bg\_check\_pdp@{bg\_check\_pdp}!BG77.h@{BG77.h}}
+\doxysubsubsection{\texorpdfstring{bg\_check\_pdp()}{bg\_check\_pdp()}}
+{\footnotesize\ttfamily \label{_b_g77_8h_ae28f36ea82838abfdca0118d7af70da7} 
+\mbox{\hyperlink{_b_g77_8h_af98be1c204049055208486fb2b91c87b}{bg\+\_\+err\+\_\+t}} bg\+\_\+check\+\_\+pdp (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{ctxt\+ID}{}\end{DoxyParamCaption})}
+
+
+
+Verifica que se tenga activado el contexto PDP seleccionado (context\+ID) 
+
+
+\begin{DoxyParams}{Parámetros}
+{\em ctxt\+ID} & Es el numero de contexto que se quiere verificar (rango 1-\/7).\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Devuelve}
+bg\+\_\+err\+\_\+t Regresa el codigo de error basado en el tipo bg\+\_\+err\+\_\+t. Si el contexto PDP del context\+ID esta activado retorna BG\+\_\+\+OK\+\_\+\+PDP\+\_\+\+ACT 
+\end{DoxyReturn}
+\Hypertarget{_b_g77_8h_ac4a2455d92827db1c3cf0ba553a05bb8}\index{BG77.h@{BG77.h}!bg\_check\_sckt@{bg\_check\_sckt}}
+\index{bg\_check\_sckt@{bg\_check\_sckt}!BG77.h@{BG77.h}}
+\doxysubsubsection{\texorpdfstring{bg\_check\_sckt()}{bg\_check\_sckt()}}
+{\footnotesize\ttfamily \label{_b_g77_8h_ac4a2455d92827db1c3cf0ba553a05bb8} 
+\mbox{\hyperlink{_b_g77_8h_af98be1c204049055208486fb2b91c87b}{bg\+\_\+err\+\_\+t}} bg\+\_\+check\+\_\+sckt (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{connect\+ID}{}\end{DoxyParamCaption})}
+
+
+
+Verifica el estado de una conexion. 
+
+
+\begin{DoxyParams}{Parámetros}
+{\em connect\+ID} & el numero de conexion (rango 0-\/11) \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Devuelve}
+bg\+\_\+err\+\_\+t Regresa el codigo de error basado en el tipo bg\+\_\+err\+\_\+t. Si la conexion esta abierta devuelve BG\+\_\+\+OK\+\_\+\+CONNECT\+\_\+\+ID\+\_\+\+OPENNED. 
+\end{DoxyReturn}
+\Hypertarget{_b_g77_8h_a6fdf52da4e8bf69a4e9130163ae5e7be}\index{BG77.h@{BG77.h}!bg\_check\_sim@{bg\_check\_sim}}
+\index{bg\_check\_sim@{bg\_check\_sim}!BG77.h@{BG77.h}}
+\doxysubsubsection{\texorpdfstring{bg\_check\_sim()}{bg\_check\_sim()}}
+{\footnotesize\ttfamily \label{_b_g77_8h_a6fdf52da4e8bf69a4e9130163ae5e7be} 
+\mbox{\hyperlink{_b_g77_8h_af98be1c204049055208486fb2b91c87b}{bg\+\_\+err\+\_\+t}} bg\+\_\+check\+\_\+sim (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Funcion para detectar SIM. 
+
+\begin{DoxyReturn}{Devuelve}
+bg\+\_\+err\+\_\+t Regresa el codigo de error basado en el tipo bg\+\_\+err\+\_\+t. Si todo esta bien se espera BG\+\_\+\+OK\+\_\+\+SIM 
+\end{DoxyReturn}
+\Hypertarget{_b_g77_8h_a803afbdc8df8c4db1b6f0267816954c8}\index{BG77.h@{BG77.h}!bg\_close\_sckt@{bg\_close\_sckt}}
+\index{bg\_close\_sckt@{bg\_close\_sckt}!BG77.h@{BG77.h}}
+\doxysubsubsection{\texorpdfstring{bg\_close\_sckt()}{bg\_close\_sckt()}}
+{\footnotesize\ttfamily \label{_b_g77_8h_a803afbdc8df8c4db1b6f0267816954c8} 
+\mbox{\hyperlink{_b_g77_8h_af98be1c204049055208486fb2b91c87b}{bg\+\_\+err\+\_\+t}} bg\+\_\+close\+\_\+sckt (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{connect\+ID}{}\end{DoxyParamCaption})}
+
+
+
+Cierra una conexion o socket. 
+
+
+\begin{DoxyParams}{Parámetros}
+{\em connect\+ID} & Es el numero de conexion que se quiere cerrar. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Devuelve}
+bg\+\_\+err\+\_\+t bg\+\_\+err\+\_\+t Regresa el codigo de error basado en el tipo bg\+\_\+err\+\_\+t. Si se consigue cerrar la conexion retorna BG\+\_\+\+OK\+\_\+\+CONNECT\+\_\+\+ID\+\_\+\+CLOSED. 
+\end{DoxyReturn}
+\Hypertarget{_b_g77_8h_ab3e3ace987b490e788e45c77d2762cc3}\index{BG77.h@{BG77.h}!bg\_conf\_pdp@{bg\_conf\_pdp}}
+\index{bg\_conf\_pdp@{bg\_conf\_pdp}!BG77.h@{BG77.h}}
+\doxysubsubsection{\texorpdfstring{bg\_conf\_pdp()}{bg\_conf\_pdp()}}
+{\footnotesize\ttfamily \label{_b_g77_8h_ab3e3ace987b490e788e45c77d2762cc3} 
+\mbox{\hyperlink{_b_g77_8h_af98be1c204049055208486fb2b91c87b}{bg\+\_\+err\+\_\+t}} bg\+\_\+conf\+\_\+pdp (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structbg__ctx_pdp__t}{bg\+\_\+ctx\+Pdp\+\_\+t}}}]{context\+PDP}{}\end{DoxyParamCaption})}
+
+
+
+Configura los parametros de contexto PDP que se quiere activar. 
+
+
+\begin{DoxyParams}{Parámetros}
+{\em context\+PDP} & Es una estructura de datos que contiene los parametros de configuracion del contexto PDP. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Devuelve}
+bg\+\_\+err\+\_\+t Regresa el codigo de error basado en el tipo bg\+\_\+err\+\_\+t. Si se configuro correctamente el contexto devolvera BG\+\_\+\+OK\+\_\+\+CONF\+\_\+\+PDP. 
+\end{DoxyReturn}
+\Hypertarget{_b_g77_8h_a5b05e846b42156e0bd04539d036e77e5}\index{BG77.h@{BG77.h}!bg\_data\_module@{bg\_data\_module}}
+\index{bg\_data\_module@{bg\_data\_module}!BG77.h@{BG77.h}}
+\doxysubsubsection{\texorpdfstring{bg\_data\_module()}{bg\_data\_module()}}
+{\footnotesize\ttfamily \label{_b_g77_8h_a5b05e846b42156e0bd04539d036e77e5} 
+\mbox{\hyperlink{_b_g77_8h_af98be1c204049055208486fb2b91c87b}{bg\+\_\+err\+\_\+t}} bg\+\_\+data\+\_\+module (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Funcion para imprimir la version de FW del modulo, ICCI e IMEI. 
+
+\begin{DoxyReturn}{Devuelve}
+bg\+\_\+err\+\_\+t Regresa el codigo de error basado en el tipo bg\+\_\+err\+\_\+t. Si todo esta bien se espera BG\+\_\+\+OK 
+\end{DoxyReturn}
+\Hypertarget{_b_g77_8h_a04ad0c65991cef2200cc99a9910a6ef7}\index{BG77.h@{BG77.h}!bg\_detach@{bg\_detach}}
+\index{bg\_detach@{bg\_detach}!BG77.h@{BG77.h}}
+\doxysubsubsection{\texorpdfstring{bg\_detach()}{bg\_detach()}}
+{\footnotesize\ttfamily \label{_b_g77_8h_a04ad0c65991cef2200cc99a9910a6ef7} 
+\mbox{\hyperlink{_b_g77_8h_af98be1c204049055208486fb2b91c87b}{bg\+\_\+err\+\_\+t}} bg\+\_\+detach (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Sirve para desregistrar el modulo de la red (detach). 
+
+\begin{DoxyReturn}{Devuelve}
+bg\+\_\+err\+\_\+t Regresa el codigo de error basado en el tipo bg\+\_\+err\+\_\+t. Si se consigue desregistrar al modulo de la red devuelve BG\+\_\+\+OK\+\_\+\+DETACH. 
+\end{DoxyReturn}
+\Hypertarget{_b_g77_8h_a453a9ac99a62c6fafe71b5179086ee97}\index{BG77.h@{BG77.h}!bg\_exit\_transparent\_mode@{bg\_exit\_transparent\_mode}}
+\index{bg\_exit\_transparent\_mode@{bg\_exit\_transparent\_mode}!BG77.h@{BG77.h}}
+\doxysubsubsection{\texorpdfstring{bg\_exit\_transparent\_mode()}{bg\_exit\_transparent\_mode()}}
+{\footnotesize\ttfamily \label{_b_g77_8h_a453a9ac99a62c6fafe71b5179086ee97} 
+\mbox{\hyperlink{_b_g77_8h_af98be1c204049055208486fb2b91c87b}{bg\+\_\+err\+\_\+t}} bg\+\_\+exit\+\_\+transparent\+\_\+mode (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Hace que el dispositivo salga de modo transparente. 
+
+\begin{DoxyReturn}{Devuelve}
+bg\+\_\+err\+\_\+t Regresa el codigo de error basado en el tipo bg\+\_\+err\+\_\+t. Si el modulo consigue salir de modo transpoarente retornara BG\+\_\+\+OK\+\_\+\+EXIT\+\_\+\+TRANSPARENT\+\_\+\+MODE. 
+\end{DoxyReturn}
+\Hypertarget{_b_g77_8h_a3f03c39804aa65f885946b3f30d6b4fc}\index{BG77.h@{BG77.h}!bg\_handle\_urc@{bg\_handle\_urc}}
+\index{bg\_handle\_urc@{bg\_handle\_urc}!BG77.h@{BG77.h}}
+\doxysubsubsection{\texorpdfstring{bg\_handle\_urc()}{bg\_handle\_urc()}}
+{\footnotesize\ttfamily \label{_b_g77_8h_a3f03c39804aa65f885946b3f30d6b4fc} 
+void bg\+\_\+handle\+\_\+urc (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Esta funcion se encarga de manejar los URC encolados. ~\newline
+ Si hay un URC encolado, se procede a parsearlo y a llamar a un callback para entregar informacion parseada al usuario. Por defecto llama a la \doxylink{_b_g77_8h_a182c6ca209fecf25da97f51f1eaf5550}{bg\+\_\+urc\+\_\+parsed\+\_\+callback(urc\+Info\+Data\+\_\+t info\+Urc)} para indicar el resultado de URC;. 
+
+NOTE\+: El usuario puede presendir de esta funcion y hacer su propia estrategia de parseo de URC. Sin embargo, si se quiere utilizar esta funcion, esta se debe de colocar en un ciclo de poleo en el codigo principal de la aplicacion, asi como, usar las funciones \doxylink{_b_g77_8h_ae3aa6c8894b5afd4e7d9cc43750cdb31}{bg\+\_\+callback\+\_\+urc\+Detected(urc\+Raw\+Data\+\_\+t urc\+Data)} y \doxylink{_b_g77_8h_a182c6ca209fecf25da97f51f1eaf5550}{bg\+\_\+urc\+\_\+parsed\+\_\+callback(urc\+Info\+Data\+\_\+t info\+Urc)} que tiene por defecto la libreria (o en su defecto el usuario debera hacer la suyas propias tomando como base estas funciones). \Hypertarget{_b_g77_8h_ae4503c4dc1caa40b7075342e7317e2f8}\index{BG77.h@{BG77.h}!bg\_incomming\_callback@{bg\_incomming\_callback}}
+\index{bg\_incomming\_callback@{bg\_incomming\_callback}!BG77.h@{BG77.h}}
+\doxysubsubsection{\texorpdfstring{bg\_incomming\_callback()}{bg\_incomming\_callback()}}
+{\footnotesize\ttfamily \label{_b_g77_8h_ae4503c4dc1caa40b7075342e7317e2f8} 
+void bg\+\_\+incomming\+\_\+callback (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{server\+ID}{, }\item[{uint8\+\_\+t}]{connect\+ID}{}\end{DoxyParamCaption})}
+
+
+
+Esta funcion corresponde a un callback que notifica al usuario la ocurrencia de una conexion entrante a algun servidor del modulo. Esta se llama en \doxylink{_b_g77_8h_a182c6ca209fecf25da97f51f1eaf5550}{bg\+\_\+urc\+\_\+parsed\+\_\+callback(urc\+Info\+Data\+\_\+t info\+Urc)} al detectar y parsear un URC INCOMMING y entrega al usuario el server\+ID y el connect\+ID de la conexion entrante. 
+
+En la libreria la funcion por defecto solo imprime el server\+ID y el connect\+ID de la conexion entrante.
+
+
+\begin{DoxyParams}{Parámetros}
+{\em server\+ID} & \\
+\hline
+{\em connect\+ID} & \\
+\hline
+\end{DoxyParams}
+\Hypertarget{_b_g77_8h_ad9920b9e69487d843b87ace0fb65535f}\index{BG77.h@{BG77.h}!bg\_init\_module@{bg\_init\_module}}
+\index{bg\_init\_module@{bg\_init\_module}!BG77.h@{BG77.h}}
+\doxysubsubsection{\texorpdfstring{bg\_init\_module()}{bg\_init\_module()}}
+{\footnotesize\ttfamily \label{_b_g77_8h_ad9920b9e69487d843b87ace0fb65535f} 
+\mbox{\hyperlink{_b_g77_8h_af98be1c204049055208486fb2b91c87b}{bg\+\_\+err\+\_\+t}} bg\+\_\+init\+\_\+module (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Funcion para inicializar el modulo. Sus funciones son encender y configurar el modulo. 
+
+\begin{DoxyReturn}{Devuelve}
+bg\+\_\+err\+\_\+t Regresa el codigo de error basado en el tipo bg\+\_\+err\+\_\+t. Si todo esta bien se espera BG\+\_\+\+OK 
+\end{DoxyReturn}
+\Hypertarget{_b_g77_8h_a796fbdf47278af0a696da945fa907110}\index{BG77.h@{BG77.h}!bg\_mainRICallback@{bg\_mainRICallback}}
+\index{bg\_mainRICallback@{bg\_mainRICallback}!BG77.h@{BG77.h}}
+\doxysubsubsection{\texorpdfstring{bg\_mainRICallback()}{bg\_mainRICallback()}}
+{\footnotesize\ttfamily \label{_b_g77_8h_a796fbdf47278af0a696da945fa907110} 
+void bg\+\_\+main\+RICallback (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{_b_g77_8h_ab0ebc1ea018349b5e09729ddad2f443e}{main\+Ri\+Edge\+\_\+t}}}]{edge}{}\end{DoxyParamCaption})}
+
+
+
+Esta funcion de callback se debe llamar en una funcion de interrupcion de pin digital que corresponde al pin MAIN\+\_\+\+RI del modulo de comunicaciones en la cual se debe especificar el flanco generado. 
+
+Sirve para proveer a la libreria la deteccion del cambio de estado en la entrada del pin MAIN\+\_\+\+RI.
+
+
+\begin{DoxyParams}{Parámetros}
+{\em edge} & Es el flanco que se genero en la interrupcion digital (se debe pasar MAIN\+\_\+\+RI\+\_\+\+EDGE\+\_\+\+FALLIN si se genero un flanco de bajada o MAIN\+\_\+\+RI\+\_\+\+EDGE\+\_\+\+RISING si se genero flanco de subida). \\
+\hline
+\end{DoxyParams}
+\Hypertarget{_b_g77_8h_a6fcaeffa8a8411da9bd284564e9cbd83}\index{BG77.h@{BG77.h}!bg\_open\_sckt@{bg\_open\_sckt}}
+\index{bg\_open\_sckt@{bg\_open\_sckt}!BG77.h@{BG77.h}}
+\doxysubsubsection{\texorpdfstring{bg\_open\_sckt()}{bg\_open\_sckt()}}
+{\footnotesize\ttfamily \label{_b_g77_8h_a6fcaeffa8a8411da9bd284564e9cbd83} 
+\mbox{\hyperlink{_b_g77_8h_af98be1c204049055208486fb2b91c87b}{bg\+\_\+err\+\_\+t}} bg\+\_\+open\+\_\+sckt (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structbg_sckt__t}{bg\+Sckt\+\_\+t}}}]{sckt}{}\end{DoxyParamCaption})}
+
+
+
+Abre una conexion (socket) TCP en modo servidor o cliente. 
+
+
+\begin{DoxyParams}{Parámetros}
+{\em sckt} & Es una estructura de datos que contiene todos los parametros necesarios para abrir una conexion. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Devuelve}
+bg\+\_\+err\+\_\+t Regresa el codigo de error basado en el tipo bg\+\_\+err\+\_\+t. Si el modulo consigue abrir la conexion devolvera BG\+\_\+\+OK\+\_\+\+CONNECT\+\_\+\+ID\+\_\+\+OPENNED 
+\end{DoxyReturn}
+\Hypertarget{_b_g77_8h_ae8e29b80c35bbfef04dde3dea52f459e}\index{BG77.h@{BG77.h}!bg\_pdp\_activation@{bg\_pdp\_activation}}
+\index{bg\_pdp\_activation@{bg\_pdp\_activation}!BG77.h@{BG77.h}}
+\doxysubsubsection{\texorpdfstring{bg\_pdp\_activation()}{bg\_pdp\_activation()}}
+{\footnotesize\ttfamily \label{_b_g77_8h_ae8e29b80c35bbfef04dde3dea52f459e} 
+\mbox{\hyperlink{_b_g77_8h_af98be1c204049055208486fb2b91c87b}{bg\+\_\+err\+\_\+t}} bg\+\_\+pdp\+\_\+activation (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{ctxt\+ID}{, }\item[{\mbox{\hyperlink{_b_g77_8h_a4ad1b226966cfdfeedb106c0a8cf2250}{bg\+\_\+act\+Pdp\+\_\+t}}}]{act}{}\end{DoxyParamCaption})}
+
+
+
+Activa o desactiva el contexto PDP previamente configurado. 
+
+
+\begin{DoxyParams}{Parámetros}
+{\em ctxt\+ID} & Numero de contexto PDP que se quiere activar/desactivar (rango 1-\/7). \\
+\hline
+{\em act} & Opcion que selecciona si se quiere activar o desactivar el contexto PDP especificado. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Devuelve}
+bg\+\_\+err\+\_\+t Regresa el codigo de error basado en el tipo bg\+\_\+err\+\_\+t. Si se desactivo el contexto PDP correctamente devuelve BG\+\_\+\+OK\+\_\+\+PDP\+\_\+\+DEACT, si se activo el contexto PDP correctamente regresa BG\+\_\+\+OK\+\_\+\+PDP\+\_\+\+ACT. 
+\end{DoxyReturn}
+\Hypertarget{_b_g77_8h_a3776fe3967e34bff08a7c7d3c32cf2e7}\index{BG77.h@{BG77.h}!bg\_pdp\_activation\_callback@{bg\_pdp\_activation\_callback}}
+\index{bg\_pdp\_activation\_callback@{bg\_pdp\_activation\_callback}!BG77.h@{BG77.h}}
+\doxysubsubsection{\texorpdfstring{bg\_pdp\_activation\_callback()}{bg\_pdp\_activation\_callback()}}
+{\footnotesize\ttfamily \label{_b_g77_8h_a3776fe3967e34bff08a7c7d3c32cf2e7} 
+void bg\+\_\+pdp\+\_\+activation\+\_\+callback (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{context\+ID}{}\end{DoxyParamCaption})}
+
+
+
+Este callback notifica al usuario que hubo una reactivacion de contexto PDP debido al URC "{}pdp deact"{} LA funcion por defecto imprime un mensaje del contexto que se reactivo. 
+
+
+\begin{DoxyParams}{Parámetros}
+{\em context\+ID} & Es el numero de contexto que se desactivo \\
+\hline
+\end{DoxyParams}
+\Hypertarget{_b_g77_8h_ae05b151b88c27bed92a5a91c4cb9781f}\index{BG77.h@{BG77.h}!bg\_power\_off@{bg\_power\_off}}
+\index{bg\_power\_off@{bg\_power\_off}!BG77.h@{BG77.h}}
+\doxysubsubsection{\texorpdfstring{bg\_power\_off()}{bg\_power\_off()}}
+{\footnotesize\ttfamily \label{_b_g77_8h_ae05b151b88c27bed92a5a91c4cb9781f} 
+\mbox{\hyperlink{_b_g77_8h_af98be1c204049055208486fb2b91c87b}{bg\+\_\+err\+\_\+t}} bg\+\_\+power\+\_\+off (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Realiza el apagado del modulo con el comando AT+\+QPOWD. 
+
+\begin{DoxyReturn}{Devuelve}
+bg\+\_\+err\+\_\+t Regresa el codigo de error basado en el tipo bg\+\_\+err\+\_\+t. Si todo esta bien se espera BG\+\_\+\+OK 
+\end{DoxyReturn}
+\Hypertarget{_b_g77_8h_ae23a60b4e1b7f50ea3cdd0927640e0de}\index{BG77.h@{BG77.h}!bg\_power\_on@{bg\_power\_on}}
+\index{bg\_power\_on@{bg\_power\_on}!BG77.h@{BG77.h}}
+\doxysubsubsection{\texorpdfstring{bg\_power\_on()}{bg\_power\_on()}}
+{\footnotesize\ttfamily \label{_b_g77_8h_ae23a60b4e1b7f50ea3cdd0927640e0de} 
+\mbox{\hyperlink{_b_g77_8h_af98be1c204049055208486fb2b91c87b}{bg\+\_\+err\+\_\+t}} bg\+\_\+power\+\_\+on (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Esta funcion realiza la secuencia necesaria de los pines BG\+\_\+\+PWRKEY\+\_\+\+PIN, BG\+\_\+\+VBAT\+\_\+\+PIN, BG\+\_\+\+RESET\+\_\+\+PIN para encender al modulo de comunicación. 
+
+\begin{DoxyReturn}{Devuelve}
+bg\+\_\+err\+\_\+t Devuelve el codigo de error basado en el tipo bg\+\_\+err\+\_\+t. Si todo esta bien se espera BG\+\_\+\+OK 
+\end{DoxyReturn}
+\Hypertarget{_b_g77_8h_ac5b7a9c29733548542fd9372f5333273}\index{BG77.h@{BG77.h}!bg\_query\_conf\_pdp@{bg\_query\_conf\_pdp}}
+\index{bg\_query\_conf\_pdp@{bg\_query\_conf\_pdp}!BG77.h@{BG77.h}}
+\doxysubsubsection{\texorpdfstring{bg\_query\_conf\_pdp()}{bg\_query\_conf\_pdp()}}
+{\footnotesize\ttfamily \label{_b_g77_8h_ac5b7a9c29733548542fd9372f5333273} 
+\mbox{\hyperlink{_b_g77_8h_af98be1c204049055208486fb2b91c87b}{bg\+\_\+err\+\_\+t}} bg\+\_\+query\+\_\+conf\+\_\+pdp (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{context\+ID}{}\end{DoxyParamCaption})}
+
+
+
+Funcion que imprime parametros de la configuracion de contexto PDP (APN, USER, PASSWORD, AUTHENTICATION) 
+
+
+\begin{DoxyParams}{Parámetros}
+{\em context\+ID} & Es el contexto ID que se quiere consutar \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Devuelve}
+bg\+\_\+err\+\_\+t Regresa el codigo de error basado en el tipo bg\+\_\+err\+\_\+t. Si todo esta bien retorna BG\+\_\+\+OK 
+\end{DoxyReturn}
+\Hypertarget{_b_g77_8h_adfa333fa2fbd83d8d555f78174c312d4}\index{BG77.h@{BG77.h}!bg\_query\_cops@{bg\_query\_cops}}
+\index{bg\_query\_cops@{bg\_query\_cops}!BG77.h@{BG77.h}}
+\doxysubsubsection{\texorpdfstring{bg\_query\_cops()}{bg\_query\_cops()}}
+{\footnotesize\ttfamily \label{_b_g77_8h_adfa333fa2fbd83d8d555f78174c312d4} 
+\mbox{\hyperlink{_b_g77_8h_af98be1c204049055208486fb2b91c87b}{bg\+\_\+err\+\_\+t}} bg\+\_\+query\+\_\+cops (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Funcion que imprime parametros de la consulta de COPS modo, operador, tecnologia de acceso. 
+
+\begin{DoxyReturn}{Devuelve}
+bg\+\_\+err\+\_\+t Regresa el codigo de error basado en el tipo bg\+\_\+err\+\_\+t. Si se tiene un operador ya registrado regresa BG\+\_\+\+OK. 
+\end{DoxyReturn}
+\Hypertarget{_b_g77_8h_a65c9f56b02078e837debb481fff49182}\index{BG77.h@{BG77.h}!bg\_query\_signal@{bg\_query\_signal}}
+\index{bg\_query\_signal@{bg\_query\_signal}!BG77.h@{BG77.h}}
+\doxysubsubsection{\texorpdfstring{bg\_query\_signal()}{bg\_query\_signal()}}
+{\footnotesize\ttfamily \label{_b_g77_8h_a65c9f56b02078e837debb481fff49182} 
+\mbox{\hyperlink{_b_g77_8h_af98be1c204049055208486fb2b91c87b}{bg\+\_\+err\+\_\+t}} bg\+\_\+query\+\_\+signal (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Consulta la intensidad de la señal cuando el modulo ya esta registrado. 
+
+\begin{DoxyReturn}{Devuelve}
+bg\+\_\+err\+\_\+t Regresa el codigo de error basado en el tipo bg\+\_\+err\+\_\+t. Si intensidad de señal es aceptable regresa BG\+\_\+\+OK\+\_\+\+SIGNAL. 
+\end{DoxyReturn}
+\Hypertarget{_b_g77_8h_a00a186528d54e0162b4ec31902db106b}\index{BG77.h@{BG77.h}!bg\_queue\_is\_empty@{bg\_queue\_is\_empty}}
+\index{bg\_queue\_is\_empty@{bg\_queue\_is\_empty}!BG77.h@{BG77.h}}
+\doxysubsubsection{\texorpdfstring{bg\_queue\_is\_empty()}{bg\_queue\_is\_empty()}}
+{\footnotesize\ttfamily \label{_b_g77_8h_a00a186528d54e0162b4ec31902db106b} 
+uint8\+\_\+t bg\+\_\+queue\+\_\+is\+\_\+empty (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Indica si la cola interna esta vacia. 
+
+\begin{DoxyReturn}{Devuelve}
+uint8\+\_\+t Devuelve 1 en caso de que este vacia y 0 en caso contrario. 
+\end{DoxyReturn}
+\Hypertarget{_b_g77_8h_a61963d30f7d309a7ae1cf8eeed599605}\index{BG77.h@{BG77.h}!bg\_queue\_is\_full@{bg\_queue\_is\_full}}
+\index{bg\_queue\_is\_full@{bg\_queue\_is\_full}!BG77.h@{BG77.h}}
+\doxysubsubsection{\texorpdfstring{bg\_queue\_is\_full()}{bg\_queue\_is\_full()}}
+{\footnotesize\ttfamily \label{_b_g77_8h_a61963d30f7d309a7ae1cf8eeed599605} 
+uint8\+\_\+t bg\+\_\+queue\+\_\+is\+\_\+full (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Indica si la cola interna esta llena. 
+
+\begin{DoxyReturn}{Devuelve}
+uint8\+\_\+t Devuelve 1 en caso de que este llena y 0 en caso contrario. 
+\end{DoxyReturn}
+\Hypertarget{_b_g77_8h_a417fbe13aaac91032b2cf5fe5fbabba3}\index{BG77.h@{BG77.h}!bg\_queue\_pop@{bg\_queue\_pop}}
+\index{bg\_queue\_pop@{bg\_queue\_pop}!BG77.h@{BG77.h}}
+\doxysubsubsection{\texorpdfstring{bg\_queue\_pop()}{bg\_queue\_pop()}}
+{\footnotesize\ttfamily \label{_b_g77_8h_a417fbe13aaac91032b2cf5fe5fbabba3} 
+void bg\+\_\+queue\+\_\+pop (\begin{DoxyParamCaption}\item[{urc\+Raw\+Data\+\_\+t \texorpdfstring{$\ast$}{*}}]{urc}{}\end{DoxyParamCaption})}
+
+
+
+Esta funcion hacer uso de la cola interna de URC de la libreria y desencola mensajes del tipo urc\+Raw\+Data\+\_\+t. 
+
+
+\begin{DoxyParams}{Parámetros}
+{\em urc} & Es un puntero a la variable en donde se quiere copiar el mensaje/evento desencolado. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{_b_g77_8h_accb6d774575fa4349a922b7194d36b95}\index{BG77.h@{BG77.h}!bg\_queue\_put@{bg\_queue\_put}}
+\index{bg\_queue\_put@{bg\_queue\_put}!BG77.h@{BG77.h}}
+\doxysubsubsection{\texorpdfstring{bg\_queue\_put()}{bg\_queue\_put()}}
+{\footnotesize\ttfamily \label{_b_g77_8h_accb6d774575fa4349a922b7194d36b95} 
+void bg\+\_\+queue\+\_\+put (\begin{DoxyParamCaption}\item[{urc\+Raw\+Data\+\_\+t}]{urc}{}\end{DoxyParamCaption})}
+
+
+
+Esta funcion hacer uso de la cola interna de URC de la libreria y encola mensajes del tipo urc\+Raw\+Data\+\_\+t. 
+
+NOTE\+: La libreria usa esta cola cuando se usan los calbacks por defecto de la libreria bg\+\_\+callback\+\_\+urc\+Detected(urc\+Raw\+Data\+\_\+t urc\+Data, \doxylink{_b_g77_8h_a182c6ca209fecf25da97f51f1eaf5550}{bg\+\_\+urc\+\_\+parsed\+\_\+callback(urc\+Info\+Data\+\_\+t info\+Urc)} y la funcion de manejo de URC \doxylink{_b_g77_8h_a3f03c39804aa65f885946b3f30d6b4fc}{bg\+\_\+handle\+\_\+urc(void)}. 
+\begin{DoxyParams}{Parámetros}
+{\em urc} & Es la variable que contiene el dato/evento a encolar. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{_b_g77_8h_a22e89067926540a7db799cf50725070b}\index{BG77.h@{BG77.h}!bg\_receive\_buffAMode@{bg\_receive\_buffAMode}}
+\index{bg\_receive\_buffAMode@{bg\_receive\_buffAMode}!BG77.h@{BG77.h}}
+\doxysubsubsection{\texorpdfstring{bg\_receive\_buffAMode()}{bg\_receive\_buffAMode()}}
+{\footnotesize\ttfamily \label{_b_g77_8h_a22e89067926540a7db799cf50725070b} 
+\mbox{\hyperlink{_b_g77_8h_af98be1c204049055208486fb2b91c87b}{bg\+\_\+err\+\_\+t}} bg\+\_\+receive\+\_\+buff\+AMode (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{connect\+ID}{, }\item[{uint8\+\_\+t \texorpdfstring{$\ast$}{*}}]{buff}{, }\item[{uint16\+\_\+t \texorpdfstring{$\ast$}{*}}]{len}{}\end{DoxyParamCaption})}
+
+
+
+Funcion que se encarga de recuperar los datos recibidos por una conexion en buffer access mode. 
+
+
+\begin{DoxyParams}{Parámetros}
+{\em connect\+ID} & numero de conexion en la cual se recibio un mensaje. \\
+\hline
+{\em buff} & puntero a buffer en donde se copiara el mensaje recibido. \\
+\hline
+{\em len} & puntero a variable que almacene el numero de bytes recibidos en el mensaje. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Devuelve}
+bg\+\_\+err\+\_\+t Regresa el codigo de error basado en el tipo bg\+\_\+err\+\_\+t. Si se consigue enviar el mensaje el modulo devuelve BG\+\_\+\+OK\+\_\+\+TRANSMIT. 
+\end{DoxyReturn}
+\Hypertarget{_b_g77_8h_a03693666091cc43048c11c148b9afd23}\index{BG77.h@{BG77.h}!bg\_recv\_callback@{bg\_recv\_callback}}
+\index{bg\_recv\_callback@{bg\_recv\_callback}!BG77.h@{BG77.h}}
+\doxysubsubsection{\texorpdfstring{bg\_recv\_callback()}{bg\_recv\_callback()}}
+{\footnotesize\ttfamily \label{_b_g77_8h_a03693666091cc43048c11c148b9afd23} 
+void bg\+\_\+recv\+\_\+callback (\begin{DoxyParamCaption}\item[{uint8\+\_\+t \texorpdfstring{$\ast$}{*}}]{buff}{, }\item[{uint16\+\_\+t}]{len}{, }\item[{uint8\+\_\+t}]{connect\+ID}{}\end{DoxyParamCaption})}
+
+
+
+Esta funcion es un callback que notifica al usuario que se recibio un mensaje de alguna conexion en modo buffer access mode. Este callback se llama en \doxylink{_b_g77_8h_a182c6ca209fecf25da97f51f1eaf5550}{bg\+\_\+urc\+\_\+parsed\+\_\+callback(urc\+Info\+Data\+\_\+t info\+Urc)} al detectar y parsear un URC RECV y entrega al usuario el mensaje, tamaño en bytes y el numero de conexion que recibio dicho mensaje. 
+
+La funcion por defecto de la libreria solo imprime el mensaje recibido, el tamaño y el numero de connect\+ID 
+\begin{DoxyParams}{Parámetros}
+{\em buff} & Puntero a funcion que apunta al mensaje recibido. \\
+\hline
+{\em len} & Tamaño en bytes del mensaje recibido. \\
+\hline
+{\em connect\+ID} & Conexion de la cual se recibio el mensaje. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{_b_g77_8h_a952e9d1543029fccfb87e8e133b68122}\index{BG77.h@{BG77.h}!bg\_send@{bg\_send}}
+\index{bg\_send@{bg\_send}!BG77.h@{BG77.h}}
+\doxysubsubsection{\texorpdfstring{bg\_send()}{bg\_send()}}
+{\footnotesize\ttfamily \label{_b_g77_8h_a952e9d1543029fccfb87e8e133b68122} 
+\mbox{\hyperlink{_b_g77_8h_af98be1c204049055208486fb2b91c87b}{bg\+\_\+err\+\_\+t}} bg\+\_\+send (\begin{DoxyParamCaption}\item[{uint32\+\_\+t}]{timeout}{, }\item[{uint8\+\_\+t}]{enable\+Print}{, }\item[{const char \texorpdfstring{$\ast$}{*}}]{fmt}{, }\item[{}]{...}{}\end{DoxyParamCaption})}
+
+
+
+Esta funcion permite enviar comandos AT en formato de especificadores de formato (como printf) 
+
+
+\begin{DoxyParams}{Parámetros}
+{\em timeout} & Es el tiempo de espera para conseguir respuesta del modulo. La unidad de tiempo son segundos. \\
+\hline
+{\em enable\+Print} & Si tiene el valor de 0 no imprime la respuesta del modulo en el Log. Cualquier otro valor, imprime la respuesta. Es recomendable usar las MACROS LE (para imprimir respuesta) y LD (para NO imprimir la respuesta). \\
+\hline
+{\em fmt} & Es el formato del mensaje. \\
+\hline
+{\em ...} & Son los parametros variables que se utilizan en el formato del mensaje generado. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Devuelve}
+bg\+\_\+err\+\_\+t Retorna el codigo de error basado en el tipo bg\+\_\+err\+\_\+t. Si todo esta bien se espera BG\+\_\+\+OK 
+\end{DoxyReturn}
+\Hypertarget{_b_g77_8h_a3f93ee3bfd2996fa41f5f9425dc83431}\index{BG77.h@{BG77.h}!bg\_set\_bsp@{bg\_set\_bsp}}
+\index{bg\_set\_bsp@{bg\_set\_bsp}!BG77.h@{BG77.h}}
+\doxysubsubsection{\texorpdfstring{bg\_set\_bsp()}{bg\_set\_bsp()}}
+{\footnotesize\ttfamily \label{_b_g77_8h_a3f93ee3bfd2996fa41f5f9425dc83431} 
+void bg\+\_\+set\+\_\+bsp (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structbg__bsp_fun__t}{bg\+\_\+bsp\+Fun\+\_\+t}}}]{bsp\+Fun}{}\end{DoxyParamCaption})}
+
+
+
+Funcion para establecer los punteros a función del BSP (UART TX, Delay, GPIO\+\_\+write, Reset de MCU). 
+
+
+\begin{DoxyParams}{Parámetros}
+{\em bsp\+Fun} & Variable que contiene los punteros a funcion para el BSP. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{_b_g77_8h_a4324d29bee02aaf36d6d7dc3d54fa1b7}\index{BG77.h@{BG77.h}!bg\_transmit\_buffAMode@{bg\_transmit\_buffAMode}}
+\index{bg\_transmit\_buffAMode@{bg\_transmit\_buffAMode}!BG77.h@{BG77.h}}
+\doxysubsubsection{\texorpdfstring{bg\_transmit\_buffAMode()}{bg\_transmit\_buffAMode()}}
+{\footnotesize\ttfamily \label{_b_g77_8h_a4324d29bee02aaf36d6d7dc3d54fa1b7} 
+\mbox{\hyperlink{_b_g77_8h_af98be1c204049055208486fb2b91c87b}{bg\+\_\+err\+\_\+t}} bg\+\_\+transmit\+\_\+buff\+AMode (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{connect\+ID}{, }\item[{uint8\+\_\+t \texorpdfstring{$\ast$}{*}}]{data}{, }\item[{uint16\+\_\+t}]{len}{}\end{DoxyParamCaption})}
+
+
+
+Funcion para transmitir mensajes por un socket que esta en modo buffer access mode. 
+
+
+\begin{DoxyParams}{Parámetros}
+{\em connect\+ID} & numero de conexion a la que se quiere transmitir el mensaje. \\
+\hline
+{\em data} & puntero al buffer que contiene el dato a transmitir. \\
+\hline
+{\em len} & numero de bytes que se quieren transmitir del buffer. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Devuelve}
+bg\+\_\+err\+\_\+t Regresa el codigo de error basado en el tipo bg\+\_\+err\+\_\+t. Si se consigue enviar el mensaje el modulo devuelve BG\+\_\+\+OK\+\_\+\+TRANSMIT. 
+\end{DoxyReturn}
+\Hypertarget{_b_g77_8h_a2eb4e7ff0044a4ccb914381d9ae25265}\index{BG77.h@{BG77.h}!bg\_transmit\_TM@{bg\_transmit\_TM}}
+\index{bg\_transmit\_TM@{bg\_transmit\_TM}!BG77.h@{BG77.h}}
+\doxysubsubsection{\texorpdfstring{bg\_transmit\_TM()}{bg\_transmit\_TM()}}
+{\footnotesize\ttfamily \label{_b_g77_8h_a2eb4e7ff0044a4ccb914381d9ae25265} 
+\mbox{\hyperlink{_b_g77_8h_af98be1c204049055208486fb2b91c87b}{bg\+\_\+err\+\_\+t}} bg\+\_\+transmit\+\_\+\+TM (\begin{DoxyParamCaption}\item[{uint8\+\_\+t \texorpdfstring{$\ast$}{*}}]{data}{, }\item[{uint16\+\_\+t}]{len}{}\end{DoxyParamCaption})}
+
+
+
+Transmite datos en modo transparente. 
+
+NOTE\+: Si no se tiene habilitado el modo transparente no envia nada por UART.
+
+
+\begin{DoxyParams}{Parámetros}
+{\em data} & Es el puntero al buffer que contiene el mensaje a transmitir. \\
+\hline
+{\em len} & Es el numero de bytes que se quieren transmitir. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Devuelve}
+bg\+\_\+err\+\_\+t 
+\end{DoxyReturn}
+\Hypertarget{_b_g77_8h_a5ed9330e905321630088fe6a84c5a5de}\index{BG77.h@{BG77.h}!bg\_transparent\_mode@{bg\_transparent\_mode}}
+\index{bg\_transparent\_mode@{bg\_transparent\_mode}!BG77.h@{BG77.h}}
+\doxysubsubsection{\texorpdfstring{bg\_transparent\_mode()}{bg\_transparent\_mode()}}
+{\footnotesize\ttfamily \label{_b_g77_8h_a5ed9330e905321630088fe6a84c5a5de} 
+\mbox{\hyperlink{_b_g77_8h_af98be1c204049055208486fb2b91c87b}{bg\+\_\+err\+\_\+t}} bg\+\_\+transparent\+\_\+mode (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{connect\+ID}{}\end{DoxyParamCaption})}
+
+
+
+Permite al dispositio cambiar su modo de acceso a modo transparente. 
+
+
+\begin{DoxyParams}{Parámetros}
+{\em connect\+ID} & Es el numero de conexion que se desea cambiar a modo transparente. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Devuelve}
+bg\+\_\+err\+\_\+t Regresa el codigo de error basado en el tipo bg\+\_\+err\+\_\+t. Si el modulo consigue entrar en modo transpoarente retornara BG\+\_\+\+OK\+\_\+\+TRANSPARENT\+\_\+\+MODE. 
+\end{DoxyReturn}
+\Hypertarget{_b_g77_8h_acd4a161fbac7d28353ca438b91e0520b}\index{BG77.h@{BG77.h}!bg\_uartCallback@{bg\_uartCallback}}
+\index{bg\_uartCallback@{bg\_uartCallback}!BG77.h@{BG77.h}}
+\doxysubsubsection{\texorpdfstring{bg\_uartCallback()}{bg\_uartCallback()}}
+{\footnotesize\ttfamily \label{_b_g77_8h_acd4a161fbac7d28353ca438b91e0520b} 
+void bg\+\_\+uart\+Callback (\begin{DoxyParamCaption}\item[{uint8\+\_\+t \texorpdfstring{$\ast$}{*}}]{buff}{, }\item[{uint16\+\_\+t}]{n\+Bytes}{}\end{DoxyParamCaption})}
+
+
+
+Esta funcion de callback se debe llamar en una funcion de interrupcion de recepcion de uart en la cual se debe pasar el buffer y el tamaño del mensaje recibido por UART. 
+
+Su funcion es proveer a la libreria todos los datos de recepcion por interrupcion de UART en el puerto correspondiente al modulo.
+
+
+\begin{DoxyParams}{Parámetros}
+{\em buff} & Es la direccion del buffer que contiene los datos recibidos en la interrupcion de UART. \\
+\hline
+{\em n\+Bytes} & Es el numero de bytes recibidos en la interrupcion de UART. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{_b_g77_8h_a182c6ca209fecf25da97f51f1eaf5550}\index{BG77.h@{BG77.h}!bg\_urc\_parsed\_callback@{bg\_urc\_parsed\_callback}}
+\index{bg\_urc\_parsed\_callback@{bg\_urc\_parsed\_callback}!BG77.h@{BG77.h}}
+\doxysubsubsection{\texorpdfstring{bg\_urc\_parsed\_callback()}{bg\_urc\_parsed\_callback()}}
+{\footnotesize\ttfamily \label{_b_g77_8h_a182c6ca209fecf25da97f51f1eaf5550} 
+void bg\+\_\+urc\+\_\+parsed\+\_\+callback (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structurc_info_data__t}{urc\+Info\+Data\+\_\+t}}}]{info\+Urc}{}\end{DoxyParamCaption})}
+
+
+
+Esta funcion es un callback en donde se le va a entregar al usuario la informacion util de un URC detectado y parseado. La funcion por defecto de la libreria, se dedica a realizar el tratamiento o manejo correspondiente al URC que se presenta. Ejemplo\+: Si se presenta un URC de cierre de socket procede a cerrar dicho socket. Si se presenta un URC de mensaje RECV procede a recuperarlo y entregarlo en un callback (mensaje, tamaño en bytes, conexion). 
+
+NOTE\+: Esta funcion se llama en la funcion de manejo de URC \doxylink{_b_g77_8h_a3f03c39804aa65f885946b3f30d6b4fc}{bg\+\_\+handle\+\_\+urc(void)} despues de parsear el URC encolado. Sin embargo, el Usuario puede prescindir de ella y realizar su estrategia de manejo de URC en este punto. 
+\begin{DoxyParams}{Parámetros}
+{\em info\+Urc} & Es una variable que contiene la informacion util del URC. \\
+\hline
+\end{DoxyParams}

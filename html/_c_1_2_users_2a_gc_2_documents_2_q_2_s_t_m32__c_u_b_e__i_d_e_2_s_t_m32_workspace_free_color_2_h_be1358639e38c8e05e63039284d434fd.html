@@ -1,0 +1,590 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.12.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>BG77: C:/Users/a_gc/Documents/Q/STM32_CUBE_IDE/STM32_workspace_free_color/HW_MTU_BG77/Core/Src/BG77/BG77.h</title>
+<link rel="icon" href="cursoCIntermedio.png" type="image/x-icon" />
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectlogo"><img alt="Logo" src=" lenguaje-c-1.png" height="100px"/></td>
+  <td id="projectalign">
+   <div id="projectname">BG77<span id="projectnumber">&#160;1.0</span>
+   </div>
+   <div id="projectbrief">Esta es una libreria basica para controlar el modulo de comunicacion BG77</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generado por Doxygen 1.12.0 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() { codefold.init(0); });
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','Buscar',false);
+  $(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="doc-content">
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function(){ initResizable(false); });
+/* @license-end */
+</script>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Cargando...</div>
+<div class="SRStatus" id="Searching">Buscando...</div>
+<div class="SRStatus" id="NoMatches">Nada coincide</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">C:/Users/a_gc/Documents/Q/STM32_CUBE_IDE/STM32_workspace_free_color/HW_MTU_BG77/Core/Src/BG77/BG77.h</div></div>
+</div><!--header-->
+<div class="contents">
+<p>Remplaza la primera ocurrencia de un caracter especificado en un array por otro deseado. El proposito de esta macro es sustituir el primer caracter encontrado por otro deseado y su utilidad es para copiar informacion que debe ser parseada.</p>
+<p>Remplaza la primera ocurrencia de un caracter especificado en un array por otro deseado. El proposito de esta macro es sustituir el primer caracter encontrado por otro deseado y su utilidad es para copiar informacion que debe ser parseada.</p><dl class="section note"><dt>Nota</dt><dd>Si el caracter no es encontrado no sucede nada.</dd></dl>
+<dl class="params"><dt>Parámetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">rempSrcBuff</td><td>Es el array al que se quiere remplazar un caracter. </td></tr>
+    <tr><td class="paramname">chrRemplaced</td><td>Es el caracter que se quiere remplazar por otro deseado. </td></tr>
+    <tr><td class="paramname">chrDesired</td><td>Es el caracter deseado.</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>En este ejemplo se intercambia el caracter 'u' del buffer fooBuff por el caracter 'a' </p><div class="fragment"><div class="line">uint8_t fooBuff[] = <span class="stringliteral">&quot;cut&quot;</span>;</div>
+<div class="line">REMPLACE_CHAR(fooBuff, <span class="charliteral">&#39;u&#39;</span>, <span class="charliteral">&#39;a&#39;</span>);</div>
+</div><!-- fragment --><div class="fragment"><div class="line"> </div>
+<div class="line"><span class="preprocessor">#include &quot;stdio.h&quot;</span></div>
+<div class="line"><span class="preprocessor">#include &quot;stdint.h&quot;</span></div>
+<div class="line"><span class="preprocessor">#include &quot;stdlib.h&quot;</span></div>
+<div class="line"><span class="preprocessor">#include &quot;string.h&quot;</span></div>
+<div class="line"><span class="preprocessor">#include &quot;stdarg.h&quot;</span></div>
+<div class="line"> </div>
+<div class="line"><span class="preprocessor">#include &quot;../BG77/queue_module/queue_module.h&quot;</span></div>
+<div class="line"> </div>
+<div class="line"><span class="preprocessor">#ifndef _BG77_H_</span></div>
+<div class="line"><span class="preprocessor">#define _BG77_H_</span></div>
+<div class="line"> </div>
+<div class="line"><span class="preprocessor">#define LD 0    </span><span class="comment">//Sirve para indicar que NO se imprima mensaje en la MACRO LOG_BG</span></div>
+<div class="line"><span class="preprocessor">#define LE 1    </span><span class="comment">//Sirve para indicar que SI se imprima mensaje en la MACRO LOG_BG</span></div>
+<div class="line"><span class="preprocessor">#define _BG_DEBUG_</span></div>
+<div class="line"><span class="preprocessor">#ifdef _BG_DEBUG_</span></div>
+<div class="line"> </div>
+<div class="line"><span class="preprocessor">#define LOG_BG(enable, ...)\</span></div>
+<div class="line"><span class="preprocessor">do{\</span></div>
+<div class="line"><span class="preprocessor">    if(enable) \</span></div>
+<div class="line"><span class="preprocessor">        printf(__VA_ARGS__);\</span></div>
+<div class="line"><span class="preprocessor">}while(0)</span></div>
+<div class="line"> </div>
+<div class="line"><span class="preprocessor">#define LOG_BG_TRACE(enable, ...)\</span></div>
+<div class="line"><span class="preprocessor">do{\</span></div>
+<div class="line"><span class="preprocessor">    if(enable) \</span></div>
+<div class="line"><span class="preprocessor">    {\</span></div>
+<div class="line"><span class="preprocessor">        printf(&quot;[%s: %d]&quot;, __FILE__, __LINE__);\</span></div>
+<div class="line"><span class="preprocessor">        printf(__VA_ARGS__);\</span></div>
+<div class="line"><span class="preprocessor">    }\</span></div>
+<div class="line"><span class="preprocessor">}while(0)</span></div>
+<div class="line"><span class="preprocessor">#else</span></div>
+<div class="line"><span class="preprocessor">#define LOG_BG(...)</span></div>
+<div class="line"><span class="preprocessor">#define LOG_BG_TRACE(...)</span></div>
+<div class="line"><span class="preprocessor">#endif</span></div>
+<div class="line"> </div>
+<div class="line"><span class="preprocessor">#define __bg_weak__ __attribute__((weak))</span></div>
+<div class="line"> </div>
+<div class="line"><span class="preprocessor">#define MAX_SEC 0XFFFFFFFFUL</span></div>
+<div class="line"> </div>
+<div class="line"><span class="preprocessor">#define BG_TIMEOUT_ANSW 10UL            </span><span class="comment">//timeout de espera de respuesta de comando BG</span></div>
+<div class="line"><span class="preprocessor">#define BG_TIMEOUT_ANSW_OK 20UL         </span><span class="comment">//timeout de espera de respuesta esperada del modulo BG</span></div>
+<div class="line"><span class="preprocessor">#define BG_TIMEOUT_ANSW_OK_LONG 40UL    </span><span class="comment">//timeout de espera de respuesta esperada del modulo BG para tiempos largos</span></div>
+<div class="line"> </div>
+<div class="line"><span class="preprocessor">#define IP_METERCAD  &quot;192.168.4.58&quot;     </span><span class="comment">//Direccion IP de maquina virtual metercad</span></div>
+<div class="line"><span class="preprocessor">#define IP_PROXYGAMMA &quot;192.168.4.57&quot;    </span><span class="comment">//Direccion IP de maquina virtual proxygamma</span></div>
+<div class="line"><span class="preprocessor">#define IP_TCP_LISTENER &quot;127.0.0.1&quot;     </span><span class="comment">//Direccion IP de por defecto para abrir socket en modo servidor</span></div>
+<div class="line"> </div>
+<div class="line"><span class="preprocessor">#define APN_LINKS_FIELD &quot;cantilever.1&quot;  </span><span class="comment">//APN de linksfield</span></div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"><span class="preprocessor">#define COPS_LF &quot;334020&quot;    </span><span class="comment">//Seleccion de operadora linksfield</span></div>
+<div class="line"><span class="preprocessor">#define COPS_ATT_1 &quot;334090&quot; </span><span class="comment">//Seleccion de operadora ATT 1</span></div>
+<div class="line"><span class="preprocessor">#define COPS_ATT_2 &quot;334050&quot; </span><span class="comment">//Seleccion de operadora ATT 2</span></div>
+<div class="line"> </div>
+<div class="line"><span class="preprocessor">#define BG_CONTEXT_ID_MAX 7 </span><span class="comment">//Es el maximo numero de contextID que soporta el modulo BG77</span></div>
+<div class="line"><span class="preprocessor">#define BG_CONTEXT_ID_MIN 1 </span><span class="comment">//Es el minimo numero de contextID que soporta el modulo BG77</span></div>
+<div class="line"> </div>
+<div class="line"><span class="preprocessor">#define BG_CONNECT_ID_MAX 11 </span><span class="comment">//Es el maximo numero de connectID que soporta el modulo BG77 (rango 0-11)</span></div>
+<div class="line"><span class="preprocessor">#define BG_CONNECT_ID_MIN 0  </span><span class="comment">//Es el minimo numero de connectID que soporta el modulo BG77 (rango 0-11)</span></div>
+<div class="line"> </div>
+<div class="line"><span class="preprocessor">#define CHECK_BG_ERR(err) do{ if(err != BG_OK) return err; } while(0)</span></div>
+<div class="line"> </div>
+<div class="line"><span class="preprocessor">#define REMPLACE_CHAR(rempSrcBuff, chrRemplaced, chrDesired)\</span></div>
+<div class="line"><span class="preprocessor">do{\</span></div>
+<div class="line"><span class="preprocessor">    uint8_t *_remplacePtr = strchr(rempSrcBuff, chrRemplaced);\</span></div>
+<div class="line"><span class="preprocessor">    if(_remplacePtr != NULL)\</span></div>
+<div class="line"><span class="preprocessor">        *_remplacePtr = chrDesired;\</span></div>
+<div class="line"><span class="preprocessor">}while(0)</span></div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"><span class="preprocessor">#define COPY_PARSE_STR(_dstBuff, dstBuffSize, srcBuff, chr1, chr2)\</span></div>
+<div class="line"><span class="preprocessor">do { \</span></div>
+<div class="line"><span class="preprocessor">    uint8_t *dstBuff = _dstBuff;\</span></div>
+<div class="line"><span class="preprocessor">    uint8_t *_parsePtr = strchr(srcBuff, chr1); \</span></div>
+<div class="line"><span class="preprocessor">    if(_parsePtr == NULL || dstBuff == NULL) break; \</span></div>
+<div class="line"><span class="preprocessor">    _parsePtr++; \</span></div>
+<div class="line"><span class="preprocessor">    uint8_t *_endPtr = NULL;\</span></div>
+<div class="line"><span class="preprocessor">    if(chr1 == chr2)\</span></div>
+<div class="line"><span class="preprocessor">        _endPtr = strchr(_parsePtr + 1, chr2); \</span></div>
+<div class="line"><span class="preprocessor">    else\</span></div>
+<div class="line"><span class="preprocessor">        _endPtr = strchr(_parsePtr, chr2); \</span></div>
+<div class="line"><span class="preprocessor">    if(_endPtr == NULL) break; \</span></div>
+<div class="line"><span class="preprocessor">    size_t len = _endPtr - _parsePtr; \</span></div>
+<div class="line"><span class="preprocessor">    if(len &gt;= dstBuffSize) break;\</span></div>
+<div class="line"><span class="preprocessor">    for(size_t i = 0; i &lt; len; i++) dstBuff[i] = _parsePtr[i];\</span></div>
+<div class="line"><span class="preprocessor">    dstBuff[len] = &#39;\0&#39;; </span><span class="comment">/* Agrega el terminador nulo */</span><span class="preprocessor"> \</span></div>
+<div class="line"><span class="preprocessor">} while(0)</span></div>
+<div class="line"> </div>
+<div class="line"><span class="preprocessor">#define CHECK_DESIRED_ANSW(srcBuff, desiredAnsw, _timeout)\</span></div>
+<div class="line"><span class="preprocessor">do{\</span></div>
+<div class="line"><span class="preprocessor">    bg_start_timeout();\</span></div>
+<div class="line"><span class="preprocessor">    while(!strstr(srcBuff, desiredAnsw) &amp;&amp; count_sec_bg &lt; _timeout)\</span></div>
+<div class="line"><span class="preprocessor">        __asm__(&quot;nop&quot;);\</span></div>
+<div class="line"><span class="preprocessor">    if(_timeout &lt;= bg_stop_timeout())\</span></div>
+<div class="line"><span class="preprocessor">    {\</span></div>
+<div class="line"><span class="preprocessor">        LOG_BG(LE,&quot;[BG_ERR] TIMEOUT RESPUESTA DESEADA\n&quot;);\</span></div>
+<div class="line"><span class="preprocessor">        return BG_ERR_TIMEOUT_ANS_DESIRED;\</span></div>
+<div class="line"><span class="preprocessor">    }\</span></div>
+<div class="line"><span class="preprocessor">}while(0)</span></div>
+<div class="line"> </div>
+<div class="line"><span class="preprocessor">#define CHECK_POWDWN_ANSW(srcBuff, _timeout)\</span></div>
+<div class="line"><span class="preprocessor">do{\</span></div>
+<div class="line"><span class="preprocessor">    bg_start_timeout();\</span></div>
+<div class="line"><span class="preprocessor">    while(!strstr(srcBuff, &quot;OK&quot;) &amp;&amp; !strstr(srcBuff, &quot;RDY&quot;) &amp;&amp; count_sec_bg &lt; _timeout)\</span></div>
+<div class="line"><span class="preprocessor">        __asm__(&quot;nop&quot;);\</span></div>
+<div class="line"><span class="preprocessor">    if(_timeout &lt;= bg_stop_timeout())\</span></div>
+<div class="line"><span class="preprocessor">    {\</span></div>
+<div class="line"><span class="preprocessor">        LOG_BG(LE,&quot;[BG_ERR] TIMEOUT RESPUESTA DESEADA\n&quot;);\</span></div>
+<div class="line"><span class="preprocessor">        return BG_ERR_TIMEOUT_ANS_DESIRED;\</span></div>
+<div class="line"><span class="preprocessor">    }\</span></div>
+<div class="line"><span class="preprocessor">}while(0)</span></div>
+<div class="line"> </div>
+<div class="line"><span class="preprocessor">#define CHECK_EXIT_TM_ANSW(srcBuff, _timeout)\</span></div>
+<div class="line"><span class="preprocessor">do{\</span></div>
+<div class="line"><span class="preprocessor">    bg_start_timeout();\</span></div>
+<div class="line"><span class="preprocessor">    while(!strstr(srcBuff, &quot;OK&quot;) &amp;&amp; !strstr(srcBuff, &quot;QIURC&quot;) &amp;&amp; count_sec_bg &lt; _timeout)\</span></div>
+<div class="line"><span class="preprocessor">        __asm__(&quot;nop&quot;);\</span></div>
+<div class="line"><span class="preprocessor">    if(_timeout &lt;= bg_stop_timeout())\</span></div>
+<div class="line"><span class="preprocessor">    {\</span></div>
+<div class="line"><span class="preprocessor">        LOG_BG(LE,&quot;[BG_ERR] TIMEOUT RESPUESTA DESEADA\n&quot;);\</span></div>
+<div class="line"><span class="preprocessor">        return BG_ERR_TIMEOUT_ANS_DESIRED;\</span></div>
+<div class="line"><span class="preprocessor">    }\</span></div>
+<div class="line"><span class="preprocessor">}while(0)</span></div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"><span class="preprocessor">#define CREATE_BUFF(x, name) \</span></div>
+<div class="line"><span class="preprocessor">typedef struct \</span></div>
+<div class="line"><span class="preprocessor">{ \</span></div>
+<div class="line"><span class="preprocessor">    uint8_t buff[(x)]; \</span></div>
+<div class="line"><span class="preprocessor">    uint16_t len; \</span></div>
+<div class="line"><span class="preprocessor">} name##_t;</span></div>
+<div class="line"> </div>
+<div class="line"><span class="preprocessor">#define SIZE_BG_BUFF 2048</span></div>
+<div class="line">CREATE_BUFF(SIZE_BG_BUFF, uartBuff);</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">typedef</span> <span class="keyword">enum</span>{</div>
+<div class="line">    BG_ERR_TIMEOUT_ANS = -255, <span class="comment">//Error de timeout al no recibir respuesta del modulo BG</span></div>
+<div class="line">    BG_ERR_TIMEOUT_ANS_DESIRED,         <span class="comment">//Error de timeout al no recibir respuesta esperada del modulo BG</span></div>
+<div class="line">    BG_ERR_MCU_TX_UART,         <span class="comment">//Ocurrio un error en la transmision por UART al BG</span></div>
+<div class="line">    BG_ERR_MCU_PTR_NULL,    <span class="comment">//El puntero que se esta entregando apunta a NULL</span></div>
+<div class="line">    BG_ERR_UNSUPPORTED_PIN, <span class="comment">//Se quiere cambiar el estado de un pin no soportado o mapeado (PWR_KEY, VBAT, RESET, PON_TRIG)</span></div>
+<div class="line">    BG_ERR_SIM_NO_OK,           <span class="comment">//No se detecta SIM</span></div>
+<div class="line">    BG_ERR_PARSE,           <span class="comment">//No se encontro el delimitador con  funcion strchr()</span></div>
+<div class="line">    BG_ERR_ATTACH_NO_OK,            <span class="comment">//El modulo NO esta registrado en la red</span></div>
+<div class="line">    BG_ERR_NO_OPER,         <span class="comment">//No se ha seleccionado una operadora en COPS</span></div>
+<div class="line">    BG_ERR_NO_CONF_PDP,     <span class="comment">//No se ha configurado el contexto PDP</span></div>
+<div class="line">    BG_ERR_CTXT_ID_UNSUPPORTED, <span class="comment">//Se esta tratando de utilizar un contextID no soportado rango 1-7 para BG77</span></div>
+<div class="line">    BG_ERR_CONNECT_ID_UNSUPORTED,   <span class="comment">//Se esta tratando de utilizar un connectID no soportado rango 0-11 para BG77</span></div>
+<div class="line">    BG_ERR_CONNECT_ID_NOT_USED, <span class="comment">//Connect ID no utilizado</span></div>
+<div class="line">    BG_ERR_CONF_PDP,    <span class="comment">//Error en la configuracion de contexto PDP </span></div>
+<div class="line">    BG_ERR_ACT_PDP,     <span class="comment">//Error en la activacion PDP</span></div>
+<div class="line">    BG_ERR_SIGNAL,      <span class="comment">//No se tiene una intensidad de señal aceptable</span></div>
+<div class="line">    BG_OK = 0,              <span class="comment">//No hay error</span></div>
+<div class="line">    BG_OK_SIM,              <span class="comment">//Se detecto SIM</span></div>
+<div class="line">    BG_OK_ATTACH,           <span class="comment">//El modulo esta registrado en la red</span></div>
+<div class="line">    BG_OK_PDP_ACT,              <span class="comment">//Contexto PDP activado</span></div>
+<div class="line">    BG_OK_PDP_DEACT,            <span class="comment">//Contexto PDP desactivado</span></div>
+<div class="line">    BG_OK_CONNECT_ID_OPENNED,   <span class="comment">//Connect ID abierto</span></div>
+<div class="line">    BG_OK_CONF_PDP, <span class="comment">//Contexto PDP configurado</span></div>
+<div class="line">    BG_OK_TRANSPARENT_MODE, <span class="comment">//La conexion se paso correctamente a modo transparente</span></div>
+<div class="line">    BG_OK_EXIT_TRANSPARENT_MODE, <span class="comment">//El modulo salio de modo transparente correctamente</span></div>
+<div class="line">    BG_OK_CONNECT_ID_CLOSED,    <span class="comment">//Connect ID cerrado</span></div>
+<div class="line">    BG_OK_DETACH,   <span class="comment">//El modulo se desrgistro correctamente</span></div>
+<div class="line">    BG_OK_TRANSMIT, <span class="comment">//Se consiguio transmitir un mensaje</span></div>
+<div class="line">    BG_OK_RECEIVE,  <span class="comment">//Se consiguio recuperar el mensaje recibido</span></div>
+<div class="line">    BG_OK_SIGNAL    <span class="comment">//Se tiene una intensidad de señal aceptable (rsrp &gt;= -115 &amp;&amp; sinr &gt;= 0)</span></div>
+<div class="line">}<a id="a0" name="a0"></a><a class="code hl_enumeration" href="_b_g77_8h.html#af98be1c204049055208486fb2b91c87b">bg_err_t</a>;</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">//-----------------------------------Flags-----------------------------------</span></div>
+<div class="line"><span class="keyword">typedef</span> <span class="keyword">struct</span>{</div>
+<div class="line">    uint16_t f0     : 1;</div>
+<div class="line">    uint16_t f1     : 1;</div>
+<div class="line">    uint16_t f2     : 1;</div>
+<div class="line">    uint16_t f3     : 1;</div>
+<div class="line">    uint16_t f4     : 1;</div>
+<div class="line">    uint16_t f5     : 1;</div>
+<div class="line">    uint16_t f6     : 1;</div>
+<div class="line">    uint16_t f7     : 1;</div>
+<div class="line">    uint16_t f8     : 1;</div>
+<div class="line">    uint16_t f9     : 1;</div>
+<div class="line">    uint16_t f10    : 1;</div>
+<div class="line">    uint16_t f11    : 1;</div>
+<div class="line">    uint16_t f12    : 1;</div>
+<div class="line">    uint16_t f13    : 1;</div>
+<div class="line">    uint16_t f14    : 1;</div>
+<div class="line">    uint16_t f15    : 1;</div>
+<div class="line">}<a id="_a1" name="_a1"></a><a class="code hl_struct" href="structflags__t.html">flags_t</a>;</div>
+<div class="line"><span class="comment">//-----------------------------------Flags end-----------------------------------</span></div>
+<div class="line"> </div>
+<div class="line"><span class="comment">//-----------------------------------BSP-----------------------------------</span></div>
+<div class="line"><span class="keyword">typedef</span> <span class="keyword">enum</span></div>
+<div class="line">{</div>
+<div class="line">    BG_PWRKEY_PIN,</div>
+<div class="line">    BG_VBAT_PIN,</div>
+<div class="line">    BG_RESET_PIN,</div>
+<div class="line">    BG_PON_TRIG_PIN,</div>
+<div class="line">    BG_UNSUPORTED_PIN</div>
+<div class="line">}<a id="a2" name="a2"></a><a class="code hl_enumeration" href="_b_g77_8h.html#a2c28d9ff8a1ade4f1a62876f8ea35812">bgPin_t</a>;</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">typedef</span> <a class="code hl_enumeration" href="_b_g77_8h.html#af98be1c204049055208486fb2b91c87b">bg_err_t</a> (*<a id="a3" name="a3"></a><a class="code hl_typedef" href="_b_g77_8h.html#a5df4af1d37573e135df6251575c7644f">uartFun_t</a>)(uint8_t *data, uint8_t len);</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">typedef</span> <a class="code hl_enumeration" href="_b_g77_8h.html#af98be1c204049055208486fb2b91c87b">bg_err_t</a> (*<a id="a4" name="a4"></a><a class="code hl_typedef" href="_b_g77_8h.html#aae937a975adb539d978912a31af5a288">gpioWriteFun_t</a>)(<a class="code hl_enumeration" href="_b_g77_8h.html#a2c28d9ff8a1ade4f1a62876f8ea35812">bgPin_t</a> pin, uint8_t state);</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">typedef</span> void (*<a id="a5" name="a5"></a><a class="code hl_typedef" href="_b_g77_8h.html#a3cf0239ec77a1d5be9c2a1b4e28e0d43">delayFun_t</a>)(uint32_t mDelay);</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">typedef</span> void (*<a id="a6" name="a6"></a><a class="code hl_typedef" href="_b_g77_8h.html#ae235bc4734e4f0ac5242dd32776a39cb">resetFun_t</a>)(void);</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">typedef</span> <span class="keyword">struct</span></div>
+<div class="line">{</div>
+<div class="line">    <a class="code hl_typedef" href="_b_g77_8h.html#a5df4af1d37573e135df6251575c7644f">uartFun_t</a> uartTx; </div>
+<div class="line">    <a class="code hl_typedef" href="_b_g77_8h.html#aae937a975adb539d978912a31af5a288">gpioWriteFun_t</a> gpioWrite;</div>
+<div class="line">    <a class="code hl_typedef" href="_b_g77_8h.html#a3cf0239ec77a1d5be9c2a1b4e28e0d43">delayFun_t</a> msDelay;</div>
+<div class="line">    <a class="code hl_typedef" href="_b_g77_8h.html#ae235bc4734e4f0ac5242dd32776a39cb">resetFun_t</a> resetMCU;</div>
+<div class="line">}<a id="_a7" name="_a7"></a><a class="code hl_struct" href="structbg__bsp_fun__t.html">bg_bspFun_t</a>;</div>
+<div class="line"> </div>
+<div class="line"><span class="keywordtype">void</span> <a id="a8" name="a8"></a><a class="code hl_function" href="_b_g77_8c.html#a3f93ee3bfd2996fa41f5f9425dc83431">bg_set_bsp</a>(<a class="code hl_struct" href="structbg__bsp_fun__t.html">bg_bspFun_t</a> bspFun);</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">//-----------------------------------BSP end-----------------------------------</span></div>
+<div class="line"> </div>
+<div class="line"><span class="comment">//---------------------------Callbacks MCU para LIB----------------------------</span></div>
+<div class="line"><span class="keyword">typedef</span> <span class="keyword">enum</span></div>
+<div class="line">{</div>
+<div class="line">    MAIN_RI_EDGE_FALLING,</div>
+<div class="line">    MAIN_RI_EDGE_RISING,</div>
+<div class="line">    MAIN_RI_EDGE_UNSUPPORTED</div>
+<div class="line">}<a id="a9" name="a9"></a><a class="code hl_enumeration" href="_b_g77_8h.html#ab0ebc1ea018349b5e09729ddad2f443e">mainRiEdge_t</a>;</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">typedef</span> <span class="keyword">struct</span>{</div>
+<div class="line">    uint8_t buff[1024];</div>
+<div class="line">    uint16_t len;</div>
+<div class="line">    uint8_t type;</div>
+<div class="line">    uint8_t connectID;</div>
+<div class="line">    uint8_t contextID;</div>
+<div class="line">    uint8_t serverID;</div>
+<div class="line">}<a id="_a10" name="_a10"></a><a class="code hl_struct" href="structurc_info_data__t.html">urcInfoData_t</a>;</div>
+<div class="line"> </div>
+<div class="line"><span class="keywordtype">void</span> <a id="a11" name="a11"></a><a class="code hl_function" href="_b_g77_8c.html#aa422c5730073a35ffc37421e44a6c632">bg_callback_ms</a>(<span class="keywordtype">void</span>);</div>
+<div class="line"> </div>
+<div class="line"><span class="keywordtype">void</span> <a id="a12" name="a12"></a><a class="code hl_function" href="_b_g77_8c.html#acd4a161fbac7d28353ca438b91e0520b">bg_uartCallback</a>(uint8_t *buff, uint16_t nBytes);</div>
+<div class="line"> </div>
+<div class="line"><span class="keywordtype">void</span> <a id="a13" name="a13"></a><a class="code hl_function" href="_b_g77_8c.html#a796fbdf47278af0a696da945fa907110">bg_mainRICallback</a>(<a class="code hl_enumeration" href="_b_g77_8h.html#ab0ebc1ea018349b5e09729ddad2f443e">mainRiEdge_t</a> edge);</div>
+<div class="line"> </div>
+<div class="line"><span class="keywordtype">void</span> <a id="a14" name="a14"></a><a class="code hl_function" href="_b_g77_8c.html#a3f03c39804aa65f885946b3f30d6b4fc">bg_handle_urc</a>(<span class="keywordtype">void</span>);</div>
+<div class="line"><span class="comment">//---------------------------Callbacks MCU para LIB end----------------------------</span></div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"><span class="comment">//------------------Funciones basicas y de configuracion de modulo------------------</span></div>
+<div class="line"><a class="code hl_enumeration" href="_b_g77_8h.html#af98be1c204049055208486fb2b91c87b">bg_err_t</a> <a id="a15" name="a15"></a><a class="code hl_function" href="_b_g77_8c.html#a952e9d1543029fccfb87e8e133b68122">bg_send</a>(uint32_t timeout, uint8_t enablePrint, <span class="keyword">const</span> <span class="keywordtype">char</span> *fmt, ...);</div>
+<div class="line"> </div>
+<div class="line"><a class="code hl_enumeration" href="_b_g77_8h.html#af98be1c204049055208486fb2b91c87b">bg_err_t</a> <a id="a16" name="a16"></a><a class="code hl_function" href="_b_g77_8c.html#ae23a60b4e1b7f50ea3cdd0927640e0de">bg_power_on</a>(<span class="keywordtype">void</span>);</div>
+<div class="line"> </div>
+<div class="line"><a class="code hl_enumeration" href="_b_g77_8h.html#af98be1c204049055208486fb2b91c87b">bg_err_t</a> <a id="a17" name="a17"></a><a class="code hl_function" href="_b_g77_8c.html#ae05b151b88c27bed92a5a91c4cb9781f">bg_power_off</a>(<span class="keywordtype">void</span>);</div>
+<div class="line"> </div>
+<div class="line"><a class="code hl_enumeration" href="_b_g77_8h.html#af98be1c204049055208486fb2b91c87b">bg_err_t</a> <a id="a18" name="a18"></a><a class="code hl_function" href="_b_g77_8c.html#ad9920b9e69487d843b87ace0fb65535f">bg_init_module</a>(<span class="keywordtype">void</span>);</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">//------------------Funciones basicas y de configuracion de modulo end--------------</span></div>
+<div class="line"> </div>
+<div class="line"><span class="comment">//------------------------------Funciones de consultas------------------------------</span></div>
+<div class="line"><a class="code hl_enumeration" href="_b_g77_8h.html#af98be1c204049055208486fb2b91c87b">bg_err_t</a> <a id="a19" name="a19"></a><a class="code hl_function" href="_b_g77_8c.html#a5b05e846b42156e0bd04539d036e77e5">bg_data_module</a>(<span class="keywordtype">void</span>);</div>
+<div class="line"> </div>
+<div class="line"><a class="code hl_enumeration" href="_b_g77_8h.html#af98be1c204049055208486fb2b91c87b">bg_err_t</a> <a id="a20" name="a20"></a><a class="code hl_function" href="_b_g77_8c.html#a6fdf52da4e8bf69a4e9130163ae5e7be">bg_check_sim</a>(<span class="keywordtype">void</span>);</div>
+<div class="line"> </div>
+<div class="line"><a class="code hl_enumeration" href="_b_g77_8h.html#af98be1c204049055208486fb2b91c87b">bg_err_t</a> <a id="a21" name="a21"></a><a class="code hl_function" href="_b_g77_8c.html#a560f384f98c140a53d8fc8f5b32b5e19">bg_check_attach</a>(<span class="keywordtype">void</span>);</div>
+<div class="line"> </div>
+<div class="line"><a class="code hl_enumeration" href="_b_g77_8h.html#af98be1c204049055208486fb2b91c87b">bg_err_t</a> <a id="a22" name="a22"></a><a class="code hl_function" href="_b_g77_8c.html#adfa333fa2fbd83d8d555f78174c312d4">bg_query_cops</a>(<span class="keywordtype">void</span>);</div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"><a class="code hl_enumeration" href="_b_g77_8h.html#af98be1c204049055208486fb2b91c87b">bg_err_t</a> <a id="a23" name="a23"></a><a class="code hl_function" href="_b_g77_8c.html#ac5b7a9c29733548542fd9372f5333273">bg_query_conf_pdp</a>(uint8_t contextID);</div>
+<div class="line"> </div>
+<div class="line"><a class="code hl_enumeration" href="_b_g77_8h.html#af98be1c204049055208486fb2b91c87b">bg_err_t</a> <a id="a24" name="a24"></a><a class="code hl_function" href="_b_g77_8c.html#ae28f36ea82838abfdca0118d7af70da7">bg_check_pdp</a>(uint8_t ctxtID);</div>
+<div class="line"> </div>
+<div class="line"><a class="code hl_enumeration" href="_b_g77_8h.html#af98be1c204049055208486fb2b91c87b">bg_err_t</a> <a id="a25" name="a25"></a><a class="code hl_function" href="_b_g77_8c.html#ac4a2455d92827db1c3cf0ba553a05bb8">bg_check_sckt</a>(uint8_t connectID);</div>
+<div class="line"> </div>
+<div class="line"><a class="code hl_enumeration" href="_b_g77_8h.html#af98be1c204049055208486fb2b91c87b">bg_err_t</a> <a id="a26" name="a26"></a><a class="code hl_function" href="_b_g77_8c.html#a65c9f56b02078e837debb481fff49182">bg_query_signal</a>(<span class="keywordtype">void</span>);</div>
+<div class="line"><span class="comment">//------------------------------Funciones de consultas end--------------------------</span></div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"><span class="comment">//-------------------------Funciones de Attach y activacion PDP----------------------</span></div>
+<div class="line"><span class="keyword">typedef</span> <span class="keyword">enum</span></div>
+<div class="line">{</div>
+<div class="line">    BG_AUTH_NONE, </div>
+<div class="line">    BG_AUTH_PAP, </div>
+<div class="line">    BG_AUTH_CHAP,</div>
+<div class="line">    BG_AUTH_PAP_CHAP,</div>
+<div class="line">    BG_AUTH_NO_SUPPORTED </div>
+<div class="line">}<a id="a27" name="a27"></a><a class="code hl_enumeration" href="_b_g77_8h.html#a4e88b1ffb1682253b142b2e133dada3e">bgAuth_t</a>;</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">typedef</span> <span class="keyword">enum</span></div>
+<div class="line">{</div>
+<div class="line">    BG_CTXT_IPV4 = 1, </div>
+<div class="line">    BG_CTXT_IPV6,</div>
+<div class="line">    BG_CTXT_IPV4_IPV6,</div>
+<div class="line">    BG_CTXT_UNSUPPORTED</div>
+<div class="line">}<a id="a28" name="a28"></a><a class="code hl_enumeration" href="_b_g77_8h.html#a0d31ddf2d818cd2c7c61b08553abff3d">bgCtxtType_t</a>;</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">typedef</span> <span class="keyword">enum</span></div>
+<div class="line">{</div>
+<div class="line">    BG_PDP_ACT, <span class="comment">//Opcion para activar el contexto PDP.</span></div>
+<div class="line">    BG_PDP_DEACT, <span class="comment">//Opcion para desactivar el contexto PDP.</span></div>
+<div class="line">    BG_PDP_ACT_UNSUPORTED </div>
+<div class="line">}<a id="a29" name="a29"></a><a class="code hl_enumeration" href="_b_g77_8h.html#a4ad1b226966cfdfeedb106c0a8cf2250">bg_actPdp_t</a>;</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">typedef</span> <span class="keyword">struct</span></div>
+<div class="line">{</div>
+<div class="line">    uint8_t ctxtID;</div>
+<div class="line">    <a class="code hl_enumeration" href="_b_g77_8h.html#a0d31ddf2d818cd2c7c61b08553abff3d">bgCtxtType_t</a> contextType;</div>
+<div class="line">    uint8_t *apn;</div>
+<div class="line">    uint8_t *usr;</div>
+<div class="line">    uint8_t *psw;</div>
+<div class="line">    <a class="code hl_enumeration" href="_b_g77_8h.html#a4e88b1ffb1682253b142b2e133dada3e">bgAuth_t</a> auth;</div>
+<div class="line">}<a id="_a30" name="_a30"></a><a class="code hl_struct" href="structbg__ctx_pdp__t.html">bg_ctxPdp_t</a>;</div>
+<div class="line"> </div>
+<div class="line"><a class="code hl_enumeration" href="_b_g77_8h.html#af98be1c204049055208486fb2b91c87b">bg_err_t</a> <a id="a31" name="a31"></a><a class="code hl_function" href="_b_g77_8c.html#a1c0f09b53bcd76cc17f7be1d95778898">bg_attach</a>(uint8_t *<span class="keyword">operator</span>);</div>
+<div class="line"> </div>
+<div class="line"><a class="code hl_enumeration" href="_b_g77_8h.html#af98be1c204049055208486fb2b91c87b">bg_err_t</a> <a id="a32" name="a32"></a><a class="code hl_function" href="_b_g77_8c.html#ab3e3ace987b490e788e45c77d2762cc3">bg_conf_pdp</a>(<a class="code hl_struct" href="structbg__ctx_pdp__t.html">bg_ctxPdp_t</a> contextPDP);</div>
+<div class="line"> </div>
+<div class="line"><a class="code hl_enumeration" href="_b_g77_8h.html#af98be1c204049055208486fb2b91c87b">bg_err_t</a> <a id="a33" name="a33"></a><a class="code hl_function" href="_b_g77_8c.html#ae8e29b80c35bbfef04dde3dea52f459e">bg_pdp_activation</a>(uint8_t ctxtID, <a class="code hl_enumeration" href="_b_g77_8h.html#a4ad1b226966cfdfeedb106c0a8cf2250">bg_actPdp_t</a> act);</div>
+<div class="line"><span class="comment">//-------------------------Funciones de Attach y activacion PDP end------------------</span></div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"><span class="comment">//------------------------Funciones de apertura de socket---------------------------</span></div>
+<div class="line"><span class="preprocessor">#define BG_OPEN_SERVER_REMOTE_PORT 0 </span><span class="comment">//Esta MACRO especifica el puerto remoto en modo Servidor.</span></div>
+<div class="line"><span class="preprocessor">#define BG_OPEN_SERVER_IP &quot;127.0.0.1&quot; </span><span class="comment">//Esta MACRO especifica la direccion IP en modo Servidor.</span></div>
+<div class="line"> </div>
+<div class="line"><span class="preprocessor">#define BG_OPEN_BUFF_ACCSS_MODE 0   </span><span class="comment">//Esta MACRO especifica que se quiere usar el modo de acceso en buffer acces mode.</span></div>
+<div class="line"><span class="preprocessor">#define BG_OPEN_TRANSPARENT_MODE 2  </span><span class="comment">//Esta MACRO especifica que se quiere usar el modo de acceso en modo transparente.</span></div>
+<div class="line"> </div>
+<div class="line"><span class="preprocessor">#define BG_OPEN_CLIENT_LOCAL_PORT 0 </span><span class="comment">//Esta MACRO especifica el puetro local automatico en modo Cliente.</span></div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">typedef</span> <span class="keyword">enum</span></div>
+<div class="line">{</div>
+<div class="line">    BG_OPEN_SERVER, <span class="comment">//Opcion para abrir conexion en modo Servidor.</span></div>
+<div class="line">    BG_OPEN_CLIENT  <span class="comment">//Opcion para abrir conexion en modo Cliente.</span></div>
+<div class="line">}<a id="a34" name="a34"></a><a class="code hl_enumeration" href="_b_g77_8h.html#a4de0ad8313ddfa98018750819864029b">bgServiceType_t</a>;</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">typedef</span> <span class="keyword">struct</span></div>
+<div class="line">{</div>
+<div class="line">    uint8_t ctxtID; <span class="comment">//contextID del contexto PDP que se activo</span></div>
+<div class="line">    uint8_t connectID; <span class="comment">//connectID es el numero de conexion. Sirve para identificar conexiones (rango 0-11)</span></div>
+<div class="line">    <a class="code hl_enumeration" href="_b_g77_8h.html#a4de0ad8313ddfa98018750819864029b">bgServiceType_t</a> serviceType; <span class="comment">//Es el tipo de conexion a abrir (TCP Cliente o TCP Servidor)</span></div>
+<div class="line">    uint8_t *ip; <span class="comment">//Direccion IP de destino cuando la conexion es Cliente</span></div>
+<div class="line">    uint32_t remotePort; <span class="comment">//Puerto remoto al que se quiere apuntar cuando la conexion es Cliente</span></div>
+<div class="line">    uint32_t localPort; <span class="comment">//Puerto local del dispositivo se utiliza cuando la conexion es Servidor (en modo Cliente por defecto es 0)</span></div>
+<div class="line">    uint32_t accssMode; <span class="comment">//Selecciona la opcion de modo de acceso Buffer acces mode o Transparent mode (las conexiones cliente son las que pueden iniciar como Transparent mode)</span></div>
+<div class="line">}<a id="_a35" name="_a35"></a><a class="code hl_struct" href="structbg_sckt__t.html">bgSckt_t</a>;</div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"><a class="code hl_enumeration" href="_b_g77_8h.html#af98be1c204049055208486fb2b91c87b">bg_err_t</a> <a id="a36" name="a36"></a><a class="code hl_function" href="_b_g77_8c.html#a6fcaeffa8a8411da9bd284564e9cbd83">bg_open_sckt</a>(<a class="code hl_struct" href="structbg_sckt__t.html">bgSckt_t</a> sckt);</div>
+<div class="line"> </div>
+<div class="line"><a class="code hl_enumeration" href="_b_g77_8h.html#af98be1c204049055208486fb2b91c87b">bg_err_t</a> <a id="a37" name="a37"></a><a class="code hl_function" href="_b_g77_8c.html#a5ed9330e905321630088fe6a84c5a5de">bg_transparent_mode</a>(uint8_t connectID);</div>
+<div class="line"><span class="comment">//-----------------------Funciones de apertura de socket end------------------------</span></div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"><span class="comment">//-----------------------Funciones de cierre y desactivacion-------------------------</span></div>
+<div class="line"><a class="code hl_enumeration" href="_b_g77_8h.html#af98be1c204049055208486fb2b91c87b">bg_err_t</a> <a id="a38" name="a38"></a><a class="code hl_function" href="_b_g77_8c.html#a453a9ac99a62c6fafe71b5179086ee97">bg_exit_transparent_mode</a>(<span class="keywordtype">void</span>);</div>
+<div class="line"> </div>
+<div class="line"><a class="code hl_enumeration" href="_b_g77_8h.html#af98be1c204049055208486fb2b91c87b">bg_err_t</a> <a id="a39" name="a39"></a><a class="code hl_function" href="_b_g77_8c.html#a803afbdc8df8c4db1b6f0267816954c8">bg_close_sckt</a>(uint8_t connectID);</div>
+<div class="line"> </div>
+<div class="line"><a class="code hl_enumeration" href="_b_g77_8h.html#af98be1c204049055208486fb2b91c87b">bg_err_t</a> <a id="a40" name="a40"></a><a class="code hl_function" href="_b_g77_8c.html#a04ad0c65991cef2200cc99a9910a6ef7">bg_detach</a>(<span class="keywordtype">void</span>);</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">//-----------------------Funciones de cierre y desactivacion end---------------------</span></div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"><span class="comment">//----------------------Funciones de transmision recepcion de mensajes---------------</span></div>
+<div class="line"><a class="code hl_enumeration" href="_b_g77_8h.html#af98be1c204049055208486fb2b91c87b">bg_err_t</a> <a id="a41" name="a41"></a><a class="code hl_function" href="_b_g77_8c.html#a4324d29bee02aaf36d6d7dc3d54fa1b7">bg_transmit_buffAMode</a>(uint8_t connectID, uint8_t *data, uint16_t len);</div>
+<div class="line"> </div>
+<div class="line"><a class="code hl_enumeration" href="_b_g77_8h.html#af98be1c204049055208486fb2b91c87b">bg_err_t</a> <a id="a42" name="a42"></a><a class="code hl_function" href="_b_g77_8c.html#a22e89067926540a7db799cf50725070b">bg_receive_buffAMode</a>(uint8_t connectID, uint8_t *buff, uint16_t *len);</div>
+<div class="line"> </div>
+<div class="line"><a class="code hl_enumeration" href="_b_g77_8h.html#af98be1c204049055208486fb2b91c87b">bg_err_t</a> <a id="a43" name="a43"></a><a class="code hl_function" href="_b_g77_8c.html#a2eb4e7ff0044a4ccb914381d9ae25265">bg_transmit_TM</a>(uint8_t *data, uint16_t len);</div>
+<div class="line"><span class="comment">//----------------------Funciones de transmision recepcion de mensajes end-----------</span></div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"><span class="comment">//---------------------------Callbacks LIB para MCU----------------------------</span></div>
+<div class="line"><span class="keyword">typedef</span> <span class="keyword">enum</span></div>
+<div class="line">{</div>
+<div class="line">    BG_URC_CLOSED,</div>
+<div class="line">    BG_URC_RECV,</div>
+<div class="line">    BG_URC_INCOMING_FULL,</div>
+<div class="line">    BG_URC_INCOMING,</div>
+<div class="line">    BG_URC_PDP_DEACT,</div>
+<div class="line">    BG_URC_EXIT_TM,</div>
+<div class="line">    BG_URC_UNSUPPORTED</div>
+<div class="line">}<a id="a44" name="a44"></a><a class="code hl_enumeration" href="_b_g77_8h.html#a6a6ed3ed80fa20a7c489f5bf09ab85c6">bg_urcType_t</a>;</div>
+<div class="line"> </div>
+<div class="line"><span class="keywordtype">void</span> <a id="a45" name="a45"></a><a class="code hl_function" href="_b_g77_8c.html#ad0fda8eacad5ae93b44f5205e4defd90">bg_callback_urcDetected</a>(urcRawData_t urcData);</div>
+<div class="line"> </div>
+<div class="line"><span class="keywordtype">void</span> <a id="a46" name="a46"></a><a class="code hl_function" href="_b_g77_8c.html#aaa55f9ad9670475441d404a86c27f732">bg_urc_parsed_callback</a>(<a class="code hl_struct" href="structurc_info_data__t.html">urcInfoData_t</a> infoUrc);</div>
+<div class="line"> </div>
+<div class="line"><span class="keywordtype">void</span> <a id="a47" name="a47"></a><a class="code hl_function" href="_b_g77_8c.html#acdaa58d150ec7d4d1a5609e0770643b2">bg_recv_callback</a>(uint8_t *buff, uint16_t len, uint8_t connectID);</div>
+<div class="line"> </div>
+<div class="line"><span class="keywordtype">void</span> <a id="a48" name="a48"></a><a class="code hl_function" href="_b_g77_8c.html#a10f9ce690b16f36b9229fecd740a6895">bg_incomming_callback</a>(uint8_t serverID, uint8_t connectID);</div>
+<div class="line"> </div>
+<div class="line"><span class="keywordtype">void</span> <a id="a49" name="a49"></a><a class="code hl_function" href="_b_g77_8c.html#a82f08c1cbe0edd3995c157be6ecd4b31">bg_callback_receive_TM</a>(uint8_t *buff, uint16_t nBytes);</div>
+<div class="line"> </div>
+<div class="line"><span class="keywordtype">void</span> <a id="a50" name="a50"></a><a class="code hl_function" href="_b_g77_8c.html#a735707a118cf1461601c586b3fb56060">bg_callback_closed_TM</a>(<span class="keywordtype">void</span>);</div>
+<div class="line"> </div>
+<div class="line"><span class="keywordtype">void</span> <a id="a51" name="a51"></a><a class="code hl_function" href="_b_g77_8c.html#ac828183e261ff8d14f033e5b1b651625">bg_pdp_activation_callback</a>(uint8_t contextID);</div>
+<div class="line"> </div>
+<div class="line"><span class="keywordtype">void</span> <a id="a52" name="a52"></a><a class="code hl_function" href="_b_g77_8c.html#a15909ca3b9587681afc05d26f7ff793c">bg_callback_TM_Inactive</a>(<span class="keywordtype">void</span>);</div>
+<div class="line"><span class="comment">//---------------------------Callbacks LIB para MCU end------------------------</span></div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"><span class="comment">//-------------------------------------Funciones de cola----------------------------</span></div>
+<div class="line"><span class="keywordtype">void</span> <a id="a53" name="a53"></a><a class="code hl_function" href="_b_g77_8c.html#accb6d774575fa4349a922b7194d36b95">bg_queue_put</a>(urcRawData_t urc);</div>
+<div class="line"> </div>
+<div class="line"><span class="keywordtype">void</span> <a id="a54" name="a54"></a><a class="code hl_function" href="_b_g77_8c.html#a417fbe13aaac91032b2cf5fe5fbabba3">bg_queue_pop</a>(urcRawData_t *urc);</div>
+<div class="line"> </div>
+<div class="line">uint8_t <a id="a55" name="a55"></a><a class="code hl_function" href="_b_g77_8c.html#a00a186528d54e0162b4ec31902db106b">bg_queue_is_empty</a>(<span class="keywordtype">void</span>);</div>
+<div class="line"> </div>
+<div class="line">uint8_t <a id="a56" name="a56"></a><a class="code hl_function" href="_b_g77_8c.html#a61963d30f7d309a7ae1cf8eeed599605">bg_queue_is_full</a>(<span class="keywordtype">void</span>);</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">//-------------------------------------Funciones de cola end------------------------</span></div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// bg_err_t bg_tx(uint8_t cntId, uint8_t *data, uint16_t len, uint32_t timeout);</span></div>
+<div class="line"><span class="comment">// void bg_parse_open_cmd(uint8_t *openCmd, clientScktParam_t *clientOpen);</span></div>
+<div class="line"><span class="comment">// bg_err_t bg_open_client(clientScktParam_t cientOpen);</span></div>
+<div class="line"><span class="comment">// static int bg_modem_config_modem(void);</span></div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"><span class="preprocessor">#endif </span><span class="comment">/* _BG77_H_ */</span><span class="preprocessor"></span></div>
+<div class="ttc" id="a_b_g77_8c_html_a00a186528d54e0162b4ec31902db106b"><div class="ttname"><a href="_b_g77_8c.html#a00a186528d54e0162b4ec31902db106b">bg_queue_is_empty</a></div><div class="ttdeci">uint8_t bg_queue_is_empty(void)</div><div class="ttdoc">Indica si la cola interna esta vacia.</div><div class="ttdef"><b>Definition</b> BG77.c:1119</div></div>
+<div class="ttc" id="a_b_g77_8c_html_a04ad0c65991cef2200cc99a9910a6ef7"><div class="ttname"><a href="_b_g77_8c.html#a04ad0c65991cef2200cc99a9910a6ef7">bg_detach</a></div><div class="ttdeci">bg_err_t bg_detach(void)</div><div class="ttdoc">Sirve para desregistrar el modulo de la red (detach).</div><div class="ttdef"><b>Definition</b> BG77.c:911</div></div>
+<div class="ttc" id="a_b_g77_8c_html_a10f9ce690b16f36b9229fecd740a6895"><div class="ttname"><a href="_b_g77_8c.html#a10f9ce690b16f36b9229fecd740a6895">bg_incomming_callback</a></div><div class="ttdeci">__bg_weak__ void bg_incomming_callback(uint8_t serverID, uint8_t connectID)</div><div class="ttdoc">Esta funcion corresponde a un callback que notifica al usuario la ocurrencia de una conexion entrante...</div><div class="ttdef"><b>Definition</b> BG77.c:1074</div></div>
+<div class="ttc" id="a_b_g77_8c_html_a15909ca3b9587681afc05d26f7ff793c"><div class="ttname"><a href="_b_g77_8c.html#a15909ca3b9587681afc05d26f7ff793c">bg_callback_TM_Inactive</a></div><div class="ttdeci">__bg_weak__ void bg_callback_TM_Inactive(void)</div><div class="ttdoc">Esta funcion de callback notifica al usuario que no hay más URC por atender y se esta fuera de modo t...</div><div class="ttdef"><b>Definition</b> BG77.c:1094</div></div>
+<div class="ttc" id="a_b_g77_8c_html_a1c0f09b53bcd76cc17f7be1d95778898"><div class="ttname"><a href="_b_g77_8c.html#a1c0f09b53bcd76cc17f7be1d95778898">bg_attach</a></div><div class="ttdeci">bg_err_t bg_attach(uint8_t *operator)</div><div class="ttdoc">Funcion para registrar el modulo en la red (attach).</div><div class="ttdef"><b>Definition</b> BG77.c:761</div></div>
+<div class="ttc" id="a_b_g77_8c_html_a22e89067926540a7db799cf50725070b"><div class="ttname"><a href="_b_g77_8c.html#a22e89067926540a7db799cf50725070b">bg_receive_buffAMode</a></div><div class="ttdeci">bg_err_t bg_receive_buffAMode(uint8_t connectID, uint8_t *buff, uint16_t *len)</div><div class="ttdoc">Funcion que se encarga de recuperar los datos recibidos por una conexion en buffer access mode.</div><div class="ttdef"><b>Definition</b> BG77.c:951</div></div>
+<div class="ttc" id="a_b_g77_8c_html_a2eb4e7ff0044a4ccb914381d9ae25265"><div class="ttname"><a href="_b_g77_8c.html#a2eb4e7ff0044a4ccb914381d9ae25265">bg_transmit_TM</a></div><div class="ttdeci">bg_err_t bg_transmit_TM(uint8_t *data, uint16_t len)</div><div class="ttdoc">Transmite datos en modo transparente.</div><div class="ttdef"><b>Definition</b> BG77.c:998</div></div>
+<div class="ttc" id="a_b_g77_8c_html_a3f03c39804aa65f885946b3f30d6b4fc"><div class="ttname"><a href="_b_g77_8c.html#a3f03c39804aa65f885946b3f30d6b4fc">bg_handle_urc</a></div><div class="ttdeci">void bg_handle_urc(void)</div><div class="ttdoc">Esta funcion se encarga de manejar los URC encolados.   Si hay un URC encolado, se procede a parsearl...</div><div class="ttdef"><b>Definition</b> BG77.c:237</div></div>
+<div class="ttc" id="a_b_g77_8c_html_a3f93ee3bfd2996fa41f5f9425dc83431"><div class="ttname"><a href="_b_g77_8c.html#a3f93ee3bfd2996fa41f5f9425dc83431">bg_set_bsp</a></div><div class="ttdeci">void bg_set_bsp(bg_bspFun_t bspFun)</div><div class="ttdoc">Funcion para establecer los punteros a función del BSP (UART TX, Delay, GPIO_write,...</div><div class="ttdef"><b>Definition</b> BG77.c:139</div></div>
+<div class="ttc" id="a_b_g77_8c_html_a417fbe13aaac91032b2cf5fe5fbabba3"><div class="ttname"><a href="_b_g77_8c.html#a417fbe13aaac91032b2cf5fe5fbabba3">bg_queue_pop</a></div><div class="ttdeci">void bg_queue_pop(urcRawData_t *urc)</div><div class="ttdoc">Esta funcion hacer uso de la cola interna de URC de la libreria y desencola mensajes del tipo urcRawD...</div><div class="ttdef"><b>Definition</b> BG77.c:1111</div></div>
+<div class="ttc" id="a_b_g77_8c_html_a4324d29bee02aaf36d6d7dc3d54fa1b7"><div class="ttname"><a href="_b_g77_8c.html#a4324d29bee02aaf36d6d7dc3d54fa1b7">bg_transmit_buffAMode</a></div><div class="ttdeci">bg_err_t bg_transmit_buffAMode(uint8_t connectID, uint8_t *data, uint16_t len)</div><div class="ttdoc">Funcion para transmitir mensajes por un socket que esta en modo buffer access mode.</div><div class="ttdef"><b>Definition</b> BG77.c:924</div></div>
+<div class="ttc" id="a_b_g77_8c_html_a453a9ac99a62c6fafe71b5179086ee97"><div class="ttname"><a href="_b_g77_8c.html#a453a9ac99a62c6fafe71b5179086ee97">bg_exit_transparent_mode</a></div><div class="ttdeci">bg_err_t bg_exit_transparent_mode(void)</div><div class="ttdoc">Hace que el dispositivo salga de modo transparente.</div><div class="ttdef"><b>Definition</b> BG77.c:880</div></div>
+<div class="ttc" id="a_b_g77_8c_html_a560f384f98c140a53d8fc8f5b32b5e19"><div class="ttname"><a href="_b_g77_8c.html#a560f384f98c140a53d8fc8f5b32b5e19">bg_check_attach</a></div><div class="ttdeci">bg_err_t bg_check_attach(void)</div><div class="ttdoc">Funcion para verificar el registro en red.</div><div class="ttdef"><b>Definition</b> BG77.c:547</div></div>
+<div class="ttc" id="a_b_g77_8c_html_a5b05e846b42156e0bd04539d036e77e5"><div class="ttname"><a href="_b_g77_8c.html#a5b05e846b42156e0bd04539d036e77e5">bg_data_module</a></div><div class="ttdeci">bg_err_t bg_data_module(void)</div><div class="ttdoc">Funcion para imprimir la version de FW del modulo, ICCI e IMEI.</div><div class="ttdef"><b>Definition</b> BG77.c:501</div></div>
+<div class="ttc" id="a_b_g77_8c_html_a5ed9330e905321630088fe6a84c5a5de"><div class="ttname"><a href="_b_g77_8c.html#a5ed9330e905321630088fe6a84c5a5de">bg_transparent_mode</a></div><div class="ttdeci">bg_err_t bg_transparent_mode(uint8_t connectID)</div><div class="ttdoc">Permite al dispositio cambiar su modo de acceso a modo transparente.</div><div class="ttdef"><b>Definition</b> BG77.c:852</div></div>
+<div class="ttc" id="a_b_g77_8c_html_a61963d30f7d309a7ae1cf8eeed599605"><div class="ttname"><a href="_b_g77_8c.html#a61963d30f7d309a7ae1cf8eeed599605">bg_queue_is_full</a></div><div class="ttdeci">uint8_t bg_queue_is_full(void)</div><div class="ttdoc">Indica si la cola interna esta llena.</div><div class="ttdef"><b>Definition</b> BG77.c:1124</div></div>
+<div class="ttc" id="a_b_g77_8c_html_a65c9f56b02078e837debb481fff49182"><div class="ttname"><a href="_b_g77_8c.html#a65c9f56b02078e837debb481fff49182">bg_query_signal</a></div><div class="ttdeci">bg_err_t bg_query_signal(void)</div><div class="ttdoc">Consulta la intensidad de la señal cuando el modulo ya esta registrado.</div><div class="ttdef"><b>Definition</b> BG77.c:711</div></div>
+<div class="ttc" id="a_b_g77_8c_html_a6fcaeffa8a8411da9bd284564e9cbd83"><div class="ttname"><a href="_b_g77_8c.html#a6fcaeffa8a8411da9bd284564e9cbd83">bg_open_sckt</a></div><div class="ttdeci">bg_err_t bg_open_sckt(bgSckt_t sckt)</div><div class="ttdoc">Abre una conexion (socket) TCP en modo servidor o cliente.</div><div class="ttdef"><b>Definition</b> BG77.c:811</div></div>
+<div class="ttc" id="a_b_g77_8c_html_a6fdf52da4e8bf69a4e9130163ae5e7be"><div class="ttname"><a href="_b_g77_8c.html#a6fdf52da4e8bf69a4e9130163ae5e7be">bg_check_sim</a></div><div class="ttdeci">bg_err_t bg_check_sim(void)</div><div class="ttdoc">Funcion para detectar SIM.</div><div class="ttdef"><b>Definition</b> BG77.c:530</div></div>
+<div class="ttc" id="a_b_g77_8c_html_a735707a118cf1461601c586b3fb56060"><div class="ttname"><a href="_b_g77_8c.html#a735707a118cf1461601c586b3fb56060">bg_callback_closed_TM</a></div><div class="ttdeci">__bg_weak__ void bg_callback_closed_TM(void)</div><div class="ttdoc">Esta funcion es un callback que notifica al usuario que la conexion en modo transparente se cerro.</div><div class="ttdef"><b>Definition</b> BG77.c:1084</div></div>
+<div class="ttc" id="a_b_g77_8c_html_a796fbdf47278af0a696da945fa907110"><div class="ttname"><a href="_b_g77_8c.html#a796fbdf47278af0a696da945fa907110">bg_mainRICallback</a></div><div class="ttdeci">void bg_mainRICallback(mainRiEdge_t edge)</div><div class="ttdoc">Esta funcion de callback se debe llamar en una funcion de interrupcion de pin digital que corresponde...</div><div class="ttdef"><b>Definition</b> BG77.c:189</div></div>
+<div class="ttc" id="a_b_g77_8c_html_a803afbdc8df8c4db1b6f0267816954c8"><div class="ttname"><a href="_b_g77_8c.html#a803afbdc8df8c4db1b6f0267816954c8">bg_close_sckt</a></div><div class="ttdeci">bg_err_t bg_close_sckt(uint8_t connectID)</div><div class="ttdoc">Cierra una conexion o socket.</div><div class="ttdef"><b>Definition</b> BG77.c:901</div></div>
+<div class="ttc" id="a_b_g77_8c_html_a82f08c1cbe0edd3995c157be6ecd4b31"><div class="ttname"><a href="_b_g77_8c.html#a82f08c1cbe0edd3995c157be6ecd4b31">bg_callback_receive_TM</a></div><div class="ttdeci">__bg_weak__ void bg_callback_receive_TM(uint8_t *buff, uint16_t nBytes)</div><div class="ttdoc">Esta funcion es un callback que notifica al usuario de un mensaje que se recibe en modo transparente.</div><div class="ttdef"><b>Definition</b> BG77.c:1079</div></div>
+<div class="ttc" id="a_b_g77_8c_html_a952e9d1543029fccfb87e8e133b68122"><div class="ttname"><a href="_b_g77_8c.html#a952e9d1543029fccfb87e8e133b68122">bg_send</a></div><div class="ttdeci">bg_err_t bg_send(uint32_t timeout, uint8_t enablePrint, const char *fmt,...)</div><div class="ttdoc">Esta funcion permite enviar comandos AT en formato de especificadores de formato (como printf)</div><div class="ttdef"><b>Definition</b> BG77.c:341</div></div>
+<div class="ttc" id="a_b_g77_8c_html_aa422c5730073a35ffc37421e44a6c632"><div class="ttname"><a href="_b_g77_8c.html#aa422c5730073a35ffc37421e44a6c632">bg_callback_ms</a></div><div class="ttdeci">void bg_callback_ms(void)</div><div class="ttdoc">Esta funcion de callback se tiene que llamar en una funcion de interrupción de temporizador en donde ...</div><div class="ttdef"><b>Definition</b> BG77.c:152</div></div>
+<div class="ttc" id="a_b_g77_8c_html_aaa55f9ad9670475441d404a86c27f732"><div class="ttname"><a href="_b_g77_8c.html#aaa55f9ad9670475441d404a86c27f732">bg_urc_parsed_callback</a></div><div class="ttdeci">__bg_weak__ void bg_urc_parsed_callback(urcInfoData_t infoUrc)</div><div class="ttdoc">Esta funcion es un callback en donde se le va a entregar al usuario la informacion util de un URC det...</div><div class="ttdef"><b>Definition</b> BG77.c:1021</div></div>
+<div class="ttc" id="a_b_g77_8c_html_ab3e3ace987b490e788e45c77d2762cc3"><div class="ttname"><a href="_b_g77_8c.html#ab3e3ace987b490e788e45c77d2762cc3">bg_conf_pdp</a></div><div class="ttdeci">bg_err_t bg_conf_pdp(bg_ctxPdp_t contextPDP)</div><div class="ttdoc">Configura los parametros de contexto PDP que se quiere activar.</div><div class="ttdef"><b>Definition</b> BG77.c:778</div></div>
+<div class="ttc" id="a_b_g77_8c_html_ac4a2455d92827db1c3cf0ba553a05bb8"><div class="ttname"><a href="_b_g77_8c.html#ac4a2455d92827db1c3cf0ba553a05bb8">bg_check_sckt</a></div><div class="ttdeci">bg_err_t bg_check_sckt(uint8_t connectID)</div><div class="ttdoc">Verifica el estado de una conexion.</div><div class="ttdef"><b>Definition</b> BG77.c:667</div></div>
+<div class="ttc" id="a_b_g77_8c_html_ac5b7a9c29733548542fd9372f5333273"><div class="ttname"><a href="_b_g77_8c.html#ac5b7a9c29733548542fd9372f5333273">bg_query_conf_pdp</a></div><div class="ttdeci">bg_err_t bg_query_conf_pdp(uint8_t contextID)</div><div class="ttdoc">Funcion que imprime parametros de la configuracion de contexto PDP (APN, USER, PASSWORD,...</div><div class="ttdef"><b>Definition</b> BG77.c:595</div></div>
+<div class="ttc" id="a_b_g77_8c_html_ac828183e261ff8d14f033e5b1b651625"><div class="ttname"><a href="_b_g77_8c.html#ac828183e261ff8d14f033e5b1b651625">bg_pdp_activation_callback</a></div><div class="ttdeci">__bg_weak__ void bg_pdp_activation_callback(uint8_t contextID)</div><div class="ttdoc">Este callback notifica al usuario que hubo una reactivacion de contexto PDP debido al URC &quot;pdp deact&quot;...</div><div class="ttdef"><b>Definition</b> BG77.c:1089</div></div>
+<div class="ttc" id="a_b_g77_8c_html_accb6d774575fa4349a922b7194d36b95"><div class="ttname"><a href="_b_g77_8c.html#accb6d774575fa4349a922b7194d36b95">bg_queue_put</a></div><div class="ttdeci">void bg_queue_put(urcRawData_t urc)</div><div class="ttdoc">Esta funcion hacer uso de la cola interna de URC de la libreria y encola mensajes del tipo urcRawData...</div><div class="ttdef"><b>Definition</b> BG77.c:1105</div></div>
+<div class="ttc" id="a_b_g77_8c_html_acd4a161fbac7d28353ca438b91e0520b"><div class="ttname"><a href="_b_g77_8c.html#acd4a161fbac7d28353ca438b91e0520b">bg_uartCallback</a></div><div class="ttdeci">void bg_uartCallback(uint8_t *buff, uint16_t nBytes)</div><div class="ttdoc">Esta funcion de callback se debe llamar en una funcion de interrupcion de recepcion de uart en la cua...</div><div class="ttdef"><b>Definition</b> BG77.c:160</div></div>
+<div class="ttc" id="a_b_g77_8c_html_acdaa58d150ec7d4d1a5609e0770643b2"><div class="ttname"><a href="_b_g77_8c.html#acdaa58d150ec7d4d1a5609e0770643b2">bg_recv_callback</a></div><div class="ttdeci">__bg_weak__ void bg_recv_callback(uint8_t *buff, uint16_t len, uint8_t connectID)</div><div class="ttdoc">Esta funcion es un callback que notifica al usuario que se recibio un mensaje de alguna conexion en m...</div><div class="ttdef"><b>Definition</b> BG77.c:1063</div></div>
+<div class="ttc" id="a_b_g77_8c_html_ad0fda8eacad5ae93b44f5205e4defd90"><div class="ttname"><a href="_b_g77_8c.html#ad0fda8eacad5ae93b44f5205e4defd90">bg_callback_urcDetected</a></div><div class="ttdeci">__bg_weak__ void bg_callback_urcDetected(urcRawData_t urcData)</div><div class="ttdoc">Esta funcion corresponde a un callback para el usuario. Esta funcion se llamara cuando se detecte un ...</div><div class="ttdef"><b>Definition</b> BG77.c:1013</div></div>
+<div class="ttc" id="a_b_g77_8c_html_ad9920b9e69487d843b87ace0fb65535f"><div class="ttname"><a href="_b_g77_8c.html#ad9920b9e69487d843b87ace0fb65535f">bg_init_module</a></div><div class="ttdeci">bg_err_t bg_init_module(void)</div><div class="ttdoc">Funcion para inicializar el modulo. Sus funciones son encender y configurar el modulo.</div><div class="ttdef"><b>Definition</b> BG77.c:464</div></div>
+<div class="ttc" id="a_b_g77_8c_html_adfa333fa2fbd83d8d555f78174c312d4"><div class="ttname"><a href="_b_g77_8c.html#adfa333fa2fbd83d8d555f78174c312d4">bg_query_cops</a></div><div class="ttdeci">bg_err_t bg_query_cops(void)</div><div class="ttdoc">Funcion que imprime parametros de la consulta de COPS modo, operador, tecnologia de acceso.</div><div class="ttdef"><b>Definition</b> BG77.c:561</div></div>
+<div class="ttc" id="a_b_g77_8c_html_ae05b151b88c27bed92a5a91c4cb9781f"><div class="ttname"><a href="_b_g77_8c.html#ae05b151b88c27bed92a5a91c4cb9781f">bg_power_off</a></div><div class="ttdeci">bg_err_t bg_power_off(void)</div><div class="ttdoc">Realiza el apagado del modulo con el comando AT+QPOWD.</div><div class="ttdef"><b>Definition</b> BG77.c:413</div></div>
+<div class="ttc" id="a_b_g77_8c_html_ae23a60b4e1b7f50ea3cdd0927640e0de"><div class="ttname"><a href="_b_g77_8c.html#ae23a60b4e1b7f50ea3cdd0927640e0de">bg_power_on</a></div><div class="ttdeci">bg_err_t bg_power_on(void)</div><div class="ttdoc">Esta funcion realiza la secuencia necesaria de los pines BG_PWRKEY_PIN, BG_VBAT_PIN,...</div><div class="ttdef"><b>Definition</b> BG77.c:395</div></div>
+<div class="ttc" id="a_b_g77_8c_html_ae28f36ea82838abfdca0118d7af70da7"><div class="ttname"><a href="_b_g77_8c.html#ae28f36ea82838abfdca0118d7af70da7">bg_check_pdp</a></div><div class="ttdeci">bg_err_t bg_check_pdp(uint8_t ctxtID)</div><div class="ttdoc">Verifica que se tenga activado el contexto PDP seleccionado (contextID)</div><div class="ttdef"><b>Definition</b> BG77.c:629</div></div>
+<div class="ttc" id="a_b_g77_8c_html_ae8e29b80c35bbfef04dde3dea52f459e"><div class="ttname"><a href="_b_g77_8c.html#ae8e29b80c35bbfef04dde3dea52f459e">bg_pdp_activation</a></div><div class="ttdeci">bg_err_t bg_pdp_activation(uint8_t ctxtID, bg_actPdp_t act)</div><div class="ttdoc">Activa o desactiva el contexto PDP previamente configurado.</div><div class="ttdef"><b>Definition</b> BG77.c:793</div></div>
+<div class="ttc" id="a_b_g77_8h_html_a0d31ddf2d818cd2c7c61b08553abff3d"><div class="ttname"><a href="_b_g77_8h.html#a0d31ddf2d818cd2c7c61b08553abff3d">bgCtxtType_t</a></div><div class="ttdeci">bgCtxtType_t</div><div class="ttdoc">Es el tipo de variable que define el tipo de contexto.</div><div class="ttdef"><b>Definition</b> BG77.h:924</div></div>
+<div class="ttc" id="a_b_g77_8h_html_a2c28d9ff8a1ade4f1a62876f8ea35812"><div class="ttname"><a href="_b_g77_8h.html#a2c28d9ff8a1ade4f1a62876f8ea35812">bgPin_t</a></div><div class="ttdeci">bgPin_t</div><div class="ttdoc">tipo de dato que enlista todos los pines soportados para la escritura de GPIOs</div><div class="ttdef"><b>Definition</b> BG77.h:669</div></div>
+<div class="ttc" id="a_b_g77_8h_html_a3cf0239ec77a1d5be9c2a1b4e28e0d43"><div class="ttname"><a href="_b_g77_8h.html#a3cf0239ec77a1d5be9c2a1b4e28e0d43">delayFun_t</a></div><div class="ttdeci">void(* delayFun_t)(uint32_t mDelay)</div><div class="ttdoc">tipo de dato para crear un puntero a funcion de delay (en mili segundos)</div><div class="ttdef"><b>Definition</b> BG77.h:693</div></div>
+<div class="ttc" id="a_b_g77_8h_html_a4ad1b226966cfdfeedb106c0a8cf2250"><div class="ttname"><a href="_b_g77_8h.html#a4ad1b226966cfdfeedb106c0a8cf2250">bg_actPdp_t</a></div><div class="ttdeci">bg_actPdp_t</div><div class="ttdoc">Es el tipo de variable que define la opcion para activar o desactivar el contexto PDP.</div><div class="ttdef"><b>Definition</b> BG77.h:937</div></div>
+<div class="ttc" id="a_b_g77_8h_html_a4de0ad8313ddfa98018750819864029b"><div class="ttname"><a href="_b_g77_8h.html#a4de0ad8313ddfa98018750819864029b">bgServiceType_t</a></div><div class="ttdeci">bgServiceType_t</div><div class="ttdoc">Es el tipo de dato para seleccionar el tipo de servicio en una apertura de conexion (Cliente o Servid...</div><div class="ttdef"><b>Definition</b> BG77.h:1002</div></div>
+<div class="ttc" id="a_b_g77_8h_html_a4e88b1ffb1682253b142b2e133dada3e"><div class="ttname"><a href="_b_g77_8h.html#a4e88b1ffb1682253b142b2e133dada3e">bgAuth_t</a></div><div class="ttdeci">bgAuth_t</div><div class="ttdoc">Es el tipo de variable que define el tipo de autenticacion a utilizar.</div><div class="ttdef"><b>Definition</b> BG77.h:911</div></div>
+<div class="ttc" id="a_b_g77_8h_html_a5df4af1d37573e135df6251575c7644f"><div class="ttname"><a href="_b_g77_8h.html#a5df4af1d37573e135df6251575c7644f">uartFun_t</a></div><div class="ttdeci">bg_err_t(* uartFun_t)(uint8_t *data, uint8_t len)</div><div class="ttdoc">tipo de dato para crear un puntero a funciones uart (TX o RX)</div><div class="ttdef"><b>Definition</b> BG77.h:681</div></div>
+<div class="ttc" id="a_b_g77_8h_html_a6a6ed3ed80fa20a7c489f5bf09ab85c6"><div class="ttname"><a href="_b_g77_8h.html#a6a6ed3ed80fa20a7c489f5bf09ab85c6">bg_urcType_t</a></div><div class="ttdeci">bg_urcType_t</div><div class="ttdoc">Variable de tipo que sirve para identificar que tipo de URC fue recibido.</div><div class="ttdef"><b>Definition</b> BG77.h:1114</div></div>
+<div class="ttc" id="a_b_g77_8h_html_aae937a975adb539d978912a31af5a288"><div class="ttname"><a href="_b_g77_8h.html#aae937a975adb539d978912a31af5a288">gpioWriteFun_t</a></div><div class="ttdeci">bg_err_t(* gpioWriteFun_t)(bgPin_t pin, uint8_t state)</div><div class="ttdoc">tipo de dato para crear un puntero a funcion de escritura de GPIOs</div><div class="ttdef"><b>Definition</b> BG77.h:687</div></div>
+<div class="ttc" id="a_b_g77_8h_html_ab0ebc1ea018349b5e09729ddad2f443e"><div class="ttname"><a href="_b_g77_8h.html#ab0ebc1ea018349b5e09729ddad2f443e">mainRiEdge_t</a></div><div class="ttdeci">mainRiEdge_t</div><div class="ttdoc">Tipo de variable que indica el flanco que sucedio en el pin MAIN_RI.</div><div class="ttdef"><b>Definition</b> BG77.h:728</div></div>
+<div class="ttc" id="a_b_g77_8h_html_ae235bc4734e4f0ac5242dd32776a39cb"><div class="ttname"><a href="_b_g77_8h.html#ae235bc4734e4f0ac5242dd32776a39cb">resetFun_t</a></div><div class="ttdeci">void(* resetFun_t)(void)</div><div class="ttdoc">tipo de dato para crear un puntero a funcion de reset de sistema (reset de MCU)</div><div class="ttdef"><b>Definition</b> BG77.h:699</div></div>
+<div class="ttc" id="a_b_g77_8h_html_af98be1c204049055208486fb2b91c87b"><div class="ttname"><a href="_b_g77_8h.html#af98be1c204049055208486fb2b91c87b">bg_err_t</a></div><div class="ttdeci">bg_err_t</div><div class="ttdoc">tipo de variable que almacena el catalogo de errores.</div><div class="ttdef"><b>Definition</b> BG77.h:605</div></div>
+<div class="ttc" id="astructbg__bsp_fun__t_html"><div class="ttname"><a href="structbg__bsp_fun__t.html">bg_bspFun_t</a></div><div class="ttdoc">Tipo de variable que contiene los punteros a funcion del BSP.</div><div class="ttdef"><b>Definition</b> BG77.h:706</div></div>
+<div class="ttc" id="astructbg__ctx_pdp__t_html"><div class="ttname"><a href="structbg__ctx_pdp__t.html">bg_ctxPdp_t</a></div><div class="ttdoc">Es el tipo de variable que define la configuracion de contexto PDP.</div><div class="ttdef"><b>Definition</b> BG77.h:948</div></div>
+<div class="ttc" id="astructbg_sckt__t_html"><div class="ttname"><a href="structbg_sckt__t.html">bgSckt_t</a></div><div class="ttdoc">Tipo de dato que contiene todos los parametros de red para abrir un socket.</div><div class="ttdef"><b>Definition</b> BG77.h:1012</div></div>
+<div class="ttc" id="astructflags__t_html"><div class="ttname"><a href="structflags__t.html">flags_t</a></div><div class="ttdoc">Tipo de dato para crear variables de banderas de 1 bit (16 bits)</div><div class="ttdef"><b>Definition</b> BG77.h:643</div></div>
+<div class="ttc" id="astructurc_info_data__t_html"><div class="ttname"><a href="structurc_info_data__t.html">urcInfoData_t</a></div><div class="ttdoc">Tipo de variable que contiene la informacion util de URC.</div><div class="ttdef"><b>Definition</b> BG77.h:738</div></div>
+</div><!-- fragment --> </div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+<img class="footer" src="cursoCIntermedio.png"  height="100px"/>
+</small></address>
+</div><!-- doc-content -->
+</body>
+</html>

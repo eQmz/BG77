@@ -1,0 +1,315 @@
+\doxysection{El}
+\hypertarget{_el-example}{}\label{_el-example}codigo de ejemplo a continuacion, muestra como utilizar la libreria. De manera general, se necesita\+:
+\begin{DoxyEnumerate}
+\item Generar el BSP que son punteros a funcion. 1.\+1 Funcion transmision de UART. 1.\+2 Funcion escritura de GPIOS. 1.\+3 Funcion de delay. 1.\+4 Funcion de reinicio de MCU.
+\item Llamar los callbacks de UART, Temporizador y Flancos del pin MAIN RI en las interrupciones correspondientes.
+\item Establecer o dar el BSP a la libreria.
+\item Inicializar la libreria.
+\item Realizar proceso de verificacion. 5.\+1 Verificar SIM. 5.\+2 Verificar el registro del modulo (attach). 5.\+3 Verificar la seleccion de operadora (COPS). 5.\+4 Verificar contexto PDP.
+\item Registrar o attachar el modulo. 6.\+1 Desactivar contexto PDP. 6.\+2 Registrar (attachar) seleccionando la operadora (COPS).
+\item Configurar y activar el contexto PDP.
+\item Configurar y abrir sockets (SERVIDOR o CLIENTE).
+\item Colocar funcion de manejo de URC en loop de la aplicacion principal.
+\item Recepcion y transmision de mensajes. 10.\+1 Dependiendo del modo de acceso usar la funcion de transmision adecuada. \doxylink{_b_g77_8h_a4324d29bee02aaf36d6d7dc3d54fa1b7}{bg\+\_\+transmit\+\_\+buff\+AMode(uint8\+\_\+t connect\+ID, uint8\+\_\+t \texorpdfstring{$\ast$}{*}data, uint16\+\_\+t len)} \doxylink{_b_g77_8h_a2eb4e7ff0044a4ccb914381d9ae25265}{bg\+\_\+transmit\+\_\+\+TM(uint8\+\_\+t \texorpdfstring{$\ast$}{*}data, uint16\+\_\+t len)}
+
+10.\+2 Dependiendo del modo de acceso usar el callback de recepcion adecuada. void \doxylink{_b_g77_8h_a9984ef8adb9430c0bb3410b6bf7120c5}{bg\+\_\+callback\+\_\+receive\+\_\+\+TM(uint8\+\_\+t \texorpdfstring{$\ast$}{*}buff, uint16\+\_\+t n\+Bytes)} \{
+
+\} void \doxylink{_b_g77_8h_a03693666091cc43048c11c148b9afd23}{bg\+\_\+recv\+\_\+callback(uint8\+\_\+t \texorpdfstring{$\ast$}{*}buff, uint16\+\_\+t len, uint8\+\_\+t connect\+ID)} \{
+
+\}
+\begin{DoxyEnumerate}
+\item Usar Callbacks de notificacion de URC 11.\+1 Callback de conexion entrante. void bg\+\_\+incomming\+\_\+callback(uint8\+\_\+t server\+ID, uint \texorpdfstring{$\ast$}{*}8\+\_\+t connect\+ID) \{
+
+\} 11.\+2 Callback de salida de modo transparente. void \doxylink{_b_g77_8h_a35a7b46f396882941b3aa7f00c1b19f4}{bg\+\_\+callback\+\_\+closed\+\_\+\+TM(void)} \{
+
+\} 11.\+3 Callback de reactivacion de contexto PDP. void \doxylink{_b_g77_8h_a3776fe3967e34bff08a7c7d3c32cf2e7}{bg\+\_\+pdp\+\_\+activation\+\_\+callback(uint8\+\_\+t context\+ID)} \{
+
+\} 11.\+4 Callback de modo transparente inactivo. El proposito es notificar al usuario para que pueda regresar a modo transparente. void \doxylink{_b_g77_8h_a8fcd8af3354bb2eb3fbde65e47993e78}{bg\+\_\+callback\+\_\+\+TM\+\_\+\+Inactive(void)} \{
+
+\}
+\end{DoxyEnumerate}
+\end{DoxyEnumerate}
+
+Los pasos numero 10 y 11 son opcionales en este codigo de ejemplo, ya que, la libreria llama a funciones de notificacion callback por defecto si no se crean los de usuario.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ "{}main.h"{}}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_b_g77_8h}{BG77.h}}"{}}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/BSP-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\mbox{\hyperlink{_b_g77_8h_af98be1c204049055208486fb2b91c87b}{bg\_err\_t}}\ uart\_tx(uint8\_t\ *data,\ uint16\_t\ len);}
+\DoxyCodeLine{\mbox{\hyperlink{_b_g77_8h_af98be1c204049055208486fb2b91c87b}{bg\_err\_t}}\ gpioWrite(\mbox{\hyperlink{_b_g77_8h_a2c28d9ff8a1ade4f1a62876f8ea35812}{bgPin\_t}}\ pin,\ uint8\_t\ state);}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ msDelay(uint32\_t\ mDelay);}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ resetMCU(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{}
+\DoxyCodeLine{\mbox{\hyperlink{_b_g77_8h_af98be1c204049055208486fb2b91c87b}{bg\_err\_t}}\ uart\_tx(uint8\_t\ *data,\ uint16\_t\ len)}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{_b_g77_8h_af98be1c204049055208486fb2b91c87b}{bg\_err\_t}}\ err\ =\ BG\_OK;}
+\DoxyCodeLine{\ \ \ \textcolor{keywordflow}{if}(HAL\_UART\_Transmit(\&UART\_BG,\ data,\ len,\ 1000)\ !=\ HAL\_OK)}
+\DoxyCodeLine{\ \ \ \ \ \ \ err\ =\ BG\_ERR\_MCU\_TX\_UART;}
+\DoxyCodeLine{\ \ \ \textcolor{keywordflow}{return}\ err;}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\mbox{\hyperlink{_b_g77_8h_af98be1c204049055208486fb2b91c87b}{bg\_err\_t}}\ gpioWrite(\mbox{\hyperlink{_b_g77_8h_a2c28d9ff8a1ade4f1a62876f8ea35812}{bgPin\_t}}\ pin,\ uint8\_t\ state)}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\ \ \ \textcolor{keywordflow}{if}(pin\ >=\ BG\_UNSUPORTED\_PIN)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ BG\_ERR\_UNSUPPORTED\_PIN;}
+\DoxyCodeLine{\ \ \ \ \ \ \ }
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{_b_g77_8h_af98be1c204049055208486fb2b91c87b}{bg\_err\_t}}\ err\ =\ BG\_OK;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ uint32\_t\ bgPin[]\ =\ \{BG\_PWRKEY\_Pin,\ \ BG\_VBAT\_Pin,\ BG\_RESET\_Pin,\ BG\_PON\_TRIG\_Pin\};}
+\DoxyCodeLine{\ \ \ uint32\_t\ bgPort[]\ =\ \{BG\_PWRKEY\_GPIO\_Port,\ BG\_VBAT\_GPIO\_Port,\ BG\_RESET\_GPIO\_Port,\(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ BG\_PON\_TRIG\_GPIO\_Port\};\ }
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \ \ HAL\_GPIO\_WritePin(bgPort[pin],\ bgPin[pin],\ state);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ BG\_OK;}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ msDelay(uint32\_t\ mDelay)}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\ \ \ HAL\_Delay(mDelay);}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ resetMCU(\textcolor{keywordtype}{void})}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\ \ \ HAL\_NVIC\_SystemReset();}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\mbox{\hyperlink{structbg__bsp_fun__t}{bg\_bspFun\_t}}\ bspFun\ =\ \{.uartTx\ =\ uart\_tx,\ .gpioWrite\ =\ gpioWrite,\ .msDelay\ =\ msDelay,\(\backslash\)}
+\DoxyCodeLine{.resetMCU\ =\ resetMCU\};}
+\DoxyCodeLine{\textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/BSP\ end-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/Funcion\ de\ recepcion\ de\ interrupcion\ de\ UART-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{//Creacion\ e\ inicialzacion\ de\ buffer\ del\ tipo\ uartBuff\_t\ (buffer\ de\ 2KB\ de\ la\ libreria)}}
+\DoxyCodeLine{uartBuff\_t\ uBg\ =\ \{.buff\ =\ \{\textcolor{charliteral}{'\(\backslash\)0'}\},\ .len\ =\ 0\};\ }
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/Variables\ para\ manejo\ de\ UART-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#define\ UART\_BG\ huart7\ }\textcolor{comment}{//instancia\ de\ UART\ de\ modulo\ de\ comunicacion}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{typedef}\ \textcolor{keyword}{enum}\ \{}
+\DoxyCodeLine{RX\_LOG,}
+\DoxyCodeLine{RX\_BG,}
+\DoxyCodeLine{RX\_NO\_SUPPORTED}
+\DoxyCodeLine{\}rxUart\_t;}
+\DoxyCodeLine{}
+\DoxyCodeLine{rxUart\_t\ keyUart\ =\ RX\_NO\_SUPPORTED;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{preprocessor}{\#define\ flg\_uart\ flg\_main.f0\ }\textcolor{comment}{//1:\ llego\ una\ recepcion\ de\ UART\ por\ interrupcion.}}
+\DoxyCodeLine{\mbox{\hyperlink{structflags__t}{flags\_t}}\ flg\_main\ =\ \{0\};\ \textcolor{comment}{//banderas\ de\ 1\ bit.}}
+\DoxyCodeLine{\textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/Variables\ para\ manejo\ de\ UART\ end-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ HAL\_UARTEx\_RxEventCallback(UART\_HandleTypeDef\ *huart,\ uint16\_t\ Size)}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\ \ \ \textcolor{keywordflow}{if}(huart\ ==\ \&UART\_BG)}
+\DoxyCodeLine{\ \ \ \{\ \ \ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/Callback\ de\ UART\ para\ libreria-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \mbox{\hyperlink{_b_g77_8c_acd4a161fbac7d28353ca438b91e0520b}{bg\_uartCallback}}(uBg.buff,\ Size);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \ \ HAL\_UARTEx\_ReceiveToIdle\_IT(\&UART\_BG,\ uBg.buff,\ \textcolor{keyword}{sizeof}(uBg.buff));}
+\DoxyCodeLine{\ \ \ \ \ \ \ keyUart\ =\ RX\_BG;}
+\DoxyCodeLine{\ \ \ \ \ \ \ uBg.len\ =\ Size;}
+\DoxyCodeLine{\ \ \ \ \ \ \ flg\_uart\ =\ 1;}
+\DoxyCodeLine{\ \ \ \}}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{\textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/Funcion\ de\ recepcion\ de\ interrupcion\ de\ UART\ end-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/Funcion\ main-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\textcolor{keywordtype}{int}\ main(\textcolor{keywordtype}{void})}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/Configuracion\ e\ inicializacion\ de\ MCU-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\ \ \ HAL\_Init();}
+\DoxyCodeLine{\ \ \ SystemClock\_Config();}
+\DoxyCodeLine{\ \ \ MX\_GPIO\_Init();}
+\DoxyCodeLine{\ \ \ MX\_UART4\_Init();}
+\DoxyCodeLine{\ \ \ MX\_UART7\_Init();}
+\DoxyCodeLine{\ \ \ MX\_USART2\_UART\_Init();}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/Configuracion\ e\ inicializacion\ de\ MCU\ end-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\ \ \ }
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/Configurando\ o\ estableciendo\ BSP-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{_b_g77_8c_a3f93ee3bfd2996fa41f5f9425dc83431}{bg\_set\_bsp}}(bspFun);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/Activando\ la\ Recepcion\ de\ interrupcion\ de\ UART-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\ \ \ HAL\_UARTEx\_ReceiveToIdle\_IT(\&UART\_BG,\ uBg.buff,\ \textcolor{keyword}{sizeof}(uBg.buff));}
+\DoxyCodeLine{\ \ \ flg\_uart\ =\ 0;}
+\DoxyCodeLine{\ \ \ }
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/Inicializando\ el\ modulo\ (libreria)-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{_b_g77_8c_ad9920b9e69487d843b87ace0fb65535f}{bg\_init\_module}}();}
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{_b_g77_8c_a5b05e846b42156e0bd04539d036e77e5}{bg\_data\_module}}();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/Verificacion\ de\ SIM-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\ \ \ \textcolor{keywordflow}{if}(\mbox{\hyperlink{_b_g77_8c_a6fdf52da4e8bf69a4e9130163ae5e7be}{bg\_check\_sim}}()\ ==\ BG\_OK\_SIM)}
+\DoxyCodeLine{\ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}SIM\ OK\(\backslash\)n"{}});}
+\DoxyCodeLine{\ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}SIM\ NO\ OK\(\backslash\)n"{}});}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/Verificacion\ si\ el\ modulo\ esta\ registrado-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\ \ \ \textcolor{keywordflow}{if}(\mbox{\hyperlink{_b_g77_8c_a560f384f98c140a53d8fc8f5b32b5e19}{bg\_check\_attach}}()\ ==\ BG\_OK\_ATTACH)}
+\DoxyCodeLine{\ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}ATTACH\ OK\(\backslash\)n"{}});}
+\DoxyCodeLine{\ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}ATTACH\ NO\ OK\(\backslash\)n"{}});}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/Verificacion\ de\ COPS-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\ \ \ \textcolor{keywordflow}{if}(\mbox{\hyperlink{_b_g77_8c_adfa333fa2fbd83d8d555f78174c312d4}{bg\_query\_cops}}()\ ==\ BG\_ERR\_NO\_OPER)}
+\DoxyCodeLine{\ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}No\ se\ ha\ seleccionado\ operadora\(\backslash\)n"{}});}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/Consulta\ la\ configuracion\ del\ contexto\ PDP-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\ \ \ \textcolor{keywordflow}{if}(\mbox{\hyperlink{_b_g77_8c_ac5b7a9c29733548542fd9372f5333273}{bg\_query\_conf\_pdp}}(1)\ ==\ BG\_ERR\_NO\_CONF\_PDP)}
+\DoxyCodeLine{\ \ \ printf(\textcolor{stringliteral}{"{}No\ se\ ha\ configurado\ contexto\ PDP\(\backslash\)n"{}});}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/Se\ verifica\ si\ esta\ activado\ el\ contexto\ PDP-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\ \ \ \textcolor{keywordflow}{if}(\mbox{\hyperlink{_b_g77_8c_ae28f36ea82838abfdca0118d7af70da7}{bg\_check\_pdp}}(1)\ ==\ BG\_OK\_PDP\_DEACT)}
+\DoxyCodeLine{\ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}No\ esta\ activado\ el\ contexto\ PDP\ 1\(\backslash\)n"{}});}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/Se\ realiza\ el\ proceso\ de\ registro\ en\ la\ red-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\ \ \ \textcolor{keywordflow}{if}(\mbox{\hyperlink{_b_g77_8c_a1c0f09b53bcd76cc17f7be1d95778898}{bg\_attach}}(COPS\_LF)\ ==\ BG\_OK\_ATTACH)}
+\DoxyCodeLine{\ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}Modulo\ ATTACHADO\(\backslash\)n"{}});}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/Verifica\ si\ se\ el\ modulo\ esta\ registrado-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\ \ \ \textcolor{keywordflow}{if}(\mbox{\hyperlink{_b_g77_8c_a560f384f98c140a53d8fc8f5b32b5e19}{bg\_check\_attach}}()\ ==\ BG\_OK\_ATTACH)}
+\DoxyCodeLine{\ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}ATTACH\ OK\(\backslash\)n"{}});}
+\DoxyCodeLine{\ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}ATTACH\ NO\ OK\(\backslash\)n"{}});}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/Configura\ conterxto\ PDP-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{structbg__ctx_pdp__t}{bg\_ctxPdp\_t}}\ contextPDP\_1\ =\{.ctxtID\ =\ 1,\ .contextType\ =\ BG\_CTXT\_IPV4,\(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ .apn\ =\ APN\_LINKS\_FIELD,\ .usr\ =\ \textcolor{stringliteral}{"{}"{}},\ .psw\ =\ \textcolor{stringliteral}{"{}"{}}\};}
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{_b_g77_8c_ab3e3ace987b490e788e45c77d2762cc3}{bg\_conf\_pdp}}(contextPDP\_1);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/Activa\ contexto\ PDP-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{_b_g77_8c_ae8e29b80c35bbfef04dde3dea52f459e}{bg\_pdp\_activation}}(1,\ BG\_PDP\_ACT);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/Verificacion\ de\ COPS-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\ \ \ \textcolor{keywordflow}{if}(\mbox{\hyperlink{_b_g77_8c_adfa333fa2fbd83d8d555f78174c312d4}{bg\_query\_cops}}()\ ==\ BG\_ERR\_NO\_OPER)}
+\DoxyCodeLine{\ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}No\ se\ ha\ seleccionado\ operadora\(\backslash\)n"{}});}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/Creacion\ y\ apertura\ de\ socket\ 1\ SERVIDOR-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{structbg_sckt__t}{bgSckt\_t}}\ mySckt\ =\ \{.ctxtID\ =\ 1,\ .connectID\ =\ 0,\ .ip\ =\ BG\_OPEN\_SERVER\_IP,\(\backslash\)}
+\DoxyCodeLine{\ \ \ .accssMode\ =\ BG\_OPEN\_BUFF\_ACCSS\_MODE,\ .serviceType\ =\ BG\_OPEN\_SERVER,\(\backslash\)}
+\DoxyCodeLine{\ \ \ .remotePort\ =\ BG\_OPEN\_SERVER\_REMOTE\_PORT,\ .localPort\ =\ 2000\};}
+\DoxyCodeLine{\ \ \ }
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{_b_g77_8c_a6fcaeffa8a8411da9bd284564e9cbd83}{bg\_open\_sckt}}(mySckt);}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/Creacion\ y\ apertura\ de\ socket\ 1\ SERVIDOR\ end-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/Creacion\ y\ apertura\ de\ socket\ 2\ CLIENTE-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{structbg_sckt__t}{bgSckt\_t}}\ mySckt2\ =\ \{.ctxtID\ =\ 1,\ .connectID\ =\ 1,\ .ip\ =\ IP\_METERCAD,\(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ .accssMode\ =\ BG\_OPEN\_BUFF\_ACCSS\_MODE,\ .serviceType\ =\ BG\_OPEN\_CLIENT,\(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ .remotePort\ =\ 2001,\ .localPort\ =\ BG\_OPEN\_CLIENT\_LOCAL\_PORT\};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \textcolor{keywordflow}{if}(\mbox{\hyperlink{_b_g77_8c_a6fcaeffa8a8411da9bd284564e9cbd83}{bg\_open\_sckt}}(mySckt2)\ ==\ BG\_OK\_CONNECT\_ID\_OPENNED)}
+\DoxyCodeLine{\ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}Conexion\ myScket2\ Abierta\(\backslash\)n"{}});}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/Creacion\ y\ apertura\ de\ socket\ 2\ CLIENTE\ end-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/Transmision\ de\ mensajes\ de\ socket\ 2\ en\ Buffer\ access\ mode-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\ \ \ \textcolor{keywordflow}{if}(\mbox{\hyperlink{_b_g77_8c_a4324d29bee02aaf36d6d7dc3d54fa1b7}{bg\_transmit\_buffAMode}}(mySckt2.connectID,\ \textcolor{stringliteral}{"{}hello\ DOGO\ \(\backslash\)x00\(\backslash\)xFF"{}},\ 13)\ ==\ BG\_OK\_TRANSMIT)}
+\DoxyCodeLine{\ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}Mensaje\ enviado\(\backslash\)n"{}});}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \textcolor{keywordflow}{if}(\mbox{\hyperlink{_b_g77_8c_a4324d29bee02aaf36d6d7dc3d54fa1b7}{bg\_transmit\_buffAMode}}(mySckt2.connectID,\ \textcolor{stringliteral}{"{}hello\ COW\ "{}},\ 10)\ ==\ BG\_OK\_TRANSMIT)}
+\DoxyCodeLine{\ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}Mensaje\ enviado\(\backslash\)n"{}});}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/Transmision\ de\ mensajes\ de\ socket\ 2\ en\ Buffer\ access\ mode\ end-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/Cambio\ de\ modo\ de\ transmision\ a\ modo\ transparente\ del\ socket\ 2\ y\ transmision\ de\ mensaje-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\ \ \ \textcolor{keywordflow}{if}(\mbox{\hyperlink{_b_g77_8c_a5ed9330e905321630088fe6a84c5a5de}{bg\_transparent\_mode}}(mySckt2.connectID)\ ==\ BG\_OK\_TRANSPARENT\_MODE)}
+\DoxyCodeLine{\ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}Modo\ transparente\ exitoso\(\backslash\)n"{}});}
+\DoxyCodeLine{\ \ \ \ \ \ \ HAL\_UART\_Transmit(\&UART\_BG,\ \textcolor{stringliteral}{"{}hello\ server"{}},\ 12,\ 1000);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \textcolor{comment}{//bg\_transmit\_TM("{}hello\ server"{},\ 12);\ //o\ tambien\ se\ puede\ usar\ esta\ funcion}}
+\DoxyCodeLine{\ \ \ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/Salida\ de\ modo\ transparente\ y\ cierre\ del\ socket\ 2-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\ \ \ \textcolor{keywordflow}{if}(\mbox{\hyperlink{_b_g77_8c_a453a9ac99a62c6fafe71b5179086ee97}{bg\_exit\_transparent\_mode}}()\ ==\ BG\_OK\_EXIT\_TRANSPARENT\_MODE)}
+\DoxyCodeLine{\ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}salida\ de\ TM\ Exitosa\(\backslash\)n"{}});}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{_b_g77_8c_ae28f36ea82838abfdca0118d7af70da7}{bg\_check\_pdp}}(1);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{_b_g77_8c_a803afbdc8df8c4db1b6f0267816954c8}{bg\_close\_sckt}}(mySckt2.connectID);}
+\DoxyCodeLine{\ \ \ \ \ \ \ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(\mbox{\hyperlink{_b_g77_8c_ac4a2455d92827db1c3cf0ba553a05bb8}{bg\_check\_sckt}}(mySckt2.connectID)\ ==\ BG\_OK\_CONNECT\_ID\_CLOSED)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}Socket\ cerrado\(\backslash\)n"{}});}
+\DoxyCodeLine{\ \ \ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}Salida\ de\ TM\ no\ exitosa\(\backslash\)n"{}});}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/Salida\ de\ modo\ transparente\ y\ cierre\ del\ socket\ 2\ end-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\ \ \ \ \ \ \ }
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/Consulta\ del\ estado\ de\ señal-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/\ \ }}
+\DoxyCodeLine{\ \ \ \textcolor{keywordflow}{if}(\mbox{\hyperlink{_b_g77_8c_a65c9f56b02078e837debb481fff49182}{bg\_query\_signal}}()\ ==\ BG\_OK\_SIGNAL)}
+\DoxyCodeLine{\ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}Intensidad\ de\ señal\ aceptable\(\backslash\)n"{}});}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}Intensidad\ de\ señal\ NO\ aceptable\(\backslash\)n"{}});}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/Desregistro\ de\ la\ red\ y\ termina\ el\ codigo-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/\ }}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//if(bg\_detach()\ ==\ BG\_OK\_DETACH)}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \textcolor{comment}{//printf("{}El\ Dispositivo\ esta\ desregistrado\ de\ la\ red\(\backslash\)n"{});}}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ while(1);}}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/Desregistro\ de\ la\ red\ y\ termina\ el\ codigo\ end-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/\ }}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/Apertura\ y\ cambio\ a\ modo\ transparente\ de\ socket\ 2\ CLIENTE-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/\ }}
+\DoxyCodeLine{\ \ \ \textcolor{keywordflow}{if}(\mbox{\hyperlink{_b_g77_8c_a6fcaeffa8a8411da9bd284564e9cbd83}{bg\_open\_sckt}}(mySckt2)\ ==\ BG\_OK\_CONNECT\_ID\_OPENNED)}
+\DoxyCodeLine{\ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}Conexion\ mySocket2\ Abierta\(\backslash\)n"{}});}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \textcolor{keywordflow}{if}(\mbox{\hyperlink{_b_g77_8c_a5ed9330e905321630088fe6a84c5a5de}{bg\_transparent\_mode}}(mySckt2.connectID)\ ==\ BG\_OK\_TRANSPARENT\_MODE)}
+\DoxyCodeLine{\ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}Modo\ transparente\ exitoso\(\backslash\)n"{}});}
+\DoxyCodeLine{\ \ \ \ \ \ \ \mbox{\hyperlink{_b_g77_8c_a2eb4e7ff0044a4ccb914381d9ae25265}{bg\_transmit\_TM}}(\textcolor{stringliteral}{"{}hello\ serverDog"{}},\ 15);}
+\DoxyCodeLine{\ \ \ \}}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/Apertura\ y\ cambio\ a\ modo\ transparente\ de\ socket\ 2\ CLIENTE-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/\ }}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/Loop\ del\ codigo\ o\ hilo\ principal-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\ \ \ \textcolor{keywordflow}{while}(1)}
+\DoxyCodeLine{\ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/Funcion\ de\ manejo\ de\ URC-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \mbox{\hyperlink{_b_g77_8c_a3f03c39804aa65f885946b3f30d6b4fc}{bg\_handle\_urc}}();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/Transmision\ de\ mensaje\ cada\ 2\ segundos-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \mbox{\hyperlink{_b_g77_8c_a2eb4e7ff0044a4ccb914381d9ae25265}{bg\_transmit\_TM}}(\textcolor{stringliteral}{"{}hello\ dog"{}},\ 9);}
+\DoxyCodeLine{\ \ \ \ \ \ \ HAL\_Delay(2000);}
+\DoxyCodeLine{\ \ \ \ \ \ \ memset(uBg.buff,\ \textcolor{charliteral}{'\(\backslash\)0'},\ \textcolor{keyword}{sizeof}(uBg.buff));\ \textcolor{comment}{//limpieza\ de\ buffer\ de\ recepcion\ de\ UART\ en\ aplicacion\ principal}}
+\DoxyCodeLine{\ \ \ \}}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/Loop\ del\ codigo\ o\ hilo\ principal-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/\ }}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{\textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/Funcion\ main\ end-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/Funcion\ de\ interrupcion\ de\ temporizador-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ callback\_systic(\textcolor{keywordtype}{void})}
+\DoxyCodeLine{\{\ \ }
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/Callback\ de\ temporizador\ de\ 1ms\ para\ libreria-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{_b_g77_8c_aa422c5730073a35ffc37421e44a6c632}{bg\_callback\_ms}}();}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{\textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/Funcion\ de\ interrupcion\ de\ temporizador\ end-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/Funcion\ de\ interrupcion\ de\ temporizador\ (Systick)-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ HAL\_GPIO\_EXTI\_Callback(uint16\_t\ GPIO\_Pin)}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\ \ \ \textcolor{keywordflow}{if}(GPIO\_Pin\ ==\ INT\_MAIN\_RI\_Pin)}
+\DoxyCodeLine{\ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \textcolor{keywordflow}{if}(HAL\_GPIO\_ReadPin(INT\_MAIN\_RI\_GPIO\_Port,\ INT\_MAIN\_RI\_Pin))}
+\DoxyCodeLine{\ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/Callback\ de\ flanco\ de\ subida\ de\ pin\ MAIN\ RI-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{_b_g77_8c_a796fbdf47278af0a696da945fa907110}{bg\_mainRICallback}}(MAIN\_RI\_EDGE\_RISING);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/Callback\ de\ flanco\ de\ bajada\ de\ pin\ MAIN\ RI-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{_b_g77_8c_a796fbdf47278af0a696da945fa907110}{bg\_mainRICallback}}(MAIN\_RI\_EDGE\_FALLING);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \}}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{\textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/Funcion\ de\ interrupcion\ de\ temporizador\ \ (Systick)\ end-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+
+\end{DoxyCode}
+ \begin{DoxyCopyright}{Copyright}
+Copyright (c) 2024
+\end{DoxyCopyright}
+
+\begin{DoxyCodeInclude}{0}
+
+\end{DoxyCodeInclude}
+ 

@@ -1,0 +1,756 @@
+\chapter{BG77}
+\hypertarget{md__r_e_a_d_m_e}{}\label{md__r_e_a_d_m_e}\index{BG77@{BG77}}
+\label{md__r_e_a_d_m_e_autotoc_md0}%
+\Hypertarget{md__r_e_a_d_m_e_autotoc_md0}%
+
+
+Esta es una libreria base que implementa funcionalidades basicas del modulo BG77 tales como\+: consulta de estados y configuraciones, apertura de conexiones, transmision y recepcion de datos.
+
+El proposito de la libreria es tener una interfaz con el modulo de comunicacion BG77 que se encargue de la gestion de urc y la ejecucion de comandos AT necesarios para las funcionalidades anteriormente mencionadas.\hypertarget{md__r_e_a_d_m_e_autotoc_md1}{}\doxysection{\texorpdfstring{Ejemplo de uso \#1.}{Ejemplo de uso \#1.}}\label{md__r_e_a_d_m_e_autotoc_md1}
+Este ejemplo de codigo, tiene como proposito mostrar el uso de las diferentes funcionalidades de la libreria implementadas en un microcontrolador STM32\+F4.
+
+De forma general se verifican diferentes aspectos como el SIM, las configuraciones actulales y los estados de registro y contexto PDP. Por otro lado, se busca dar apertura a dos conexiones, siendo la primera en modo servidor con buffer access mode y la segunda en modo cliente con modo transparente. De esta manera, se puede ejemplificar como pueden coexistir dos tipos de conexiones diferentes en modos de transmision diferentes. Siendo mas explicitos, se busca mostrar como es el cambio automatico del modo transparente cuando este esta activo recibiendo o transfiriendo mensajes y se presenta un URC de alguna otra conexion (se recibe un mensaje o conexion entrante de la conexion en modo servidor).
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\#include\ "{}main.h"{}}
+\DoxyCodeLine{\ \#include\ "{}BG77.h"{}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ //-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/BSP-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}
+\DoxyCodeLine{\ bg\_err\_t\ uart\_tx(uint8\_t\ *data,\ uint16\_t\ len);}
+\DoxyCodeLine{\ bg\_err\_t\ gpioWrite(bgPin\_t\ pin,\ uint8\_t\ state);}
+\DoxyCodeLine{\ void\ msDelay(uint32\_t\ mDelay);}
+\DoxyCodeLine{\ void\ resetMCU(void);}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ bg\_err\_t\ uart\_tx(uint8\_t\ *data,\ uint16\_t\ len)}
+\DoxyCodeLine{\ \{}
+\DoxyCodeLine{\ \ \ \ \ bg\_err\_t\ err\ =\ BG\_OK;}
+\DoxyCodeLine{\ \ \ \ \ if(HAL\_UART\_Transmit(\&UART\_BG,\ data,\ len,\ 1000)\ !=\ HAL\_OK)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ err\ =\ BG\_ERR\_MCU\_TX\_UART;}
+\DoxyCodeLine{\ \ \ \ \ return\ err;}
+\DoxyCodeLine{\ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ bg\_err\_t\ gpioWrite(bgPin\_t\ pin,\ uint8\_t\ state)}
+\DoxyCodeLine{\ \{}
+\DoxyCodeLine{\ \ \ \ \ if(pin\ >=\ BG\_UNSUPORTED\_PIN)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ return\ BG\_ERR\_UNSUPPORTED\_PIN;}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\ \ \ \ \ bg\_err\_t\ err\ =\ BG\_OK;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ uint32\_t\ bgPin[]\ =\ \{BG\_PWRKEY\_Pin,\ \ BG\_VBAT\_Pin,\ BG\_RESET\_Pin,\ BG\_PON\_TRIG\_Pin\};}
+\DoxyCodeLine{\ \ \ \ \ uint32\_t\ bgPort[]\ =\ \{BG\_PWRKEY\_GPIO\_Port,\ BG\_VBAT\_GPIO\_Port,\ BG\_RESET\_GPIO\_Port,\(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ BG\_PON\_TRIG\_GPIO\_Port\};\ }
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ HAL\_GPIO\_WritePin(bgPort[pin],\ bgPin[pin],\ state);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ return\ BG\_OK;}
+\DoxyCodeLine{\ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ void\ msDelay(uint32\_t\ mDelay)}
+\DoxyCodeLine{\ \{}
+\DoxyCodeLine{\ \ \ \ \ HAL\_Delay(mDelay);}
+\DoxyCodeLine{\ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ void\ resetMCU(void)}
+\DoxyCodeLine{\ \{}
+\DoxyCodeLine{\ \ \ \ \ HAL\_NVIC\_SystemReset();}
+\DoxyCodeLine{\ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ bg\_bspFun\_t\ bspFun\ =\ \{.uartTx\ =\ uart\_tx,\ .gpioWrite\ =\ gpioWrite,\ .msDelay\ =\ msDelay,\(\backslash\)}
+\DoxyCodeLine{\ .resetMCU\ =\ resetMCU\};}
+\DoxyCodeLine{\ //-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/BSP\ end-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ //-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/Funcion\ de\ recepcion\ de\ interrupcion\ de\ UART-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ //Creacion\ e\ inicialzacion\ de\ buffer\ del\ tipo\ uartBuff\_t\ (buffer\ de\ 2KB\ de\ la\ libreria)}
+\DoxyCodeLine{\ uartBuff\_t\ uBg\ =\ \{.buff\ =\ \{'\(\backslash\)0'\},\ .len\ =\ 0\};\ }
+\DoxyCodeLine{}
+\DoxyCodeLine{\ //-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/Variables\ para\ manejo\ de\ UART-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}
+\DoxyCodeLine{\ \#define\ UART\_BG\ huart7\ //instancia\ de\ UART\ de\ modulo\ de\ comunicacion}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ typedef\ enum\ \{}
+\DoxyCodeLine{\ RX\_LOG,}
+\DoxyCodeLine{\ RX\_BG,}
+\DoxyCodeLine{\ RX\_NO\_SUPPORTED}
+\DoxyCodeLine{\ \}rxUart\_t;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ rxUart\_t\ keyUart\ =\ RX\_NO\_SUPPORTED;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \#define\ flg\_uart\ flg\_main.f0\ //1:\ llego\ una\ recepcion\ de\ UART\ por\ interrupcion.}
+\DoxyCodeLine{\ flags\_t\ flg\_main\ =\ \{0\};\ //banderas\ de\ 1\ bit.}
+\DoxyCodeLine{\ //-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/Variables\ para\ manejo\ de\ UART\ end-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ void\ HAL\_UARTEx\_RxEventCallback(UART\_HandleTypeDef\ *huart,\ uint16\_t\ Size)}
+\DoxyCodeLine{\ \{}
+\DoxyCodeLine{\ \ \ \ \ if(huart\ ==\ \&UART\_BG)}
+\DoxyCodeLine{\ \ \ \ \ \{\ \ \ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ //-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/Callback\ de\ UART\ para\ libreria-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ bg\_uartCallback(uBg.buff,\ Size);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ HAL\_UARTEx\_ReceiveToIdle\_IT(\&UART\_BG,\ uBg.buff,\ sizeof(uBg.buff));}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ keyUart\ =\ RX\_BG;}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ uBg.len\ =\ Size;}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ flg\_uart\ =\ 1;}
+\DoxyCodeLine{\ \ \ \ \ \}}
+\DoxyCodeLine{\ \}}
+\DoxyCodeLine{\ //-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/Funcion\ de\ recepcion\ de\ interrupcion\ de\ UART\ end-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ //-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/Funcion\ main-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}
+\DoxyCodeLine{\ int\ main(void)}
+\DoxyCodeLine{\ \{}
+\DoxyCodeLine{\ \ \ \ \ //-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/Configuracion\ e\ inicializacion\ de\ MCU-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}
+\DoxyCodeLine{\ \ \ \ \ HAL\_Init();}
+\DoxyCodeLine{\ \ \ \ \ SystemClock\_Config();}
+\DoxyCodeLine{\ \ \ \ \ MX\_GPIO\_Init();}
+\DoxyCodeLine{\ \ \ \ \ MX\_UART4\_Init();}
+\DoxyCodeLine{\ \ \ \ \ MX\_UART7\_Init();}
+\DoxyCodeLine{\ \ \ \ \ MX\_USART2\_UART\_Init();}
+\DoxyCodeLine{\ \ \ \ \ //-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/Configuracion\ e\ inicializacion\ de\ MCU\ end-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}
+\DoxyCodeLine{\ \ \ \ \ }
+\DoxyCodeLine{\ \ \ \ \ //-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/Configurando\ o\ estableciendo\ BSP-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}
+\DoxyCodeLine{\ \ \ \ \ bg\_set\_bsp(bspFun);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ //-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/Activando\ la\ Recepcion\ de\ interrupcion\ de\ UART-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}
+\DoxyCodeLine{\ \ \ \ \ HAL\_UARTEx\_ReceiveToIdle\_IT(\&UART\_BG,\ uBg.buff,\ sizeof(uBg.buff));}
+\DoxyCodeLine{\ \ \ \ \ flg\_uart\ =\ 0;}
+\DoxyCodeLine{\ \ \ \ \ }
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ //-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/Inicializando\ el\ modulo\ (libreria)-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}
+\DoxyCodeLine{\ \ \ \ \ bg\_init\_module();}
+\DoxyCodeLine{\ \ \ \ \ bg\_data\_module();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ //-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/Verificacion\ de\ SIM-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}
+\DoxyCodeLine{\ \ \ \ \ if(bg\_check\_sim()\ ==\ BG\_OK\_SIM)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ printf("{}SIM\ OK\(\backslash\)n"{});}
+\DoxyCodeLine{\ \ \ \ \ else}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ printf("{}SIM\ NO\ OK\(\backslash\)n"{});}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ //-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/Verificacion\ si\ el\ modulo\ esta\ registrado-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}
+\DoxyCodeLine{\ \ \ \ \ if(bg\_check\_attach()\ ==\ BG\_OK\_ATTACH)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ printf("{}ATTACH\ OK\(\backslash\)n"{});}
+\DoxyCodeLine{\ \ \ \ \ else}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ printf("{}ATTACH\ NO\ OK\(\backslash\)n"{});}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ //-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/Verificacion\ de\ COPS-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}
+\DoxyCodeLine{\ \ \ \ \ if(bg\_query\_cops()\ ==\ BG\_ERR\_NO\_OPER)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ printf("{}No\ se\ ha\ seleccionado\ operadora\(\backslash\)n"{});}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ //-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/Consulta\ la\ configuracion\ del\ contexto\ PDP-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}
+\DoxyCodeLine{\ \ \ \ \ if(bg\_query\_conf\_pdp(1)\ ==\ BG\_ERR\_NO\_CONF\_PDP)}
+\DoxyCodeLine{\ \ \ \ \ printf("{}No\ se\ ha\ configurado\ contexto\ PDP\(\backslash\)n"{});}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ //-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/Se\ verifica\ si\ esta\ activado\ el\ contexto\ PDP-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}
+\DoxyCodeLine{\ \ \ \ \ if(bg\_check\_pdp(1)\ ==\ BG\_OK\_PDP\_DEACT)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ printf("{}No\ esta\ activado\ el\ contexto\ PDP\ 1\(\backslash\)n"{});}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ //-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/Se\ realiza\ el\ proceso\ de\ registro\ en\ la\ red-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}
+\DoxyCodeLine{\ \ \ \ \ if(bg\_attach(COPS\_LF)\ ==\ BG\_OK\_ATTACH)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ printf("{}Modulo\ ATTACHADO\(\backslash\)n"{});}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ //-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/Verifica\ si\ se\ el\ modulo\ esta\ registrado-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}
+\DoxyCodeLine{\ \ \ \ \ if(bg\_check\_attach()\ ==\ BG\_OK\_ATTACH)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ printf("{}ATTACH\ OK\(\backslash\)n"{});}
+\DoxyCodeLine{\ \ \ \ \ else}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ printf("{}ATTACH\ NO\ OK\(\backslash\)n"{});}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ //-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/Configura\ conterxto\ PDP-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}
+\DoxyCodeLine{\ \ \ \ \ bg\_ctxPdp\_t\ contextPDP\_1\ =\{.ctxtID\ =\ 1,\ .contextType\ =\ BG\_CTXT\_IPV4,\(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ .apn\ =\ APN\_LINKS\_FIELD,\ .usr\ =\ "{}"{},\ .psw\ =\ "{}"{}\};}
+\DoxyCodeLine{\ \ \ \ \ bg\_conf\_pdp(contextPDP\_1);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ //-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/Activa\ contexto\ PDP-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}
+\DoxyCodeLine{\ \ \ \ \ bg\_pdp\_activation(1,\ BG\_PDP\_ACT);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ //-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/Verificacion\ de\ COPS-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}
+\DoxyCodeLine{\ \ \ \ \ if(bg\_query\_cops()\ ==\ BG\_ERR\_NO\_OPER)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ printf("{}No\ se\ ha\ seleccionado\ operadora\(\backslash\)n"{});}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ //-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/Creacion\ y\ apertura\ de\ socket\ 1\ SERVIDOR-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}
+\DoxyCodeLine{\ \ \ \ \ bgSckt\_t\ mySckt\ =\ \{.ctxtID\ =\ 1,\ .connectID\ =\ 0,\ .ip\ =\ BG\_OPEN\_SERVER\_IP,\(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ .accssMode\ =\ BG\_OPEN\_BUFF\_ACCSS\_MODE,\ .serviceType\ =\ BG\_OPEN\_SERVER,\(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ .remotePort\ =\ BG\_OPEN\_SERVER\_REMOTE\_PORT,\ .localPort\ =\ 2000\};}
+\DoxyCodeLine{\ \ \ \ \ }
+\DoxyCodeLine{\ \ \ \ \ bg\_open\_sckt(mySckt);}
+\DoxyCodeLine{\ \ \ \ \ //-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/Creacion\ y\ apertura\ de\ socket\ 1\ SERVIDOR\ end-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ //-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/Creacion\ y\ apertura\ de\ socket\ 2\ CLIENTE-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}
+\DoxyCodeLine{\ \ \ \ \ bgSckt\_t\ mySckt2\ =\ \{.ctxtID\ =\ 1,\ .connectID\ =\ 1,\ .ip\ =\ IP\_METERCAD,\(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ .accssMode\ =\ BG\_OPEN\_BUFF\_ACCSS\_MODE,\ .serviceType\ =\ BG\_OPEN\_CLIENT,\(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ .remotePort\ =\ 2001,\ .localPort\ =\ BG\_OPEN\_CLIENT\_LOCAL\_PORT\};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ if(bg\_open\_sckt(mySckt2)\ ==\ BG\_OK\_CONNECT\_ID\_OPENNED)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ printf("{}Conexion\ myScket2\ Abierta\(\backslash\)n"{});}
+\DoxyCodeLine{\ \ \ \ \ //-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/Creacion\ y\ apertura\ de\ socket\ 2\ CLIENTE\ end-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ //-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/Transmision\ de\ mensajes\ de\ socket\ 2\ en\ Buffer\ access\ mode-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}
+\DoxyCodeLine{\ \ \ \ \ if(bg\_transmit\_buffAMode(mySckt2.connectID,\ "{}hello\ DOGO\ \(\backslash\)x00\(\backslash\)xFF"{},\ 13)\ ==\ BG\_OK\_TRANSMIT)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ printf("{}Mensaje\ enviado\(\backslash\)n"{});}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ if(bg\_transmit\_buffAMode(mySckt2.connectID,\ "{}hello\ COW\ "{},\ 10)\ ==\ BG\_OK\_TRANSMIT)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ printf("{}Mensaje\ enviado\(\backslash\)n"{});}
+\DoxyCodeLine{\ \ \ \ \ //-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/Transmision\ de\ mensajes\ de\ socket\ 2\ en\ Buffer\ access\ mode\ end-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ //-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/Cambio\ de\ modo\ de\ transmision\ a\ modo\ transparente\ del\ socket\ 2\ y\ transmision\ de\ mensaje-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}
+\DoxyCodeLine{\ \ \ \ \ if(bg\_transparent\_mode(mySckt2.connectID)\ ==\ BG\_OK\_TRANSPARENT\_MODE)}
+\DoxyCodeLine{\ \ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ printf("{}Modo\ transparente\ exitoso\(\backslash\)n"{});}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ HAL\_UART\_Transmit(\&UART\_BG,\ "{}hello\ server"{},\ 12,\ 1000);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ //bg\_transmit\_TM("{}hello\ server"{},\ 12);\ //o\ tambien\ se\ puede\ usar\ esta\ funcion}
+\DoxyCodeLine{\ \ \ \ \ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ //-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/Salida\ de\ modo\ transparente\ y\ cierre\ del\ socket\ 2-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}
+\DoxyCodeLine{\ \ \ \ \ if(bg\_exit\_transparent\_mode()\ ==\ BG\_OK\_EXIT\_TRANSPARENT\_MODE)}
+\DoxyCodeLine{\ \ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ printf("{}salida\ de\ TM\ Exitosa\(\backslash\)n"{});}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ bg\_check\_pdp(1);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ bg\_close\_sckt(mySckt2.connectID);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ if(bg\_check\_sckt(mySckt2.connectID)\ ==\ BG\_OK\_CONNECT\_ID\_CLOSED)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ printf("{}Socket\ cerrado\(\backslash\)n"{});}
+\DoxyCodeLine{\ \ \ \ \ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ else}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ printf("{}Salida\ de\ TM\ no\ exitosa\(\backslash\)n"{});}
+\DoxyCodeLine{\ \ \ \ \ //-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/Salida\ de\ modo\ transparente\ y\ cierre\ del\ socket\ 2\ end-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\ \ \ \ \ //-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/Consulta\ del\ estado\ de\ señal-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/\ \ }
+\DoxyCodeLine{\ \ \ \ \ if(bg\_query\_signal()\ ==\ BG\_OK\_SIGNAL)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ printf("{}Intensidad\ de\ señal\ aceptable\(\backslash\)n"{});}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ else}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ printf("{}Intensidad\ de\ señal\ NO\ aceptable\(\backslash\)n"{});}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ //-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/Desregistro\ de\ la\ red\ y\ termina\ el\ codigo-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/\ }
+\DoxyCodeLine{\ \ \ \ \ //if(bg\_detach()\ ==\ BG\_OK\_DETACH)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ //printf("{}El\ Dispositivo\ esta\ desregistrado\ de\ la\ red\(\backslash\)n"{});}
+\DoxyCodeLine{\ \ \ \ \ //\ while(1);}
+\DoxyCodeLine{\ \ \ \ \ //-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/Desregistro\ de\ la\ red\ y\ termina\ el\ codigo\ end-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/\ }
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ //-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/Apertura\ y\ cambio\ a\ modo\ transparente\ de\ socket\ 2\ CLIENTE-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/\ }
+\DoxyCodeLine{\ \ \ \ \ if(bg\_open\_sckt(mySckt2)\ ==\ BG\_OK\_CONNECT\_ID\_OPENNED)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ printf("{}Conexion\ mySocket2\ Abierta\(\backslash\)n"{});}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ if(bg\_transparent\_mode(mySckt2.connectID)\ ==\ BG\_OK\_TRANSPARENT\_MODE)}
+\DoxyCodeLine{\ \ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ printf("{}Modo\ transparente\ exitoso\(\backslash\)n"{});}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ bg\_transmit\_TM("{}hello\ serverDog"{},\ 15);}
+\DoxyCodeLine{\ \ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ \ //-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/Apertura\ y\ cambio\ a\ modo\ transparente\ de\ socket\ 2\ CLIENTE-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/\ }
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ //-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/Loop\ del\ codigo\ o\ hilo\ principal-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}
+\DoxyCodeLine{\ \ \ \ \ while(1)}
+\DoxyCodeLine{\ \ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ //-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/Funcion\ de\ manejo\ de\ URC-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ bg\_handle\_urc();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ //-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/Transmision\ de\ mensaje\ cada\ 2\ segundos-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ bg\_transmit\_TM("{}hello\ dog"{},\ 9);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ HAL\_Delay(2000);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ memset(uBg.buff,\ '\(\backslash\)0',\ sizeof(uBg.buff));\ //limpieza\ de\ buffer\ de\ recepcion\ de\ UART\ en\ aplicacion\ principal}
+\DoxyCodeLine{\ \ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ \ //-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/Loop\ del\ codigo\ o\ hilo\ principal-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/\ }
+\DoxyCodeLine{\ \}}
+\DoxyCodeLine{\ //-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/Funcion\ main\ end-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ //-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/Funcion\ de\ interrupcion\ de\ temporizador-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}
+\DoxyCodeLine{\ void\ callback\_systic(void)}
+\DoxyCodeLine{\ \{\ \ \ }
+\DoxyCodeLine{\ \ \ \ \ //-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/Callback\ de\ temporizador\ de\ 1ms\ para\ libreria-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}
+\DoxyCodeLine{\ \ \ \ \ bg\_callback\_ms();}
+\DoxyCodeLine{\ \}}
+\DoxyCodeLine{\ //-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/Funcion\ de\ interrupcion\ de\ temporizador\ end-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ //-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/Funcion\ de\ interrupcion\ de\ temporizador\ (Systick)-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}
+\DoxyCodeLine{\ void\ HAL\_GPIO\_EXTI\_Callback(uint16\_t\ GPIO\_Pin)}
+\DoxyCodeLine{\ \{}
+\DoxyCodeLine{\ \ \ \ \ if(GPIO\_Pin\ ==\ INT\_MAIN\_RI\_Pin)}
+\DoxyCodeLine{\ \ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ if(HAL\_GPIO\_ReadPin(INT\_MAIN\_RI\_GPIO\_Port,\ INT\_MAIN\_RI\_Pin))}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ //-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/Callback\ de\ flanco\ de\ subida\ de\ pin\ MAIN\ RI-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ bg\_mainRICallback(MAIN\_RI\_EDGE\_RISING);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ else}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ //-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/Callback\ de\ flanco\ de\ bajada\ de\ pin\ MAIN\ RI-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ bg\_mainRICallback(MAIN\_RI\_EDGE\_FALLING);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ \ \}}
+\DoxyCodeLine{\ \}}
+\DoxyCodeLine{\ //-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/Funcion\ de\ interrupcion\ de\ temporizador\ \ (Systick)\ end-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}
+
+\end{DoxyCode}
+
+
+La explicacion del ejemplo se resume en los siguientes pasos\+:
+
+
+\begin{DoxyEnumerate}
+\item Generar el BSP que son punteros a funcion.
+
+1.\+1 Funcion transmision de UART.
+
+1.\+2 Funcion escritura de GPIOS.
+
+1.\+3 Funcion de delay.
+
+1.\+4 Funcion de reinicio de MCU.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/BSP-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}
+\DoxyCodeLine{bg\_err\_t\ uart\_tx(uint8\_t\ *data,\ uint16\_t\ len);}
+\DoxyCodeLine{bg\_err\_t\ gpioWrite(bgPin\_t\ pin,\ uint8\_t\ state);}
+\DoxyCodeLine{void\ msDelay(uint32\_t\ mDelay);}
+\DoxyCodeLine{void\ resetMCU(void);}
+\DoxyCodeLine{}
+\DoxyCodeLine{bg\_err\_t\ uart\_tx(uint8\_t\ *data,\ uint16\_t\ len)}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\ \ \ bg\_err\_t\ err\ =\ BG\_OK;}
+\DoxyCodeLine{\ \ \ if(HAL\_UART\_Transmit(\&UART\_BG,\ data,\ len,\ 1000)\ !=\ HAL\_OK)}
+\DoxyCodeLine{\ \ \ \ \ \ err\ =\ BG\_ERR\_MCU\_TX\_UART;}
+\DoxyCodeLine{\ \ \ return\ err;}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{bg\_err\_t\ gpioWrite(bgPin\_t\ pin,\ uint8\_t\ state)}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\ \ \ if(pin\ >=\ BG\_UNSUPORTED\_PIN)}
+\DoxyCodeLine{\ \ \ \ \ \ return\ BG\_ERR\_UNSUPPORTED\_PIN;}
+\DoxyCodeLine{\ \ \ \ \ \ }
+\DoxyCodeLine{\ \ \ bg\_err\_t\ err\ =\ BG\_OK;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ uint32\_t\ bgPin[]\ =\ \{BG\_PWRKEY\_Pin,\ \ BG\_VBAT\_Pin,\ BG\_RESET\_Pin,\ BG\_PON\_TRIG\_Pin\};}
+\DoxyCodeLine{\ \ \ uint32\_t\ bgPort[]\ =\ \{BG\_PWRKEY\_GPIO\_Port,\ BG\_VBAT\_GPIO\_Port,\ BG\_RESET\_GPIO\_Port,\(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ BG\_PON\_TRIG\_GPIO\_Port\};\ }
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \ HAL\_GPIO\_WritePin(bgPort[pin],\ bgPin[pin],\ state);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \ return\ BG\_OK;}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{void\ msDelay(uint32\_t\ mDelay)}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\ \ \ HAL\_Delay(mDelay);}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{void\ resetMCU(void)}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\ \ \ HAL\_NVIC\_SystemReset();}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{bg\_bspFun\_t\ bspFun\ =\ \{.uartTx\ =\ uart\_tx,\ .gpioWrite\ =\ gpioWrite,\ .msDelay\ =\ msDelay,\(\backslash\)}
+\DoxyCodeLine{.resetMCU\ =\ resetMCU\};}
+\DoxyCodeLine{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/BSP\ end-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}
+
+\end{DoxyCode}
+
+\begin{DoxyEnumerate}
+\item Llamar los callbacks de UART, Temporizador y Flancos del pin MAIN RI en las interrupciones correspondientes.
+\end{DoxyEnumerate}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/Funcion\ de\ recepcion\ de\ interrupcion\ de\ UART-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ //Creacion\ e\ inicialzacion\ de\ buffer\ del\ tipo\ uartBuff\_t\ (buffer\ de\ 2KB\ de\ la\ libreria)}
+\DoxyCodeLine{\ \ uartBuff\_t\ uBg\ =\ \{.buff\ =\ \{'\(\backslash\)0'\},\ .len\ =\ 0\};\ }
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ //-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/Variables\ para\ manejo\ de\ UART-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}
+\DoxyCodeLine{\ \ \#define\ UART\_BG\ huart7\ //instancia\ de\ UART\ de\ modulo\ de\ comunicacion}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ typedef\ enum\ \{}
+\DoxyCodeLine{\ \ RX\_LOG,}
+\DoxyCodeLine{\ \ RX\_BG,}
+\DoxyCodeLine{\ \ RX\_NO\_SUPPORTED}
+\DoxyCodeLine{\ \ \}rxUart\_t;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ rxUart\_t\ keyUart\ =\ RX\_NO\_SUPPORTED;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \#define\ flg\_uart\ flg\_main.f0\ //1:\ llego\ una\ recepcion\ de\ UART\ por\ interrupcion.}
+\DoxyCodeLine{\ \ flags\_t\ flg\_main\ =\ \{0\};\ //banderas\ de\ 1\ bit.}
+\DoxyCodeLine{\ \ //-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/Variables\ para\ manejo\ de\ UART\ end-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ void\ HAL\_UARTEx\_RxEventCallback(UART\_HandleTypeDef\ *huart,\ uint16\_t\ Size)}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \ if(huart\ ==\ \&UART\_BG)}
+\DoxyCodeLine{\ \ \ \ \ \ \{\ \ \ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ //-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/Callback\ de\ UART\ para\ libreria-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ bg\_uartCallback(uBg.buff,\ Size);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ HAL\_UARTEx\_ReceiveToIdle\_IT(\&UART\_BG,\ uBg.buff,\ sizeof(uBg.buff));}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ keyUart\ =\ RX\_BG;}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ uBg.len\ =\ Size;}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ flg\_uart\ =\ 1;}
+\DoxyCodeLine{\ \ \ \ \ \ \}}
+\DoxyCodeLine{\ \ \}}
+\DoxyCodeLine{\ \ //-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/Funcion\ de\ recepcion\ de\ interrupcion\ de\ UART\ end-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ //-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/Funcion\ de\ interrupcion\ de\ temporizador-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}
+\DoxyCodeLine{\ \ void\ callback\_systic(void)}
+\DoxyCodeLine{\ \ \{\ \ \ }
+\DoxyCodeLine{\ \ \ \ \ \ //-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/Callback\ de\ temporizador\ de\ 1ms\ para\ libreria-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}
+\DoxyCodeLine{\ \ \ \ \ \ bg\_callback\_ms();}
+\DoxyCodeLine{\ \ \}}
+\DoxyCodeLine{\ \ //-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/Funcion\ de\ interrupcion\ de\ temporizador\ end-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ //-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/Funcion\ de\ interrupcion\ de\ temporizador\ (Systick)-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}
+\DoxyCodeLine{\ \ void\ HAL\_GPIO\_EXTI\_Callback(uint16\_t\ GPIO\_Pin)}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \ if(GPIO\_Pin\ ==\ INT\_MAIN\_RI\_Pin)}
+\DoxyCodeLine{\ \ \ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ if(HAL\_GPIO\_ReadPin(INT\_MAIN\_RI\_GPIO\_Port,\ INT\_MAIN\_RI\_Pin))}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ //-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/Callback\ de\ flanco\ de\ subida\ de\ pin\ MAIN\ RI-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ bg\_mainRICallback(MAIN\_RI\_EDGE\_RISING);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ else}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ //-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/Callback\ de\ flanco\ de\ bajada\ de\ pin\ MAIN\ RI-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ bg\_mainRICallback(MAIN\_RI\_EDGE\_FALLING);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ \ \ \}}
+\DoxyCodeLine{\ \ \}}
+\DoxyCodeLine{\ \ //-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/Funcion\ de\ interrupcion\ de\ temporizador\ \ (Systick)\ end-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}
+
+\end{DoxyCode}
+
+\begin{DoxyEnumerate}
+\item Establecer o dar el BSP a la libreria. {\ttfamily  //-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/\+Configurando o estableciendo BSP-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/ bg\+\_\+set\+\_\+bsp(bsp\+Fun); }
+\item Inicializar la libreria. 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/Inicializando\ el\ modulo\ (libreria)-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}
+\DoxyCodeLine{\ \ \ \ \ bg\_init\_module();}
+
+\end{DoxyCode}
+
+\item Realizar proceso de verificacion.
+
+5.\+1 Verificar SIM. {\ttfamily  //-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/\+Verificacion de SIM-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/ if(\doxylink{_b_g77_8c_a6fdf52da4e8bf69a4e9130163ae5e7be}{bg\+\_\+check\+\_\+sim()} == BG\+\_\+\+OK\+\_\+\+SIM) printf("{}\+SIM OK\textbackslash{}n"{}); else printf("{}\+SIM NO OK\textbackslash{}n"{}); }
+
+5.\+2 Verificar el registro del modulo (attach). {\ttfamily  //-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/\+Verificacion si el modulo esta registrado-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/ if(\doxylink{_b_g77_8c_a560f384f98c140a53d8fc8f5b32b5e19}{bg\+\_\+check\+\_\+attach()} == BG\+\_\+\+OK\+\_\+\+ATTACH) printf("{}\+ATTACH OK\textbackslash{}n"{}); else printf("{}\+ATTACH NO OK\textbackslash{}n"{}); }
+
+5.\+3 Verificar la seleccion de operadora (COPS). {\ttfamily  //-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/\+Verificacion de COPS-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/ if(\doxylink{_b_g77_8c_adfa333fa2fbd83d8d555f78174c312d4}{bg\+\_\+query\+\_\+cops()} == BG\+\_\+\+ERR\+\_\+\+NO\+\_\+\+OPER) printf("{}\+No se ha seleccionado operadora\textbackslash{}n"{}); }
+
+5.\+4 Verificar contexto PDP. {\ttfamily  //-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/\+Se verifica si esta activado el contexto PDP-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/ if(bg\+\_\+check\+\_\+pdp(1) == BG\+\_\+\+OK\+\_\+\+PDP\+\_\+\+DEACT) printf("{}\+No esta activado el contexto PDP 1\textbackslash{}n"{}); }
+\item Registrar o attachar el modulo seleccionando la operadora (COPS).
+
+{\ttfamily  //-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/\+Se realiza el proceso de registro en la red-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/ if(bg\+\_\+attach(\+COPS\+\_\+\+LF) == BG\+\_\+\+OK\+\_\+\+ATTACH) printf("{}\+Modulo ATTACHADO\textbackslash{}n"{}); }
+\item Configurar y activar el contexto PDP. \`{}\`{}\`{} //-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/---Configura conterxto PDP-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/--- \doxylink{structbg__ctx_pdp__t}{bg\+\_\+ctx\+Pdp\+\_\+t} context\+PDP\+\_\+1 =\{.ctxt\+ID = 1, .context\+Type = BG\+\_\+\+CTXT\+\_\+\+IPV4,\textbackslash{} .apn = APN\+\_\+\+LINKS\+\_\+\+FIELD, .usr = "{}"{}, .psw = "{}"{}\}; bg\+\_\+conf\+\_\+pdp(context\+PDP\+\_\+1);
+
+//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/---Activa contexto PDP-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/--- bg\+\_\+pdp\+\_\+activation(1, BG\+\_\+\+PDP\+\_\+\+ACT); \`{}\`{}\`{}
+\item Configurar y abrir sockets (SERVIDOR o CLIENTE). 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/Creacion\ y\ apertura\ de\ socket\ 1\ SERVIDOR-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}
+\DoxyCodeLine{bgSckt\_t\ mySckt\ =\ \{.ctxtID\ =\ 1,\ .connectID\ =\ 0,\ .ip\ =\ BG\_OPEN\_SERVER\_IP,\(\backslash\)}
+\DoxyCodeLine{.accssMode\ =\ BG\_OPEN\_BUFF\_ACCSS\_MODE,\ .serviceType\ =\ BG\_OPEN\_SERVER,\(\backslash\)}
+\DoxyCodeLine{.remotePort\ =\ BG\_OPEN\_SERVER\_REMOTE\_PORT,\ .localPort\ =\ 2000\};}
+\DoxyCodeLine{}
+\DoxyCodeLine{bg\_open\_sckt(mySckt);}
+\DoxyCodeLine{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/Creacion\ y\ apertura\ de\ socket\ 1\ SERVIDOR\ end-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}
+\DoxyCodeLine{}
+\DoxyCodeLine{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/Creacion\ y\ apertura\ de\ socket\ 2\ CLIENTE-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}
+\DoxyCodeLine{bgSckt\_t\ mySckt2\ =\ \{.ctxtID\ =\ 1,\ .connectID\ =\ 1,\ .ip\ =\ IP\_METERCAD,\(\backslash\)}
+\DoxyCodeLine{\ \ \ .accssMode\ =\ BG\_OPEN\_BUFF\_ACCSS\_MODE,\ .serviceType\ =\ BG\_OPEN\_CLIENT,\(\backslash\)}
+\DoxyCodeLine{\ \ \ .remotePort\ =\ 2001,\ .localPort\ =\ BG\_OPEN\_CLIENT\_LOCAL\_PORT\};}
+\DoxyCodeLine{}
+\DoxyCodeLine{if(bg\_open\_sckt(mySckt2)\ ==\ BG\_OK\_CONNECT\_ID\_OPENNED)}
+\DoxyCodeLine{\ \ \ printf("{}Conexion\ myScket2\ Abierta\(\backslash\)n"{});}
+\DoxyCodeLine{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/Creacion\ y\ apertura\ de\ socket\ 2\ CLIENTE\ end-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}
+
+\end{DoxyCode}
+
+\item Colocar funcion de manejo de URC en loop de la aplicacion principal. 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/Loop\ del\ codigo\ o\ hilo\ principal-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}
+\DoxyCodeLine{\ while(1)}
+\DoxyCodeLine{\ \{}
+\DoxyCodeLine{\ \ \ \ //-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/Funcion\ de\ manejo\ de\ URC-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}
+\DoxyCodeLine{\ \ \ \ bg\_handle\_urc();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ //-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/Transmision\ de\ mensaje\ en\ modo\ transparente\ cada\ 2\ segundos-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}
+\DoxyCodeLine{\ \ \ \ bg\_transmit\_TM("{}hello\ dog"{},\ 9);}
+\DoxyCodeLine{\ \ \ \ HAL\_Delay(2000);}
+\DoxyCodeLine{\ \ \ \ memset(uBg.buff,\ '\(\backslash\)0',\ sizeof(uBg.buff));\ //limpieza\ de\ buffer\ de\ recepcion\ de\ UART\ en\ aplicacion\ principal}
+\DoxyCodeLine{\ \}}
+\DoxyCodeLine{\ //-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/Loop\ del\ codigo\ o\ hilo\ principal-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}
+
+\end{DoxyCode}
+
+\item Transmision y Recepcion de mensajes.
+
+10.\+1.\+1 En modo buffer access mode. \`{}\`{}\`{} //-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/---Transmision de mensajes de socket 2 en Buffer access mode-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/--- if(bg\+\_\+transmit\+\_\+buff\+AMode(my\+Sckt2.\+connect\+ID, "{}hello DOGO \textbackslash{}x00\textbackslash{}x\+FF"{}, 13) == BG\+\_\+\+OK\+\_\+\+TRANSMIT) printf("{}\+Mensaje enviado\textbackslash{}n"{});
+
+if(bg\+\_\+transmit\+\_\+buff\+AMode(my\+Sckt2.\+connect\+ID, "{}hello COW "{}, 10) == BG\+\_\+\+OK\+\_\+\+TRANSMIT) printf("{}\+Mensaje enviado\textbackslash{}n"{}); //-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/---Transmision de mensajes de socket 2 en Buffer access mode end-\/-\/-\/-\/-\/-\/-\/-\/-\/--- \`{}\`{}\`{}
+
+10.\+1.\+2 En modo transparente
+
+{\ttfamily  //-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/\+Cambio de modo de transmision a modo transparente del socket 2 y transmision de mensaje-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/ if(bg\+\_\+transparent\+\_\+mode(my\+Sckt2.\+connect\+ID) == BG\+\_\+\+OK\+\_\+\+TRANSPARENT\+\_\+\+MODE) \{ printf("{}\+Modo transparente exitoso\textbackslash{}n"{}); HAL\+\_\+\+UART\+\_\+\+Transmit(\&UART\+\_\+\+BG, "{}hello server"{}, 12, 1000); //bg\+\_\+transmit\+\_\+\+TM("{}hello server"{}, 12); //o tambien se puede usar esta funcion \} //-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/\+Salida de modo transparente y cierre del socket 2-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/ } ~\newline
+
+
+10.\+2 Dependiendo del modo de acceso se debe crear o usar el callback de recepcion adecuada. \`{}\`{}\`{} void \doxylink{_b_g77_8c_a82f08c1cbe0edd3995c157be6ecd4b31}{bg\+\_\+callback\+\_\+receive\+\_\+\+TM(uint8\+\_\+t \texorpdfstring{$\ast$}{*}buff, uint16\+\_\+t n\+Bytes)} \{
+
+\} {\ttfamily  } void \doxylink{_b_g77_8c_acdaa58d150ec7d4d1a5609e0770643b2}{bg\+\_\+recv\+\_\+callback(uint8\+\_\+t \texorpdfstring{$\ast$}{*}buff, uint16\+\_\+t len, uint8\+\_\+t connect\+ID)} \{
+
+\} \`{}\`{}\`{} Cuando se reciba algun mensaje la libreria llamara el callback respectivo dependiendo si esta activado o no el modo transparente.
+\begin{DoxyEnumerate}
+\item Usar Callbacks de notificacion de URC
+
+11.\+1 Callback de conexion entrante.
+
+\`{}\`{}\`{} void bg\+\_\+incomming\+\_\+callback(uint8\+\_\+t server\+ID, uint \texorpdfstring{$\ast$}{*}8\+\_\+t connect\+ID) \{
+
+\} \`{}\`{}\`{}
+
+11.\+2 Callback de salida de modo transparente.
+
+\`{}\`{}\`{} void \doxylink{_b_g77_8c_a735707a118cf1461601c586b3fb56060}{bg\+\_\+callback\+\_\+closed\+\_\+\+TM(void)} \{
+
+\} \`{}\`{}\`{}
+
+11.\+3 Callback de reactivacion de contexto PDP.
+
+\`{}\`{}\`{} void \doxylink{_b_g77_8c_ac828183e261ff8d14f033e5b1b651625}{bg\+\_\+pdp\+\_\+activation\+\_\+callback(uint8\+\_\+t context\+ID)} \{
+
+\} \`{}\`{}\`{}
+
+11.\+4 Callback de modo transparente inactivo. El proposito es notificar al usuario para que pueda regresar a modo transparente.
+
+\`{}\`{}\`{} void bg\+\_\+callback\+\_\+\+TM\+\_\+\+Inactive(void) \{
+
+\} \`{}\`{}\`{} Los pasos numero 10 y 11 son opcionales en este codigo de ejemplo, ya que, la libreria llama a funciones de notificacion callback por defecto si no se crean los de usuario.
+\end{DoxyEnumerate}
+\end{DoxyEnumerate}
+\end{DoxyEnumerate}\hypertarget{md__r_e_a_d_m_e_autotoc_md2}{}\doxysection{\texorpdfstring{Ejemplo de uso \#2 "{}\+Ejemplo reducido"{}.}{Ejemplo de uso \#2 "{}\+Ejemplo reducido"{}.}}\label{md__r_e_a_d_m_e_autotoc_md2}
+Este codigo de ejemplo, muestra como utilizar la libreria en un microcontrolador STM32\+F4 de forma mas concreta.
+
+A diferencia del ejemplo 1, el ejemplo 2 consiste en solo abrir una conexion en modo cliente con modo transparente e intercambiar mensajes con el servidor al que se apunta, de una forma mas sencilla sin tantas verificaciones y usode ejemplo de otras funciones.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\#include\ "{}main.h"{}}
+\DoxyCodeLine{\ \#include\ "{}BG77.h"{}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ //-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/BSP-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}
+\DoxyCodeLine{\ bg\_err\_t\ uart\_tx(uint8\_t\ *data,\ uint16\_t\ len);}
+\DoxyCodeLine{\ bg\_err\_t\ gpioWrite(bgPin\_t\ pin,\ uint8\_t\ state);}
+\DoxyCodeLine{\ void\ msDelay(uint32\_t\ mDelay);}
+\DoxyCodeLine{\ void\ resetMCU(void);}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ bg\_err\_t\ uart\_tx(uint8\_t\ *data,\ uint16\_t\ len)}
+\DoxyCodeLine{\ \{}
+\DoxyCodeLine{\ \ \ \ \ bg\_err\_t\ err\ =\ BG\_OK;}
+\DoxyCodeLine{\ \ \ \ \ if(HAL\_UART\_Transmit(\&UART\_BG,\ data,\ len,\ 1000)\ !=\ HAL\_OK)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ err\ =\ BG\_ERR\_MCU\_TX\_UART;}
+\DoxyCodeLine{\ \ \ \ \ return\ err;}
+\DoxyCodeLine{\ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ bg\_err\_t\ gpioWrite(bgPin\_t\ pin,\ uint8\_t\ state)}
+\DoxyCodeLine{\ \{}
+\DoxyCodeLine{\ \ \ \ \ if(pin\ >=\ BG\_UNSUPORTED\_PIN)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ return\ BG\_ERR\_UNSUPPORTED\_PIN;}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\ \ \ \ \ bg\_err\_t\ err\ =\ BG\_OK;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ uint32\_t\ bgPin[]\ =\ \{BG\_PWRKEY\_Pin,\ \ BG\_VBAT\_Pin,\ BG\_RESET\_Pin,\ BG\_PON\_TRIG\_Pin\};}
+\DoxyCodeLine{\ \ \ \ \ uint32\_t\ bgPort[]\ =\ \{BG\_PWRKEY\_GPIO\_Port,\ BG\_VBAT\_GPIO\_Port,\ BG\_RESET\_GPIO\_Port,\(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ BG\_PON\_TRIG\_GPIO\_Port\};\ }
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ HAL\_GPIO\_WritePin(bgPort[pin],\ bgPin[pin],\ state);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ return\ BG\_OK;}
+\DoxyCodeLine{\ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ void\ msDelay(uint32\_t\ mDelay)}
+\DoxyCodeLine{\ \{}
+\DoxyCodeLine{\ \ \ \ \ HAL\_Delay(mDelay);}
+\DoxyCodeLine{\ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ void\ resetMCU(void)}
+\DoxyCodeLine{\ \{}
+\DoxyCodeLine{\ \ \ \ \ HAL\_NVIC\_SystemReset();}
+\DoxyCodeLine{\ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ bg\_bspFun\_t\ bspFun\ =\ \{.uartTx\ =\ uart\_tx,\ .gpioWrite\ =\ gpioWrite,\ .msDelay\ =\ msDelay,\(\backslash\)}
+\DoxyCodeLine{\ .resetMCU\ =\ resetMCU\};}
+\DoxyCodeLine{\ //-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/BSP\ end-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ //-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/Funcion\ de\ recepcion\ de\ interrupcion\ de\ UART-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ //Creacion\ e\ inicialzacion\ de\ buffer\ del\ tipo\ uartBuff\_t\ (buffer\ de\ 2KB\ de\ la\ libreria)}
+\DoxyCodeLine{\ uartBuff\_t\ uBg\ =\ \{.buff\ =\ \{'\(\backslash\)0'\},\ .len\ =\ 0\};\ }
+\DoxyCodeLine{}
+\DoxyCodeLine{\ //-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/Variables\ para\ manejo\ de\ UART-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}
+\DoxyCodeLine{\ \#define\ UART\_BG\ huart7\ //instancia\ de\ UART\ de\ modulo\ de\ comunicacion}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ typedef\ enum\ \{}
+\DoxyCodeLine{\ RX\_LOG,}
+\DoxyCodeLine{\ RX\_BG,}
+\DoxyCodeLine{\ RX\_NO\_SUPPORTED}
+\DoxyCodeLine{\ \}rxUart\_t;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ rxUart\_t\ keyUart\ =\ RX\_NO\_SUPPORTED;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \#define\ flg\_uart\ flg\_main.f0\ //1:\ llego\ una\ recepcion\ de\ UART\ por\ interrupcion.}
+\DoxyCodeLine{\ flags\_t\ flg\_main\ =\ \{0\};\ //banderas\ de\ 1\ bit.}
+\DoxyCodeLine{\ //-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/Variables\ para\ manejo\ de\ UART\ end-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ void\ HAL\_UARTEx\_RxEventCallback(UART\_HandleTypeDef\ *huart,\ uint16\_t\ Size)}
+\DoxyCodeLine{\ \{}
+\DoxyCodeLine{\ \ \ \ \ if(huart\ ==\ \&UART\_BG)}
+\DoxyCodeLine{\ \ \ \ \ \{\ \ \ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ //-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/Callback\ de\ UART\ para\ libreria-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ bg\_uartCallback(uBg.buff,\ Size);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ HAL\_UARTEx\_ReceiveToIdle\_IT(\&UART\_BG,\ uBg.buff,\ sizeof(uBg.buff));}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ keyUart\ =\ RX\_BG;}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ uBg.len\ =\ Size;}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ flg\_uart\ =\ 1;}
+\DoxyCodeLine{\ \ \ \ \ \}}
+\DoxyCodeLine{\ \}}
+\DoxyCodeLine{\ //-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/Funcion\ de\ recepcion\ de\ interrupcion\ de\ UART\ end-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ //-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/Funcion\ main-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}
+\DoxyCodeLine{\ int\ main(void)}
+\DoxyCodeLine{\ \{}
+\DoxyCodeLine{\ \ \ \ \ //-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/Configuracion\ e\ inicializacion\ de\ MCU-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}
+\DoxyCodeLine{\ \ \ \ \ HAL\_Init();}
+\DoxyCodeLine{\ \ \ \ \ SystemClock\_Config();}
+\DoxyCodeLine{\ \ \ \ \ MX\_GPIO\_Init();}
+\DoxyCodeLine{\ \ \ \ \ MX\_UART4\_Init();}
+\DoxyCodeLine{\ \ \ \ \ MX\_UART7\_Init();}
+\DoxyCodeLine{\ \ \ \ \ MX\_USART2\_UART\_Init();}
+\DoxyCodeLine{\ \ \ \ \ //-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/Configuracion\ e\ inicializacion\ de\ MCU\ end-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}
+\DoxyCodeLine{\ \ \ \ \ }
+\DoxyCodeLine{\ \ \ \ \ //-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/Configurando\ o\ estableciendo\ BSP-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}
+\DoxyCodeLine{\ \ \ \ \ bg\_set\_bsp(bspFun);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ //-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/Activando\ la\ Recepcion\ de\ interrupcion\ de\ UART-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}
+\DoxyCodeLine{\ \ \ \ \ HAL\_UARTEx\_ReceiveToIdle\_IT(\&UART\_BG,\ uBg.buff,\ sizeof(uBg.buff));}
+\DoxyCodeLine{\ \ \ \ \ flg\_uart\ =\ 0;}
+\DoxyCodeLine{\ \ \ \ \ }
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ //-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/Inicializando\ el\ modulo\ (libreria)-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}
+\DoxyCodeLine{\ \ \ \ \ bg\_init\_module();}
+\DoxyCodeLine{\ \ \ \ \ }
+\DoxyCodeLine{\ \ \ \ \ //-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/Verificacion\ de\ SIM-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}
+\DoxyCodeLine{\ \ \ \ \ if(bg\_check\_sim()\ ==\ BG\_OK\_SIM)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ printf("{}SIM\ OK\(\backslash\)n"{});}
+\DoxyCodeLine{\ \ \ \ \ else}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ printf("{}SIM\ NO\ OK\(\backslash\)n"{});}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ //-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/Se\ realiza\ el\ proceso\ de\ registro\ en\ la\ red-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}
+\DoxyCodeLine{\ \ \ \ \ if(bg\_attach(COPS\_LF)\ ==\ BG\_OK\_ATTACH)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ printf("{}Modulo\ ATTACHADO\(\backslash\)n"{});}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ //-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/Configura\ conterxto\ PDP-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}
+\DoxyCodeLine{\ \ \ \ \ bg\_ctxPdp\_t\ contextPDP\_1\ =\{.ctxtID\ =\ 1,\ .contextType\ =\ BG\_CTXT\_IPV4,\(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ .apn\ =\ APN\_LINKS\_FIELD,\ .usr\ =\ "{}"{},\ .psw\ =\ "{}"{}\};}
+\DoxyCodeLine{\ \ \ \ \ bg\_conf\_pdp(contextPDP\_1);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ //-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/Activa\ contexto\ PDP-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}
+\DoxyCodeLine{\ \ \ \ \ bg\_pdp\_activation(1,\ BG\_PDP\_ACT);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ //-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/Creacion\ y\ apertura\ de\ socket\ 1\ CLIENTE-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}
+\DoxyCodeLine{\ \ \ \ \ bgSckt\_t\ mySckt2\ =\ \{.ctxtID\ =\ 1,\ .connectID\ =\ 1,\ .ip\ =\ IP\_METERCAD,\(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ .accssMode\ =\ BG\_OPEN\_BUFF\_ACCSS\_MODE,\ .serviceType\ =\ BG\_OPEN\_CLIENT,\(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ .remotePort\ =\ 2001,\ .localPort\ =\ BG\_OPEN\_CLIENT\_LOCAL\_PORT\};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ if(bg\_open\_sckt(mySckt2)\ ==\ BG\_OK\_CONNECT\_ID\_OPENNED)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ printf("{}Conexion\ myScket2\ Abierta\(\backslash\)n"{});}
+\DoxyCodeLine{\ \ \ \ \ //-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/Creacion\ y\ apertura\ de\ socket\ 2\ CLIENTE\ end-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ //-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/Cambio\ a\ modo\ transparente\ de\ socket\ 2\ CLIENTE-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/\ }
+\DoxyCodeLine{\ \ \ \ \ if(bg\_transparent\_mode(mySckt2.connectID)\ ==\ BG\_OK\_TRANSPARENT\_MODE)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ printf("{}Modo\ transparente\ exitoso\(\backslash\)n"{});}
+\DoxyCodeLine{\ \ \ \ \ //-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/Cambio\ a\ modo\ transparente\ de\ socket\ 2\ CLIENTE-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/\ }
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ //-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/Loop\ del\ codigo\ o\ hilo\ principal-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}
+\DoxyCodeLine{\ \ \ \ \ while(1)}
+\DoxyCodeLine{\ \ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ //-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/Funcion\ de\ manejo\ de\ URC-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ bg\_handle\_urc();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ //-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/Transmision\ de\ mensaje\ cada\ 2\ segundos-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ bg\_transmit\_TM("{}hello\ dog"{},\ 9);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ HAL\_Delay(2000);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ memset(uBg.buff,\ '\(\backslash\)0',\ sizeof(uBg.buff));\ //limpieza\ de\ buffer\ de\ recepcion\ de\ UART\ en\ aplicacion\ principal}
+\DoxyCodeLine{\ \ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ \ //-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/Loop\ del\ codigo\ o\ hilo\ principal-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/\ }
+\DoxyCodeLine{\ \}}
+\DoxyCodeLine{\ //-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/Funcion\ main\ end-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ //-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/Funcion\ de\ interrupcion\ de\ temporizador-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}
+\DoxyCodeLine{\ void\ callback\_systic(void)}
+\DoxyCodeLine{\ \{\ \ \ }
+\DoxyCodeLine{\ \ \ \ \ //-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/Callback\ de\ temporizador\ de\ 1ms\ para\ libreria-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}
+\DoxyCodeLine{\ \ \ \ \ bg\_callback\_ms();}
+\DoxyCodeLine{\ \}}
+\DoxyCodeLine{\ //-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/Funcion\ de\ interrupcion\ de\ temporizador\ end-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ //-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/Funcion\ de\ interrupcion\ de\ temporizador\ (Systick)-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}
+\DoxyCodeLine{\ void\ HAL\_GPIO\_EXTI\_Callback(uint16\_t\ GPIO\_Pin)}
+\DoxyCodeLine{\ \{}
+\DoxyCodeLine{\ \ \ \ \ if(GPIO\_Pin\ ==\ INT\_MAIN\_RI\_Pin)}
+\DoxyCodeLine{\ \ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ if(HAL\_GPIO\_ReadPin(INT\_MAIN\_RI\_GPIO\_Port,\ INT\_MAIN\_RI\_Pin))}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ //-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/Callback\ de\ flanco\ de\ subida\ de\ pin\ MAIN\ RI-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ bg\_mainRICallback(MAIN\_RI\_EDGE\_RISING);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ else}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ //-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/Callback\ de\ flanco\ de\ bajada\ de\ pin\ MAIN\ RI-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ bg\_mainRICallback(MAIN\_RI\_EDGE\_FALLING);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ \ \}}
+\DoxyCodeLine{\ \}}
+\DoxyCodeLine{\ //-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/Funcion\ de\ interrupcion\ de\ temporizador\ \ (Systick)\ end-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}
+
+\end{DoxyCode}
+
+
+El contenido del codigo puede ser explicado con los siguientes\+:
+
+
+\begin{DoxyEnumerate}
+\item Creacion de BSP
+\item Llamada de callbacks necesarios para libreria (UART, Temporizador 1ms, Flancos de pin MAIN\+\_\+\+RI).
+\item Pasar BSP a libreria.
+\item Inicializar libreria.
+\item Verificar SIM.
+\item Attacharse.
+\item Configurar y activar contexto PDP.
+\item Configurar y abrir conexion en modo transparente.
+\item Colocar funcion de manejo de URC en loop principal (\doxylink{_b_g77_8c_a3f03c39804aa65f885946b3f30d6b4fc}{bg\+\_\+handle\+\_\+urc()}).
+\item Intercambiar mensajes con servidor al que se apunta.
+\item El usuario puede generar sus propias funciones callbacks de notificacion como se explico en el punto 11 del ejemplo 1.
+\end{DoxyEnumerate}\hypertarget{md__r_e_a_d_m_e_autotoc_md3}{}\doxysection{\texorpdfstring{Compilacion}{Compilacion}}\label{md__r_e_a_d_m_e_autotoc_md3}
+Esta compilacion se realiza en STM32\+Cube\+IDE, sin embargo, la compilacion en diferentes IDE\textquotesingle{}s es similar. Primero se tiene que descargar o copiar la libreria en la ruta del proyecto principal(o se podria clonar o agregar como un submodulo desde el repositorio). La ubicacion de la libreria en el proyecto se deberia de ver de la siguiente manera\+:
+
+
+
+Después, en STM32\+Cube\+IDE se debe incluir su ruta en los paths and simbols.
+
+
+
+Posterior a ello solo se debe compilar con el boton de compilacion.\hypertarget{md__r_e_a_d_m_e_autotoc_md4}{}\doxysection{\texorpdfstring{Mensaje}{Mensaje}}\label{md__r_e_a_d_m_e_autotoc_md4}
+Recuerda usar
+
+👍"{}\+Hello Dog! 🐶"{}
+
+En vez de
+
+✖️"{}\+Hello World!"{}
+
+ 

@@ -1,0 +1,617 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.12.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>BG77: Archivo de código fuente BG77.h</title>
+<link rel="icon" href="cursoCIntermedio.png" type="image/x-icon" />
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectlogo"><img alt="Logo" src=" lenguaje-c-1.png" height="100px"/></td>
+  <td id="projectalign">
+   <div id="projectname">BG77<span id="projectnumber">&#160;1.0</span>
+   </div>
+   <div id="projectbrief">Esta es una libreria basica para controlar el modulo de comunicacion BG77</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generado por Doxygen 1.12.0 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() { codefold.init(0); });
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','Buscar',false);
+  $(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="doc-content">
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function(){ initResizable(false); });
+/* @license-end */
+</script>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Cargando...</div>
+<div class="SRStatus" id="Searching">Buscando...</div>
+<div class="SRStatus" id="NoMatches">Nada coincide</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">BG77.h</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="_b_g77_8h.html">Ir a la documentación de este archivo.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span> </div>
+<div class="line"><a id="l00362" name="l00362"></a><span class="lineno">  362</span><span class="preprocessor">#include &quot;stdio.h&quot;</span></div>
+<div class="line"><a id="l00363" name="l00363"></a><span class="lineno">  363</span><span class="preprocessor">#include &quot;stdint.h&quot;</span></div>
+<div class="line"><a id="l00364" name="l00364"></a><span class="lineno">  364</span><span class="preprocessor">#include &quot;stdlib.h&quot;</span></div>
+<div class="line"><a id="l00365" name="l00365"></a><span class="lineno">  365</span><span class="preprocessor">#include &quot;string.h&quot;</span></div>
+<div class="line"><a id="l00366" name="l00366"></a><span class="lineno">  366</span><span class="preprocessor">#include &quot;stdarg.h&quot;</span></div>
+<div class="line"><a id="l00367" name="l00367"></a><span class="lineno">  367</span> </div>
+<div class="line"><a id="l00368" name="l00368"></a><span class="lineno">  368</span><span class="preprocessor">#include &quot;../BG77/queue_module/queue_module.h&quot;</span></div>
+<div class="line"><a id="l00369" name="l00369"></a><span class="lineno">  369</span> </div>
+<div class="line"><a id="l00370" name="l00370"></a><span class="lineno">  370</span><span class="preprocessor">#ifndef _BG77_H_</span></div>
+<div class="line"><a id="l00371" name="l00371"></a><span class="lineno">  371</span><span class="preprocessor">#define _BG77_H_</span></div>
+<div class="line"><a id="l00372" name="l00372"></a><span class="lineno">  372</span> </div>
+<div class="line"><a id="l00373" name="l00373"></a><span class="lineno">  373</span><span class="preprocessor">#define LD 0    </span><span class="comment">//Sirve para indicar que NO se imprima mensaje en la MACRO LOG_BG</span></div>
+<div class="line"><a id="l00374" name="l00374"></a><span class="lineno">  374</span><span class="preprocessor">#define LE 1    </span><span class="comment">//Sirve para indicar que SI se imprima mensaje en la MACRO LOG_BG</span></div>
+<div class="line"><a id="l00375" name="l00375"></a><span class="lineno">  375</span><span class="preprocessor">#define _BG_DEBUG_</span></div>
+<div class="line"><a id="l00376" name="l00376"></a><span class="lineno">  376</span><span class="preprocessor">#ifdef _BG_DEBUG_</span></div>
+<div class="line"><a id="l00377" name="l00377"></a><span class="lineno">  377</span> </div>
+<div class="foldopen" id="foldopen00383" data-start="" data-end="">
+<div class="line"><a id="l00383" name="l00383"></a><span class="lineno"><a class="line" href="_b_g77_8h.html#abced5d6549b42ce11890222cdcce5625">  383</a></span><span class="preprocessor">#define LOG_BG(enable, ...)\</span></div>
+<div class="line"><a id="l00384" name="l00384"></a><span class="lineno">  384</span><span class="preprocessor">do{\</span></div>
+<div class="line"><a id="l00385" name="l00385"></a><span class="lineno">  385</span><span class="preprocessor">    if(enable) \</span></div>
+<div class="line"><a id="l00386" name="l00386"></a><span class="lineno">  386</span><span class="preprocessor">        printf(__VA_ARGS__);\</span></div>
+<div class="line"><a id="l00387" name="l00387"></a><span class="lineno">  387</span><span class="preprocessor">}while(0)</span></div>
+</div>
+<div class="line"><a id="l00388" name="l00388"></a><span class="lineno">  388</span> </div>
+<div class="foldopen" id="foldopen00393" data-start="" data-end="">
+<div class="line"><a id="l00393" name="l00393"></a><span class="lineno"><a class="line" href="_b_g77_8h.html#a68ee928e8b006a04a7fcf30d8498cbbe">  393</a></span><span class="preprocessor">#define LOG_BG_TRACE(enable, ...)\</span></div>
+<div class="line"><a id="l00394" name="l00394"></a><span class="lineno">  394</span><span class="preprocessor">do{\</span></div>
+<div class="line"><a id="l00395" name="l00395"></a><span class="lineno">  395</span><span class="preprocessor">    if(enable) \</span></div>
+<div class="line"><a id="l00396" name="l00396"></a><span class="lineno">  396</span><span class="preprocessor">    {\</span></div>
+<div class="line"><a id="l00397" name="l00397"></a><span class="lineno">  397</span><span class="preprocessor">        printf(&quot;[%s: %d]&quot;, __FILE__, __LINE__);\</span></div>
+<div class="line"><a id="l00398" name="l00398"></a><span class="lineno">  398</span><span class="preprocessor">        printf(__VA_ARGS__);\</span></div>
+<div class="line"><a id="l00399" name="l00399"></a><span class="lineno">  399</span><span class="preprocessor">    }\</span></div>
+<div class="line"><a id="l00400" name="l00400"></a><span class="lineno">  400</span><span class="preprocessor">}while(0)</span></div>
+</div>
+<div class="line"><a id="l00401" name="l00401"></a><span class="lineno">  401</span><span class="preprocessor">#else</span></div>
+<div class="line"><a id="l00402" name="l00402"></a><span class="lineno">  402</span><span class="preprocessor">#define LOG_BG(...)</span></div>
+<div class="line"><a id="l00403" name="l00403"></a><span class="lineno">  403</span><span class="preprocessor">#define LOG_BG_TRACE(...)</span></div>
+<div class="line"><a id="l00404" name="l00404"></a><span class="lineno">  404</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00405" name="l00405"></a><span class="lineno">  405</span> </div>
+<div class="line"><a id="l00410" name="l00410"></a><span class="lineno"><a class="line" href="_b_g77_8h.html#ac5cdc584cf35c61f2875f1703ab9219b">  410</a></span><span class="preprocessor">#define __bg_weak__ __attribute__((weak))</span></div>
+<div class="line"><a id="l00411" name="l00411"></a><span class="lineno">  411</span> </div>
+<div class="line"><a id="l00412" name="l00412"></a><span class="lineno">  412</span><span class="preprocessor">#define MAX_SEC 0XFFFFFFFFUL</span></div>
+<div class="line"><a id="l00413" name="l00413"></a><span class="lineno">  413</span> </div>
+<div class="line"><a id="l00414" name="l00414"></a><span class="lineno">  414</span><span class="preprocessor">#define BG_TIMEOUT_ANSW 10UL            </span><span class="comment">//timeout de espera de respuesta de comando BG</span></div>
+<div class="line"><a id="l00415" name="l00415"></a><span class="lineno">  415</span><span class="preprocessor">#define BG_TIMEOUT_ANSW_OK 20UL         </span><span class="comment">//timeout de espera de respuesta esperada del modulo BG</span></div>
+<div class="line"><a id="l00416" name="l00416"></a><span class="lineno">  416</span><span class="preprocessor">#define BG_TIMEOUT_ANSW_OK_LONG 40UL    </span><span class="comment">//timeout de espera de respuesta esperada del modulo BG para tiempos largos</span></div>
+<div class="line"><a id="l00417" name="l00417"></a><span class="lineno">  417</span> </div>
+<div class="line"><a id="l00418" name="l00418"></a><span class="lineno">  418</span><span class="preprocessor">#define IP_METERCAD  &quot;192.168.4.58&quot;     </span><span class="comment">//Direccion IP de maquina virtual metercad</span></div>
+<div class="line"><a id="l00419" name="l00419"></a><span class="lineno">  419</span><span class="preprocessor">#define IP_PROXYGAMMA &quot;192.168.4.57&quot;    </span><span class="comment">//Direccion IP de maquina virtual proxygamma</span></div>
+<div class="line"><a id="l00420" name="l00420"></a><span class="lineno">  420</span><span class="preprocessor">#define IP_TCP_LISTENER &quot;127.0.0.1&quot;     </span><span class="comment">//Direccion IP de por defecto para abrir socket en modo servidor</span></div>
+<div class="line"><a id="l00421" name="l00421"></a><span class="lineno">  421</span> </div>
+<div class="line"><a id="l00422" name="l00422"></a><span class="lineno">  422</span><span class="preprocessor">#define APN_LINKS_FIELD &quot;cantilever.1&quot;  </span><span class="comment">//APN de linksfield</span></div>
+<div class="line"><a id="l00423" name="l00423"></a><span class="lineno">  423</span> </div>
+<div class="line"><a id="l00424" name="l00424"></a><span class="lineno">  424</span> </div>
+<div class="line"><a id="l00425" name="l00425"></a><span class="lineno">  425</span><span class="preprocessor">#define COPS_LF &quot;334020&quot;    </span><span class="comment">//Seleccion de operadora linksfield</span></div>
+<div class="line"><a id="l00426" name="l00426"></a><span class="lineno">  426</span><span class="preprocessor">#define COPS_ATT_1 &quot;334090&quot; </span><span class="comment">//Seleccion de operadora ATT 1</span></div>
+<div class="line"><a id="l00427" name="l00427"></a><span class="lineno">  427</span><span class="preprocessor">#define COPS_ATT_2 &quot;334050&quot; </span><span class="comment">//Seleccion de operadora ATT 2</span></div>
+<div class="line"><a id="l00428" name="l00428"></a><span class="lineno">  428</span> </div>
+<div class="line"><a id="l00429" name="l00429"></a><span class="lineno">  429</span><span class="preprocessor">#define BG_CONTEXT_ID_MAX 7 </span><span class="comment">//Es el maximo numero de contextID que soporta el modulo BG77</span></div>
+<div class="line"><a id="l00430" name="l00430"></a><span class="lineno">  430</span><span class="preprocessor">#define BG_CONTEXT_ID_MIN 1 </span><span class="comment">//Es el minimo numero de contextID que soporta el modulo BG77</span></div>
+<div class="line"><a id="l00431" name="l00431"></a><span class="lineno">  431</span> </div>
+<div class="line"><a id="l00432" name="l00432"></a><span class="lineno">  432</span><span class="preprocessor">#define BG_CONNECT_ID_MAX 11 </span><span class="comment">//Es el maximo numero de connectID que soporta el modulo BG77 (rango 0-11)</span></div>
+<div class="line"><a id="l00433" name="l00433"></a><span class="lineno">  433</span><span class="preprocessor">#define BG_CONNECT_ID_MIN 0  </span><span class="comment">//Es el minimo numero de connectID que soporta el modulo BG77 (rango 0-11)</span></div>
+<div class="line"><a id="l00434" name="l00434"></a><span class="lineno">  434</span> </div>
+<div class="line"><a id="l00442" name="l00442"></a><span class="lineno"><a class="line" href="_b_g77_8h.html#a29b43f40cd1353df5eb853cb40aca7f9">  442</a></span><span class="preprocessor">#define CHECK_BG_ERR(err) do{ if(err != BG_OK) return err; } while(0)</span></div>
+<div class="line"><a id="l00443" name="l00443"></a><span class="lineno">  443</span> </div>
+<div class="line"><a id="l00462" name="l00462"></a><span class="lineno">  462</span><span class="preprocessor">#define REMPLACE_CHAR(rempSrcBuff, chrRemplaced, chrDesired)\</span></div>
+<div class="line"><a id="l00463" name="l00463"></a><span class="lineno">  463</span><span class="preprocessor">do{\</span></div>
+<div class="line"><a id="l00464" name="l00464"></a><span class="lineno">  464</span><span class="preprocessor">    uint8_t *_remplacePtr = strchr(rempSrcBuff, chrRemplaced);\</span></div>
+<div class="line"><a id="l00465" name="l00465"></a><span class="lineno">  465</span><span class="preprocessor">    if(_remplacePtr != NULL)\</span></div>
+<div class="line"><a id="l00466" name="l00466"></a><span class="lineno">  466</span><span class="preprocessor">        *_remplacePtr = chrDesired;\</span></div>
+<div class="line"><a id="l00467" name="l00467"></a><span class="lineno">  467</span><span class="preprocessor">}while(0)</span></div>
+<div class="line"><a id="l00468" name="l00468"></a><span class="lineno">  468</span> </div>
+<div class="line"><a id="l00469" name="l00469"></a><span class="lineno">  469</span> </div>
+<div class="line"><a id="l00489" name="l00489"></a><span class="lineno">  489</span><span class="preprocessor">#define COPY_PARSE_STR(_dstBuff, dstBuffSize, srcBuff, chr1, chr2)\</span></div>
+<div class="line"><a id="l00490" name="l00490"></a><span class="lineno">  490</span><span class="preprocessor">do { \</span></div>
+<div class="line"><a id="l00491" name="l00491"></a><span class="lineno">  491</span><span class="preprocessor">    uint8_t *dstBuff = _dstBuff;\</span></div>
+<div class="line"><a id="l00492" name="l00492"></a><span class="lineno">  492</span><span class="preprocessor">    uint8_t *_parsePtr = strchr(srcBuff, chr1); \</span></div>
+<div class="line"><a id="l00493" name="l00493"></a><span class="lineno">  493</span><span class="preprocessor">    if(_parsePtr == NULL || dstBuff == NULL) break; \</span></div>
+<div class="line"><a id="l00494" name="l00494"></a><span class="lineno">  494</span><span class="preprocessor">    _parsePtr++; \</span></div>
+<div class="line"><a id="l00495" name="l00495"></a><span class="lineno">  495</span><span class="preprocessor">    uint8_t *_endPtr = NULL;\</span></div>
+<div class="line"><a id="l00496" name="l00496"></a><span class="lineno">  496</span><span class="preprocessor">    if(chr1 == chr2)\</span></div>
+<div class="line"><a id="l00497" name="l00497"></a><span class="lineno">  497</span><span class="preprocessor">        _endPtr = strchr(_parsePtr + 1, chr2); \</span></div>
+<div class="line"><a id="l00498" name="l00498"></a><span class="lineno">  498</span><span class="preprocessor">    else\</span></div>
+<div class="line"><a id="l00499" name="l00499"></a><span class="lineno">  499</span><span class="preprocessor">        _endPtr = strchr(_parsePtr, chr2); \</span></div>
+<div class="line"><a id="l00500" name="l00500"></a><span class="lineno">  500</span><span class="preprocessor">    if(_endPtr == NULL) break; \</span></div>
+<div class="line"><a id="l00501" name="l00501"></a><span class="lineno">  501</span><span class="preprocessor">    size_t len = _endPtr - _parsePtr; \</span></div>
+<div class="line"><a id="l00502" name="l00502"></a><span class="lineno">  502</span><span class="preprocessor">    if(len &gt;= dstBuffSize) break;\</span></div>
+<div class="line"><a id="l00503" name="l00503"></a><span class="lineno">  503</span><span class="preprocessor">    for(size_t i = 0; i &lt; len; i++) dstBuff[i] = _parsePtr[i];\</span></div>
+<div class="line"><a id="l00504" name="l00504"></a><span class="lineno">  504</span><span class="preprocessor">    dstBuff[len] = &#39;\0&#39;; </span><span class="comment">/* Agrega el terminador nulo */</span><span class="preprocessor"> \</span></div>
+<div class="line"><a id="l00505" name="l00505"></a><span class="lineno">  505</span><span class="preprocessor">} while(0)</span></div>
+<div class="line"><a id="l00506" name="l00506"></a><span class="lineno">  506</span> </div>
+<div class="foldopen" id="foldopen00515" data-start="" data-end="">
+<div class="line"><a id="l00515" name="l00515"></a><span class="lineno"><a class="line" href="_b_g77_8h.html#a65789cf68a6f03ed3ede1aa82784c39b">  515</a></span><span class="preprocessor">#define CHECK_DESIRED_ANSW(srcBuff, desiredAnsw, _timeout)\</span></div>
+<div class="line"><a id="l00516" name="l00516"></a><span class="lineno">  516</span><span class="preprocessor">do{\</span></div>
+<div class="line"><a id="l00517" name="l00517"></a><span class="lineno">  517</span><span class="preprocessor">    bg_start_timeout();\</span></div>
+<div class="line"><a id="l00518" name="l00518"></a><span class="lineno">  518</span><span class="preprocessor">    while(!strstr(srcBuff, desiredAnsw) &amp;&amp; count_sec_bg &lt; _timeout)\</span></div>
+<div class="line"><a id="l00519" name="l00519"></a><span class="lineno">  519</span><span class="preprocessor">        __asm__(&quot;nop&quot;);\</span></div>
+<div class="line"><a id="l00520" name="l00520"></a><span class="lineno">  520</span><span class="preprocessor">    if(_timeout &lt;= bg_stop_timeout())\</span></div>
+<div class="line"><a id="l00521" name="l00521"></a><span class="lineno">  521</span><span class="preprocessor">    {\</span></div>
+<div class="line"><a id="l00522" name="l00522"></a><span class="lineno">  522</span><span class="preprocessor">        LOG_BG(LE,&quot;[BG_ERR] TIMEOUT RESPUESTA DESEADA\n&quot;);\</span></div>
+<div class="line"><a id="l00523" name="l00523"></a><span class="lineno">  523</span><span class="preprocessor">        return BG_ERR_TIMEOUT_ANS_DESIRED;\</span></div>
+<div class="line"><a id="l00524" name="l00524"></a><span class="lineno">  524</span><span class="preprocessor">    }\</span></div>
+<div class="line"><a id="l00525" name="l00525"></a><span class="lineno">  525</span><span class="preprocessor">}while(0)</span></div>
+</div>
+<div class="line"><a id="l00526" name="l00526"></a><span class="lineno">  526</span> </div>
+<div class="foldopen" id="foldopen00534" data-start="" data-end="">
+<div class="line"><a id="l00534" name="l00534"></a><span class="lineno"><a class="line" href="_b_g77_8h.html#a25de0a3a2ef034775a4ed2739c9d6af7">  534</a></span><span class="preprocessor">#define CHECK_POWDWN_ANSW(srcBuff, _timeout)\</span></div>
+<div class="line"><a id="l00535" name="l00535"></a><span class="lineno">  535</span><span class="preprocessor">do{\</span></div>
+<div class="line"><a id="l00536" name="l00536"></a><span class="lineno">  536</span><span class="preprocessor">    bg_start_timeout();\</span></div>
+<div class="line"><a id="l00537" name="l00537"></a><span class="lineno">  537</span><span class="preprocessor">    while(!strstr(srcBuff, &quot;OK&quot;) &amp;&amp; !strstr(srcBuff, &quot;RDY&quot;) &amp;&amp; count_sec_bg &lt; _timeout)\</span></div>
+<div class="line"><a id="l00538" name="l00538"></a><span class="lineno">  538</span><span class="preprocessor">        __asm__(&quot;nop&quot;);\</span></div>
+<div class="line"><a id="l00539" name="l00539"></a><span class="lineno">  539</span><span class="preprocessor">    if(_timeout &lt;= bg_stop_timeout())\</span></div>
+<div class="line"><a id="l00540" name="l00540"></a><span class="lineno">  540</span><span class="preprocessor">    {\</span></div>
+<div class="line"><a id="l00541" name="l00541"></a><span class="lineno">  541</span><span class="preprocessor">        LOG_BG(LE,&quot;[BG_ERR] TIMEOUT RESPUESTA DESEADA\n&quot;);\</span></div>
+<div class="line"><a id="l00542" name="l00542"></a><span class="lineno">  542</span><span class="preprocessor">        return BG_ERR_TIMEOUT_ANS_DESIRED;\</span></div>
+<div class="line"><a id="l00543" name="l00543"></a><span class="lineno">  543</span><span class="preprocessor">    }\</span></div>
+<div class="line"><a id="l00544" name="l00544"></a><span class="lineno">  544</span><span class="preprocessor">}while(0)</span></div>
+</div>
+<div class="line"><a id="l00545" name="l00545"></a><span class="lineno">  545</span> </div>
+<div class="foldopen" id="foldopen00553" data-start="" data-end="">
+<div class="line"><a id="l00553" name="l00553"></a><span class="lineno"><a class="line" href="_b_g77_8h.html#ae249007a2f2f4a602e52a621236bde51">  553</a></span><span class="preprocessor">#define CHECK_EXIT_TM_ANSW(srcBuff, _timeout)\</span></div>
+<div class="line"><a id="l00554" name="l00554"></a><span class="lineno">  554</span><span class="preprocessor">do{\</span></div>
+<div class="line"><a id="l00555" name="l00555"></a><span class="lineno">  555</span><span class="preprocessor">    bg_start_timeout();\</span></div>
+<div class="line"><a id="l00556" name="l00556"></a><span class="lineno">  556</span><span class="preprocessor">    while(!strstr(srcBuff, &quot;OK&quot;) &amp;&amp; !strstr(srcBuff, &quot;QIURC&quot;) &amp;&amp; count_sec_bg &lt; _timeout)\</span></div>
+<div class="line"><a id="l00557" name="l00557"></a><span class="lineno">  557</span><span class="preprocessor">        __asm__(&quot;nop&quot;);\</span></div>
+<div class="line"><a id="l00558" name="l00558"></a><span class="lineno">  558</span><span class="preprocessor">    if(_timeout &lt;= bg_stop_timeout())\</span></div>
+<div class="line"><a id="l00559" name="l00559"></a><span class="lineno">  559</span><span class="preprocessor">    {\</span></div>
+<div class="line"><a id="l00560" name="l00560"></a><span class="lineno">  560</span><span class="preprocessor">        LOG_BG(LE,&quot;[BG_ERR] TIMEOUT RESPUESTA DESEADA\n&quot;);\</span></div>
+<div class="line"><a id="l00561" name="l00561"></a><span class="lineno">  561</span><span class="preprocessor">        return BG_ERR_TIMEOUT_ANS_DESIRED;\</span></div>
+<div class="line"><a id="l00562" name="l00562"></a><span class="lineno">  562</span><span class="preprocessor">    }\</span></div>
+<div class="line"><a id="l00563" name="l00563"></a><span class="lineno">  563</span><span class="preprocessor">}while(0)</span></div>
+</div>
+<div class="line"><a id="l00564" name="l00564"></a><span class="lineno">  564</span> </div>
+<div class="line"><a id="l00565" name="l00565"></a><span class="lineno">  565</span> </div>
+<div class="line"><a id="l00588" name="l00588"></a><span class="lineno">  588</span><span class="preprocessor">#define CREATE_BUFF(x, name) \</span></div>
+<div class="line"><a id="l00589" name="l00589"></a><span class="lineno">  589</span><span class="preprocessor">typedef struct \</span></div>
+<div class="line"><a id="l00590" name="l00590"></a><span class="lineno">  590</span><span class="preprocessor">{ \</span></div>
+<div class="line"><a id="l00591" name="l00591"></a><span class="lineno">  591</span><span class="preprocessor">    uint8_t buff[(x)]; \</span></div>
+<div class="line"><a id="l00592" name="l00592"></a><span class="lineno">  592</span><span class="preprocessor">    uint16_t len; \</span></div>
+<div class="line"><a id="l00593" name="l00593"></a><span class="lineno">  593</span><span class="preprocessor">} name##_t;</span></div>
+<div class="line"><a id="l00594" name="l00594"></a><span class="lineno">  594</span> </div>
+<div class="line"><a id="l00595" name="l00595"></a><span class="lineno">  595</span><span class="preprocessor">#define SIZE_BG_BUFF 2048</span></div>
+<div class="line"><a id="l00600" name="l00600"></a><span class="lineno"><a class="line" href="_b_g77_8h.html#a89dac8bef95fbc323f9216383fad9377">  600</a></span>CREATE_BUFF(SIZE_BG_BUFF, uartBuff);</div>
+<div class="line"><a id="l00601" name="l00601"></a><span class="lineno">  601</span> </div>
+<div class="foldopen" id="foldopen00605" data-start="{" data-end="};">
+<div class="line"><a id="l00605" name="l00605"></a><span class="lineno"><a class="line" href="_b_g77_8h.html#af98be1c204049055208486fb2b91c87b">  605</a></span><span class="keyword">typedef</span> <span class="keyword">enum</span>{</div>
+<div class="line"><a id="l00606" name="l00606"></a><span class="lineno">  606</span>    BG_ERR_TIMEOUT_ANS = -255, <span class="comment">//Error de timeout al no recibir respuesta del modulo BG</span></div>
+<div class="line"><a id="l00607" name="l00607"></a><span class="lineno">  607</span>    BG_ERR_TIMEOUT_ANS_DESIRED,         <span class="comment">//Error de timeout al no recibir respuesta esperada del modulo BG</span></div>
+<div class="line"><a id="l00608" name="l00608"></a><span class="lineno">  608</span>    BG_ERR_MCU_TX_UART,         <span class="comment">//Ocurrio un error en la transmision por UART al BG</span></div>
+<div class="line"><a id="l00609" name="l00609"></a><span class="lineno">  609</span>    BG_ERR_MCU_PTR_NULL,    <span class="comment">//El puntero que se esta entregando apunta a NULL</span></div>
+<div class="line"><a id="l00610" name="l00610"></a><span class="lineno">  610</span>    BG_ERR_UNSUPPORTED_PIN, <span class="comment">//Se quiere cambiar el estado de un pin no soportado o mapeado (PWR_KEY, VBAT, RESET, PON_TRIG)</span></div>
+<div class="line"><a id="l00611" name="l00611"></a><span class="lineno">  611</span>    BG_ERR_SIM_NO_OK,           <span class="comment">//No se detecta SIM</span></div>
+<div class="line"><a id="l00612" name="l00612"></a><span class="lineno">  612</span>    BG_ERR_PARSE,           <span class="comment">//No se encontro el delimitador con  funcion strchr()</span></div>
+<div class="line"><a id="l00613" name="l00613"></a><span class="lineno">  613</span>    BG_ERR_ATTACH_NO_OK,            <span class="comment">//El modulo NO esta registrado en la red</span></div>
+<div class="line"><a id="l00614" name="l00614"></a><span class="lineno">  614</span>    BG_ERR_NO_OPER,         <span class="comment">//No se ha seleccionado una operadora en COPS</span></div>
+<div class="line"><a id="l00615" name="l00615"></a><span class="lineno">  615</span>    BG_ERR_NO_CONF_PDP,     <span class="comment">//No se ha configurado el contexto PDP</span></div>
+<div class="line"><a id="l00616" name="l00616"></a><span class="lineno">  616</span>    BG_ERR_CTXT_ID_UNSUPPORTED, <span class="comment">//Se esta tratando de utilizar un contextID no soportado rango 1-7 para BG77</span></div>
+<div class="line"><a id="l00617" name="l00617"></a><span class="lineno">  617</span>    BG_ERR_CONNECT_ID_UNSUPORTED,   <span class="comment">//Se esta tratando de utilizar un connectID no soportado rango 0-11 para BG77</span></div>
+<div class="line"><a id="l00618" name="l00618"></a><span class="lineno">  618</span>    BG_ERR_CONNECT_ID_NOT_USED, <span class="comment">//Connect ID no utilizado</span></div>
+<div class="line"><a id="l00619" name="l00619"></a><span class="lineno">  619</span>    BG_ERR_CONF_PDP,    <span class="comment">//Error en la configuracion de contexto PDP </span></div>
+<div class="line"><a id="l00620" name="l00620"></a><span class="lineno">  620</span>    BG_ERR_ACT_PDP,     <span class="comment">//Error en la activacion PDP</span></div>
+<div class="line"><a id="l00621" name="l00621"></a><span class="lineno">  621</span>    BG_ERR_SIGNAL,      <span class="comment">//No se tiene una intensidad de señal aceptable</span></div>
+<div class="line"><a id="l00622" name="l00622"></a><span class="lineno">  622</span>    BG_OK = 0,              <span class="comment">//No hay error</span></div>
+<div class="line"><a id="l00623" name="l00623"></a><span class="lineno">  623</span>    BG_OK_SIM,              <span class="comment">//Se detecto SIM</span></div>
+<div class="line"><a id="l00624" name="l00624"></a><span class="lineno">  624</span>    BG_OK_ATTACH,           <span class="comment">//El modulo esta registrado en la red</span></div>
+<div class="line"><a id="l00625" name="l00625"></a><span class="lineno">  625</span>    BG_OK_PDP_ACT,              <span class="comment">//Contexto PDP activado</span></div>
+<div class="line"><a id="l00626" name="l00626"></a><span class="lineno">  626</span>    BG_OK_PDP_DEACT,            <span class="comment">//Contexto PDP desactivado</span></div>
+<div class="line"><a id="l00627" name="l00627"></a><span class="lineno">  627</span>    BG_OK_CONNECT_ID_OPENNED,   <span class="comment">//Connect ID abierto</span></div>
+<div class="line"><a id="l00628" name="l00628"></a><span class="lineno">  628</span>    BG_OK_CONF_PDP, <span class="comment">//Contexto PDP configurado</span></div>
+<div class="line"><a id="l00629" name="l00629"></a><span class="lineno">  629</span>    BG_OK_TRANSPARENT_MODE, <span class="comment">//La conexion se paso correctamente a modo transparente</span></div>
+<div class="line"><a id="l00630" name="l00630"></a><span class="lineno">  630</span>    BG_OK_EXIT_TRANSPARENT_MODE, <span class="comment">//El modulo salio de modo transparente correctamente</span></div>
+<div class="line"><a id="l00631" name="l00631"></a><span class="lineno">  631</span>    BG_OK_CONNECT_ID_CLOSED,    <span class="comment">//Connect ID cerrado</span></div>
+<div class="line"><a id="l00632" name="l00632"></a><span class="lineno">  632</span>    BG_OK_DETACH,   <span class="comment">//El modulo se desrgistro correctamente</span></div>
+<div class="line"><a id="l00633" name="l00633"></a><span class="lineno">  633</span>    BG_OK_TRANSMIT, <span class="comment">//Se consiguio transmitir un mensaje</span></div>
+<div class="line"><a id="l00634" name="l00634"></a><span class="lineno">  634</span>    BG_OK_RECEIVE,  <span class="comment">//Se consiguio recuperar el mensaje recibido</span></div>
+<div class="line"><a id="l00635" name="l00635"></a><span class="lineno">  635</span>    BG_OK_SIGNAL    <span class="comment">//Se tiene una intensidad de señal aceptable (rsrp &gt;= -115 &amp;&amp; sinr &gt;= 0)</span></div>
+<div class="line"><a id="l00636" name="l00636"></a><span class="lineno">  636</span>}<a class="code hl_enumeration" href="_b_g77_8h.html#af98be1c204049055208486fb2b91c87b">bg_err_t</a>;</div>
+</div>
+<div class="line"><a id="l00637" name="l00637"></a><span class="lineno">  637</span> </div>
+<div class="line"><a id="l00638" name="l00638"></a><span class="lineno">  638</span><span class="comment">//-----------------------------------Flags-----------------------------------</span></div>
+<div class="foldopen" id="foldopen00643" data-start="{" data-end="};">
+<div class="line"><a id="l00643" name="l00643"></a><span class="lineno"><a class="line" href="structflags__t.html">  643</a></span><span class="keyword">typedef</span> <span class="keyword">struct</span>{</div>
+<div class="line"><a id="l00644" name="l00644"></a><span class="lineno">  644</span>    uint16_t f0     : 1;</div>
+<div class="line"><a id="l00645" name="l00645"></a><span class="lineno">  645</span>    uint16_t f1     : 1;</div>
+<div class="line"><a id="l00646" name="l00646"></a><span class="lineno">  646</span>    uint16_t f2     : 1;</div>
+<div class="line"><a id="l00647" name="l00647"></a><span class="lineno">  647</span>    uint16_t f3     : 1;</div>
+<div class="line"><a id="l00648" name="l00648"></a><span class="lineno">  648</span>    uint16_t f4     : 1;</div>
+<div class="line"><a id="l00649" name="l00649"></a><span class="lineno">  649</span>    uint16_t f5     : 1;</div>
+<div class="line"><a id="l00650" name="l00650"></a><span class="lineno">  650</span>    uint16_t f6     : 1;</div>
+<div class="line"><a id="l00651" name="l00651"></a><span class="lineno">  651</span>    uint16_t f7     : 1;</div>
+<div class="line"><a id="l00652" name="l00652"></a><span class="lineno">  652</span>    uint16_t f8     : 1;</div>
+<div class="line"><a id="l00653" name="l00653"></a><span class="lineno">  653</span>    uint16_t f9     : 1;</div>
+<div class="line"><a id="l00654" name="l00654"></a><span class="lineno">  654</span>    uint16_t f10    : 1;</div>
+<div class="line"><a id="l00655" name="l00655"></a><span class="lineno">  655</span>    uint16_t f11    : 1;</div>
+<div class="line"><a id="l00656" name="l00656"></a><span class="lineno">  656</span>    uint16_t f12    : 1;</div>
+<div class="line"><a id="l00657" name="l00657"></a><span class="lineno">  657</span>    uint16_t f13    : 1;</div>
+<div class="line"><a id="l00658" name="l00658"></a><span class="lineno">  658</span>    uint16_t f14    : 1;</div>
+<div class="line"><a id="l00659" name="l00659"></a><span class="lineno">  659</span>    uint16_t f15    : 1;</div>
+<div class="line"><a id="l00660" name="l00660"></a><span class="lineno">  660</span>}<a class="code hl_struct" href="structflags__t.html">flags_t</a>;</div>
+</div>
+<div class="line"><a id="l00661" name="l00661"></a><span class="lineno">  661</span><span class="comment">//-----------------------------------Flags end-----------------------------------</span></div>
+<div class="line"><a id="l00662" name="l00662"></a><span class="lineno">  662</span> </div>
+<div class="line"><a id="l00663" name="l00663"></a><span class="lineno">  663</span><span class="comment">//-----------------------------------BSP-----------------------------------</span></div>
+<div class="foldopen" id="foldopen00668" data-start="{" data-end="};">
+<div class="line"><a id="l00668" name="l00668"></a><span class="lineno"><a class="line" href="_b_g77_8h.html#a2c28d9ff8a1ade4f1a62876f8ea35812">  668</a></span><span class="keyword">typedef</span> <span class="keyword">enum</span></div>
+<div class="line"><a id="l00669" name="l00669"></a><span class="lineno">  669</span>{</div>
+<div class="line"><a id="l00670" name="l00670"></a><span class="lineno">  670</span>    BG_PWRKEY_PIN,</div>
+<div class="line"><a id="l00671" name="l00671"></a><span class="lineno">  671</span>    BG_VBAT_PIN,</div>
+<div class="line"><a id="l00672" name="l00672"></a><span class="lineno">  672</span>    BG_RESET_PIN,</div>
+<div class="line"><a id="l00673" name="l00673"></a><span class="lineno">  673</span>    BG_PON_TRIG_PIN,</div>
+<div class="line"><a id="l00674" name="l00674"></a><span class="lineno">  674</span>    BG_UNSUPORTED_PIN</div>
+<div class="line"><a id="l00675" name="l00675"></a><span class="lineno">  675</span>}<a class="code hl_enumeration" href="_b_g77_8h.html#a2c28d9ff8a1ade4f1a62876f8ea35812">bgPin_t</a>;</div>
+</div>
+<div class="line"><a id="l00676" name="l00676"></a><span class="lineno">  676</span> </div>
+<div class="line"><a id="l00681" name="l00681"></a><span class="lineno"><a class="line" href="_b_g77_8h.html#a5df4af1d37573e135df6251575c7644f">  681</a></span><span class="keyword">typedef</span> <a class="code hl_enumeration" href="_b_g77_8h.html#af98be1c204049055208486fb2b91c87b">bg_err_t</a> (*<a class="code hl_typedef" href="_b_g77_8h.html#a5df4af1d37573e135df6251575c7644f">uartFun_t</a>)(uint8_t *data, uint8_t len);</div>
+<div class="line"><a id="l00682" name="l00682"></a><span class="lineno">  682</span> </div>
+<div class="line"><a id="l00687" name="l00687"></a><span class="lineno"><a class="line" href="_b_g77_8h.html#aae937a975adb539d978912a31af5a288">  687</a></span><span class="keyword">typedef</span> <a class="code hl_enumeration" href="_b_g77_8h.html#af98be1c204049055208486fb2b91c87b">bg_err_t</a> (*<a class="code hl_typedef" href="_b_g77_8h.html#aae937a975adb539d978912a31af5a288">gpioWriteFun_t</a>)(<a class="code hl_enumeration" href="_b_g77_8h.html#a2c28d9ff8a1ade4f1a62876f8ea35812">bgPin_t</a> pin, uint8_t state);</div>
+<div class="line"><a id="l00688" name="l00688"></a><span class="lineno">  688</span> </div>
+<div class="line"><a id="l00693" name="l00693"></a><span class="lineno"><a class="line" href="_b_g77_8h.html#a3cf0239ec77a1d5be9c2a1b4e28e0d43">  693</a></span><span class="keyword">typedef</span> void (*<a class="code hl_typedef" href="_b_g77_8h.html#a3cf0239ec77a1d5be9c2a1b4e28e0d43">delayFun_t</a>)(uint32_t mDelay);</div>
+<div class="line"><a id="l00694" name="l00694"></a><span class="lineno">  694</span> </div>
+<div class="line"><a id="l00699" name="l00699"></a><span class="lineno"><a class="line" href="_b_g77_8h.html#ae235bc4734e4f0ac5242dd32776a39cb">  699</a></span><span class="keyword">typedef</span> void (*<a class="code hl_typedef" href="_b_g77_8h.html#ae235bc4734e4f0ac5242dd32776a39cb">resetFun_t</a>)(void);</div>
+<div class="line"><a id="l00700" name="l00700"></a><span class="lineno">  700</span> </div>
+<div class="foldopen" id="foldopen00705" data-start="{" data-end="};">
+<div class="line"><a id="l00705" name="l00705"></a><span class="lineno"><a class="line" href="structbg__bsp_fun__t.html">  705</a></span><span class="keyword">typedef</span> <span class="keyword">struct</span></div>
+<div class="line"><a id="l00706" name="l00706"></a><span class="lineno">  706</span>{</div>
+<div class="line"><a id="l00707" name="l00707"></a><span class="lineno">  707</span>    <a class="code hl_typedef" href="_b_g77_8h.html#a5df4af1d37573e135df6251575c7644f">uartFun_t</a> uartTx; </div>
+<div class="line"><a id="l00708" name="l00708"></a><span class="lineno">  708</span>    <a class="code hl_typedef" href="_b_g77_8h.html#aae937a975adb539d978912a31af5a288">gpioWriteFun_t</a> gpioWrite;</div>
+<div class="line"><a id="l00709" name="l00709"></a><span class="lineno">  709</span>    <a class="code hl_typedef" href="_b_g77_8h.html#a3cf0239ec77a1d5be9c2a1b4e28e0d43">delayFun_t</a> msDelay;</div>
+<div class="line"><a id="l00710" name="l00710"></a><span class="lineno">  710</span>    <a class="code hl_typedef" href="_b_g77_8h.html#ae235bc4734e4f0ac5242dd32776a39cb">resetFun_t</a> resetMCU;</div>
+<div class="line"><a id="l00711" name="l00711"></a><span class="lineno">  711</span>}<a class="code hl_struct" href="structbg__bsp_fun__t.html">bg_bspFun_t</a>;</div>
+</div>
+<div class="line"><a id="l00712" name="l00712"></a><span class="lineno">  712</span> </div>
+<div class="line"><a id="l00718" name="l00718"></a><span class="lineno">  718</span><span class="keywordtype">void</span> <a class="code hl_function" href="_b_g77_8h.html#a3f93ee3bfd2996fa41f5f9425dc83431">bg_set_bsp</a>(<a class="code hl_struct" href="structbg__bsp_fun__t.html">bg_bspFun_t</a> bspFun);</div>
+<div class="line"><a id="l00719" name="l00719"></a><span class="lineno">  719</span> </div>
+<div class="line"><a id="l00720" name="l00720"></a><span class="lineno">  720</span><span class="comment">//-----------------------------------BSP end-----------------------------------</span></div>
+<div class="line"><a id="l00721" name="l00721"></a><span class="lineno">  721</span> </div>
+<div class="line"><a id="l00722" name="l00722"></a><span class="lineno">  722</span><span class="comment">//---------------------------Callbacks MCU para LIB----------------------------</span></div>
+<div class="foldopen" id="foldopen00727" data-start="{" data-end="};">
+<div class="line"><a id="l00727" name="l00727"></a><span class="lineno"><a class="line" href="_b_g77_8h.html#ab0ebc1ea018349b5e09729ddad2f443e">  727</a></span><span class="keyword">typedef</span> <span class="keyword">enum</span></div>
+<div class="line"><a id="l00728" name="l00728"></a><span class="lineno">  728</span>{</div>
+<div class="line"><a id="l00729" name="l00729"></a><span class="lineno">  729</span>    MAIN_RI_EDGE_FALLING,</div>
+<div class="line"><a id="l00730" name="l00730"></a><span class="lineno">  730</span>    MAIN_RI_EDGE_RISING,</div>
+<div class="line"><a id="l00731" name="l00731"></a><span class="lineno">  731</span>    MAIN_RI_EDGE_UNSUPPORTED</div>
+<div class="line"><a id="l00732" name="l00732"></a><span class="lineno">  732</span>}<a class="code hl_enumeration" href="_b_g77_8h.html#ab0ebc1ea018349b5e09729ddad2f443e">mainRiEdge_t</a>;</div>
+</div>
+<div class="line"><a id="l00733" name="l00733"></a><span class="lineno">  733</span> </div>
+<div class="foldopen" id="foldopen00738" data-start="{" data-end="};">
+<div class="line"><a id="l00738" name="l00738"></a><span class="lineno"><a class="line" href="structurc_info_data__t.html">  738</a></span><span class="keyword">typedef</span> <span class="keyword">struct</span>{</div>
+<div class="line"><a id="l00739" name="l00739"></a><span class="lineno">  739</span>    uint8_t buff[1024];</div>
+<div class="line"><a id="l00740" name="l00740"></a><span class="lineno">  740</span>    uint16_t len;</div>
+<div class="line"><a id="l00741" name="l00741"></a><span class="lineno">  741</span>    uint8_t type;</div>
+<div class="line"><a id="l00742" name="l00742"></a><span class="lineno">  742</span>    uint8_t connectID;</div>
+<div class="line"><a id="l00743" name="l00743"></a><span class="lineno">  743</span>    uint8_t contextID;</div>
+<div class="line"><a id="l00744" name="l00744"></a><span class="lineno">  744</span>    uint8_t serverID;</div>
+<div class="line"><a id="l00745" name="l00745"></a><span class="lineno">  745</span>}<a class="code hl_struct" href="structurc_info_data__t.html">urcInfoData_t</a>;</div>
+</div>
+<div class="line"><a id="l00746" name="l00746"></a><span class="lineno">  746</span> </div>
+<div class="line"><a id="l00754" name="l00754"></a><span class="lineno">  754</span><span class="keywordtype">void</span> <a class="code hl_function" href="_b_g77_8h.html#aa422c5730073a35ffc37421e44a6c632">bg_callback_ms</a>(<span class="keywordtype">void</span>);</div>
+<div class="line"><a id="l00755" name="l00755"></a><span class="lineno">  755</span> </div>
+<div class="line"><a id="l00766" name="l00766"></a><span class="lineno">  766</span><span class="keywordtype">void</span> <a class="code hl_function" href="_b_g77_8h.html#acd4a161fbac7d28353ca438b91e0520b">bg_uartCallback</a>(uint8_t *buff, uint16_t nBytes);</div>
+<div class="line"><a id="l00767" name="l00767"></a><span class="lineno">  767</span> </div>
+<div class="line"><a id="l00778" name="l00778"></a><span class="lineno">  778</span><span class="keywordtype">void</span> <a class="code hl_function" href="_b_g77_8h.html#a796fbdf47278af0a696da945fa907110">bg_mainRICallback</a>(<a class="code hl_enumeration" href="_b_g77_8h.html#ab0ebc1ea018349b5e09729ddad2f443e">mainRiEdge_t</a> edge);</div>
+<div class="line"><a id="l00779" name="l00779"></a><span class="lineno">  779</span> </div>
+<div class="line"><a id="l00790" name="l00790"></a><span class="lineno">  790</span><span class="keywordtype">void</span> <a class="code hl_function" href="_b_g77_8h.html#a3f03c39804aa65f885946b3f30d6b4fc">bg_handle_urc</a>(<span class="keywordtype">void</span>);</div>
+<div class="line"><a id="l00791" name="l00791"></a><span class="lineno">  791</span><span class="comment">//---------------------------Callbacks MCU para LIB end----------------------------</span></div>
+<div class="line"><a id="l00792" name="l00792"></a><span class="lineno">  792</span> </div>
+<div class="line"><a id="l00793" name="l00793"></a><span class="lineno">  793</span> </div>
+<div class="line"><a id="l00794" name="l00794"></a><span class="lineno">  794</span><span class="comment">//------------------Funciones basicas y de configuracion de modulo------------------</span></div>
+<div class="line"><a id="l00805" name="l00805"></a><span class="lineno">  805</span><a class="code hl_enumeration" href="_b_g77_8h.html#af98be1c204049055208486fb2b91c87b">bg_err_t</a> <a class="code hl_function" href="_b_g77_8h.html#a952e9d1543029fccfb87e8e133b68122">bg_send</a>(uint32_t timeout, uint8_t enablePrint, <span class="keyword">const</span> <span class="keywordtype">char</span> *fmt, ...);</div>
+<div class="line"><a id="l00806" name="l00806"></a><span class="lineno">  806</span> </div>
+<div class="line"><a id="l00813" name="l00813"></a><span class="lineno">  813</span><a class="code hl_enumeration" href="_b_g77_8h.html#af98be1c204049055208486fb2b91c87b">bg_err_t</a> <a class="code hl_function" href="_b_g77_8h.html#ae23a60b4e1b7f50ea3cdd0927640e0de">bg_power_on</a>(<span class="keywordtype">void</span>);</div>
+<div class="line"><a id="l00814" name="l00814"></a><span class="lineno">  814</span> </div>
+<div class="line"><a id="l00820" name="l00820"></a><span class="lineno">  820</span><a class="code hl_enumeration" href="_b_g77_8h.html#af98be1c204049055208486fb2b91c87b">bg_err_t</a> <a class="code hl_function" href="_b_g77_8h.html#ae05b151b88c27bed92a5a91c4cb9781f">bg_power_off</a>(<span class="keywordtype">void</span>);</div>
+<div class="line"><a id="l00821" name="l00821"></a><span class="lineno">  821</span> </div>
+<div class="line"><a id="l00828" name="l00828"></a><span class="lineno">  828</span><a class="code hl_enumeration" href="_b_g77_8h.html#af98be1c204049055208486fb2b91c87b">bg_err_t</a> <a class="code hl_function" href="_b_g77_8h.html#ad9920b9e69487d843b87ace0fb65535f">bg_init_module</a>(<span class="keywordtype">void</span>);</div>
+<div class="line"><a id="l00829" name="l00829"></a><span class="lineno">  829</span> </div>
+<div class="line"><a id="l00830" name="l00830"></a><span class="lineno">  830</span><span class="comment">//------------------Funciones basicas y de configuracion de modulo end--------------</span></div>
+<div class="line"><a id="l00831" name="l00831"></a><span class="lineno">  831</span> </div>
+<div class="line"><a id="l00832" name="l00832"></a><span class="lineno">  832</span><span class="comment">//------------------------------Funciones de consultas------------------------------</span></div>
+<div class="line"><a id="l00839" name="l00839"></a><span class="lineno">  839</span><a class="code hl_enumeration" href="_b_g77_8h.html#af98be1c204049055208486fb2b91c87b">bg_err_t</a> <a class="code hl_function" href="_b_g77_8h.html#a5b05e846b42156e0bd04539d036e77e5">bg_data_module</a>(<span class="keywordtype">void</span>);</div>
+<div class="line"><a id="l00840" name="l00840"></a><span class="lineno">  840</span> </div>
+<div class="line"><a id="l00847" name="l00847"></a><span class="lineno">  847</span><a class="code hl_enumeration" href="_b_g77_8h.html#af98be1c204049055208486fb2b91c87b">bg_err_t</a> <a class="code hl_function" href="_b_g77_8h.html#a6fdf52da4e8bf69a4e9130163ae5e7be">bg_check_sim</a>(<span class="keywordtype">void</span>);</div>
+<div class="line"><a id="l00848" name="l00848"></a><span class="lineno">  848</span> </div>
+<div class="line"><a id="l00856" name="l00856"></a><span class="lineno">  856</span><a class="code hl_enumeration" href="_b_g77_8h.html#af98be1c204049055208486fb2b91c87b">bg_err_t</a> <a class="code hl_function" href="_b_g77_8h.html#a560f384f98c140a53d8fc8f5b32b5e19">bg_check_attach</a>(<span class="keywordtype">void</span>);</div>
+<div class="line"><a id="l00857" name="l00857"></a><span class="lineno">  857</span> </div>
+<div class="line"><a id="l00865" name="l00865"></a><span class="lineno">  865</span><a class="code hl_enumeration" href="_b_g77_8h.html#af98be1c204049055208486fb2b91c87b">bg_err_t</a> <a class="code hl_function" href="_b_g77_8h.html#adfa333fa2fbd83d8d555f78174c312d4">bg_query_cops</a>(<span class="keywordtype">void</span>);</div>
+<div class="line"><a id="l00866" name="l00866"></a><span class="lineno">  866</span> </div>
+<div class="line"><a id="l00867" name="l00867"></a><span class="lineno">  867</span> </div>
+<div class="line"><a id="l00874" name="l00874"></a><span class="lineno">  874</span><a class="code hl_enumeration" href="_b_g77_8h.html#af98be1c204049055208486fb2b91c87b">bg_err_t</a> <a class="code hl_function" href="_b_g77_8h.html#ac5b7a9c29733548542fd9372f5333273">bg_query_conf_pdp</a>(uint8_t contextID);</div>
+<div class="line"><a id="l00875" name="l00875"></a><span class="lineno">  875</span> </div>
+<div class="line"><a id="l00884" name="l00884"></a><span class="lineno">  884</span><a class="code hl_enumeration" href="_b_g77_8h.html#af98be1c204049055208486fb2b91c87b">bg_err_t</a> <a class="code hl_function" href="_b_g77_8h.html#ae28f36ea82838abfdca0118d7af70da7">bg_check_pdp</a>(uint8_t ctxtID);</div>
+<div class="line"><a id="l00885" name="l00885"></a><span class="lineno">  885</span> </div>
+<div class="line"><a id="l00893" name="l00893"></a><span class="lineno">  893</span><a class="code hl_enumeration" href="_b_g77_8h.html#af98be1c204049055208486fb2b91c87b">bg_err_t</a> <a class="code hl_function" href="_b_g77_8h.html#ac4a2455d92827db1c3cf0ba553a05bb8">bg_check_sckt</a>(uint8_t connectID);</div>
+<div class="line"><a id="l00894" name="l00894"></a><span class="lineno">  894</span> </div>
+<div class="line"><a id="l00901" name="l00901"></a><span class="lineno">  901</span><a class="code hl_enumeration" href="_b_g77_8h.html#af98be1c204049055208486fb2b91c87b">bg_err_t</a> <a class="code hl_function" href="_b_g77_8h.html#a65c9f56b02078e837debb481fff49182">bg_query_signal</a>(<span class="keywordtype">void</span>);</div>
+<div class="line"><a id="l00902" name="l00902"></a><span class="lineno">  902</span><span class="comment">//------------------------------Funciones de consultas end--------------------------</span></div>
+<div class="line"><a id="l00903" name="l00903"></a><span class="lineno">  903</span> </div>
+<div class="line"><a id="l00904" name="l00904"></a><span class="lineno">  904</span> </div>
+<div class="line"><a id="l00905" name="l00905"></a><span class="lineno">  905</span><span class="comment">//-------------------------Funciones de Attach y activacion PDP----------------------</span></div>
+<div class="foldopen" id="foldopen00910" data-start="{" data-end="};">
+<div class="line"><a id="l00910" name="l00910"></a><span class="lineno"><a class="line" href="_b_g77_8h.html#a4e88b1ffb1682253b142b2e133dada3e">  910</a></span><span class="keyword">typedef</span> <span class="keyword">enum</span></div>
+<div class="line"><a id="l00911" name="l00911"></a><span class="lineno">  911</span>{</div>
+<div class="line"><a id="l00912" name="l00912"></a><span class="lineno">  912</span>    BG_AUTH_NONE, </div>
+<div class="line"><a id="l00913" name="l00913"></a><span class="lineno">  913</span>    BG_AUTH_PAP, </div>
+<div class="line"><a id="l00914" name="l00914"></a><span class="lineno">  914</span>    BG_AUTH_CHAP,</div>
+<div class="line"><a id="l00915" name="l00915"></a><span class="lineno">  915</span>    BG_AUTH_PAP_CHAP,</div>
+<div class="line"><a id="l00916" name="l00916"></a><span class="lineno">  916</span>    BG_AUTH_NO_SUPPORTED </div>
+<div class="line"><a id="l00917" name="l00917"></a><span class="lineno">  917</span>}<a class="code hl_enumeration" href="_b_g77_8h.html#a4e88b1ffb1682253b142b2e133dada3e">bgAuth_t</a>;</div>
+</div>
+<div class="line"><a id="l00918" name="l00918"></a><span class="lineno">  918</span> </div>
+<div class="foldopen" id="foldopen00923" data-start="{" data-end="};">
+<div class="line"><a id="l00923" name="l00923"></a><span class="lineno"><a class="line" href="_b_g77_8h.html#a0d31ddf2d818cd2c7c61b08553abff3d">  923</a></span><span class="keyword">typedef</span> <span class="keyword">enum</span></div>
+<div class="line"><a id="l00924" name="l00924"></a><span class="lineno">  924</span>{</div>
+<div class="line"><a id="l00925" name="l00925"></a><span class="lineno">  925</span>    BG_CTXT_IPV4 = 1, </div>
+<div class="line"><a id="l00926" name="l00926"></a><span class="lineno">  926</span>    BG_CTXT_IPV6,</div>
+<div class="line"><a id="l00927" name="l00927"></a><span class="lineno">  927</span>    BG_CTXT_IPV4_IPV6,</div>
+<div class="line"><a id="l00928" name="l00928"></a><span class="lineno">  928</span>    BG_CTXT_UNSUPPORTED</div>
+<div class="line"><a id="l00929" name="l00929"></a><span class="lineno">  929</span>}<a class="code hl_enumeration" href="_b_g77_8h.html#a0d31ddf2d818cd2c7c61b08553abff3d">bgCtxtType_t</a>;</div>
+</div>
+<div class="line"><a id="l00930" name="l00930"></a><span class="lineno">  930</span> </div>
+<div class="foldopen" id="foldopen00936" data-start="{" data-end="};">
+<div class="line"><a id="l00936" name="l00936"></a><span class="lineno"><a class="line" href="_b_g77_8h.html#a4ad1b226966cfdfeedb106c0a8cf2250">  936</a></span><span class="keyword">typedef</span> <span class="keyword">enum</span></div>
+<div class="line"><a id="l00937" name="l00937"></a><span class="lineno">  937</span>{</div>
+<div class="line"><a id="l00938" name="l00938"></a><span class="lineno">  938</span>    BG_PDP_ACT, <span class="comment">//Opcion para activar el contexto PDP.</span></div>
+<div class="line"><a id="l00939" name="l00939"></a><span class="lineno">  939</span>    BG_PDP_DEACT, <span class="comment">//Opcion para desactivar el contexto PDP.</span></div>
+<div class="line"><a id="l00940" name="l00940"></a><span class="lineno">  940</span>    BG_PDP_ACT_UNSUPORTED </div>
+<div class="line"><a id="l00941" name="l00941"></a><span class="lineno">  941</span>}<a class="code hl_enumeration" href="_b_g77_8h.html#a4ad1b226966cfdfeedb106c0a8cf2250">bg_actPdp_t</a>;</div>
+</div>
+<div class="line"><a id="l00942" name="l00942"></a><span class="lineno">  942</span> </div>
+<div class="foldopen" id="foldopen00947" data-start="{" data-end="};">
+<div class="line"><a id="l00947" name="l00947"></a><span class="lineno"><a class="line" href="structbg__ctx_pdp__t.html">  947</a></span><span class="keyword">typedef</span> <span class="keyword">struct</span></div>
+<div class="line"><a id="l00948" name="l00948"></a><span class="lineno">  948</span>{</div>
+<div class="line"><a id="l00949" name="l00949"></a><span class="lineno">  949</span>    uint8_t ctxtID;</div>
+<div class="line"><a id="l00950" name="l00950"></a><span class="lineno">  950</span>    <a class="code hl_enumeration" href="_b_g77_8h.html#a0d31ddf2d818cd2c7c61b08553abff3d">bgCtxtType_t</a> contextType;</div>
+<div class="line"><a id="l00951" name="l00951"></a><span class="lineno">  951</span>    uint8_t *apn;</div>
+<div class="line"><a id="l00952" name="l00952"></a><span class="lineno">  952</span>    uint8_t *usr;</div>
+<div class="line"><a id="l00953" name="l00953"></a><span class="lineno">  953</span>    uint8_t *psw;</div>
+<div class="line"><a id="l00954" name="l00954"></a><span class="lineno">  954</span>    <a class="code hl_enumeration" href="_b_g77_8h.html#a4e88b1ffb1682253b142b2e133dada3e">bgAuth_t</a> auth;</div>
+<div class="line"><a id="l00955" name="l00955"></a><span class="lineno">  955</span>}<a class="code hl_struct" href="structbg__ctx_pdp__t.html">bg_ctxPdp_t</a>;</div>
+</div>
+<div class="line"><a id="l00956" name="l00956"></a><span class="lineno">  956</span> </div>
+<div class="line"><a id="l00964" name="l00964"></a><span class="lineno">  964</span><a class="code hl_enumeration" href="_b_g77_8h.html#af98be1c204049055208486fb2b91c87b">bg_err_t</a> <a class="code hl_function" href="_b_g77_8h.html#a1c0f09b53bcd76cc17f7be1d95778898">bg_attach</a>(uint8_t *<span class="keyword">operator</span>);</div>
+<div class="line"><a id="l00965" name="l00965"></a><span class="lineno">  965</span> </div>
+<div class="line"><a id="l00974" name="l00974"></a><span class="lineno">  974</span><a class="code hl_enumeration" href="_b_g77_8h.html#af98be1c204049055208486fb2b91c87b">bg_err_t</a> <a class="code hl_function" href="_b_g77_8h.html#ab3e3ace987b490e788e45c77d2762cc3">bg_conf_pdp</a>(<a class="code hl_struct" href="structbg__ctx_pdp__t.html">bg_ctxPdp_t</a> contextPDP);</div>
+<div class="line"><a id="l00975" name="l00975"></a><span class="lineno">  975</span> </div>
+<div class="line"><a id="l00984" name="l00984"></a><span class="lineno">  984</span><a class="code hl_enumeration" href="_b_g77_8h.html#af98be1c204049055208486fb2b91c87b">bg_err_t</a> <a class="code hl_function" href="_b_g77_8h.html#ae8e29b80c35bbfef04dde3dea52f459e">bg_pdp_activation</a>(uint8_t ctxtID, <a class="code hl_enumeration" href="_b_g77_8h.html#a4ad1b226966cfdfeedb106c0a8cf2250">bg_actPdp_t</a> act);</div>
+<div class="line"><a id="l00985" name="l00985"></a><span class="lineno">  985</span><span class="comment">//-------------------------Funciones de Attach y activacion PDP end------------------</span></div>
+<div class="line"><a id="l00986" name="l00986"></a><span class="lineno">  986</span> </div>
+<div class="line"><a id="l00987" name="l00987"></a><span class="lineno">  987</span> </div>
+<div class="line"><a id="l00988" name="l00988"></a><span class="lineno">  988</span><span class="comment">//------------------------Funciones de apertura de socket---------------------------</span></div>
+<div class="line"><a id="l00989" name="l00989"></a><span class="lineno">  989</span><span class="preprocessor">#define BG_OPEN_SERVER_REMOTE_PORT 0 </span><span class="comment">//Esta MACRO especifica el puerto remoto en modo Servidor.</span></div>
+<div class="line"><a id="l00990" name="l00990"></a><span class="lineno">  990</span><span class="preprocessor">#define BG_OPEN_SERVER_IP &quot;127.0.0.1&quot; </span><span class="comment">//Esta MACRO especifica la direccion IP en modo Servidor.</span></div>
+<div class="line"><a id="l00991" name="l00991"></a><span class="lineno">  991</span> </div>
+<div class="line"><a id="l00992" name="l00992"></a><span class="lineno">  992</span><span class="preprocessor">#define BG_OPEN_BUFF_ACCSS_MODE 0   </span><span class="comment">//Esta MACRO especifica que se quiere usar el modo de acceso en buffer acces mode.</span></div>
+<div class="line"><a id="l00993" name="l00993"></a><span class="lineno">  993</span><span class="preprocessor">#define BG_OPEN_TRANSPARENT_MODE 2  </span><span class="comment">//Esta MACRO especifica que se quiere usar el modo de acceso en modo transparente.</span></div>
+<div class="line"><a id="l00994" name="l00994"></a><span class="lineno">  994</span> </div>
+<div class="line"><a id="l00995" name="l00995"></a><span class="lineno">  995</span><span class="preprocessor">#define BG_OPEN_CLIENT_LOCAL_PORT 0 </span><span class="comment">//Esta MACRO especifica el puetro local automatico en modo Cliente.</span></div>
+<div class="line"><a id="l00996" name="l00996"></a><span class="lineno">  996</span> </div>
+<div class="foldopen" id="foldopen01001" data-start="{" data-end="};">
+<div class="line"><a id="l01001" name="l01001"></a><span class="lineno"><a class="line" href="_b_g77_8h.html#a4de0ad8313ddfa98018750819864029b"> 1001</a></span><span class="keyword">typedef</span> <span class="keyword">enum</span></div>
+<div class="line"><a id="l01002" name="l01002"></a><span class="lineno"> 1002</span>{</div>
+<div class="line"><a id="l01003" name="l01003"></a><span class="lineno"> 1003</span>    BG_OPEN_SERVER, <span class="comment">//Opcion para abrir conexion en modo Servidor.</span></div>
+<div class="line"><a id="l01004" name="l01004"></a><span class="lineno"> 1004</span>    BG_OPEN_CLIENT  <span class="comment">//Opcion para abrir conexion en modo Cliente.</span></div>
+<div class="line"><a id="l01005" name="l01005"></a><span class="lineno"> 1005</span>}<a class="code hl_enumeration" href="_b_g77_8h.html#a4de0ad8313ddfa98018750819864029b">bgServiceType_t</a>;</div>
+</div>
+<div class="line"><a id="l01006" name="l01006"></a><span class="lineno"> 1006</span> </div>
+<div class="foldopen" id="foldopen01011" data-start="{" data-end="};">
+<div class="line"><a id="l01011" name="l01011"></a><span class="lineno"><a class="line" href="structbg_sckt__t.html"> 1011</a></span><span class="keyword">typedef</span> <span class="keyword">struct</span></div>
+<div class="line"><a id="l01012" name="l01012"></a><span class="lineno"> 1012</span>{</div>
+<div class="line"><a id="l01013" name="l01013"></a><span class="lineno"> 1013</span>    uint8_t ctxtID; <span class="comment">//contextID del contexto PDP que se activo</span></div>
+<div class="line"><a id="l01014" name="l01014"></a><span class="lineno"> 1014</span>    uint8_t connectID; <span class="comment">//connectID es el numero de conexion. Sirve para identificar conexiones (rango 0-11)</span></div>
+<div class="line"><a id="l01015" name="l01015"></a><span class="lineno"> 1015</span>    <a class="code hl_enumeration" href="_b_g77_8h.html#a4de0ad8313ddfa98018750819864029b">bgServiceType_t</a> serviceType; <span class="comment">//Es el tipo de conexion a abrir (TCP Cliente o TCP Servidor)</span></div>
+<div class="line"><a id="l01016" name="l01016"></a><span class="lineno"> 1016</span>    uint8_t *ip; <span class="comment">//Direccion IP de destino cuando la conexion es Cliente</span></div>
+<div class="line"><a id="l01017" name="l01017"></a><span class="lineno"> 1017</span>    uint32_t remotePort; <span class="comment">//Puerto remoto al que se quiere apuntar cuando la conexion es Cliente</span></div>
+<div class="line"><a id="l01018" name="l01018"></a><span class="lineno"> 1018</span>    uint32_t localPort; <span class="comment">//Puerto local del dispositivo se utiliza cuando la conexion es Servidor (en modo Cliente por defecto es 0)</span></div>
+<div class="line"><a id="l01019" name="l01019"></a><span class="lineno"> 1019</span>    uint32_t accssMode; <span class="comment">//Selecciona la opcion de modo de acceso Buffer acces mode o Transparent mode (las conexiones cliente son las que pueden iniciar como Transparent mode)</span></div>
+<div class="line"><a id="l01020" name="l01020"></a><span class="lineno"> 1020</span>}<a class="code hl_struct" href="structbg_sckt__t.html">bgSckt_t</a>;</div>
+</div>
+<div class="line"><a id="l01021" name="l01021"></a><span class="lineno"> 1021</span> </div>
+<div class="line"><a id="l01022" name="l01022"></a><span class="lineno"> 1022</span> </div>
+<div class="line"><a id="l01030" name="l01030"></a><span class="lineno"> 1030</span><a class="code hl_enumeration" href="_b_g77_8h.html#af98be1c204049055208486fb2b91c87b">bg_err_t</a> <a class="code hl_function" href="_b_g77_8h.html#a6fcaeffa8a8411da9bd284564e9cbd83">bg_open_sckt</a>(<a class="code hl_struct" href="structbg_sckt__t.html">bgSckt_t</a> sckt);</div>
+<div class="line"><a id="l01031" name="l01031"></a><span class="lineno"> 1031</span> </div>
+<div class="line"><a id="l01039" name="l01039"></a><span class="lineno"> 1039</span><a class="code hl_enumeration" href="_b_g77_8h.html#af98be1c204049055208486fb2b91c87b">bg_err_t</a> <a class="code hl_function" href="_b_g77_8h.html#a5ed9330e905321630088fe6a84c5a5de">bg_transparent_mode</a>(uint8_t connectID);</div>
+<div class="line"><a id="l01040" name="l01040"></a><span class="lineno"> 1040</span><span class="comment">//-----------------------Funciones de apertura de socket end------------------------</span></div>
+<div class="line"><a id="l01041" name="l01041"></a><span class="lineno"> 1041</span> </div>
+<div class="line"><a id="l01042" name="l01042"></a><span class="lineno"> 1042</span> </div>
+<div class="line"><a id="l01043" name="l01043"></a><span class="lineno"> 1043</span><span class="comment">//-----------------------Funciones de cierre y desactivacion-------------------------</span></div>
+<div class="line"><a id="l01050" name="l01050"></a><span class="lineno"> 1050</span><a class="code hl_enumeration" href="_b_g77_8h.html#af98be1c204049055208486fb2b91c87b">bg_err_t</a> <a class="code hl_function" href="_b_g77_8h.html#a453a9ac99a62c6fafe71b5179086ee97">bg_exit_transparent_mode</a>(<span class="keywordtype">void</span>);</div>
+<div class="line"><a id="l01051" name="l01051"></a><span class="lineno"> 1051</span> </div>
+<div class="line"><a id="l01059" name="l01059"></a><span class="lineno"> 1059</span><a class="code hl_enumeration" href="_b_g77_8h.html#af98be1c204049055208486fb2b91c87b">bg_err_t</a> <a class="code hl_function" href="_b_g77_8h.html#a803afbdc8df8c4db1b6f0267816954c8">bg_close_sckt</a>(uint8_t connectID);</div>
+<div class="line"><a id="l01060" name="l01060"></a><span class="lineno"> 1060</span> </div>
+<div class="line"><a id="l01067" name="l01067"></a><span class="lineno"> 1067</span><a class="code hl_enumeration" href="_b_g77_8h.html#af98be1c204049055208486fb2b91c87b">bg_err_t</a> <a class="code hl_function" href="_b_g77_8h.html#a04ad0c65991cef2200cc99a9910a6ef7">bg_detach</a>(<span class="keywordtype">void</span>);</div>
+<div class="line"><a id="l01068" name="l01068"></a><span class="lineno"> 1068</span> </div>
+<div class="line"><a id="l01069" name="l01069"></a><span class="lineno"> 1069</span><span class="comment">//-----------------------Funciones de cierre y desactivacion end---------------------</span></div>
+<div class="line"><a id="l01070" name="l01070"></a><span class="lineno"> 1070</span> </div>
+<div class="line"><a id="l01071" name="l01071"></a><span class="lineno"> 1071</span> </div>
+<div class="line"><a id="l01072" name="l01072"></a><span class="lineno"> 1072</span><span class="comment">//----------------------Funciones de transmision recepcion de mensajes---------------</span></div>
+<div class="line"><a id="l01082" name="l01082"></a><span class="lineno"> 1082</span><a class="code hl_enumeration" href="_b_g77_8h.html#af98be1c204049055208486fb2b91c87b">bg_err_t</a> <a class="code hl_function" href="_b_g77_8h.html#a4324d29bee02aaf36d6d7dc3d54fa1b7">bg_transmit_buffAMode</a>(uint8_t connectID, uint8_t *data, uint16_t len);</div>
+<div class="line"><a id="l01083" name="l01083"></a><span class="lineno"> 1083</span> </div>
+<div class="line"><a id="l01093" name="l01093"></a><span class="lineno"> 1093</span><a class="code hl_enumeration" href="_b_g77_8h.html#af98be1c204049055208486fb2b91c87b">bg_err_t</a> <a class="code hl_function" href="_b_g77_8h.html#a22e89067926540a7db799cf50725070b">bg_receive_buffAMode</a>(uint8_t connectID, uint8_t *buff, uint16_t *len);</div>
+<div class="line"><a id="l01094" name="l01094"></a><span class="lineno"> 1094</span> </div>
+<div class="line"><a id="l01104" name="l01104"></a><span class="lineno"> 1104</span><a class="code hl_enumeration" href="_b_g77_8h.html#af98be1c204049055208486fb2b91c87b">bg_err_t</a> <a class="code hl_function" href="_b_g77_8h.html#a2eb4e7ff0044a4ccb914381d9ae25265">bg_transmit_TM</a>(uint8_t *data, uint16_t len);</div>
+<div class="line"><a id="l01105" name="l01105"></a><span class="lineno"> 1105</span><span class="comment">//----------------------Funciones de transmision recepcion de mensajes end-----------</span></div>
+<div class="line"><a id="l01106" name="l01106"></a><span class="lineno"> 1106</span> </div>
+<div class="line"><a id="l01107" name="l01107"></a><span class="lineno"> 1107</span> </div>
+<div class="line"><a id="l01108" name="l01108"></a><span class="lineno"> 1108</span><span class="comment">//---------------------------Callbacks LIB para MCU----------------------------</span></div>
+<div class="foldopen" id="foldopen01113" data-start="{" data-end="};">
+<div class="line"><a id="l01113" name="l01113"></a><span class="lineno"><a class="line" href="_b_g77_8h.html#a6a6ed3ed80fa20a7c489f5bf09ab85c6"> 1113</a></span><span class="keyword">typedef</span> <span class="keyword">enum</span></div>
+<div class="line"><a id="l01114" name="l01114"></a><span class="lineno"> 1114</span>{</div>
+<div class="line"><a id="l01115" name="l01115"></a><span class="lineno"> 1115</span>    BG_URC_CLOSED,</div>
+<div class="line"><a id="l01116" name="l01116"></a><span class="lineno"> 1116</span>    BG_URC_RECV,</div>
+<div class="line"><a id="l01117" name="l01117"></a><span class="lineno"> 1117</span>    BG_URC_INCOMING_FULL,</div>
+<div class="line"><a id="l01118" name="l01118"></a><span class="lineno"> 1118</span>    BG_URC_INCOMING,</div>
+<div class="line"><a id="l01119" name="l01119"></a><span class="lineno"> 1119</span>    BG_URC_PDP_DEACT,</div>
+<div class="line"><a id="l01120" name="l01120"></a><span class="lineno"> 1120</span>    BG_URC_EXIT_TM,</div>
+<div class="line"><a id="l01121" name="l01121"></a><span class="lineno"> 1121</span>    BG_URC_NO_CARRIER,</div>
+<div class="line"><a id="l01122" name="l01122"></a><span class="lineno"> 1122</span>    BG_URC_UNSUPPORTED</div>
+<div class="line"><a id="l01123" name="l01123"></a><span class="lineno"> 1123</span>}<a class="code hl_enumeration" href="_b_g77_8h.html#a6a6ed3ed80fa20a7c489f5bf09ab85c6">bg_urcType_t</a>;</div>
+</div>
+<div class="line"><a id="l01124" name="l01124"></a><span class="lineno"> 1124</span> </div>
+<div class="foldopen" id="foldopen01130" data-start="{" data-end="};">
+<div class="line"><a id="l01130" name="l01130"></a><span class="lineno"><a class="line" href="_b_g77_8h.html#a2eda4d5bf02084b0c05dbc21810a5e82"> 1130</a></span><span class="keyword">typedef</span> <span class="keyword">enum</span> </div>
+<div class="line"><a id="l01131" name="l01131"></a><span class="lineno"> 1131</span>{</div>
+<div class="line"><a id="l01132" name="l01132"></a><span class="lineno"> 1132</span>    BG_TM_NO_CARRIER_SET,</div>
+<div class="line"><a id="l01133" name="l01133"></a><span class="lineno"> 1133</span>    BG_TM_NO_CARRIER_RESET</div>
+<div class="line"><a id="l01134" name="l01134"></a><span class="lineno"> 1134</span>}<a class="code hl_enumeration" href="_b_g77_8h.html#a2eda4d5bf02084b0c05dbc21810a5e82">bg_noCarrierTM_t</a>;</div>
+</div>
+<div class="line"><a id="l01135" name="l01135"></a><span class="lineno"> 1135</span> </div>
+<div class="line"><a id="l01144" name="l01144"></a><span class="lineno"> 1144</span><span class="keywordtype">void</span> <a class="code hl_function" href="_b_g77_8h.html#ae3aa6c8894b5afd4e7d9cc43750cdb31">bg_callback_urcDetected</a>(urcRawData_t urcData);</div>
+<div class="line"><a id="l01145" name="l01145"></a><span class="lineno"> 1145</span> </div>
+<div class="line"><a id="l01157" name="l01157"></a><span class="lineno"> 1157</span><span class="keywordtype">void</span> <a class="code hl_function" href="_b_g77_8h.html#a182c6ca209fecf25da97f51f1eaf5550">bg_urc_parsed_callback</a>(<a class="code hl_struct" href="structurc_info_data__t.html">urcInfoData_t</a> infoUrc);</div>
+<div class="line"><a id="l01158" name="l01158"></a><span class="lineno"> 1158</span> </div>
+<div class="line"><a id="l01169" name="l01169"></a><span class="lineno"> 1169</span><span class="keywordtype">void</span> <a class="code hl_function" href="_b_g77_8h.html#a03693666091cc43048c11c148b9afd23">bg_recv_callback</a>(uint8_t *buff, uint16_t len, uint8_t connectID);</div>
+<div class="line"><a id="l01170" name="l01170"></a><span class="lineno"> 1170</span> </div>
+<div class="line"><a id="l01181" name="l01181"></a><span class="lineno"> 1181</span><span class="keywordtype">void</span> <a class="code hl_function" href="_b_g77_8h.html#ae4503c4dc1caa40b7075342e7317e2f8">bg_incomming_callback</a>(uint8_t serverID, uint8_t connectID);</div>
+<div class="line"><a id="l01182" name="l01182"></a><span class="lineno"> 1182</span> </div>
+<div class="line"><a id="l01189" name="l01189"></a><span class="lineno"> 1189</span><span class="keywordtype">void</span> <a class="code hl_function" href="_b_g77_8h.html#a9984ef8adb9430c0bb3410b6bf7120c5">bg_callback_receive_TM</a>(uint8_t *buff, uint16_t nBytes);</div>
+<div class="line"><a id="l01190" name="l01190"></a><span class="lineno"> 1190</span> </div>
+<div class="line"><a id="l01196" name="l01196"></a><span class="lineno"> 1196</span><span class="keywordtype">void</span> <a class="code hl_function" href="_b_g77_8h.html#a35a7b46f396882941b3aa7f00c1b19f4">bg_callback_closed_TM</a>(<span class="keywordtype">void</span>);</div>
+<div class="line"><a id="l01197" name="l01197"></a><span class="lineno"> 1197</span> </div>
+<div class="line"><a id="l01204" name="l01204"></a><span class="lineno"> 1204</span><span class="keywordtype">void</span> <a class="code hl_function" href="_b_g77_8h.html#a3776fe3967e34bff08a7c7d3c32cf2e7">bg_pdp_activation_callback</a>(uint8_t contextID);</div>
+<div class="line"><a id="l01205" name="l01205"></a><span class="lineno"> 1205</span> </div>
+<div class="line"><a id="l01220" name="l01220"></a><span class="lineno"> 1220</span><span class="keywordtype">void</span> <a class="code hl_function" href="_b_g77_8h.html#a96631fa2e9306134c3f2d13692d6c382">bg_callback_TM_Inactive</a>(uint8_t connectID, <a class="code hl_enumeration" href="_b_g77_8h.html#a2eda4d5bf02084b0c05dbc21810a5e82">bg_noCarrierTM_t</a> statusNoCarrier);</div>
+<div class="line"><a id="l01221" name="l01221"></a><span class="lineno"> 1221</span><span class="comment">//---------------------------Callbacks LIB para MCU end------------------------</span></div>
+<div class="line"><a id="l01222" name="l01222"></a><span class="lineno"> 1222</span> </div>
+<div class="line"><a id="l01223" name="l01223"></a><span class="lineno"> 1223</span> </div>
+<div class="line"><a id="l01224" name="l01224"></a><span class="lineno"> 1224</span><span class="comment">//-------------------------------------Funciones de cola----------------------------</span></div>
+<div class="line"><a id="l01232" name="l01232"></a><span class="lineno"> 1232</span><span class="keywordtype">void</span> <a class="code hl_function" href="_b_g77_8h.html#accb6d774575fa4349a922b7194d36b95">bg_queue_put</a>(urcRawData_t urc);</div>
+<div class="line"><a id="l01233" name="l01233"></a><span class="lineno"> 1233</span> </div>
+<div class="line"><a id="l01239" name="l01239"></a><span class="lineno"> 1239</span><span class="keywordtype">void</span> <a class="code hl_function" href="_b_g77_8h.html#a417fbe13aaac91032b2cf5fe5fbabba3">bg_queue_pop</a>(urcRawData_t *urc);</div>
+<div class="line"><a id="l01240" name="l01240"></a><span class="lineno"> 1240</span> </div>
+<div class="line"><a id="l01246" name="l01246"></a><span class="lineno"> 1246</span>uint8_t <a class="code hl_function" href="_b_g77_8h.html#a00a186528d54e0162b4ec31902db106b">bg_queue_is_empty</a>(<span class="keywordtype">void</span>);</div>
+<div class="line"><a id="l01247" name="l01247"></a><span class="lineno"> 1247</span> </div>
+<div class="line"><a id="l01253" name="l01253"></a><span class="lineno"> 1253</span>uint8_t <a class="code hl_function" href="_b_g77_8h.html#a61963d30f7d309a7ae1cf8eeed599605">bg_queue_is_full</a>(<span class="keywordtype">void</span>);</div>
+<div class="line"><a id="l01254" name="l01254"></a><span class="lineno"> 1254</span> </div>
+<div class="line"><a id="l01255" name="l01255"></a><span class="lineno"> 1255</span><span class="comment">//-------------------------------------Funciones de cola end------------------------</span></div>
+<div class="line"><a id="l01256" name="l01256"></a><span class="lineno"> 1256</span><span class="preprocessor">#endif </span><span class="comment">/* _BG77_H_ */</span><span class="preprocessor"></span></div>
+<div class="ttc" id="a_b_g77_8h_html_a00a186528d54e0162b4ec31902db106b"><div class="ttname"><a href="_b_g77_8h.html#a00a186528d54e0162b4ec31902db106b">bg_queue_is_empty</a></div><div class="ttdeci">uint8_t bg_queue_is_empty(void)</div><div class="ttdoc">Indica si la cola interna esta vacia.</div><div class="ttdef"><b>Definition</b> BG77.c:1174</div></div>
+<div class="ttc" id="a_b_g77_8h_html_a03693666091cc43048c11c148b9afd23"><div class="ttname"><a href="_b_g77_8h.html#a03693666091cc43048c11c148b9afd23">bg_recv_callback</a></div><div class="ttdeci">void bg_recv_callback(uint8_t *buff, uint16_t len, uint8_t connectID)</div><div class="ttdoc">Esta funcion es un callback que notifica al usuario que se recibio un mensaje de alguna conexion en m...</div><div class="ttdef"><b>Definition</b> BG77.c:1116</div></div>
+<div class="ttc" id="a_b_g77_8h_html_a04ad0c65991cef2200cc99a9910a6ef7"><div class="ttname"><a href="_b_g77_8h.html#a04ad0c65991cef2200cc99a9910a6ef7">bg_detach</a></div><div class="ttdeci">bg_err_t bg_detach(void)</div><div class="ttdoc">Sirve para desregistrar el modulo de la red (detach).</div><div class="ttdef"><b>Definition</b> BG77.c:956</div></div>
+<div class="ttc" id="a_b_g77_8h_html_a0d31ddf2d818cd2c7c61b08553abff3d"><div class="ttname"><a href="_b_g77_8h.html#a0d31ddf2d818cd2c7c61b08553abff3d">bgCtxtType_t</a></div><div class="ttdeci">bgCtxtType_t</div><div class="ttdoc">Es el tipo de variable que define el tipo de contexto.</div><div class="ttdef"><b>Definition</b> BG77.h:924</div></div>
+<div class="ttc" id="a_b_g77_8h_html_a182c6ca209fecf25da97f51f1eaf5550"><div class="ttname"><a href="_b_g77_8h.html#a182c6ca209fecf25da97f51f1eaf5550">bg_urc_parsed_callback</a></div><div class="ttdeci">void bg_urc_parsed_callback(urcInfoData_t infoUrc)</div><div class="ttdoc">Esta funcion es un callback en donde se le va a entregar al usuario la informacion util de un URC det...</div><div class="ttdef"><b>Definition</b> BG77.c:1066</div></div>
+<div class="ttc" id="a_b_g77_8h_html_a1c0f09b53bcd76cc17f7be1d95778898"><div class="ttname"><a href="_b_g77_8h.html#a1c0f09b53bcd76cc17f7be1d95778898">bg_attach</a></div><div class="ttdeci">bg_err_t bg_attach(uint8_t *operator)</div><div class="ttdoc">Funcion para registrar el modulo en la red (attach).</div><div class="ttdef"><b>Definition</b> BG77.c:800</div></div>
+<div class="ttc" id="a_b_g77_8h_html_a22e89067926540a7db799cf50725070b"><div class="ttname"><a href="_b_g77_8h.html#a22e89067926540a7db799cf50725070b">bg_receive_buffAMode</a></div><div class="ttdeci">bg_err_t bg_receive_buffAMode(uint8_t connectID, uint8_t *buff, uint16_t *len)</div><div class="ttdoc">Funcion que se encarga de recuperar los datos recibidos por una conexion en buffer access mode.</div><div class="ttdef"><b>Definition</b> BG77.c:996</div></div>
+<div class="ttc" id="a_b_g77_8h_html_a2c28d9ff8a1ade4f1a62876f8ea35812"><div class="ttname"><a href="_b_g77_8h.html#a2c28d9ff8a1ade4f1a62876f8ea35812">bgPin_t</a></div><div class="ttdeci">bgPin_t</div><div class="ttdoc">tipo de dato que enlista todos los pines soportados para la escritura de GPIOs</div><div class="ttdef"><b>Definition</b> BG77.h:669</div></div>
+<div class="ttc" id="a_b_g77_8h_html_a2eb4e7ff0044a4ccb914381d9ae25265"><div class="ttname"><a href="_b_g77_8h.html#a2eb4e7ff0044a4ccb914381d9ae25265">bg_transmit_TM</a></div><div class="ttdeci">bg_err_t bg_transmit_TM(uint8_t *data, uint16_t len)</div><div class="ttdoc">Transmite datos en modo transparente.</div><div class="ttdef"><b>Definition</b> BG77.c:1043</div></div>
+<div class="ttc" id="a_b_g77_8h_html_a2eda4d5bf02084b0c05dbc21810a5e82"><div class="ttname"><a href="_b_g77_8h.html#a2eda4d5bf02084b0c05dbc21810a5e82">bg_noCarrierTM_t</a></div><div class="ttdeci">bg_noCarrierTM_t</div><div class="ttdoc">Este tipo de variable sirve para indicar si llego un mensaje de NO CARRIER que indica la salida de mo...</div><div class="ttdef"><b>Definition</b> BG77.h:1131</div></div>
+<div class="ttc" id="a_b_g77_8h_html_a35a7b46f396882941b3aa7f00c1b19f4"><div class="ttname"><a href="_b_g77_8h.html#a35a7b46f396882941b3aa7f00c1b19f4">bg_callback_closed_TM</a></div><div class="ttdeci">void bg_callback_closed_TM(void)</div><div class="ttdoc">Esta funcion es un callback que notifica al usuario que la conexion en modo transparente se cerro.</div><div class="ttdef"><b>Definition</b> BG77.c:1137</div></div>
+<div class="ttc" id="a_b_g77_8h_html_a3776fe3967e34bff08a7c7d3c32cf2e7"><div class="ttname"><a href="_b_g77_8h.html#a3776fe3967e34bff08a7c7d3c32cf2e7">bg_pdp_activation_callback</a></div><div class="ttdeci">void bg_pdp_activation_callback(uint8_t contextID)</div><div class="ttdoc">Este callback notifica al usuario que hubo una reactivacion de contexto PDP debido al URC &quot;pdp deact&quot;...</div><div class="ttdef"><b>Definition</b> BG77.c:1142</div></div>
+<div class="ttc" id="a_b_g77_8h_html_a3cf0239ec77a1d5be9c2a1b4e28e0d43"><div class="ttname"><a href="_b_g77_8h.html#a3cf0239ec77a1d5be9c2a1b4e28e0d43">delayFun_t</a></div><div class="ttdeci">void(* delayFun_t)(uint32_t mDelay)</div><div class="ttdoc">tipo de dato para crear un puntero a funcion de delay (en mili segundos)</div><div class="ttdef"><b>Definition</b> BG77.h:693</div></div>
+<div class="ttc" id="a_b_g77_8h_html_a3f03c39804aa65f885946b3f30d6b4fc"><div class="ttname"><a href="_b_g77_8h.html#a3f03c39804aa65f885946b3f30d6b4fc">bg_handle_urc</a></div><div class="ttdeci">void bg_handle_urc(void)</div><div class="ttdoc">Esta funcion se encarga de manejar los URC encolados.   Si hay un URC encolado, se procede a parsearl...</div><div class="ttdef"><b>Definition</b> BG77.c:259</div></div>
+<div class="ttc" id="a_b_g77_8h_html_a3f93ee3bfd2996fa41f5f9425dc83431"><div class="ttname"><a href="_b_g77_8h.html#a3f93ee3bfd2996fa41f5f9425dc83431">bg_set_bsp</a></div><div class="ttdeci">void bg_set_bsp(bg_bspFun_t bspFun)</div><div class="ttdoc">Funcion para establecer los punteros a función del BSP (UART TX, Delay, GPIO_write,...</div><div class="ttdef"><b>Definition</b> BG77.c:140</div></div>
+<div class="ttc" id="a_b_g77_8h_html_a417fbe13aaac91032b2cf5fe5fbabba3"><div class="ttname"><a href="_b_g77_8h.html#a417fbe13aaac91032b2cf5fe5fbabba3">bg_queue_pop</a></div><div class="ttdeci">void bg_queue_pop(urcRawData_t *urc)</div><div class="ttdoc">Esta funcion hacer uso de la cola interna de URC de la libreria y desencola mensajes del tipo urcRawD...</div><div class="ttdef"><b>Definition</b> BG77.c:1166</div></div>
+<div class="ttc" id="a_b_g77_8h_html_a4324d29bee02aaf36d6d7dc3d54fa1b7"><div class="ttname"><a href="_b_g77_8h.html#a4324d29bee02aaf36d6d7dc3d54fa1b7">bg_transmit_buffAMode</a></div><div class="ttdeci">bg_err_t bg_transmit_buffAMode(uint8_t connectID, uint8_t *data, uint16_t len)</div><div class="ttdoc">Funcion para transmitir mensajes por un socket que esta en modo buffer access mode.</div><div class="ttdef"><b>Definition</b> BG77.c:969</div></div>
+<div class="ttc" id="a_b_g77_8h_html_a453a9ac99a62c6fafe71b5179086ee97"><div class="ttname"><a href="_b_g77_8h.html#a453a9ac99a62c6fafe71b5179086ee97">bg_exit_transparent_mode</a></div><div class="ttdeci">bg_err_t bg_exit_transparent_mode(void)</div><div class="ttdoc">Hace que el dispositivo salga de modo transparente.</div><div class="ttdef"><b>Definition</b> BG77.c:924</div></div>
+<div class="ttc" id="a_b_g77_8h_html_a4ad1b226966cfdfeedb106c0a8cf2250"><div class="ttname"><a href="_b_g77_8h.html#a4ad1b226966cfdfeedb106c0a8cf2250">bg_actPdp_t</a></div><div class="ttdeci">bg_actPdp_t</div><div class="ttdoc">Es el tipo de variable que define la opcion para activar o desactivar el contexto PDP.</div><div class="ttdef"><b>Definition</b> BG77.h:937</div></div>
+<div class="ttc" id="a_b_g77_8h_html_a4de0ad8313ddfa98018750819864029b"><div class="ttname"><a href="_b_g77_8h.html#a4de0ad8313ddfa98018750819864029b">bgServiceType_t</a></div><div class="ttdeci">bgServiceType_t</div><div class="ttdoc">Es el tipo de dato para seleccionar el tipo de servicio en una apertura de conexion (Cliente o Servid...</div><div class="ttdef"><b>Definition</b> BG77.h:1002</div></div>
+<div class="ttc" id="a_b_g77_8h_html_a4e88b1ffb1682253b142b2e133dada3e"><div class="ttname"><a href="_b_g77_8h.html#a4e88b1ffb1682253b142b2e133dada3e">bgAuth_t</a></div><div class="ttdeci">bgAuth_t</div><div class="ttdoc">Es el tipo de variable que define el tipo de autenticacion a utilizar.</div><div class="ttdef"><b>Definition</b> BG77.h:911</div></div>
+<div class="ttc" id="a_b_g77_8h_html_a560f384f98c140a53d8fc8f5b32b5e19"><div class="ttname"><a href="_b_g77_8h.html#a560f384f98c140a53d8fc8f5b32b5e19">bg_check_attach</a></div><div class="ttdeci">bg_err_t bg_check_attach(void)</div><div class="ttdoc">Funcion para verificar el registro en red.</div><div class="ttdef"><b>Definition</b> BG77.c:586</div></div>
+<div class="ttc" id="a_b_g77_8h_html_a5b05e846b42156e0bd04539d036e77e5"><div class="ttname"><a href="_b_g77_8h.html#a5b05e846b42156e0bd04539d036e77e5">bg_data_module</a></div><div class="ttdeci">bg_err_t bg_data_module(void)</div><div class="ttdoc">Funcion para imprimir la version de FW del modulo, ICCI e IMEI.</div><div class="ttdef"><b>Definition</b> BG77.c:540</div></div>
+<div class="ttc" id="a_b_g77_8h_html_a5df4af1d37573e135df6251575c7644f"><div class="ttname"><a href="_b_g77_8h.html#a5df4af1d37573e135df6251575c7644f">uartFun_t</a></div><div class="ttdeci">bg_err_t(* uartFun_t)(uint8_t *data, uint8_t len)</div><div class="ttdoc">tipo de dato para crear un puntero a funciones uart (TX o RX)</div><div class="ttdef"><b>Definition</b> BG77.h:681</div></div>
+<div class="ttc" id="a_b_g77_8h_html_a5ed9330e905321630088fe6a84c5a5de"><div class="ttname"><a href="_b_g77_8h.html#a5ed9330e905321630088fe6a84c5a5de">bg_transparent_mode</a></div><div class="ttdeci">bg_err_t bg_transparent_mode(uint8_t connectID)</div><div class="ttdoc">Permite al dispositio cambiar su modo de acceso a modo transparente.</div><div class="ttdef"><b>Definition</b> BG77.c:894</div></div>
+<div class="ttc" id="a_b_g77_8h_html_a61963d30f7d309a7ae1cf8eeed599605"><div class="ttname"><a href="_b_g77_8h.html#a61963d30f7d309a7ae1cf8eeed599605">bg_queue_is_full</a></div><div class="ttdeci">uint8_t bg_queue_is_full(void)</div><div class="ttdoc">Indica si la cola interna esta llena.</div><div class="ttdef"><b>Definition</b> BG77.c:1179</div></div>
+<div class="ttc" id="a_b_g77_8h_html_a65c9f56b02078e837debb481fff49182"><div class="ttname"><a href="_b_g77_8h.html#a65c9f56b02078e837debb481fff49182">bg_query_signal</a></div><div class="ttdeci">bg_err_t bg_query_signal(void)</div><div class="ttdoc">Consulta la intensidad de la señal cuando el modulo ya esta registrado.</div><div class="ttdef"><b>Definition</b> BG77.c:750</div></div>
+<div class="ttc" id="a_b_g77_8h_html_a6a6ed3ed80fa20a7c489f5bf09ab85c6"><div class="ttname"><a href="_b_g77_8h.html#a6a6ed3ed80fa20a7c489f5bf09ab85c6">bg_urcType_t</a></div><div class="ttdeci">bg_urcType_t</div><div class="ttdoc">Variable de tipo que sirve para identificar que tipo de URC fue recibido.</div><div class="ttdef"><b>Definition</b> BG77.h:1114</div></div>
+<div class="ttc" id="a_b_g77_8h_html_a6fcaeffa8a8411da9bd284564e9cbd83"><div class="ttname"><a href="_b_g77_8h.html#a6fcaeffa8a8411da9bd284564e9cbd83">bg_open_sckt</a></div><div class="ttdeci">bg_err_t bg_open_sckt(bgSckt_t sckt)</div><div class="ttdoc">Abre una conexion (socket) TCP en modo servidor o cliente.</div><div class="ttdef"><b>Definition</b> BG77.c:850</div></div>
+<div class="ttc" id="a_b_g77_8h_html_a6fdf52da4e8bf69a4e9130163ae5e7be"><div class="ttname"><a href="_b_g77_8h.html#a6fdf52da4e8bf69a4e9130163ae5e7be">bg_check_sim</a></div><div class="ttdeci">bg_err_t bg_check_sim(void)</div><div class="ttdoc">Funcion para detectar SIM.</div><div class="ttdef"><b>Definition</b> BG77.c:569</div></div>
+<div class="ttc" id="a_b_g77_8h_html_a796fbdf47278af0a696da945fa907110"><div class="ttname"><a href="_b_g77_8h.html#a796fbdf47278af0a696da945fa907110">bg_mainRICallback</a></div><div class="ttdeci">void bg_mainRICallback(mainRiEdge_t edge)</div><div class="ttdoc">Esta funcion de callback se debe llamar en una funcion de interrupcion de pin digital que corresponde...</div><div class="ttdef"><b>Definition</b> BG77.c:210</div></div>
+<div class="ttc" id="a_b_g77_8h_html_a803afbdc8df8c4db1b6f0267816954c8"><div class="ttname"><a href="_b_g77_8h.html#a803afbdc8df8c4db1b6f0267816954c8">bg_close_sckt</a></div><div class="ttdeci">bg_err_t bg_close_sckt(uint8_t connectID)</div><div class="ttdoc">Cierra una conexion o socket.</div><div class="ttdef"><b>Definition</b> BG77.c:946</div></div>
+<div class="ttc" id="a_b_g77_8h_html_a952e9d1543029fccfb87e8e133b68122"><div class="ttname"><a href="_b_g77_8h.html#a952e9d1543029fccfb87e8e133b68122">bg_send</a></div><div class="ttdeci">bg_err_t bg_send(uint32_t timeout, uint8_t enablePrint, const char *fmt,...)</div><div class="ttdoc">Esta funcion permite enviar comandos AT en formato de especificadores de formato (como printf)</div><div class="ttdef"><b>Definition</b> BG77.c:380</div></div>
+<div class="ttc" id="a_b_g77_8h_html_a96631fa2e9306134c3f2d13692d6c382"><div class="ttname"><a href="_b_g77_8h.html#a96631fa2e9306134c3f2d13692d6c382">bg_callback_TM_Inactive</a></div><div class="ttdeci">void bg_callback_TM_Inactive(uint8_t connectID, bg_noCarrierTM_t statusNoCarrier)</div><div class="ttdoc">Esta funcion de callback notifica al usuario que no hay más URC por atender y se esta fuera de modo t...</div><div class="ttdef"><b>Definition</b> BG77.c:1147</div></div>
+<div class="ttc" id="a_b_g77_8h_html_a9984ef8adb9430c0bb3410b6bf7120c5"><div class="ttname"><a href="_b_g77_8h.html#a9984ef8adb9430c0bb3410b6bf7120c5">bg_callback_receive_TM</a></div><div class="ttdeci">void bg_callback_receive_TM(uint8_t *buff, uint16_t nBytes)</div><div class="ttdoc">Esta funcion es un callback que notifica al usuario de un mensaje que se recibe en modo transparente.</div><div class="ttdef"><b>Definition</b> BG77.c:1132</div></div>
+<div class="ttc" id="a_b_g77_8h_html_aa422c5730073a35ffc37421e44a6c632"><div class="ttname"><a href="_b_g77_8h.html#aa422c5730073a35ffc37421e44a6c632">bg_callback_ms</a></div><div class="ttdeci">void bg_callback_ms(void)</div><div class="ttdoc">Esta funcion de callback se tiene que llamar en una funcion de interrupción de temporizador en donde ...</div><div class="ttdef"><b>Definition</b> BG77.c:153</div></div>
+<div class="ttc" id="a_b_g77_8h_html_aae937a975adb539d978912a31af5a288"><div class="ttname"><a href="_b_g77_8h.html#aae937a975adb539d978912a31af5a288">gpioWriteFun_t</a></div><div class="ttdeci">bg_err_t(* gpioWriteFun_t)(bgPin_t pin, uint8_t state)</div><div class="ttdoc">tipo de dato para crear un puntero a funcion de escritura de GPIOs</div><div class="ttdef"><b>Definition</b> BG77.h:687</div></div>
+<div class="ttc" id="a_b_g77_8h_html_ab0ebc1ea018349b5e09729ddad2f443e"><div class="ttname"><a href="_b_g77_8h.html#ab0ebc1ea018349b5e09729ddad2f443e">mainRiEdge_t</a></div><div class="ttdeci">mainRiEdge_t</div><div class="ttdoc">Tipo de variable que indica el flanco que sucedio en el pin MAIN_RI.</div><div class="ttdef"><b>Definition</b> BG77.h:728</div></div>
+<div class="ttc" id="a_b_g77_8h_html_ab3e3ace987b490e788e45c77d2762cc3"><div class="ttname"><a href="_b_g77_8h.html#ab3e3ace987b490e788e45c77d2762cc3">bg_conf_pdp</a></div><div class="ttdeci">bg_err_t bg_conf_pdp(bg_ctxPdp_t contextPDP)</div><div class="ttdoc">Configura los parametros de contexto PDP que se quiere activar.</div><div class="ttdef"><b>Definition</b> BG77.c:817</div></div>
+<div class="ttc" id="a_b_g77_8h_html_ac4a2455d92827db1c3cf0ba553a05bb8"><div class="ttname"><a href="_b_g77_8h.html#ac4a2455d92827db1c3cf0ba553a05bb8">bg_check_sckt</a></div><div class="ttdeci">bg_err_t bg_check_sckt(uint8_t connectID)</div><div class="ttdoc">Verifica el estado de una conexion.</div><div class="ttdef"><b>Definition</b> BG77.c:706</div></div>
+<div class="ttc" id="a_b_g77_8h_html_ac5b7a9c29733548542fd9372f5333273"><div class="ttname"><a href="_b_g77_8h.html#ac5b7a9c29733548542fd9372f5333273">bg_query_conf_pdp</a></div><div class="ttdeci">bg_err_t bg_query_conf_pdp(uint8_t contextID)</div><div class="ttdoc">Funcion que imprime parametros de la configuracion de contexto PDP (APN, USER, PASSWORD,...</div><div class="ttdef"><b>Definition</b> BG77.c:634</div></div>
+<div class="ttc" id="a_b_g77_8h_html_accb6d774575fa4349a922b7194d36b95"><div class="ttname"><a href="_b_g77_8h.html#accb6d774575fa4349a922b7194d36b95">bg_queue_put</a></div><div class="ttdeci">void bg_queue_put(urcRawData_t urc)</div><div class="ttdoc">Esta funcion hacer uso de la cola interna de URC de la libreria y encola mensajes del tipo urcRawData...</div><div class="ttdef"><b>Definition</b> BG77.c:1160</div></div>
+<div class="ttc" id="a_b_g77_8h_html_acd4a161fbac7d28353ca438b91e0520b"><div class="ttname"><a href="_b_g77_8h.html#acd4a161fbac7d28353ca438b91e0520b">bg_uartCallback</a></div><div class="ttdeci">void bg_uartCallback(uint8_t *buff, uint16_t nBytes)</div><div class="ttdoc">Esta funcion de callback se debe llamar en una funcion de interrupcion de recepcion de uart en la cua...</div><div class="ttdef"><b>Definition</b> BG77.c:161</div></div>
+<div class="ttc" id="a_b_g77_8h_html_ad9920b9e69487d843b87ace0fb65535f"><div class="ttname"><a href="_b_g77_8h.html#ad9920b9e69487d843b87ace0fb65535f">bg_init_module</a></div><div class="ttdeci">bg_err_t bg_init_module(void)</div><div class="ttdoc">Funcion para inicializar el modulo. Sus funciones son encender y configurar el modulo.</div><div class="ttdef"><b>Definition</b> BG77.c:503</div></div>
+<div class="ttc" id="a_b_g77_8h_html_adfa333fa2fbd83d8d555f78174c312d4"><div class="ttname"><a href="_b_g77_8h.html#adfa333fa2fbd83d8d555f78174c312d4">bg_query_cops</a></div><div class="ttdeci">bg_err_t bg_query_cops(void)</div><div class="ttdoc">Funcion que imprime parametros de la consulta de COPS modo, operador, tecnologia de acceso.</div><div class="ttdef"><b>Definition</b> BG77.c:600</div></div>
+<div class="ttc" id="a_b_g77_8h_html_ae05b151b88c27bed92a5a91c4cb9781f"><div class="ttname"><a href="_b_g77_8h.html#ae05b151b88c27bed92a5a91c4cb9781f">bg_power_off</a></div><div class="ttdeci">bg_err_t bg_power_off(void)</div><div class="ttdoc">Realiza el apagado del modulo con el comando AT+QPOWD.</div><div class="ttdef"><b>Definition</b> BG77.c:452</div></div>
+<div class="ttc" id="a_b_g77_8h_html_ae235bc4734e4f0ac5242dd32776a39cb"><div class="ttname"><a href="_b_g77_8h.html#ae235bc4734e4f0ac5242dd32776a39cb">resetFun_t</a></div><div class="ttdeci">void(* resetFun_t)(void)</div><div class="ttdoc">tipo de dato para crear un puntero a funcion de reset de sistema (reset de MCU)</div><div class="ttdef"><b>Definition</b> BG77.h:699</div></div>
+<div class="ttc" id="a_b_g77_8h_html_ae23a60b4e1b7f50ea3cdd0927640e0de"><div class="ttname"><a href="_b_g77_8h.html#ae23a60b4e1b7f50ea3cdd0927640e0de">bg_power_on</a></div><div class="ttdeci">bg_err_t bg_power_on(void)</div><div class="ttdoc">Esta funcion realiza la secuencia necesaria de los pines BG_PWRKEY_PIN, BG_VBAT_PIN,...</div><div class="ttdef"><b>Definition</b> BG77.c:434</div></div>
+<div class="ttc" id="a_b_g77_8h_html_ae28f36ea82838abfdca0118d7af70da7"><div class="ttname"><a href="_b_g77_8h.html#ae28f36ea82838abfdca0118d7af70da7">bg_check_pdp</a></div><div class="ttdeci">bg_err_t bg_check_pdp(uint8_t ctxtID)</div><div class="ttdoc">Verifica que se tenga activado el contexto PDP seleccionado (contextID)</div><div class="ttdef"><b>Definition</b> BG77.c:668</div></div>
+<div class="ttc" id="a_b_g77_8h_html_ae3aa6c8894b5afd4e7d9cc43750cdb31"><div class="ttname"><a href="_b_g77_8h.html#ae3aa6c8894b5afd4e7d9cc43750cdb31">bg_callback_urcDetected</a></div><div class="ttdeci">void bg_callback_urcDetected(urcRawData_t urcData)</div><div class="ttdoc">Esta funcion corresponde a un callback para el usuario. Esta funcion se llamara cuando se detecte un ...</div><div class="ttdef"><b>Definition</b> BG77.c:1058</div></div>
+<div class="ttc" id="a_b_g77_8h_html_ae4503c4dc1caa40b7075342e7317e2f8"><div class="ttname"><a href="_b_g77_8h.html#ae4503c4dc1caa40b7075342e7317e2f8">bg_incomming_callback</a></div><div class="ttdeci">void bg_incomming_callback(uint8_t serverID, uint8_t connectID)</div><div class="ttdoc">Esta funcion corresponde a un callback que notifica al usuario la ocurrencia de una conexion entrante...</div><div class="ttdef"><b>Definition</b> BG77.c:1127</div></div>
+<div class="ttc" id="a_b_g77_8h_html_ae8e29b80c35bbfef04dde3dea52f459e"><div class="ttname"><a href="_b_g77_8h.html#ae8e29b80c35bbfef04dde3dea52f459e">bg_pdp_activation</a></div><div class="ttdeci">bg_err_t bg_pdp_activation(uint8_t ctxtID, bg_actPdp_t act)</div><div class="ttdoc">Activa o desactiva el contexto PDP previamente configurado.</div><div class="ttdef"><b>Definition</b> BG77.c:832</div></div>
+<div class="ttc" id="a_b_g77_8h_html_af98be1c204049055208486fb2b91c87b"><div class="ttname"><a href="_b_g77_8h.html#af98be1c204049055208486fb2b91c87b">bg_err_t</a></div><div class="ttdeci">bg_err_t</div><div class="ttdoc">tipo de variable que almacena el catalogo de errores.</div><div class="ttdef"><b>Definition</b> BG77.h:605</div></div>
+<div class="ttc" id="astructbg__bsp_fun__t_html"><div class="ttname"><a href="structbg__bsp_fun__t.html">bg_bspFun_t</a></div><div class="ttdoc">Tipo de variable que contiene los punteros a funcion del BSP.</div><div class="ttdef"><b>Definition</b> BG77.h:706</div></div>
+<div class="ttc" id="astructbg__ctx_pdp__t_html"><div class="ttname"><a href="structbg__ctx_pdp__t.html">bg_ctxPdp_t</a></div><div class="ttdoc">Es el tipo de variable que define la configuracion de contexto PDP.</div><div class="ttdef"><b>Definition</b> BG77.h:948</div></div>
+<div class="ttc" id="astructbg_sckt__t_html"><div class="ttname"><a href="structbg_sckt__t.html">bgSckt_t</a></div><div class="ttdoc">Tipo de dato que contiene todos los parametros de red para abrir un socket.</div><div class="ttdef"><b>Definition</b> BG77.h:1012</div></div>
+<div class="ttc" id="astructflags__t_html"><div class="ttname"><a href="structflags__t.html">flags_t</a></div><div class="ttdoc">Tipo de dato para crear variables de banderas de 1 bit (16 bits)</div><div class="ttdef"><b>Definition</b> BG77.h:643</div></div>
+<div class="ttc" id="astructurc_info_data__t_html"><div class="ttname"><a href="structurc_info_data__t.html">urcInfoData_t</a></div><div class="ttdoc">Tipo de variable que contiene la informacion util de URC.</div><div class="ttdef"><b>Definition</b> BG77.h:738</div></div>
+</div><!-- fragment --></div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+<img class="footer" src="cursoCIntermedio.png"  height="100px"/>
+</small></address>
+</div><!-- doc-content -->
+</body>
+</html>

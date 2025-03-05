@@ -1,0 +1,34 @@
+\doxysection{Uso\+\_\+de\+\_\+\+COPY\+\_\+\+PARSE\+\_\+\+STR}
+\hypertarget{_uso_de__c_o_p_y__p_a_r_s_e__s_t_r-example}{}\label{_uso_de__c_o_p_y__p_a_r_s_e__s_t_r-example}Copia una cadena que se encuentra entre dos caracteres desde un buffer origen a otro buffer de destino. El proposito de esta MACRO es copiar cadenas de informacion que debe ser parseada por delimitadores como \textquotesingle{}~\newline
+\textquotesingle{}, \textquotesingle{} \textquotesingle{}, \textquotesingle{}=\textquotesingle{}, \textquotesingle{},\textquotesingle{}.
+
+Copia una cadena que se encuentra entre dos caracteres desde un buffer origen a otro buffer de destino. El proposito de esta MACRO es copiar cadenas de informacion que debe ser parseada por delimitadores como \textquotesingle{}~\newline
+\textquotesingle{}, \textquotesingle{} \textquotesingle{}, \textquotesingle{}=\textquotesingle{}, \textquotesingle{},\textquotesingle{} 
+\begin{DoxyParams}{Parámetros}
+{\em dst\+Buff} & Es el buffer de destino. \\
+\hline
+{\em dst\+Buff\+Size} & Es el tamaño total de dst\+Buff. Sirve para evaluar el desbordamiento de memoria. \\
+\hline
+{\em src\+Buff} & Es el buffer origen. \\
+\hline
+{\em chr1} & Es el caracter que indica desde donde se empezar a copiar. Se empieza a copiar una posicion despues de este caracter. \\
+\hline
+{\em chr2} & Es el caracter hasta el cual se va a copiar. Este ultimo caracter se cambia a nulo \textquotesingle{}\textbackslash{}0\textquotesingle{} para delimitar la cadena. ~\newline
+\\
+\hline
+\end{DoxyParams}
+En este ejemplo se copia la cadena "{}125"{} proveniente de data\+Buff a parse\+Buff 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{uint8\_t\ dataBuff[]\ =\ \textcolor{stringliteral}{"{}vol=125v,pot=12w"{}};}
+\DoxyCodeLine{uint8\_t\ parseBuff[30]\ =\ \{\textcolor{charliteral}{'\(\backslash\)0'}\};}
+\DoxyCodeLine{}
+\DoxyCodeLine{COPY\_PARSE\_STR(\textcolor{keyword}{sizeof}(parseBuff),\ parseBuff,\ dataBuff,\ \textcolor{charliteral}{'='},\ \textcolor{charliteral}{'v'});}
+
+\end{DoxyCode}
+
+
+
+\begin{DoxyCodeInclude}{0}
+
+\end{DoxyCodeInclude}
+ 

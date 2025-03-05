@@ -1,0 +1,28 @@
+\doxysection{Uso\+\_\+de\+\_\+\+REMPLACE\+\_\+\+CHAR}
+\hypertarget{_uso_de__r_e_m_p_l_a_c_e__c_h_a_r-example}{}\label{_uso_de__r_e_m_p_l_a_c_e__c_h_a_r-example}Remplaza la primera ocurrencia de un caracter especificado en un array por otro deseado. El proposito de esta macro es sustituir el primer caracter encontrado por otro deseado y su utilidad es para copiar informacion que debe ser parseada.
+
+Remplaza la primera ocurrencia de un caracter especificado en un array por otro deseado. El proposito de esta macro es sustituir el primer caracter encontrado por otro deseado y su utilidad es para copiar informacion que debe ser parseada.\begin{DoxyNote}{Nota}
+Si el caracter no es encontrado no sucede nada.
+\end{DoxyNote}
+
+\begin{DoxyParams}{Parámetros}
+{\em remp\+Src\+Buff} & Es el array al que se quiere remplazar un caracter. \\
+\hline
+{\em chr\+Remplaced} & Es el caracter que se quiere remplazar por otro deseado. \\
+\hline
+{\em chr\+Desired} & Es el caracter deseado.\\
+\hline
+\end{DoxyParams}
+En este ejemplo se intercambia el caracter \textquotesingle{}u\textquotesingle{} del buffer foo\+Buff por el caracter \textquotesingle{}a\textquotesingle{} 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{uint8\_t\ fooBuff[]\ =\ \textcolor{stringliteral}{"{}cut"{}};}
+\DoxyCodeLine{REMPLACE\_CHAR(fooBuff,\ \textcolor{charliteral}{'u'},\ \textcolor{charliteral}{'a'});}
+
+\end{DoxyCode}
+
+
+
+\begin{DoxyCodeInclude}{0}
+
+\end{DoxyCodeInclude}
+ 

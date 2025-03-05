@@ -1,0 +1,783 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.12.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>BG77: BG77</title>
+<link rel="icon" href="cursoCIntermedio.png" type="image/x-icon" />
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectlogo"><img alt="Logo" src=" lenguaje-c-1.png" height="100px"/></td>
+  <td id="projectalign">
+   <div id="projectname">BG77<span id="projectnumber">&#160;1.0</span>
+   </div>
+   <div id="projectbrief">Esta es una libreria basica para controlar el modulo de comunicacion BG77</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generado por Doxygen 1.12.0 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() { codefold.init(0); });
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','Buscar',false);
+  $(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function(){ initResizable(false); });
+/* @license-end */
+</script>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Cargando...</div>
+<div class="SRStatus" id="Searching">Buscando...</div>
+<div class="SRStatus" id="NoMatches">Nada coincide</div>
+</div>
+</div>
+</div>
+</div>
+
+</div><!-- top -->
+<div id="doc-content">
+<div><div class="header">
+  <div class="headertitle"><div class="title">BG77</div></div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><p><a class="anchor" id="autotoc_md0"></a></p>
+<p>Esta es una libreria base que implementa funcionalidades basicas del modulo BG77 tales como: consulta de estados y configuraciones, apertura de conexiones, transmision y recepcion de datos.</p>
+<p>El proposito de la libreria es tener una interfaz con el modulo de comunicacion BG77 que se encargue de la gestion de urc y la ejecucion de comandos AT necesarios para las funcionalidades anteriormente mencionadas.</p>
+<h1><a class="anchor" id="autotoc_md1"></a>
+Ejemplo de uso #1.</h1>
+<p>Este ejemplo de codigo, tiene como proposito mostrar el uso de las diferentes funcionalidades de la libreria implementadas en un microcontrolador STM32F4.</p>
+<p>De forma general se verifican diferentes aspectos como el SIM, las configuraciones actulales y los estados de registro y contexto PDP. Por otro lado, se busca dar apertura a dos conexiones, siendo la primera en modo servidor con buffer access mode y la segunda en modo cliente con modo transparente. De esta manera, se puede ejemplificar como pueden coexistir dos tipos de conexiones diferentes en modos de transmision diferentes. Siendo mas explicitos, se busca mostrar como es el cambio automatico del modo transparente cuando este esta activo recibiendo o transfiriendo mensajes y se presenta un URC de alguna otra conexion (se recibe un mensaje o conexion entrante de la conexion en modo servidor).</p>
+<div class="fragment"><div class="line">#include &quot;main.h&quot;</div>
+<div class="line"> #include &quot;BG77.h&quot;</div>
+<div class="line"> </div>
+<div class="line"> //-----------------------------BSP--------------------------------------</div>
+<div class="line"> bg_err_t uart_tx(uint8_t *data, uint16_t len);</div>
+<div class="line"> bg_err_t gpioWrite(bgPin_t pin, uint8_t state);</div>
+<div class="line"> void msDelay(uint32_t mDelay);</div>
+<div class="line"> void resetMCU(void);</div>
+<div class="line"> </div>
+<div class="line"> bg_err_t uart_tx(uint8_t *data, uint16_t len)</div>
+<div class="line"> {</div>
+<div class="line">     bg_err_t err = BG_OK;</div>
+<div class="line">     if(HAL_UART_Transmit(&amp;UART_BG, data, len, 1000) != HAL_OK)</div>
+<div class="line">         err = BG_ERR_MCU_TX_UART;</div>
+<div class="line">     return err;</div>
+<div class="line"> }</div>
+<div class="line"> </div>
+<div class="line"> bg_err_t gpioWrite(bgPin_t pin, uint8_t state)</div>
+<div class="line"> {</div>
+<div class="line">     if(pin &gt;= BG_UNSUPORTED_PIN)</div>
+<div class="line">         return BG_ERR_UNSUPPORTED_PIN;</div>
+<div class="line">         </div>
+<div class="line">     bg_err_t err = BG_OK;</div>
+<div class="line"> </div>
+<div class="line">     uint32_t bgPin[] = {BG_PWRKEY_Pin,  BG_VBAT_Pin, BG_RESET_Pin, BG_PON_TRIG_Pin};</div>
+<div class="line">     uint32_t bgPort[] = {BG_PWRKEY_GPIO_Port, BG_VBAT_GPIO_Port, BG_RESET_GPIO_Port,\</div>
+<div class="line">         BG_PON_TRIG_GPIO_Port}; </div>
+<div class="line"> </div>
+<div class="line">         HAL_GPIO_WritePin(bgPort[pin], bgPin[pin], state);</div>
+<div class="line"> </div>
+<div class="line">         return BG_OK;</div>
+<div class="line"> }</div>
+<div class="line"> </div>
+<div class="line"> void msDelay(uint32_t mDelay)</div>
+<div class="line"> {</div>
+<div class="line">     HAL_Delay(mDelay);</div>
+<div class="line"> }</div>
+<div class="line"> </div>
+<div class="line"> void resetMCU(void)</div>
+<div class="line"> {</div>
+<div class="line">     HAL_NVIC_SystemReset();</div>
+<div class="line"> }</div>
+<div class="line"> </div>
+<div class="line"> bg_bspFun_t bspFun = {.uartTx = uart_tx, .gpioWrite = gpioWrite, .msDelay = msDelay,\</div>
+<div class="line"> .resetMCU = resetMCU};</div>
+<div class="line"> //-----------------------------BSP end--------------------------------------</div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> //-----------------------------Funcion de recepcion de interrupcion de UART---------------------</div>
+<div class="line"> </div>
+<div class="line"> //Creacion e inicialzacion de buffer del tipo uartBuff_t (buffer de 2KB de la libreria)</div>
+<div class="line"> uartBuff_t uBg = {.buff = {&#39;\0&#39;}, .len = 0}; </div>
+<div class="line"> </div>
+<div class="line"> //--------------------------------Variables para manejo de UART---------------------</div>
+<div class="line"> #define UART_BG huart7 //instancia de UART de modulo de comunicacion</div>
+<div class="line"> </div>
+<div class="line"> typedef enum {</div>
+<div class="line"> RX_LOG,</div>
+<div class="line"> RX_BG,</div>
+<div class="line"> RX_NO_SUPPORTED</div>
+<div class="line"> }rxUart_t;</div>
+<div class="line"> </div>
+<div class="line"> rxUart_t keyUart = RX_NO_SUPPORTED;</div>
+<div class="line"> </div>
+<div class="line"> #define flg_uart flg_main.f0 //1: llego una recepcion de UART por interrupcion.</div>
+<div class="line"> flags_t flg_main = {0}; //banderas de 1 bit.</div>
+<div class="line"> //--------------------------------Variables para manejo de UART end-----------------</div>
+<div class="line"> </div>
+<div class="line"> void HAL_UARTEx_RxEventCallback(UART_HandleTypeDef *huart, uint16_t Size)</div>
+<div class="line"> {</div>
+<div class="line">     if(huart == &amp;UART_BG)</div>
+<div class="line">     {   </div>
+<div class="line">         //-----------Callback de UART para libreria-----------</div>
+<div class="line">         bg_uartCallback(uBg.buff, Size);</div>
+<div class="line"> </div>
+<div class="line">         HAL_UARTEx_ReceiveToIdle_IT(&amp;UART_BG, uBg.buff, sizeof(uBg.buff));</div>
+<div class="line">         keyUart = RX_BG;</div>
+<div class="line">         uBg.len = Size;</div>
+<div class="line">         flg_uart = 1;</div>
+<div class="line">     }</div>
+<div class="line"> }</div>
+<div class="line"> //-----------------------------Funcion de recepcion de interrupcion de UART end-----------------</div>
+<div class="line"> </div>
+<div class="line"> //-----------------------------------------------Funcion main-----------------------------------</div>
+<div class="line"> int main(void)</div>
+<div class="line"> {</div>
+<div class="line">     //----------------------Configuracion e inicializacion de MCU----------------------------------</div>
+<div class="line">     HAL_Init();</div>
+<div class="line">     SystemClock_Config();</div>
+<div class="line">     MX_GPIO_Init();</div>
+<div class="line">     MX_UART4_Init();</div>
+<div class="line">     MX_UART7_Init();</div>
+<div class="line">     MX_USART2_UART_Init();</div>
+<div class="line">     //----------------------Configuracion e inicializacion de MCU end------------------------------</div>
+<div class="line">     </div>
+<div class="line">     //---------------------------------------Configurando o estableciendo BSP----------------------</div>
+<div class="line">     bg_set_bsp(bspFun);</div>
+<div class="line"> </div>
+<div class="line">     //--------------------------Activando la Recepcion de interrupcion de UART----------------------</div>
+<div class="line">     HAL_UARTEx_ReceiveToIdle_IT(&amp;UART_BG, uBg.buff, sizeof(uBg.buff));</div>
+<div class="line">     flg_uart = 0;</div>
+<div class="line">     </div>
+<div class="line"> </div>
+<div class="line">     //-------------------------------Inicializando el modulo (libreria)-----------------------------</div>
+<div class="line">     bg_init_module();</div>
+<div class="line">     bg_data_module();</div>
+<div class="line"> </div>
+<div class="line">     //-------------------------------Verificacion de SIM-------------------------------</div>
+<div class="line">     if(bg_check_sim() == BG_OK_SIM)</div>
+<div class="line">         printf(&quot;SIM OK\n&quot;);</div>
+<div class="line">     else</div>
+<div class="line">         printf(&quot;SIM NO OK\n&quot;);</div>
+<div class="line"> </div>
+<div class="line">     //--------------------Verificacion si el modulo esta registrado--------------------</div>
+<div class="line">     if(bg_check_attach() == BG_OK_ATTACH)</div>
+<div class="line">         printf(&quot;ATTACH OK\n&quot;);</div>
+<div class="line">     else</div>
+<div class="line">         printf(&quot;ATTACH NO OK\n&quot;);</div>
+<div class="line"> </div>
+<div class="line">     //------------------------------Verificacion de COPS--------------------------------</div>
+<div class="line">     if(bg_query_cops() == BG_ERR_NO_OPER)</div>
+<div class="line">         printf(&quot;No se ha seleccionado operadora\n&quot;);</div>
+<div class="line"> </div>
+<div class="line">     //--------------------Consulta la configuracion del contexto PDP--------------------</div>
+<div class="line">     if(bg_query_conf_pdp(1) == BG_ERR_NO_CONF_PDP)</div>
+<div class="line">     printf(&quot;No se ha configurado contexto PDP\n&quot;);</div>
+<div class="line"> </div>
+<div class="line">     //--------------------Se verifica si esta activado el contexto PDP------------------</div>
+<div class="line">     if(bg_check_pdp(1) == BG_OK_PDP_DEACT)</div>
+<div class="line">         printf(&quot;No esta activado el contexto PDP 1\n&quot;);</div>
+<div class="line"> </div>
+<div class="line">     //---------------------Se realiza el proceso de registro en la red------------------</div>
+<div class="line">     if(bg_attach(COPS_LF) == BG_OK_ATTACH)</div>
+<div class="line">         printf(&quot;Modulo ATTACHADO\n&quot;);</div>
+<div class="line"> </div>
+<div class="line">     //----------------------Verifica si se el modulo esta registrado-------------------</div>
+<div class="line">     if(bg_check_attach() == BG_OK_ATTACH)</div>
+<div class="line">         printf(&quot;ATTACH OK\n&quot;);</div>
+<div class="line">     else</div>
+<div class="line">         printf(&quot;ATTACH NO OK\n&quot;);</div>
+<div class="line"> </div>
+<div class="line">     //-----------------------------Configura conterxto PDP-----------------------------</div>
+<div class="line">     bg_ctxPdp_t contextPDP_1 ={.ctxtID = 1, .contextType = BG_CTXT_IPV4,\</div>
+<div class="line">         .apn = APN_LINKS_FIELD, .usr = &quot;&quot;, .psw = &quot;&quot;};</div>
+<div class="line">     bg_conf_pdp(contextPDP_1);</div>
+<div class="line"> </div>
+<div class="line">     //-------------------------------Activa contexto PDP------------------------------</div>
+<div class="line">     bg_pdp_activation(1, BG_PDP_ACT);</div>
+<div class="line"> </div>
+<div class="line">     //------------------------------Verificacion de COPS--------------------------------</div>
+<div class="line">     if(bg_query_cops() == BG_ERR_NO_OPER)</div>
+<div class="line">         printf(&quot;No se ha seleccionado operadora\n&quot;);</div>
+<div class="line"> </div>
+<div class="line">     //---------------------Creacion y apertura de socket 1 SERVIDOR----------------------</div>
+<div class="line">     bgSckt_t mySckt = {.ctxtID = 1, .connectID = 0, .ip = BG_OPEN_SERVER_IP,\</div>
+<div class="line">     .accssMode = BG_OPEN_BUFF_ACCSS_MODE, .serviceType = BG_OPEN_SERVER,\</div>
+<div class="line">     .remotePort = BG_OPEN_SERVER_REMOTE_PORT, .localPort = 2000};</div>
+<div class="line">     </div>
+<div class="line">     bg_open_sckt(mySckt);</div>
+<div class="line">     //---------------------Creacion y apertura de socket 1 SERVIDOR end--------------------</div>
+<div class="line"> </div>
+<div class="line">     //----------------------Creacion y apertura de socket 2 CLIENTE------------------------</div>
+<div class="line">     bgSckt_t mySckt2 = {.ctxtID = 1, .connectID = 1, .ip = IP_METERCAD,\</div>
+<div class="line">         .accssMode = BG_OPEN_BUFF_ACCSS_MODE, .serviceType = BG_OPEN_CLIENT,\</div>
+<div class="line">         .remotePort = 2001, .localPort = BG_OPEN_CLIENT_LOCAL_PORT};</div>
+<div class="line"> </div>
+<div class="line">     if(bg_open_sckt(mySckt2) == BG_OK_CONNECT_ID_OPENNED)</div>
+<div class="line">         printf(&quot;Conexion myScket2 Abierta\n&quot;);</div>
+<div class="line">     //----------------------Creacion y apertura de socket 2 CLIENTE end---------------------</div>
+<div class="line"> </div>
+<div class="line">     //--------------Transmision de mensajes de socket 2 en Buffer access mode---------------</div>
+<div class="line">     if(bg_transmit_buffAMode(mySckt2.connectID, &quot;hello DOGO \x00\xFF&quot;, 13) == BG_OK_TRANSMIT)</div>
+<div class="line">         printf(&quot;Mensaje enviado\n&quot;);</div>
+<div class="line"> </div>
+<div class="line">     if(bg_transmit_buffAMode(mySckt2.connectID, &quot;hello COW &quot;, 10) == BG_OK_TRANSMIT)</div>
+<div class="line">         printf(&quot;Mensaje enviado\n&quot;);</div>
+<div class="line">     //--------------Transmision de mensajes de socket 2 en Buffer access mode end------------</div>
+<div class="line"> </div>
+<div class="line">     //-----------Cambio de modo de transmision a modo transparente del socket 2 y transmision de mensaje-----------</div>
+<div class="line">     if(bg_transparent_mode(mySckt2.connectID) == BG_OK_TRANSPARENT_MODE)</div>
+<div class="line">     {</div>
+<div class="line">         printf(&quot;Modo transparente exitoso\n&quot;);</div>
+<div class="line">         HAL_UART_Transmit(&amp;UART_BG, &quot;hello server&quot;, 12, 1000);</div>
+<div class="line">         //bg_transmit_TM(&quot;hello server&quot;, 12); //o tambien se puede usar esta funcion</div>
+<div class="line">     }</div>
+<div class="line"> </div>
+<div class="line">     //-------------------Salida de modo transparente y cierre del socket 2------------------</div>
+<div class="line">     if(bg_exit_transparent_mode() == BG_OK_EXIT_TRANSPARENT_MODE)</div>
+<div class="line">     {</div>
+<div class="line">             printf(&quot;salida de TM Exitosa\n&quot;);</div>
+<div class="line">             bg_check_pdp(1);</div>
+<div class="line">             bg_close_sckt(mySckt2.connectID);</div>
+<div class="line">         </div>
+<div class="line">             if(bg_check_sckt(mySckt2.connectID) == BG_OK_CONNECT_ID_CLOSED)</div>
+<div class="line">                 printf(&quot;Socket cerrado\n&quot;);</div>
+<div class="line">     }</div>
+<div class="line"> </div>
+<div class="line">     else</div>
+<div class="line">         printf(&quot;Salida de TM no exitosa\n&quot;);</div>
+<div class="line">     //-------------------Salida de modo transparente y cierre del socket 2 end------------------</div>
+<div class="line">         </div>
+<div class="line">     //--------------------------------Consulta del estado de señal------------------------------  </div>
+<div class="line">     if(bg_query_signal() == BG_OK_SIGNAL)</div>
+<div class="line">         printf(&quot;Intensidad de señal aceptable\n&quot;);</div>
+<div class="line"> </div>
+<div class="line">     else</div>
+<div class="line">         printf(&quot;Intensidad de señal NO aceptable\n&quot;);</div>
+<div class="line"> </div>
+<div class="line">     //--------------------------------Desregistro de la red y termina el codigo------------------------------ </div>
+<div class="line">     //if(bg_detach() == BG_OK_DETACH)</div>
+<div class="line">         //printf(&quot;El Dispositivo esta desregistrado de la red\n&quot;);</div>
+<div class="line">     // while(1);</div>
+<div class="line">     //--------------------------------Desregistro de la red y termina el codigo end-------------------------- </div>
+<div class="line"> </div>
+<div class="line">     //------------------------Apertura y cambio a modo transparente de socket 2 CLIENTE---------------------- </div>
+<div class="line">     if(bg_open_sckt(mySckt2) == BG_OK_CONNECT_ID_OPENNED)</div>
+<div class="line">         printf(&quot;Conexion mySocket2 Abierta\n&quot;);</div>
+<div class="line"> </div>
+<div class="line">     if(bg_transparent_mode(mySckt2.connectID) == BG_OK_TRANSPARENT_MODE)</div>
+<div class="line">     {</div>
+<div class="line">         printf(&quot;Modo transparente exitoso\n&quot;);</div>
+<div class="line">         bg_transmit_TM(&quot;hello serverDog&quot;, 15);</div>
+<div class="line">     }</div>
+<div class="line">     //------------------------Apertura y cambio a modo transparente de socket 2 CLIENTE---------------------- </div>
+<div class="line"> </div>
+<div class="line">     //-----------------------------Loop del codigo o hilo principal----------------------------</div>
+<div class="line">     while(1)</div>
+<div class="line">     {</div>
+<div class="line">         //--------------------Funcion de manejo de URC-----------------------</div>
+<div class="line">         bg_handle_urc();</div>
+<div class="line"> </div>
+<div class="line">         //---------------Transmision de mensaje cada 2 segundos---------------</div>
+<div class="line">         bg_transmit_TM(&quot;hello dog&quot;, 9);</div>
+<div class="line">         HAL_Delay(2000);</div>
+<div class="line">         memset(uBg.buff, &#39;\0&#39;, sizeof(uBg.buff)); //limpieza de buffer de recepcion de UART en aplicacion principal</div>
+<div class="line">     }</div>
+<div class="line">     //-----------------------------Loop del codigo o hilo principal---------------------------- </div>
+<div class="line"> }</div>
+<div class="line"> //-----------------------------------------------Funcion main end-------------------------------</div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> //---------------------------------Funcion de interrupcion de temporizador----------------------</div>
+<div class="line"> void callback_systic(void)</div>
+<div class="line"> {   </div>
+<div class="line">     //-----------Callback de temporizador de 1ms para libreria-----------</div>
+<div class="line">     bg_callback_ms();</div>
+<div class="line"> }</div>
+<div class="line"> //---------------------------------Funcion de interrupcion de temporizador end------------------</div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> //---------------------------------Funcion de interrupcion de temporizador (Systick)----------------------</div>
+<div class="line"> void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)</div>
+<div class="line"> {</div>
+<div class="line">     if(GPIO_Pin == INT_MAIN_RI_Pin)</div>
+<div class="line">     {</div>
+<div class="line">         if(HAL_GPIO_ReadPin(INT_MAIN_RI_GPIO_Port, INT_MAIN_RI_Pin))</div>
+<div class="line">         {</div>
+<div class="line">             //-----------Callback de flanco de subida de pin MAIN RI-----------</div>
+<div class="line">             bg_mainRICallback(MAIN_RI_EDGE_RISING);</div>
+<div class="line">         }</div>
+<div class="line"> </div>
+<div class="line">         else</div>
+<div class="line">         {</div>
+<div class="line">             //-----------Callback de flanco de bajada de pin MAIN RI-----------</div>
+<div class="line">             bg_mainRICallback(MAIN_RI_EDGE_FALLING);</div>
+<div class="line">         }</div>
+<div class="line">     }</div>
+<div class="line"> }</div>
+<div class="line"> //---------------------------------Funcion de interrupcion de temporizador  (Systick) end------------------</div>
+</div><!-- fragment --><p>La explicacion del ejemplo se resume en los siguientes pasos:</p>
+<ol type="1">
+<li><p class="startli">Generar el BSP que son punteros a funcion.</p>
+<p class="startli">1.1 Funcion transmision de UART.</p>
+<p class="startli">1.2 Funcion escritura de GPIOS.</p>
+<p class="startli">1.3 Funcion de delay.</p>
+<p class="startli">1.4 Funcion de reinicio de MCU.</p>
+<div class="fragment"><div class="line">//-----------------------------BSP--------------------------------------</div>
+<div class="line">bg_err_t uart_tx(uint8_t *data, uint16_t len);</div>
+<div class="line">bg_err_t gpioWrite(bgPin_t pin, uint8_t state);</div>
+<div class="line">void msDelay(uint32_t mDelay);</div>
+<div class="line">void resetMCU(void);</div>
+<div class="line"> </div>
+<div class="line">bg_err_t uart_tx(uint8_t *data, uint16_t len)</div>
+<div class="line">{</div>
+<div class="line">   bg_err_t err = BG_OK;</div>
+<div class="line">   if(HAL_UART_Transmit(&amp;UART_BG, data, len, 1000) != HAL_OK)</div>
+<div class="line">      err = BG_ERR_MCU_TX_UART;</div>
+<div class="line">   return err;</div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line">bg_err_t gpioWrite(bgPin_t pin, uint8_t state)</div>
+<div class="line">{</div>
+<div class="line">   if(pin &gt;= BG_UNSUPORTED_PIN)</div>
+<div class="line">      return BG_ERR_UNSUPPORTED_PIN;</div>
+<div class="line">      </div>
+<div class="line">   bg_err_t err = BG_OK;</div>
+<div class="line"> </div>
+<div class="line">   uint32_t bgPin[] = {BG_PWRKEY_Pin,  BG_VBAT_Pin, BG_RESET_Pin, BG_PON_TRIG_Pin};</div>
+<div class="line">   uint32_t bgPort[] = {BG_PWRKEY_GPIO_Port, BG_VBAT_GPIO_Port, BG_RESET_GPIO_Port,\</div>
+<div class="line">      BG_PON_TRIG_GPIO_Port}; </div>
+<div class="line"> </div>
+<div class="line">      HAL_GPIO_WritePin(bgPort[pin], bgPin[pin], state);</div>
+<div class="line"> </div>
+<div class="line">      return BG_OK;</div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line">void msDelay(uint32_t mDelay)</div>
+<div class="line">{</div>
+<div class="line">   HAL_Delay(mDelay);</div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line">void resetMCU(void)</div>
+<div class="line">{</div>
+<div class="line">   HAL_NVIC_SystemReset();</div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line">bg_bspFun_t bspFun = {.uartTx = uart_tx, .gpioWrite = gpioWrite, .msDelay = msDelay,\</div>
+<div class="line">.resetMCU = resetMCU};</div>
+<div class="line">//-----------------------------BSP end--------------------------------------</div>
+</div><!-- fragment --><ol type="a">
+<li>Llamar los callbacks de UART, Temporizador y Flancos del pin MAIN RI en las interrupciones correspondientes.</li>
+</ol>
+<div class="fragment"><div class="line">//-----------------------------Funcion de recepcion de interrupcion de UART---------------------</div>
+<div class="line"> </div>
+<div class="line">  //Creacion e inicialzacion de buffer del tipo uartBuff_t (buffer de 2KB de la libreria)</div>
+<div class="line">  uartBuff_t uBg = {.buff = {&#39;\0&#39;}, .len = 0}; </div>
+<div class="line"> </div>
+<div class="line">  //--------------------------------Variables para manejo de UART---------------------</div>
+<div class="line">  #define UART_BG huart7 //instancia de UART de modulo de comunicacion</div>
+<div class="line"> </div>
+<div class="line">  typedef enum {</div>
+<div class="line">  RX_LOG,</div>
+<div class="line">  RX_BG,</div>
+<div class="line">  RX_NO_SUPPORTED</div>
+<div class="line">  }rxUart_t;</div>
+<div class="line"> </div>
+<div class="line">  rxUart_t keyUart = RX_NO_SUPPORTED;</div>
+<div class="line"> </div>
+<div class="line">  #define flg_uart flg_main.f0 //1: llego una recepcion de UART por interrupcion.</div>
+<div class="line">  flags_t flg_main = {0}; //banderas de 1 bit.</div>
+<div class="line">  //--------------------------------Variables para manejo de UART end-----------------</div>
+<div class="line"> </div>
+<div class="line">  void HAL_UARTEx_RxEventCallback(UART_HandleTypeDef *huart, uint16_t Size)</div>
+<div class="line">  {</div>
+<div class="line">      if(huart == &amp;UART_BG)</div>
+<div class="line">      {   </div>
+<div class="line">          //-----------Callback de UART para libreria-----------</div>
+<div class="line">          bg_uartCallback(uBg.buff, Size);</div>
+<div class="line"> </div>
+<div class="line">          HAL_UARTEx_ReceiveToIdle_IT(&amp;UART_BG, uBg.buff, sizeof(uBg.buff));</div>
+<div class="line">          keyUart = RX_BG;</div>
+<div class="line">          uBg.len = Size;</div>
+<div class="line">          flg_uart = 1;</div>
+<div class="line">      }</div>
+<div class="line">  }</div>
+<div class="line">  //-----------------------------Funcion de recepcion de interrupcion de UART end-----------------</div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> //---------------------------------Funcion de interrupcion de temporizador----------------------</div>
+<div class="line">  void callback_systic(void)</div>
+<div class="line">  {   </div>
+<div class="line">      //-----------Callback de temporizador de 1ms para libreria-----------</div>
+<div class="line">      bg_callback_ms();</div>
+<div class="line">  }</div>
+<div class="line">  //---------------------------------Funcion de interrupcion de temporizador end------------------</div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line">  //---------------------------------Funcion de interrupcion de temporizador (Systick)----------------------</div>
+<div class="line">  void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)</div>
+<div class="line">  {</div>
+<div class="line">      if(GPIO_Pin == INT_MAIN_RI_Pin)</div>
+<div class="line">      {</div>
+<div class="line">          if(HAL_GPIO_ReadPin(INT_MAIN_RI_GPIO_Port, INT_MAIN_RI_Pin))</div>
+<div class="line">          {</div>
+<div class="line">              //-----------Callback de flanco de subida de pin MAIN RI-----------</div>
+<div class="line">              bg_mainRICallback(MAIN_RI_EDGE_RISING);</div>
+<div class="line">          }</div>
+<div class="line"> </div>
+<div class="line">          else</div>
+<div class="line">          {</div>
+<div class="line">              //-----------Callback de flanco de bajada de pin MAIN RI-----------</div>
+<div class="line">              bg_mainRICallback(MAIN_RI_EDGE_FALLING);</div>
+<div class="line">          }</div>
+<div class="line">      }</div>
+<div class="line">  }</div>
+<div class="line">  //---------------------------------Funcion de interrupcion de temporizador  (Systick) end------------------</div>
+</div><!-- fragment --><ol type="a">
+<li>Establecer o dar el BSP a la libreria. <code> //---------------------------------------Configurando o estableciendo BSP---------------------- bg_set_bsp(bspFun); </code></li>
+<li>Inicializar la libreria. <div class="fragment"><div class="line">//-------------------------------Inicializando el modulo (libreria)-----------------------------</div>
+<div class="line">     bg_init_module();</div>
+</div><!-- fragment --></li>
+<li><p class="startli">Realizar proceso de verificacion.</p>
+<p class="startli">5.1 Verificar SIM. <code> //-------------------------------Verificacion de SIM------------------------------- if(<a class="el" href="_b_g77_8c.html#a6fdf52da4e8bf69a4e9130163ae5e7be" title="Funcion para detectar SIM.">bg_check_sim()</a> == BG_OK_SIM) printf("SIM OK\n"); else printf("SIM NO OK\n"); </code></p>
+<p class="startli">5.2 Verificar el registro del modulo (attach). <code> //--------------------Verificacion si el modulo esta registrado-------------------- if(<a class="el" href="_b_g77_8c.html#a560f384f98c140a53d8fc8f5b32b5e19" title="Funcion para verificar el registro en red.">bg_check_attach()</a> == BG_OK_ATTACH) printf("ATTACH OK\n"); else printf("ATTACH NO OK\n"); </code></p>
+<p class="startli">5.3 Verificar la seleccion de operadora (COPS). <code> //------------------------------Verificacion de COPS-------------------------------- if(<a class="el" href="_b_g77_8c.html#adfa333fa2fbd83d8d555f78174c312d4" title="Funcion que imprime parametros de la consulta de COPS modo, operador, tecnologia de acceso.">bg_query_cops()</a> == BG_ERR_NO_OPER) printf("No se ha seleccionado operadora\n"); </code></p>
+<p class="startli">5.4 Verificar contexto PDP. <code> //--------------------Se verifica si esta activado el contexto PDP------------------ if(bg_check_pdp(1) == BG_OK_PDP_DEACT) printf("No esta activado el contexto PDP 1\n"); </code></p>
+</li>
+<li><p class="startli">Registrar o attachar el modulo seleccionando la operadora (COPS).</p>
+<p class="startli"><code> //---------------------Se realiza el proceso de registro en la red------------------ if(bg_attach(COPS_LF) == BG_OK_ATTACH) printf("Modulo ATTACHADO\n"); </code></p>
+</li>
+<li><p class="startli">Configurar y activar el contexto PDP. ``` //--------------------------&mdash;Configura conterxto PDP--------------------------&mdash; <a class="el" href="structbg__ctx_pdp__t.html" title="Es el tipo de variable que define la configuracion de contexto PDP.">bg_ctxPdp_t</a> contextPDP_1 ={.ctxtID = 1, .contextType = BG_CTXT_IPV4,\ .apn = APN_LINKS_FIELD, .usr = "", .psw = ""}; bg_conf_pdp(contextPDP_1);</p>
+<p class="startli">//----------------------------&mdash;Activa contexto PDP---------------------------&mdash; bg_pdp_activation(1, BG_PDP_ACT); ```</p>
+</li>
+<li>Configurar y abrir sockets (SERVIDOR o CLIENTE). <div class="fragment"><div class="line">//---------------------Creacion y apertura de socket 1 SERVIDOR----------------------</div>
+<div class="line">bgSckt_t mySckt = {.ctxtID = 1, .connectID = 0, .ip = BG_OPEN_SERVER_IP,\</div>
+<div class="line">.accssMode = BG_OPEN_BUFF_ACCSS_MODE, .serviceType = BG_OPEN_SERVER,\</div>
+<div class="line">.remotePort = BG_OPEN_SERVER_REMOTE_PORT, .localPort = 2000};</div>
+<div class="line"> </div>
+<div class="line">bg_open_sckt(mySckt);</div>
+<div class="line">//---------------------Creacion y apertura de socket 1 SERVIDOR end--------------------</div>
+<div class="line"> </div>
+<div class="line">//----------------------Creacion y apertura de socket 2 CLIENTE------------------------</div>
+<div class="line">bgSckt_t mySckt2 = {.ctxtID = 1, .connectID = 1, .ip = IP_METERCAD,\</div>
+<div class="line">   .accssMode = BG_OPEN_BUFF_ACCSS_MODE, .serviceType = BG_OPEN_CLIENT,\</div>
+<div class="line">   .remotePort = 2001, .localPort = BG_OPEN_CLIENT_LOCAL_PORT};</div>
+<div class="line"> </div>
+<div class="line">if(bg_open_sckt(mySckt2) == BG_OK_CONNECT_ID_OPENNED)</div>
+<div class="line">   printf(&quot;Conexion myScket2 Abierta\n&quot;);</div>
+<div class="line">//----------------------Creacion y apertura de socket 2 CLIENTE end---------------------</div>
+</div><!-- fragment --></li>
+<li>Colocar funcion de manejo de URC en loop de la aplicacion principal. <div class="fragment"><div class="line">//-----------------------------Loop del codigo o hilo principal----------------------------</div>
+<div class="line"> while(1)</div>
+<div class="line"> {</div>
+<div class="line">    //--------------------Funcion de manejo de URC-----------------------</div>
+<div class="line">    bg_handle_urc();</div>
+<div class="line"> </div>
+<div class="line">    //---------------Transmision de mensaje en modo transparente cada 2 segundos---------------</div>
+<div class="line">    bg_transmit_TM(&quot;hello dog&quot;, 9);</div>
+<div class="line">    HAL_Delay(2000);</div>
+<div class="line">    memset(uBg.buff, &#39;\0&#39;, sizeof(uBg.buff)); //limpieza de buffer de recepcion de UART en aplicacion principal</div>
+<div class="line"> }</div>
+<div class="line"> //-----------------------------Loop del codigo o hilo principal----------------------------</div>
+</div><!-- fragment --></li>
+<li><p class="startli">Transmision y Recepcion de mensajes.</p>
+<p class="startli">10.1.1 En modo buffer access mode. ``` //-----------&mdash;Transmision de mensajes de socket 2 en Buffer access mode------------&mdash; if(bg_transmit_buffAMode(mySckt2.connectID, "hello DOGO \x00\xFF", 13) == BG_OK_TRANSMIT) printf("Mensaje enviado\n");</p>
+<p class="startli">if(bg_transmit_buffAMode(mySckt2.connectID, "hello COW ", 10) == BG_OK_TRANSMIT) printf("Mensaje enviado\n"); //-----------&mdash;Transmision de mensajes de socket 2 en Buffer access mode end---------&mdash; ```</p>
+<p class="startli">10.1.2 En modo transparente</p>
+<p class="startli"><code> //-----------Cambio de modo de transmision a modo transparente del socket 2 y transmision de mensaje----------- if(bg_transparent_mode(mySckt2.connectID) == BG_OK_TRANSPARENT_MODE) { printf("Modo transparente exitoso\n"); HAL_UART_Transmit(&amp;UART_BG, "hello server", 12, 1000); //bg_transmit_TM("hello server", 12); //o tambien se puede usar esta funcion } //-------------------Salida de modo transparente y cierre del socket 2------------------ </code> <br  />
+</p>
+<p class="startli">10.2 Dependiendo del modo de acceso se debe crear o usar el callback de recepcion adecuada. ``` void <a class="el" href="_b_g77_8c.html#a82f08c1cbe0edd3995c157be6ecd4b31" title="Esta funcion es un callback que notifica al usuario de un mensaje que se recibe en modo transparente.">bg_callback_receive_TM(uint8_t *buff, uint16_t nBytes)</a> {</p>
+<p class="startli">} <code> </code> void <a class="el" href="_b_g77_8c.html#acdaa58d150ec7d4d1a5609e0770643b2" title="Esta funcion es un callback que notifica al usuario que se recibio un mensaje de alguna conexion en m...">bg_recv_callback(uint8_t *buff, uint16_t len, uint8_t connectID)</a> {</p>
+<p class="startli">} ``` Cuando se reciba algun mensaje la libreria llamara el callback respectivo dependiendo si esta activado o no el modo transparente.</p><ol type="i">
+<li><p class="startli">Usar Callbacks de notificacion de URC</p>
+<p class="startli">11.1 Callback de conexion entrante.</p>
+<p class="startli">``` void bg_incomming_callback(uint8_t serverID, uint *8_t connectID) {</p>
+<p class="startli">} ```</p>
+<p class="startli">11.2 Callback de salida de modo transparente.</p>
+<p class="startli">``` void <a class="el" href="_b_g77_8c.html#a735707a118cf1461601c586b3fb56060" title="Esta funcion es un callback que notifica al usuario que la conexion en modo transparente se cerro.">bg_callback_closed_TM(void)</a> {</p>
+<p class="startli">} ```</p>
+<p class="startli">11.3 Callback de reactivacion de contexto PDP.</p>
+<p class="startli">``` void <a class="el" href="_b_g77_8c.html#ac828183e261ff8d14f033e5b1b651625" title="Este callback notifica al usuario que hubo una reactivacion de contexto PDP debido al URC &quot;pdp deact&quot;...">bg_pdp_activation_callback(uint8_t contextID)</a> {</p>
+<p class="startli">} ```</p>
+<p class="startli">11.4 Callback de modo transparente inactivo. El proposito es notificar al usuario para que pueda regresar a modo transparente.</p>
+<p class="startli">``` void bg_callback_TM_Inactive(void) {</p>
+<p class="startli">} ``` Los pasos numero 10 y 11 son opcionales en este codigo de ejemplo, ya que, la libreria llama a funciones de notificacion callback por defecto si no se crean los de usuario.</p>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+<h1><a class="anchor" id="autotoc_md2"></a>
+Ejemplo de uso #2 "Ejemplo reducido".</h1>
+<p>Este codigo de ejemplo, muestra como utilizar la libreria en un microcontrolador STM32F4 de forma mas concreta.</p>
+<p>A diferencia del ejemplo 1, el ejemplo 2 consiste en solo abrir una conexion en modo cliente con modo transparente e intercambiar mensajes con el servidor al que se apunta, de una forma mas sencilla sin tantas verificaciones y usode ejemplo de otras funciones.</p>
+<div class="fragment"><div class="line">#include &quot;main.h&quot;</div>
+<div class="line"> #include &quot;BG77.h&quot;</div>
+<div class="line"> </div>
+<div class="line"> //-----------------------------BSP--------------------------------------</div>
+<div class="line"> bg_err_t uart_tx(uint8_t *data, uint16_t len);</div>
+<div class="line"> bg_err_t gpioWrite(bgPin_t pin, uint8_t state);</div>
+<div class="line"> void msDelay(uint32_t mDelay);</div>
+<div class="line"> void resetMCU(void);</div>
+<div class="line"> </div>
+<div class="line"> bg_err_t uart_tx(uint8_t *data, uint16_t len)</div>
+<div class="line"> {</div>
+<div class="line">     bg_err_t err = BG_OK;</div>
+<div class="line">     if(HAL_UART_Transmit(&amp;UART_BG, data, len, 1000) != HAL_OK)</div>
+<div class="line">         err = BG_ERR_MCU_TX_UART;</div>
+<div class="line">     return err;</div>
+<div class="line"> }</div>
+<div class="line"> </div>
+<div class="line"> bg_err_t gpioWrite(bgPin_t pin, uint8_t state)</div>
+<div class="line"> {</div>
+<div class="line">     if(pin &gt;= BG_UNSUPORTED_PIN)</div>
+<div class="line">         return BG_ERR_UNSUPPORTED_PIN;</div>
+<div class="line">         </div>
+<div class="line">     bg_err_t err = BG_OK;</div>
+<div class="line"> </div>
+<div class="line">     uint32_t bgPin[] = {BG_PWRKEY_Pin,  BG_VBAT_Pin, BG_RESET_Pin, BG_PON_TRIG_Pin};</div>
+<div class="line">     uint32_t bgPort[] = {BG_PWRKEY_GPIO_Port, BG_VBAT_GPIO_Port, BG_RESET_GPIO_Port,\</div>
+<div class="line">         BG_PON_TRIG_GPIO_Port}; </div>
+<div class="line"> </div>
+<div class="line">         HAL_GPIO_WritePin(bgPort[pin], bgPin[pin], state);</div>
+<div class="line"> </div>
+<div class="line">         return BG_OK;</div>
+<div class="line"> }</div>
+<div class="line"> </div>
+<div class="line"> void msDelay(uint32_t mDelay)</div>
+<div class="line"> {</div>
+<div class="line">     HAL_Delay(mDelay);</div>
+<div class="line"> }</div>
+<div class="line"> </div>
+<div class="line"> void resetMCU(void)</div>
+<div class="line"> {</div>
+<div class="line">     HAL_NVIC_SystemReset();</div>
+<div class="line"> }</div>
+<div class="line"> </div>
+<div class="line"> bg_bspFun_t bspFun = {.uartTx = uart_tx, .gpioWrite = gpioWrite, .msDelay = msDelay,\</div>
+<div class="line"> .resetMCU = resetMCU};</div>
+<div class="line"> //-----------------------------BSP end--------------------------------------</div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> //-----------------------------Funcion de recepcion de interrupcion de UART---------------------</div>
+<div class="line"> </div>
+<div class="line"> //Creacion e inicialzacion de buffer del tipo uartBuff_t (buffer de 2KB de la libreria)</div>
+<div class="line"> uartBuff_t uBg = {.buff = {&#39;\0&#39;}, .len = 0}; </div>
+<div class="line"> </div>
+<div class="line"> //--------------------------------Variables para manejo de UART---------------------</div>
+<div class="line"> #define UART_BG huart7 //instancia de UART de modulo de comunicacion</div>
+<div class="line"> </div>
+<div class="line"> typedef enum {</div>
+<div class="line"> RX_LOG,</div>
+<div class="line"> RX_BG,</div>
+<div class="line"> RX_NO_SUPPORTED</div>
+<div class="line"> }rxUart_t;</div>
+<div class="line"> </div>
+<div class="line"> rxUart_t keyUart = RX_NO_SUPPORTED;</div>
+<div class="line"> </div>
+<div class="line"> #define flg_uart flg_main.f0 //1: llego una recepcion de UART por interrupcion.</div>
+<div class="line"> flags_t flg_main = {0}; //banderas de 1 bit.</div>
+<div class="line"> //--------------------------------Variables para manejo de UART end-----------------</div>
+<div class="line"> </div>
+<div class="line"> void HAL_UARTEx_RxEventCallback(UART_HandleTypeDef *huart, uint16_t Size)</div>
+<div class="line"> {</div>
+<div class="line">     if(huart == &amp;UART_BG)</div>
+<div class="line">     {   </div>
+<div class="line">         //-----------Callback de UART para libreria-----------</div>
+<div class="line">         bg_uartCallback(uBg.buff, Size);</div>
+<div class="line"> </div>
+<div class="line">         HAL_UARTEx_ReceiveToIdle_IT(&amp;UART_BG, uBg.buff, sizeof(uBg.buff));</div>
+<div class="line">         keyUart = RX_BG;</div>
+<div class="line">         uBg.len = Size;</div>
+<div class="line">         flg_uart = 1;</div>
+<div class="line">     }</div>
+<div class="line"> }</div>
+<div class="line"> //-----------------------------Funcion de recepcion de interrupcion de UART end-----------------</div>
+<div class="line"> </div>
+<div class="line"> //-----------------------------------------------Funcion main-----------------------------------</div>
+<div class="line"> int main(void)</div>
+<div class="line"> {</div>
+<div class="line">     //----------------------Configuracion e inicializacion de MCU----------------------------------</div>
+<div class="line">     HAL_Init();</div>
+<div class="line">     SystemClock_Config();</div>
+<div class="line">     MX_GPIO_Init();</div>
+<div class="line">     MX_UART4_Init();</div>
+<div class="line">     MX_UART7_Init();</div>
+<div class="line">     MX_USART2_UART_Init();</div>
+<div class="line">     //----------------------Configuracion e inicializacion de MCU end------------------------------</div>
+<div class="line">     </div>
+<div class="line">     //---------------------------------------Configurando o estableciendo BSP----------------------</div>
+<div class="line">     bg_set_bsp(bspFun);</div>
+<div class="line"> </div>
+<div class="line">     //--------------------------Activando la Recepcion de interrupcion de UART----------------------</div>
+<div class="line">     HAL_UARTEx_ReceiveToIdle_IT(&amp;UART_BG, uBg.buff, sizeof(uBg.buff));</div>
+<div class="line">     flg_uart = 0;</div>
+<div class="line">     </div>
+<div class="line"> </div>
+<div class="line">     //-------------------------------Inicializando el modulo (libreria)-----------------------------</div>
+<div class="line">     bg_init_module();</div>
+<div class="line">     </div>
+<div class="line">     //-------------------------------Verificacion de SIM-------------------------------</div>
+<div class="line">     if(bg_check_sim() == BG_OK_SIM)</div>
+<div class="line">         printf(&quot;SIM OK\n&quot;);</div>
+<div class="line">     else</div>
+<div class="line">         printf(&quot;SIM NO OK\n&quot;);</div>
+<div class="line"> </div>
+<div class="line">     //---------------------Se realiza el proceso de registro en la red------------------</div>
+<div class="line">     if(bg_attach(COPS_LF) == BG_OK_ATTACH)</div>
+<div class="line">         printf(&quot;Modulo ATTACHADO\n&quot;);</div>
+<div class="line"> </div>
+<div class="line">     //-----------------------------Configura conterxto PDP-----------------------------</div>
+<div class="line">     bg_ctxPdp_t contextPDP_1 ={.ctxtID = 1, .contextType = BG_CTXT_IPV4,\</div>
+<div class="line">         .apn = APN_LINKS_FIELD, .usr = &quot;&quot;, .psw = &quot;&quot;};</div>
+<div class="line">     bg_conf_pdp(contextPDP_1);</div>
+<div class="line"> </div>
+<div class="line">     //-------------------------------Activa contexto PDP------------------------------</div>
+<div class="line">     bg_pdp_activation(1, BG_PDP_ACT);</div>
+<div class="line"> </div>
+<div class="line">     //----------------------Creacion y apertura de socket 1 CLIENTE------------------------</div>
+<div class="line">     bgSckt_t mySckt2 = {.ctxtID = 1, .connectID = 1, .ip = IP_METERCAD,\</div>
+<div class="line">         .accssMode = BG_OPEN_BUFF_ACCSS_MODE, .serviceType = BG_OPEN_CLIENT,\</div>
+<div class="line">         .remotePort = 2001, .localPort = BG_OPEN_CLIENT_LOCAL_PORT};</div>
+<div class="line"> </div>
+<div class="line">     if(bg_open_sckt(mySckt2) == BG_OK_CONNECT_ID_OPENNED)</div>
+<div class="line">         printf(&quot;Conexion myScket2 Abierta\n&quot;);</div>
+<div class="line">     //----------------------Creacion y apertura de socket 2 CLIENTE end---------------------</div>
+<div class="line"> </div>
+<div class="line">     //------------------------Cambio a modo transparente de socket 2 CLIENTE---------------------- </div>
+<div class="line">     if(bg_transparent_mode(mySckt2.connectID) == BG_OK_TRANSPARENT_MODE)</div>
+<div class="line">         printf(&quot;Modo transparente exitoso\n&quot;);</div>
+<div class="line">     //------------------------Cambio a modo transparente de socket 2 CLIENTE---------------------- </div>
+<div class="line"> </div>
+<div class="line">     //-----------------------------Loop del codigo o hilo principal----------------------------</div>
+<div class="line">     while(1)</div>
+<div class="line">     {</div>
+<div class="line">         //--------------------Funcion de manejo de URC-----------------------</div>
+<div class="line">         bg_handle_urc();</div>
+<div class="line"> </div>
+<div class="line">         //---------------Transmision de mensaje cada 2 segundos---------------</div>
+<div class="line">         bg_transmit_TM(&quot;hello dog&quot;, 9);</div>
+<div class="line">         HAL_Delay(2000);</div>
+<div class="line">         memset(uBg.buff, &#39;\0&#39;, sizeof(uBg.buff)); //limpieza de buffer de recepcion de UART en aplicacion principal</div>
+<div class="line">     }</div>
+<div class="line">     //-----------------------------Loop del codigo o hilo principal---------------------------- </div>
+<div class="line"> }</div>
+<div class="line"> //-----------------------------------------------Funcion main end-------------------------------</div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> //---------------------------------Funcion de interrupcion de temporizador----------------------</div>
+<div class="line"> void callback_systic(void)</div>
+<div class="line"> {   </div>
+<div class="line">     //-----------Callback de temporizador de 1ms para libreria-----------</div>
+<div class="line">     bg_callback_ms();</div>
+<div class="line"> }</div>
+<div class="line"> //---------------------------------Funcion de interrupcion de temporizador end------------------</div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> //---------------------------------Funcion de interrupcion de temporizador (Systick)----------------------</div>
+<div class="line"> void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)</div>
+<div class="line"> {</div>
+<div class="line">     if(GPIO_Pin == INT_MAIN_RI_Pin)</div>
+<div class="line">     {</div>
+<div class="line">         if(HAL_GPIO_ReadPin(INT_MAIN_RI_GPIO_Port, INT_MAIN_RI_Pin))</div>
+<div class="line">         {</div>
+<div class="line">             //-----------Callback de flanco de subida de pin MAIN RI-----------</div>
+<div class="line">             bg_mainRICallback(MAIN_RI_EDGE_RISING);</div>
+<div class="line">         }</div>
+<div class="line"> </div>
+<div class="line">         else</div>
+<div class="line">         {</div>
+<div class="line">             //-----------Callback de flanco de bajada de pin MAIN RI-----------</div>
+<div class="line">             bg_mainRICallback(MAIN_RI_EDGE_FALLING);</div>
+<div class="line">         }</div>
+<div class="line">     }</div>
+<div class="line"> }</div>
+<div class="line"> //---------------------------------Funcion de interrupcion de temporizador  (Systick) end------------------</div>
+</div><!-- fragment --><p>El contenido del codigo puede ser explicado con los siguientes:</p>
+<ol type="1">
+<li>Creacion de BSP</li>
+<li>Llamada de callbacks necesarios para libreria (UART, Temporizador 1ms, Flancos de pin MAIN_RI).</li>
+<li>Pasar BSP a libreria.</li>
+<li>Inicializar libreria.</li>
+<li>Verificar SIM.</li>
+<li>Attacharse.</li>
+<li>Configurar y activar contexto PDP.</li>
+<li>Configurar y abrir conexion en modo transparente.</li>
+<li>Colocar funcion de manejo de URC en loop principal (<a class="el" href="_b_g77_8c.html#a3f03c39804aa65f885946b3f30d6b4fc" title="Esta funcion se encarga de manejar los URC encolados.   Si hay un URC encolado, se procede a parsearl...">bg_handle_urc()</a>).</li>
+<li>Intercambiar mensajes con servidor al que se apunta.</li>
+<li>El usuario puede generar sus propias funciones callbacks de notificacion como se explico en el punto 11 del ejemplo 1.</li>
+</ol>
+<h1><a class="anchor" id="autotoc_md3"></a>
+Compilacion</h1>
+<p>Esta compilacion se realiza en STM32CubeIDE, sin embargo, la compilacion en diferentes IDE's es similar. Primero se tiene que descargar o copiar la libreria en la ruta del proyecto principal(o se podria clonar o agregar como un submodulo desde el repositorio). La ubicacion de la libreria en el proyecto se deberia de ver de la siguiente manera:</p>
+<p><img src="image.png" alt="alt text" class="inline"/></p>
+<p>Después, en STM32CubeIDE se debe incluir su ruta en los paths and simbols.</p>
+<p><img src="image-1.png" alt="image2" class="inline"/></p>
+<p>Posterior a ello solo se debe compilar con el boton de compilacion.</p>
+<h1><a class="anchor" id="autotoc_md4"></a>
+Mensaje</h1>
+<p>Recuerda usar</p>
+<p>👍"Hello Dog! 🐶"</p>
+<p>En vez de</p>
+<p>✖️"Hello World!"</p>
+<p><img src="html/cursoCIntermedio.png" alt="alt text" class="inline"/> </p>
+</div></div><!-- contents -->
+</div><!-- PageDoc -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+<img class="footer" src="cursoCIntermedio.png"  height="100px"/>
+</small></address>
+</div><!-- doc-content -->
+</body>
+</html>

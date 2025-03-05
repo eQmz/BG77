@@ -1,0 +1,32 @@
+\doxysection{Uso\+\_\+de\+\_\+\+CREATE\+\_\+\+BUFF}
+\hypertarget{_uso_de__c_r_e_a_t_e__b_u_f_f-example}{}\label{_uso_de__c_r_e_a_t_e__b_u_f_f-example}MACRO generadora de tipos de buffer. La utilidad de esta MACRO es poder generar variables de buffers con diferente tamaño agrupando su tamaño de contenido.
+
+MACRO generadora de tipos de buffer. La utilidad de esta MACRO es poder generar variables de buffers con diferente tamaño agrupando su tamaño de contenido. 
+\begin{DoxyParams}{Parámetros}
+{\em x} & es el tamaño del buffer \\
+\hline
+{\em name} & es el nombre del tipo de variable\\
+\hline
+\end{DoxyParams}
+En este ejemplo se genera un tipo de variable llamado buff256\+\_\+t el cual sirve para generar buffers de 256 bytes CREATE\+\_\+\+BUFF(256, buff256) 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{buff256\_t\ uart\ =\ \{.buff\ =\ \{\textcolor{charliteral}{'\(\backslash\)0'}\},\ .len\ =\ 0\};}
+\DoxyCodeLine{strcpy(uart.buff,\ \textcolor{stringliteral}{"{}hello\ uart"{}});}
+\DoxyCodeLine{len\ =\ strlen(uart.buff);}
+\DoxyCodeLine{}
+\DoxyCodeLine{buff256\_t\ sensor\ =\ \{.buff\ =\ \{\textcolor{charliteral}{'\(\backslash\)0'}\},\ .len\ =\ 0\};}
+\DoxyCodeLine{strcpy(sensor.buff,\ \textcolor{stringliteral}{"{}hello\ sensor"{}});}
+\DoxyCodeLine{len\ =\ strlen(sensor.buff);}
+\DoxyCodeLine{}
+\DoxyCodeLine{buff256\_t\ aux\ =\ \{.buff\ =\ \{\textcolor{charliteral}{'\(\backslash\)0'}\},\ .len\ =\ 0\};}
+\DoxyCodeLine{strcpy(aux.buff,\ \textcolor{stringliteral}{"{}hello\ aux"{}});}
+\DoxyCodeLine{len\ =\ strlen(aux.buff);}
+
+\end{DoxyCode}
+
+
+
+\begin{DoxyCodeInclude}{0}
+
+\end{DoxyCodeInclude}
+ 
