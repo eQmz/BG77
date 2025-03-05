@@ -697,7 +697,7 @@ typedef enum
  * @brief tipo de dato para crear un puntero a funciones uart (TX o RX)
  * 
  */
-typedef bg_err_t (*uartFun_t)(uint8_t *data, uint8_t len);
+typedef bg_err_t (*uartFun_t)(uint8_t *data, uint16_t len);
 
 /**
  * @brief tipo de dato para crear un puntero a funcion de escritura de GPIOs
