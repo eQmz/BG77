@@ -248,7 +248,6 @@ De forma general se verifican diferentes aspectos como el SIM, las configuracion
 			//---------------Transmision de mensaje cada 2 segundos---------------
 			bg_transmit_TM("hello dog", 9);
 			HAL_Delay(2000);
-			memset(uBg.buff, '\0', sizeof(uBg.buff)); //limpieza de buffer de recepcion de UART en aplicacion principal
 		}
 		//-----------------------------Loop del codigo o hilo principal----------------------------	
 	}
@@ -508,7 +507,6 @@ La explicacion del ejemplo se resume en los siguientes pasos:
       //---------------Transmision de mensaje en modo transparente cada 2 segundos---------------
       bg_transmit_TM("hello dog", 9);
       HAL_Delay(2000);
-      memset(uBg.buff, '\0', sizeof(uBg.buff)); //limpieza de buffer de recepcion de UART en aplicacion principal
    }
    //-----------------------------Loop del codigo o hilo principal----------------------------
   ```

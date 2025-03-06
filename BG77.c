@@ -163,7 +163,8 @@ void bg_uartCallback(uint8_t *buff, uint16_t nBytes)
 	uBg.len = uBgUrc.len = nBytes;
 
 	memcpy(uBg.buff, buff, uBg.len);
-	memcpy(uBgUrc.buff, buff, uBgUrc.len);
+	memset(buff, '\0', sizeof(uBg.buff));
+	memcpy(uBgUrc.buff, uBg.buff, uBgUrc.len);
 
 	bg_infoTM_t infoTM = bg_getter_transparentMode();
 

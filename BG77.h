@@ -320,7 +320,6 @@
 			//---------------Transmision de mensaje cada 2 segundos---------------
 			bg_transmit_TM("hello dog", 9);
 			HAL_Delay(2000);
-			memset(uBg.buff, '\0', sizeof(uBg.buff)); //limpieza de buffer de recepcion de UART en aplicacion principal
 		}
 		//-----------------------------Loop del codigo o hilo principal----------------------------	
 	}
